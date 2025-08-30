@@ -79,8 +79,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'news_scraper',
         'USER': 'postgres',
-        'PASSWORD': 'Derivation1@',
-        'HOST': 'localhost',
+        'PASSWORD': 'cltalt5!',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
