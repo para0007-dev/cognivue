@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news_scraper.urls')),
+    path('timer/', include('timer.urls'))
 ]
