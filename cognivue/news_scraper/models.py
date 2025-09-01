@@ -15,3 +15,17 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['-date_collected']
+
+class CuratedArticle(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=120, blank=True)
+    image_url = models.URLField(blank=True)
+    url = models.URLField(help_text="External article URL")
+    source = models.CharField(max_length=120, help_text="Publisher (e.g., UniSA, ABS, SBS)")
+    date_published = models.DateTimeField()
+
+    class Meta:
+        ordering = ["-date_published"]  # latest first
+
+    def __str__(self):
+        return self.title

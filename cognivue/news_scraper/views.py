@@ -16,10 +16,24 @@ def article_list(request):
     
     context = {
         'articles': articles,
-        'keywords': ['technology', 'ai', 'software', 'innovation', 'cybersecurity'],
+        'keywords':[
+                    ("vitamin d", "Vitamin D"),
+                    ("vitamin d3", "Vitamin D3"),
+                    ("sun exposure", "Sun exposure"),
+                    ("uv index", "UV index"),
+                    ("cognitive", "Cognitive"),
+                    ("dementia", "Dementia"),
+        ]
+,
         'sources': Article.objects.values_list('source_domain', flat=True).distinct(),
         'selected_keyword': keyword,
         'selected_source': source,
     }
     context["vd_result"] = request.session.get("vd_result")
     return render(request, 'news_scraper/article_list.html', context)
+
+from .models import CuratedArticle
+
+def curated_news_list(request):
+    articles = CuratedArticle.objects.all()  # ordered by -date_published via Meta
+    return render(request, "news_scraper/curated_list.html", {"articles": articles})

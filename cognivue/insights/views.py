@@ -76,3 +76,21 @@ def hub(request):
 
 def disclaimer(request):
     return render(request, "insights/disclaimer.html")
+
+def learn_more(request):
+    # Simple curated list for now; can move to DB later
+    sources = [
+        {
+            "name": "UniSA – Research news on vitamin D & brain health",
+            "url": "https://www.unisa.edu.au/Media-Centre/News/",
+        },
+        {
+            "name": "ABS – Australian Health Survey (general health stats)",
+            "url": "https://www.abs.gov.au/",
+        },
+        {
+            "name": "SBS Health – Public-facing explainers and news",
+            "url": "https://www.sbs.com.au/news/health",
+        },
+    ]
+    return render(request, "insights/learn_more.html", {"sources": sources})
