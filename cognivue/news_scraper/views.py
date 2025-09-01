@@ -21,5 +21,5 @@ def article_list(request):
         'selected_keyword': keyword,
         'selected_source': source,
     }
-    
+    context["vd_result"] = request.session.get("vd_result")
     return render(request, 'news_scraper/article_list.html', context)

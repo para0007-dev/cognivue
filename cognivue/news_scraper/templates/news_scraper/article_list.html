@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html>
+<div style="margin:20px 0; padding:16px; border:1px solid #eee; border-radius:10px;">
+  <h2 style="margin-top:0;">Check your Vitamin D Risk</h2>
+
+  {% if vd_result %}
+    <a href="{% url 'insights:questionnaire_result' %}"
+       style="display:inline-block; padding:12px 18px; border-radius:8px; text-decoration:none; border:1px solid #ccc;">
+      View My Vitamin D Level
+    </a>
+    <span style="margin-left:8px;">(Current result: {{ vd_result }})</span>
+  {% else %}
+    <a href="{% url 'insights:questionnaire_start' %}"
+       style="display:inline-block; padding:12px 18px; border-radius:8px; text-decoration:none; border:1px solid #ccc;">
+      Test My Vitamin D Level
+    </a>
+  {% endif %}
+</div>
+
+
 <head>
     <title>News Articles - Keyword Scraper</title>
     <style>
