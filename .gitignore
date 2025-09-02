@@ -1,0 +1,18 @@
+# Virtual environment
+venv/
+.env
+
+# Django
+*.sqlite3
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+
+# Pem key
+*.pem
+
+# Cloning key
+key.txt

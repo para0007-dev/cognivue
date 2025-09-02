@@ -20,8 +20,11 @@ class Command(BaseCommand):
     ]
     
     KEYWORDS = [
-        'technology', 'ai', 'artificial intelligence', 'machine learning',
-        'software', 'innovation', 'digital', 'startup', 'cybersecurity'
+        'vitamin d', 'vitamin d deficiency', 'brain health', 'cognitive function',
+    'dementia', 'alzheimer', 'depression', 'mental health', 'sunlight',
+    'cognitive decline', 'brain fog', 'memory loss', 'omega-3', 'brain benefits',
+    'mental clarity', 'seasonal affective', 'neurodegenerative', 'brain function',
+    'psychological health', 'health research'
     ]
     
     USER_AGENT = "NewsScraper/1.0 (+http://example.com/bot)"
