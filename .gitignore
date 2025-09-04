@@ -1,18 +1,22 @@
-# Virtual environment
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.egg-info/
+.venv/
+env/
 venv/
-.env
 
 # Django
 *.sqlite3
-__pycache__/
-*.pyc
+/staticfiles/
+/media/
 
-# IDE
+# Env files
+.env
+*.env
+
+# OS/IDE
+.DS_Store
 .idea/
 .vscode/
-
-# Pem key
-*.pem
-
-# Cloning key
-key.txt

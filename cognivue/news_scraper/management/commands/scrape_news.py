@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+from django.conf import settings
 from news_scraper.models import Article
 import time
 from datetime import datetime
@@ -32,6 +33,12 @@ class Command(BaseCommand):
     MAX_ARTICLES_PER_SITE = 20
 
     def handle(self, *args, **options):
+        # security guard: disabled unless ALLOW_SCRAPER=1
+        if not getattr(settings, "ALLOW_SCRAPER", False):
+            raise CommandError(
+                "Scraper is disabled. Set ALLOW_SCRAPER=1 to enable (local only)."
+            )
+
         self.stdout.write(f"🚀 Starting news scraping at {datetime.now()}")
         self.stdout.write(f"🔍 Keywords: {', '.join(self.KEYWORDS)}")
         
