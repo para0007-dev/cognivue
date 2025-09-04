@@ -21,12 +21,12 @@ class Command(BaseCommand):
     ]
     
     KEYWORDS = [
-    "vitamin d", "vitamin d3", "cholecalciferol",
-    "sun exposure", "uv index", "ultraviolet",
-    "brain", "cognitive", "cognition", "memory",
-    "dementia", "brain volume", "neuroprotective", "stroke",
+        'vitamin d', 'vitamin d deficiency', 'brain health', 'cognitive function',
+    'dementia', 'alzheimer', 'depression', 'mental health', 'sunlight',
+    'cognitive decline', 'brain fog', 'memory loss', 'omega-3', 'brain benefits',
+    'mental clarity', 'seasonal affective', 'neurodegenerative', 'brain function',
+    'psychological health', 'health research'
     ]
-
     
     USER_AGENT = "NewsScraper/1.0 (+http://example.com/bot)"
     REQUEST_DELAY = 2  # Be polite to servers
