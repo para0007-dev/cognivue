@@ -1,91 +1,25 @@
-<!DOCTYPE html>
-<html>
+<!-- Top hero -->
 <div style="margin:20px 0; padding:16px; border:1px solid #eee; border-radius:10px;">
   <h2 style="margin-top:0;">Check your Vitamin D Risk</h2>
 
+  <!-- Always allow starting a new test -->
+  <a href="{% url 'insights:questionnaire_start' %}"
+     style="display:inline-block; padding:12px 18px; border-radius:8px; text-decoration:none; border:1px solid #ccc; margin-right:8px;">
+    Test My Vitamin D Level
+  </a>
+
+  <!-- Only show if we have a stored result -->
   {% if vd_result %}
     <a href="{% url 'insights:questionnaire_result' %}"
        style="display:inline-block; padding:12px 18px; border-radius:8px; text-decoration:none; border:1px solid #ccc;">
       View My Vitamin D Level
     </a>
-    <span style="margin-left:8px;">(Current result: {{ vd_result }})</span>
-  {% else %}
-    <a href="{% url 'insights:questionnaire_start' %}"
-       style="display:inline-block; padding:12px 18px; border-radius:8px; text-decoration:none; border:1px solid #ccc;">
-      Test My Vitamin D Level
-    </a>
   {% endif %}
 </div>
-<p><a href="/insights/">Go to Insight Hub</a></p>
-<p><a href="{% url 'brain_health_news' %}">🧠 Brain Health News (Curated)</a></p>
-<head>
-    <title>News Articles - Keyword Scraper</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .filters { background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .filters form { display: flex; gap: 15px; flex-wrap: wrap; align-items: end; }
-        .filter-group { display: flex; flex-direction: column; }
-        .article { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
-        .article h3 { margin-top: 0; }
-        .meta { color: #666; font-size: 0.9em; }
-        .keywords { background: #e8f5e8; padding: 5px; border-radius: 3px; display: inline-block; }
-    </style>
-</head>
-<body>
-    <h1>📰 News Articles with Keywords</h1>
-    
-    <div class="filters">
-        <h2>🔍 Filter Articles</h2>
-        <form method="get">
-            <div class="filter-group">
-                <label for="keyword">Keyword:</label>
-                <select name="keyword" id="keyword">
-                    <option value="">All Keywords</option>
-                    {% for keyword in keywords %}
-                        <option value="{{ keyword }}" {% if keyword == selected_keyword %}selected{% endif %}>
-                            {{ keyword }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label for="source">News Source:</label>
-                <select name="source" id="source">
-                    <option value="">All Sources</option>
-                    {% for source in sources %}
-                        <option value="{{ source }}" {% if source == selected_source %}selected{% endif %}>
-                            {{ source }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <button type="submit">Apply Filters</button>
-                <a href="?">Clear</a>
-            </div>
-        </form>
-    </div>
 
-    <p>Found <strong>{{ articles|length }}</strong> articles matching your criteria.</p>
-    
-    {% for article in articles %}
-        <div class="article">
-            <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
-            <div class="meta">
-                <strong>Source:</strong> {{ article.source_domain }} • 
-                <strong>Collected:</strong> {{ article.date_collected|date:"M d, Y" }}
-            </div>
-            <p>{{ article.content|truncatewords:50 }}</p>
-            <div class="keywords">
-                <strong>Keywords found:</strong> {{ article.keywords_found }}
-            </div>
-        </div>
-    {% empty %}
-        <div class="article">
-            <p>No articles found. Try running the scraper first or adjusting your filters.</p>
-        </div>
-    {% endfor %}
-</body>
-</html>
+<p><a href="/insights/">Go to Insight Hub</a>
+  <!-- optional curated news link; delete if you want it fully hidden -->
+  &nbsp;|&nbsp; <a href="{% url 'brain_health_news' %}">🧠 Brain Health News (Curated)</a>
+</p>
+
+<!-- REMOVE the old keyword filter + scraped list block below -->
