@@ -106,6 +106,8 @@
     <div class="container">
         <h1>Sun Exposure Timer</h1>
 
+        <div id="timer-container" data-timer-seconds="{{ timer_seconds }}"></div>
+
         <div class="time-display" id="timeDisplay">00:00</div>
 
         <div class="input-display" id="inputDisplay">Enter minutes</div>
@@ -141,14 +143,20 @@
 
     <script>
         class SunTimer {
-            constructor() {
-                this.totalSeconds = 0;
-                this.currentSeconds = 0;
-                this.isRunning = false;
-                this.interval = null;
+            constructor(timerSeconds) {
+                if (timerSeconds) {
+                    this.totalSeconds = parseInt(timerSeconds);
+                    this.currentSeconds = this.totalSeconds;
+                    this.updateDisplay();
+                } else {
+                    this.totalSeconds = 0;
+                    this.currentSeconds = 0;
+                    this.isRunning = false;
+                    this.interval = null;
 
-                this.initializeElements();
-                this.bindEvents();
+                    this.initializeElements();
+                    this.bindEvents();
+                }
             }
 
             initializeElements() {
@@ -264,7 +272,13 @@
 
         // Initialize timer when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            new SunTimer();
+            const timerSeconds = document.getElementById('timer-container').dataset.timerSeconds;
+            if (timerSeconds) {
+                new SunTimer(timerSeconds);
+            } else {
+                new SunTimer();
+            }
+
         });
     </script>
 </body>

@@ -28,12 +28,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# OpenWeather API Configuration
+OPENWEATHER_API_KEY = '0ba8d4e3b494e7864ea8b8ac09bf7275'
+
+# User Credential Management
+LOGOUT_REDIRECT_URL = '/accounts/login/'  # Where to redirect after logout
+LOGIN_REDIRECT_URL = '/vitamin-d-helper/'  # Where to redirect after login
 
 # Application definition
 
 INSTALLED_APPS = [
     'news_scraper',
     'timer',
+    'vitamin_d_helper',
+    'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
