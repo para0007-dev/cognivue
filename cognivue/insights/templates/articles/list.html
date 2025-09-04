@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Insights | Cognivue{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap gap-3 align-items-center mb-3">
+  <div class="fw-semibold">Quick keywords:</div>
+  {% for k, val in keywords %}
+    <a href="?keyword={{ k }}{% if selected_source %}&source={{ selected_source }}{% endif %}"
+       class="btn btn-sm {% if selected_keyword == k %}btn-primary{% else %}btn-outline-primary{% endif %}">
+      {{ val }}
+    </a>
+  {% endfor %}
+</div>
+
+<form class="row g-3 align-items-end mb-4" method="get">
+  <div class="col-md-4">
+    <label class="form-label">Source</label>
+    <select class="form-select" name="source">
+      <option value="">All sources</option>
+      {% for s in sources %}
+        <option value="{{ s }}" {% if selected_source == s %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Keyword</label>
+    <input class="form-control" name="keyword" value="{{ selected_keyword|default:'' }}" placeholder="e.g. vitamin d">
+  </div>
+  <div class="col-md-4 d-flex gap-2">
+    <button class="btn btn-primary" type="submit">Apply</button>
+    <a class="btn btn-outline-secondary" href="{% url 'home' %}">Reset</a>
+  </div>
+</form>
+
+{% if articles %}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for a in articles %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          {% if a.hero_image_url %}
+            <img src="{{ a.hero_image_url }}" class="card-img-top" alt="">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <div class="small text-muted mb-1">
+              {{ a.source_domain }} · {{ a.date_published|date:"M j, Y" }}
+            </div>
+            <h5 class="card-title">{{ a.title }}</h5>
+            <p class="card-text text-secondary flex-grow-1">
+              {{ a.summary|default:a.excerpt|default:a.description|truncatechars:150 }}
+            </p>
+
+            {% if a.tag_list %}
+            <div class="mt-2 d-flex flex-wrap gap-1">
+                {% for tag in a.tag_list %}
+                <span class="badge text-bg-light border">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+            {% if a.url %}
+              <a href="{{ a.url }}" target="_blank" rel="noopener" class="mt-3 btn btn-sm btn-outline-primary">
+                Read source
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">No articles match your filters yet.</div>
+{% endif %}
+{% endblock %}

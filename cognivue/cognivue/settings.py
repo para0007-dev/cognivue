@@ -139,3 +139,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "app" / "templates"]
+
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "app" / "static"]

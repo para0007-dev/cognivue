@@ -1,16 +1,48 @@
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Your Vitamin D Result</title></head>
-<body>
-  <h1>Your Vitamin D Level</h1>
-  {% if result %}
-    <p><strong>Category:</strong> {{ result }}</p>
-    <p><strong>Total score:</strong> {{ total }}</p>
-  {% else %}
-    <p>No result yet — please complete the questionnaire.</p>
-  {% endif %}
+{% extends "base_site.html" %}
+{% block title %}Your Vitamin D Result{% endblock %}
+{% block content %}
 
-  <p><a href="/insights/disclaimer/">Supplementation disclaimer</a></p>
-  <p><a href="/">Return to homepage</a></p>
-</body>
-</html>
+{% if not result %}
+  <div class="alert alert-info">No result yet — please complete the questionnaire.</div>
+  <a class="btn btn-success" href="{% url 'insights:questionnaire_start' %}">Start Assessment</a>
+{% else %}
+  {% with cls=result|lower %}
+  <div class="result-card p-4 result-{{ cls }}">
+    {% if cls == "adequate" %}
+      <div class="d-flex align-items-center gap-3 mb-2">
+        <i class="bi bi-check2-circle text-success" style="font-size:2rem;"></i>
+        <h3 class="mb-0">Your Vitamin D Level: <span class="badge">Adequate</span></h3>
+      </div>
+      <p class="text-muted">Great job! Your current habits support healthy vitamin D levels and brain protection.</p>
+
+      <div class="row g-3 mt-1">
+        <div class="col-12"><div class="p-3 border rounded-3 d-flex gap-2"><i class="bi bi-sun"></i> Maintain Sun Exposure &mdash; continue 15–30 minutes daily</div></div>
+        <div class="col-12"><div class="p-3 border rounded-3 d-flex gap-2"><i class="bi bi-egg-fried"></i> Keep Eating Well &mdash; include vitamin D-rich foods</div></div>
+        <div class="col-12"><div class="p-3 border rounded-3 d-flex gap-2"><i class="bi bi-brain"></i> Monitor Brain Health &mdash; current levels support cognition</div></div>
+      </div>
+    {% else %}
+      <div class="d-flex align-items-center gap-3 mb-2">
+        <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size:2rem;"></i>
+        <h3 class="mb-0">Your Vitamin D Level: <span class="badge">Inadequate</span></h3>
+      </div>
+      <p class="text-muted">Your vitamin D levels may need improvement for optimal brain health protection.</p>
+
+      <div class="row g-3 mt-1">
+        <div class="col-12"><div class="p-3 border rounded-3 d-flex gap-2"><i class="bi bi-sunrise-fill"></i> Increase Sun Exposure &mdash; aim for 20–30 minutes daily</div></div>
+        <div class="col-12"><div class="p-3 border rounded-3 d-flex gap-2"><i class="bi bi-basket2"></i> Add Vitamin D Foods &mdash; fatty fish, eggs, dairy, fortified</div></div>
+        <div class="col-12"><div class="p-3 border rounded-3 d-flex gap-2"><i class="bi bi-capsule-pill"></i> Consider Supplements &mdash; speak to your doctor</div></div>
+      </div>
+    {% endif %}
+
+    <div class="result-note p-3 mt-3 small">
+      <div class="fw-semibold">Important Note</div>
+      This assessment provides an estimate only. For accurate vitamin D levels, ask your doctor for a 25(OH)D blood test.
+      The optimal blood level is &gt;75 nmol/L (&gt;30 ng/mL).
+    </div>
+
+    <a class="btn btn-success mt-3" href="{% url 'home' %}"><i class="bi bi-house-door"></i> Return to Homepage</a>
+  </div>
+  {% endwith %}
+{% endif %}
+
+{% endblock %}

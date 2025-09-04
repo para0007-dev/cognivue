@@ -71,26 +71,66 @@ def questionnaire_result(request):
         "questions": QUESTIONNAIRE,
     })
 
+
+
 def hub(request):
-    return render(request, "insights/hub.html")
+    last_result = request.session.get(SESSION_KEYS["result"])
+    return render(request, "insights/hub.html", {"last_result": last_result})
+
+
+
 
 def disclaimer(request):
     return render(request, "insights/disclaimer.html")
 
 def learn_more(request):
-    # Simple curated list for now; can move to DB later
-    sources = [
-        {
-            "name": "UniSA – Research news on vitamin D & brain health",
-            "url": "https://www.unisa.edu.au/Media-Centre/News/",
-        },
-        {
-            "name": "ABS – Australian Health Survey (general health stats)",
-            "url": "https://www.abs.gov.au/",
-        },
-        {
-            "name": "SBS Health – Public-facing explainers and news",
-            "url": "https://www.sbs.com.au/news/health",
-        },
-    ]
-    return render(request, "insights/learn_more.html", {"sources": sources})
+    last_result = request.session.get(SESSION_KEYS["result"])
+    return render(request, "insights/learn_more.html", {"last_result": last_result})
+
+
+
+from news_scraper.models import Article
+
+
+def article_list(request):
+    qs = Article.objects.filter(has_keywords=True)
+
+    keyword = request.GET.get('keyword')
+    if keyword:
+        qs = qs.filter(keywords_found__icontains=keyword)
+
+    source = request.GET.get('source')
+    if source:
+        qs = qs.filter(source_domain__icontains=source)
+
+    # Prepare articles and tag list for template (avoid calling .split in template)
+    articles = list(qs.order_by('-date_published')[:60])
+    for a in articles:
+        raw = a.keywords_found or ""
+        a.tag_list = [t.strip() for t in raw.split(",") if t.strip()]
+
+    # Source list for the filter (exclude blanks/nulls)
+    sources = (
+        Article.objects
+        .exclude(source_domain__isnull=True)
+        .exclude(source_domain__exact="")
+        .values_list('source_domain', flat=True)
+        .distinct()
+        .order_by('source_domain')
+    )
+
+    context = {
+        'articles': articles,
+        'keywords': [
+            ("vitamin d", "Vitamin D"),
+            ("vitamin d3", "Vitamin D3"),
+            ("sun exposure", "Sun exposure"),
+            ("uv index", "UV index"),
+            ("cognitive", "Cognitive"),
+            ("dementia", "Dementia"),
+        ],
+        'sources': sources,
+        'selected_keyword': keyword,
+        'selected_source': source,
+    }
+    return render(request, "articles/list.html", context)

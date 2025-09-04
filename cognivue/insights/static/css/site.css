@@ -1,0 +1,71 @@
+/* --- Tokens --- */
+:root{
+  --brand:#18b266;
+  --brand-600:#159a58;
+  --mint-50:#f0fff6;
+  --mint-100:#e5fbf0;
+  --sun-100:#fff7e6;
+  --red-100:#ffe8e6;
+  --gray-700:#3b3b3b;
+  --shadow:0 10px 24px rgba(16,24,40,.08), 0 2px 6px rgba(16,24,40,.06);
+}
+
+/* Brand pill in navbar */
+.brand-pill{
+  display:inline-grid; place-items:center; width:28px; height:28px;
+  border-radius:10px; background:linear-gradient(135deg,var(--brand),#2dd4bf);
+  color:white; font-weight:700; font-size:.9rem;
+}
+
+/* Soft buttons */
+.btn-success-soft{
+  background:var(--mint-100); color:var(--brand); border:1px solid #c6f3dc;
+}
+.btn-success-soft:hover{ background:#dff9ec; color:var(--brand-600); }
+
+/* Hero */
+.hero{
+  background: radial-gradient(1200px 400px at 60% -20%, #e7fff2, transparent 60%),
+              linear-gradient(180deg, #ffffff, #f7fbf9);
+}
+.hero-eyebrow{ color:var(--brand); font-weight:600; }
+
+/* Metric icons */
+.metric i{ font-size: 1.25rem; color: var(--brand); }
+
+/* Feature cards */
+.feature-card{
+  border:1px solid #e9ecef; border-radius:16px; background:white; box-shadow: var(--shadow);
+}
+.feature-icon{
+  width:34px; height:34px; border-radius:10px; display:inline-grid; place-items:center;
+  background: var(--mint-100); color: var(--brand);
+}
+
+/* Research blocks */
+.block{
+  background:white; border:1px solid #e9ecef; border-radius:14px; box-shadow: var(--shadow);
+}
+.block-head{ background:#f6f9fb; border-bottom:1px solid #e9ecef; border-radius:14px 14px 0 0; }
+
+/* Questionnaire */
+.q-shell{
+  background:linear-gradient(135deg,#f5fff9,#eef8ff);
+  border-radius:20px; padding:20px; border:1px solid #e5f0ea;
+}
+.q-option{
+  border:1px solid #dfe7e2; border-radius:12px; background:white;
+  padding:12px 14px; transition: all .15s ease; width:100%; text-align:left;
+}
+.q-option:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
+
+/* Result cards */
+.result-card{
+  border-radius:18px; border:1px solid #e9ecef; box-shadow: var(--shadow); background:white;
+}
+.result-adequate .badge{ background:#e8fff3; color:var(--brand) }
+.result-inadequate .badge{ background:#ffe6e6; color:#cc3c28 }
+.result-note{ background:#f6f8ff; border:1px solid #e1e5ff; border-radius:12px; }
+
+/* Small helpers */
+.text-muted-2{ color:#6b7280; }

@@ -1,30 +1,137 @@
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Insight Hub – Vitamin D & Brain Health</title></head>
-<body>
-  <h1>Vitamin D & Brain Health</h1>
-  <p>
-    Low vitamin D has been associated with smaller brain volumes and poorer cognitive scores in observational research.
-    Sun exposure, skin type, season, clothing coverage, and diet/supplements all influence your vitamin D status.
-  </p>
+{% extends "base_site.html" %}
+{% load static %}
+{% block title %}Home – VitaminD Brain{% endblock %}
 
-  <h3>What factors matter?</h3>
-  <ul>
-    <li><strong>Sun exposure:</strong> time outdoors between 10am–3pm</li>
-    <li><strong>Skin type:</strong> darker skin synthesises vitamin D more slowly</li>
-    <li><strong>Location & season:</strong> southern states in winter have lower UV</li>
-    <li><strong>Clothing coverage:</strong> more covered = less UV to skin</li>
-    <li><strong>Diet & supplements:</strong> oily fish, fortified milk/margarine, eggs; supplements can help</li>
-  </ul>
+{% block wide %}
+<section class="hero py-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <div class="hero-eyebrow mb-2 d-flex align-items-center gap-2">
+          <i class="bi bi-shield-check"></i> VitaminD Brain
+        </div>
+        <h1 class="display-5 fw-bold lh-sm mb-2">
+          Protect Your Brain with <span class="text-success">Vitamin&nbsp;D</span>
+        </h1>
+        <p class="text-muted fs-5 mb-4">
+          Research shows vitamin D deficiency can reduce brain volume and increase dementia risk.
+          Track your vitamin D levels, sun exposure, and nutrition to protect your cognitive health.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{% url 'insights:questionnaire_start' %}" class="btn btn-success btn-lg">
+            Test Your Vitamin D Level
+          </a>
+          <a href="{% url 'insights:learn_more' %}" class="btn btn-outline-primary btn-lg">
+      Learn More
+          </a>
+          <span class="text-muted align-self-center ms-2">Quick 5-question assessment · ~2 minutes</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow" style="background:#fffbe6; border:1px solid #ffe1a6;">
+          <img src="{% static 'img/hero_cognivue.png' %}" class="object-fit-cover" alt="Vitamin D and Brain Health" />
+        </div>
+      </div>
+    </div>
 
-  <p>
-    Want a personalised indication? Try the quick test:
-    <a href="{% url 'insights:questionnaire_start' %}">Test My Vitamin D Level</a>.
-  </p>
+    <!-- Metrics -->
+    <div class="row text-center mt-5 g-3">
+      <div class="col-12 col-md-4">
+        <div class="p-3 feature-card">
+          <div class="metric"><i class="bi bi-people"></i></div>
+          <div class="fw-bold fs-5 mt-2">1+ Billion</div>
+          <div class="text-muted small">People with vitamin D deficiency worldwide</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="p-3 feature-card">
+          <div class="metric"><i class="bi bi-activity"></i></div>
+          <div class="fw-bold fs-5 mt-2">25%</div>
+          <div class="text-muted small">Of Australians are vitamin D deficient</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="p-3 feature-card">
+          <div class="metric"><i class="bi bi-shield-plus"></i></div>
+          <div class="fw-bold fs-5 mt-2">17%</div>
+          <div class="text-muted small">Lower dementia risk with optimal levels</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <p>
-    <a href="{% url 'insights:learn_more' %}">Learn More</a> |
-    <a href="{% url 'insights:disclaimer' %}">Supplementation disclaimer</a>
-  </p>
-</body>
-</html>
+<!-- Features -->
+<section class="py-5">
+  <div class="container">
+    <h3 class="fw-bold text-center mb-3">Comprehensive Vitamin D Tracking</h3>
+    <p class="text-muted text-center mb-4">
+      Our website helps middle-aged Australians who work indoors monitor and improve
+      their vitamin D levels for better brain health and cognitive protection.
+    </p>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100">
+          <div class="feature-icon"><i class="bi bi-sun"></i></div>
+          <h6 class="mt-3 mb-1">Sun Exposure Tracking</h6>
+          <p class="text-muted small mb-0">Monitor your daily safe sun exposure for optimal vitamin D.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100">
+          <div class="feature-icon"><i class="bi bi-egg-fried"></i></div>
+          <h6 class="mt-3 mb-1">Nutrition Tracking</h6>
+          <p class="text-muted small mb-0">Log vitamin D-rich foods and track your daily intake in IU.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100">
+          <div class="feature-icon"><i class="bi bi-brain"></i></div>
+          <h6 class="mt-3 mb-1">Brain Health Insights</h6>
+          <p class="text-muted small mb-0">Learn how vitamin D protects brain volume and cognition.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100">
+          <div class="feature-icon"><i class="bi bi-flower3"></i></div>
+          <h6 class="mt-3 mb-1">Virtual Garden</h6>
+          <p class="text-muted small mb-0">Grow your virtual garden as you maintain healthy habits.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why it matters -->
+    <div class="row g-4 mt-4">
+      <div class="col-lg-7">
+        <div class="block p-4 h-100">
+          <h5 class="mb-3">Why Vitamin D Matters for Your Brain</h5>
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex gap-2 align-items-start mb-2"><i class="bi bi-check2-square text-success mt-1"></i>Maintains hippocampus size and structure crucial for memory.</li>
+            <li class="d-flex gap-2 align-items-start mb-2"><i class="bi bi-check2-square text-success mt-1"></i>Up to 17% lower dementia risk with adequate levels.</li>
+            <li class="d-flex gap-2 align-items-start mb-2"><i class="bi bi-check2-square text-success mt-1"></i>Supports cognitive function and processing speed.</li>
+            <li class="d-flex gap-2 align-items-start"><i class="bi bi-check2-square text-success mt-1"></i>Prevents age-related decline and executive dysfunction.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="block p-4 h-100">
+          <h6 class="text-muted mb-2">Research Source</h6>
+          <div class="d-flex align-items-start gap-3">
+            <div class="feature-icon"><i class="bi bi-building"></i></div>
+            <div>
+              <div class="fw-semibold">Queensland Brain Institute</div>
+              <div class="small text-muted">University of Queensland</div>
+            </div>
+          </div>
+          <p class="small text-muted mt-3 mb-0">
+            “Vitamin D deficiency impacts the volume and function of the hippocampus,
+            leading to reduced cognitive ability, potentially increasing the risk of stroke,
+            or contributing to dementia.”
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock wide %}

@@ -1,14 +1,72 @@
-<!doctype html>
-<html>
-<head><meta charset="utf-8"><title>Learn More – Credible Australian Sources</title></head>
-<body>
-  <h1>Credible Australian Sources</h1>
-  <p>These external links provide background on vitamin D, sun exposure, and brain health.</p>
-  <ul>
-    {% for s in sources %}
-      <li><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a></li>
-    {% endfor %}
-  </ul>
-  <p><a href="{% url 'insights:hub' %}">← Back to Insight Hub</a></p>
-</body>
-</html>
+{% extends "base_site.html" %}
+{% block title %}Health Impact Research – VitaminD Brain{% endblock %}
+{% block content %}
+  <div class="mb-4">
+    <h2 class="fw-bold"><i class="bi bi-activity text-primary me-2"></i>Health Impact Research</h2>
+    <p class="text-muted">Explore the evidence behind vitamin D’s impact on brain health, cognition, and dementia prevention.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head p-3">
+      <div class="fw-semibold">How Vitamin D Protects Your Brain</div>
+      <div class="small text-muted">Evidence-based summaries from QBI and global institutions</div>
+    </div>
+    <div class="p-3">
+      <div class="border rounded-3 p-3 mb-2">
+        <div class="fw-semibold">Hippocampus Protection</div>
+        <div class="small text-muted">Maintains brain volume and structure critical for memory formation.</div>
+        <span class="badge text-bg-primary-subtle mt-2">Up to 20% larger hippocampus at optimal levels</span>
+      </div>
+      <div class="border rounded-3 p-3 mb-2">
+        <div class="fw-semibold">Cognitive Protection</div>
+        <div class="small text-muted">Lowers risk of cognitive decline and dementia.</div>
+        <span class="badge text-bg-success-subtle mt-2">17% lower dementia risk</span>
+      </div>
+      <div class="border rounded-3 p-3 mb-2">
+        <div class="fw-semibold">Stroke Prevention</div>
+        <div class="small text-muted">Supports vascular health and reduces stroke risk.</div>
+        <span class="badge text-bg-info-subtle mt-2">36% reduction in stroke incidence</span>
+      </div>
+      <div class="border rounded-3 p-3">
+        <div class="fw-semibold">Mental Performance</div>
+        <div class="small text-muted">Improves processing speed and executive function.</div>
+        <span class="badge text-bg-warning-subtle mt-2">Measurable improvements in 8–12 weeks</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-4">
+    <a href="{% url 'insights:questionnaire_start' %}" class="btn btn-success btn-lg">View Your Vitamin D Level</a>
+    <div class="small text-muted mt-2">See personalized recommendations based on your answers</div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="p-3 border rounded-3">
+        <div class="fw-semibold mb-1">Optimal Levels</div>
+        <ul class="small text-muted mb-0">
+          <li>&gt;75 nmol/L (&gt;30 ng/mL)</li>
+          <li>Better cognitive function</li>
+          <li>Enhanced hippocampus size</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-3 border rounded-3">
+        <div class="fw-semibold mb-1">Global Impact</div>
+        <ul class="small text-muted mb-0">
+          <li>1+ billion people deficient worldwide</li>
+          <li>487,500 Australians living with dementia</li>
+          <li>Risk increases with age</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning-subtle mt-4" role="alert">
+    <div class="fw-semibold">Medical Disclaimer</div>
+    <div class="small text-muted">
+      Information on this site is educational and not medical advice. Consult a healthcare professional. For accurate levels, request a 25(OH)D blood test.
+    </div>
+  </div>
+{% endblock %}
