@@ -6,9 +6,9 @@ from insights import views as insights_views
 
 
 urlpatterns = [
+    path('', insights_views.hub, name='home'),
     path('admin/', admin.site.urls),
 
-    path('', insights_views.hub, name='home'),
     path('news/', include('news_scraper.urls')),
     path('timer/', include('timer.urls')),
     path('vitamin-d-helper/', include('vitamin_d_helper.urls')),
