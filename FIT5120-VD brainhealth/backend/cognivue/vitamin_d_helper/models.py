@@ -1,7 +1,6 @@
 # models.py
 from django.db import models
 from django.contrib.auth.models import User
-from django_countries.fields import CountryField
 
 class SkinType(models.Model):
     SKIN_TYPE_CHOICES = [
@@ -31,6 +30,8 @@ class UserProfile(models.Model):
         return self.latitude is not None and self.longitude is not None
     
     def get_location_string(self):
-        if self.city and self.country:
-            return f"{self.city},{self.country.code}"
+        if self.city:
+            return f"{self.city}, AU"
         return 'Melbourne, AU'
+    
+    
