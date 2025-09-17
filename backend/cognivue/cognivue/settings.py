@@ -115,12 +115,11 @@ else:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'news_scraper',
             'USER': 'postgres',
-            'PASSWORD': 'cltalt5!',
+            'PASSWORD': 'Derivation1@',
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -16,6 +16,8 @@ class FoodItemListView(generics.ListAPIView):
         lactose_free = self.request.query_params.get("lactose_free")
         nut_free = self.request.query_params.get("nut_free")
 
+        print(q)
+
         # Search
         if q:
             queryset = queryset.filter(Q(name__icontains=q) | Q(category__icontains=q))
