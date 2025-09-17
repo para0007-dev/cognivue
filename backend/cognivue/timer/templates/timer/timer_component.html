@@ -1,94 +1,198 @@
 <div class="card mt-4">
-    <div class="card-header">
-        <h4>Sun Exposure Timer</h4>
-    </div>
-    <div class="card-body">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Sun Exposure Timer</h4>
         {% if recommended_minutes %}
-        <p class="text-success">
-            <i class="bi bi-clock"></i> Recommended time: {{ recommended_minutes }} minutes
-        </p>
+        <span class="text-success small">
+            <i class="bi bi-clock"></i>
+            Recommended: {{ recommended_minutes }} min
+        </span>
         {% endif %}
+    </div>
 
-        <div class="timer-display">
-            <h1 id="timer-display">00:00</h1>
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <div class="col-12 col-md-4">
+                <label class="form-label">Duration (minutes)</label>
+                <input id="vd-duration" type="number" class="form-control" min="1" max="180"
+                    value="{{ recommended_minutes|default:15 }}">
+                <div class="form-text">Adjust then press “Set”.</div>
+            </div>
+            <div class="col-12 col-md-2">
+                <button id="vd-set" class="btn btn-outline-primary w-100">Set</button>
+            </div>
+            <div class="col-12 col-md-6 text-center">
+                <div class="display-4 fw-bold" id="vd-display">00:00</div>
+                <div class="small text-muted" id="vd-status"></div>
+            </div>
         </div>
 
-        <div class="timer-controls mt-3">
-            <button id="start-timer" class="btn btn-success">Start Timer</button>
-            <button id="pause-timer" class="btn btn-warning" disabled>Pause</button>
-            <button id="reset-timer" class="btn btn-danger" disabled>Reset</button>
-        </div>
+        <hr class="my-4">
 
-        {% if recommended_minutes %}
-        <div class="mt-3">
-            <button class="btn btn-outline-primary btn-sm" onclick="setRecommendedTime({{ recommended_minutes }})">
-                Set to Recommended Time
+        <div class="d-flex gap-2 flex-wrap">
+            <button id="vd-start" class="btn btn-success">
+                <i class="bi bi-play-fill"></i> Start
+            </button>
+            <button id="vd-pause" class="btn btn-warning" disabled>
+                <i class="bi bi-pause-fill"></i> Pause
+            </button>
+            <button id="vd-reset" class="btn btn-secondary" disabled>
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+            </button>
+            <button id="vd-log" class="btn btn-outline-dark ms-auto" disabled>
+                Log Session
             </button>
         </div>
-        {% endif %}
+
+        <audio id="vd-beep">
+            <source src="data:audio/wav;base64,UklGRmQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABYB..." type="audio/wav">
+        </audio>
     </div>
 </div>
 
 <script>
-    let timerInterval;
-    let secondsLeft = {{ initial_seconds|default: 0 }};
-    let isRunning = false;
+    (function () {
+        // ----- Config / state -----
+        const initialSeconds = Number('{{ initial_seconds|default:0 }}') || 0;
+        const storageKey = 'vd_timer_state_v1';
 
-    function updateDisplay() {
-        const minutes = Math.floor(secondsLeft / 60);
-        const seconds = secondsLeft % 60;
-        document.getElementById('timer-display').textContent =
-            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
+        let totalSeconds = initialSeconds > 0 ? initialSeconds : (Number('{{ recommended_minutes|default:15 }}') || 15) * 60;
+        let remaining = totalSeconds;
+        let running = false;
+        let tickId = null;
 
-    function setRecommendedTime(minutes) {
-        secondsLeft = minutes * 60;
-        updateDisplay();
-        document.getElementById('reset-timer').disabled = false;
-    }
+        // ----- Elements -----
+        const elDisplay = document.getElementById('vd-display');
+        const elStatus = document.getElementById('vd-status');
+        const elStart = document.getElementById('vd-start');
+        const elPause = document.getElementById('vd-pause');
+        const elReset = document.getElementById('vd-reset');
+        const elLog = document.getElementById('vd-log');
+        const elSet = document.getElementById('vd-set');
+        const elDuration = document.getElementById('vd-duration');
+        const elBeep = document.getElementById('vd-beep');
 
-    document.getElementById('start-timer').addEventListener('click', function () {
-        if (!isRunning) {
-            isRunning = true;
-            this.disabled = true;
-            document.getElementById('pause-timer').disabled = false;
-            document.getElementById('reset-timer').disabled = false;
+        // ----- Helpers -----
+        function fmt(s) {
+            s = Math.max(0, Math.floor(s));
+            const m = Math.floor(s / 60);
+            const ss = s % 60;
+            return `${String(m).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+        }
 
-            timerInterval = setInterval(function () {
-                if (secondsLeft > 0) {
-                    secondsLeft--;
-                    updateDisplay();
-                } else {
-                    clearInterval(timerInterval);
-                    isRunning = false;
-                    alert('Time\'s up! Sun exposure session completed.');
-                    document.getElementById('start-timer').disabled = false;
-                    document.getElementById('pause-timer').disabled = true;
+        function saveState() {
+            const payload = {
+                totalSeconds, remaining, running,
+                ts: Date.now()
+            };
+            localStorage.setItem(storageKey, JSON.stringify(payload));
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(storageKey);
+                if (!raw) return;
+                const st = JSON.parse(raw);
+                totalSeconds = Number(st.totalSeconds) || totalSeconds;
+                remaining = Number(st.remaining) || remaining;
+                running = Boolean(st.running);
+            } catch (_) { }
+        }
+
+        function updateUI() {
+            elDisplay.textContent = fmt(remaining);
+            elPause.disabled = !running;
+            elReset.disabled = (remaining === totalSeconds) && !running;
+            elStart.disabled = running || remaining <= 0;
+            elLog.disabled = remaining !== 0;
+            elStatus.textContent = running ? 'Running…' : (remaining === 0 ? 'Done' : 'Paused');
+        }
+
+        function stopTick() {
+            if (tickId) { clearInterval(tickId); tickId = null; }
+        }
+
+        function startTick() {
+            stopTick();
+            running = true;
+            tickId = setInterval(() => {
+                remaining -= 1;
+                if (remaining <= 0) {
+                    remaining = 0;
+                    running = false;
+                    stopTick();
+                    try { elBeep && elBeep.play && elBeep.play(); } catch (_) { }
                 }
+                saveState();
+                updateUI();
             }, 1000);
         }
-    });
 
-    document.getElementById('pause-timer').addEventListener('click', function () {
-        if (isRunning) {
-            clearInterval(timerInterval);
-            isRunning = false;
-            document.getElementById('start-timer').disabled = false;
-            this.disabled = true;
+        // ----- Event wiring -----
+        elSet.addEventListener('click', () => {
+            const mins = Math.max(1, Math.min(180, Number(elDuration.value) || 0));
+            totalSeconds = mins * 60;
+            remaining = totalSeconds;
+            running = false;
+            stopTick();
+            saveState();
+            updateUI();
+        });
+
+        elStart.addEventListener('click', () => {
+            if (remaining <= 0) return;
+            startTick();
+            saveState();
+            updateUI();
+        });
+
+        elPause.addEventListener('click', () => {
+            running = false;
+            stopTick();
+            saveState();
+            updateUI();
+        });
+
+        elReset.addEventListener('click', () => {
+            running = false;
+            stopTick();
+            remaining = totalSeconds;
+            saveState();
+            updateUI();
+        });
+
+        // Optional: POST log on completion (or manual click)
+        elLog.addEventListener('click', async () => {
+            // Post the *original* totalSeconds as completed duration
+            const durationSec = totalSeconds;
+            try {
+                const res = await fetch("{% url 'vd_log_session' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": (document.querySelector('[name=csrfmiddlewaretoken]')?.value) || getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({ duration_seconds: durationSec })
+                });
+                if (!res.ok) throw new Error(await res.text());
+                elStatus.textContent = 'Session logged ✅';
+            } catch (e) {
+                elStatus.textContent = 'Could not log session';
+            }
+        });
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
-    });
 
-    document.getElementById('reset-timer').addEventListener('click', function () {
-        clearInterval(timerInterval);
-        isRunning = false;
-        secondsLeft = {{ initial_seconds |default: 0 }
-    };
-    updateDisplay();
-    document.getElementById('start-timer').disabled = false;
-    document.getElementById('pause-timer').disabled = true;
-    this.disabled = true;
-    });
-
-    // Initialize display
-    updateDisplay();
+        // ----- Init -----
+        loadState();
+        // If initialSeconds was provided and greater than default, prefer it:
+        if (initialSeconds && initialSeconds > 0) {
+            totalSeconds = initialSeconds;
+            remaining = initialSeconds;
+        }
+        updateUI();
+    })();
 </script>
