@@ -48,9 +48,8 @@ def vitamin_d_helper(request):
     
     timer_seconds = None
     if recommendation:
-        # Use the midpoint of the recommended range
-        recommended_mid = (recommendation['min_minutes'] + recommendation['max_minutes']) // 2
-        timer_seconds = recommended_mid * 60
+        print(recommendation)
+        timer_seconds = recommendation['max_minutes']* 60
 
     context = {
         'form': form,
@@ -68,138 +67,79 @@ def vitamin_d_helper(request):
 
 def get_weather_data(profile):
     """
-    Get weather data from Open-Meteo API (free, no API key required)
+    Get weather data for Australian locations
     """
     try:
-        # Default coordinates (Melbourne)
-        lat, lon = -37.8136, 144.9631
-        location_name = "Melbourne, Australia"
-        
-        # Try to get coordinates from profile
+        # Priority 1: Coordinates from geolocation
         if profile.has_location():
-            lat, lon = profile.latitude, profile.longitude
-            # Try to get location name from reverse geocoding
-            city, country = reverse_geocode(lat, lon)
-            if city:
-                location_name = f"{city}, {country or 'Australia'}"
-            else:
-                location_name = "Melbourne, Australia"  # Fallback to Melbourne instead of coordinates
+            print("Using coordinates from geolocation")
+            url = "https://api.openweathermap.org/data/2.5/weather"
+            params = {
+                'lat': profile.latitude,
+                'lon': profile.longitude,
+                'appid': settings.OPENWEATHER_API_KEY,
+                'units': 'metric'
+            }
+
+        # Priority 2: Manual city (fallback if no coords)
         elif profile.city:
-            # For city names, we'll use geocoding to get coordinates
-            geocode_result = geocode_city(profile.city)
-            if geocode_result:
-                lat, lon = geocode_result['lat'], geocode_result['lon']
-                location_name = geocode_result['name']
+            print(f"Using manual city: {profile.city}")
+            url = "https://api.openweathermap.org/data/2.5/weather"
+            params = {
+                'q': f"{profile.city},AU",
+                'appid': settings.OPENWEATHER_API_KEY,
+                'units': 'metric'
+            }
+
+        # Priority 3: Default fallback to Melbourne
         else:
-            # For default Melbourne coordinates, ensure we have the city name
-            location_name = "Melbourne, Australia"
-        
-        # Get weather data from Open-Meteo API
-        url = "https://api.open-meteo.com/v1/forecast"
-        params = {
-            'latitude': lat,
-            'longitude': lon,
-            'current': 'temperature_2m,relative_humidity_2m,weather_code,uv_index',
-            'timezone': 'auto'
-        }
-        
+            print("Using default location: Melbourne")
+            url = "https://api.openweathermap.org/data/2.5/weather"
+            params = {
+                'q': 'Melbourne,AU',
+                'appid': settings.OPENWEATHER_API_KEY,
+                'units': 'metric'
+            }
+
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
-        
+
         data = response.json()
-        current = data.get('current', {})
-        
-        # Map weather codes to descriptions
-        weather_code = current.get('weather_code', 0)
-        condition = get_weather_description(weather_code)
-        
+        uv_index = get_uv_index(data['coord']['lat'], data['coord']['lon'])
+
         return {
-            'location': location_name,
-            'condition': condition,
-            'temp': round(current.get('temperature_2m', 22)),
-            'uv_index': round(current.get('uv_index', 5)),
-            'humidity': round(current.get('relative_humidity_2m', 60)),
+            'location': f"{data['name']}, Australia",
+            'condition': data['weather'][0]['description'].title(),
+            'temp': round(data['main']['temp']),
+            'uv_index': uv_index,
+            'humidity': data['main']['humidity'],
         }
-        
+
     except Exception as e:
         print(f"Weather API error: {e}")
-        # Return default data if API fails
-        return {
-            'location': 'Melbourne, Australia',
-            'condition': 'Partly Cloudy',
-            'temp': 22,
-            'uv_index': 5,
-            'humidity': 60,
-        }
+        return None
 
-def get_weather_description(weather_code):
+def get_uv_index(lat, lon):
     """
-    Map Open-Meteo weather codes to human-readable descriptions
-    """
-    weather_codes = {
-        0: 'Clear Sky',
-        1: 'Mainly Clear',
-        2: 'Partly Cloudy',
-        3: 'Overcast',
-        45: 'Fog',
-        48: 'Depositing Rime Fog',
-        51: 'Light Drizzle',
-        53: 'Moderate Drizzle',
-        55: 'Dense Drizzle',
-        56: 'Light Freezing Drizzle',
-        57: 'Dense Freezing Drizzle',
-        61: 'Slight Rain',
-        63: 'Moderate Rain',
-        65: 'Heavy Rain',
-        66: 'Light Freezing Rain',
-        67: 'Heavy Freezing Rain',
-        71: 'Slight Snow',
-        73: 'Moderate Snow',
-        75: 'Heavy Snow',
-        77: 'Snow Grains',
-        80: 'Slight Rain Showers',
-        81: 'Moderate Rain Showers',
-        82: 'Violent Rain Showers',
-        85: 'Slight Snow Showers',
-        86: 'Heavy Snow Showers',
-        95: 'Thunderstorm',
-        96: 'Thunderstorm with Slight Hail',
-        99: 'Thunderstorm with Heavy Hail'
-    }
-    return weather_codes.get(weather_code, 'Unknown')
-
-def geocode_city(city_name):
-    """
-    Get coordinates for a city using Open-Meteo geocoding API
+    Get UV index using OpenWeather's One Call API
     """
     try:
-        url = "https://geocoding-api.open-meteo.com/v1/search"
+        url = "https://api.openweathermap.org/data/3.0/onecall"
         params = {
-            'name': city_name,
-            'count': 1,
-            'language': 'en',
-            'format': 'json'
+            'lat': lat,
+            'lon': lon,
+            'exclude': 'minutely,hourly,daily,alerts',
+            'appid': settings.OPENWEATHER_API_KEY
         }
         
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
         
         data = response.json()
-        results = data.get('results', [])
+        return ceil(data.get('current', {}).get('uvi', 0))
         
-        if results:
-            result = results[0]
-            return {
-                'lat': result['latitude'],
-                'lon': result['longitude'],
-                'name': f"{result['name']}, {result.get('country', '')}"
-            }
-        
-        return None
-        
-    except Exception as e:
-        print(f"Geocoding error: {e}")
-        return None
+    except:
+        return 0
 
 def is_good_conditions(weather_data):
     """
@@ -250,156 +190,25 @@ def update_location_from_coords(request):
 def reverse_geocode(lat, lon):
     """
     Reverse geocode coordinates to get city and country
-    Using Open-Meteo's free geocoding API
+    Using OpenWeather's reverse geocoding API
     """
     try:
-        url = "https://geocoding-api.open-meteo.com/v1/search"
+        url = "http://api.openweathermap.org/geo/1.0/reverse"
         params = {
-            'latitude': lat,
-            'longitude': lon,
-            'count': 1,
-            'language': 'en',
-            'format': 'json'
+            'lat': lat,
+            'lon': lon,
+            'limit': 1,
+            'appid': settings.OPENWEATHER_API_KEY
         }
         
         response = requests.get(url, params=params, timeout=5)
         response.raise_for_status()
         
         data = response.json()
-        results = data.get('results', [])
-        if results and len(results) > 0:
-            result = results[0]
-            return result.get('name'), result.get('country')
+        if data and len(data) > 0:
+            return data[0].get('name'), data[0].get('country')
             
     except:
         pass
     
     return None, None
-
-
-# API Views for Frontend Integration
-@csrf_exempt
-def get_weather_api(request):
-    """API endpoint to get weather data"""
-    if request.method == 'GET':
-        try:
-            # Get location from query parameters
-            lat = request.GET.get('lat')
-            lon = request.GET.get('lon')
-            city = request.GET.get('city')
-            
-            # Create a temporary profile object for weather data
-            class TempProfile:
-                def __init__(self):
-                    self.latitude = float(lat) if lat else None
-                    self.longitude = float(lon) if lon else None
-                    self.city = city
-                
-                def has_location(self):
-                    return self.latitude is not None and self.longitude is not None
-            
-            profile = TempProfile()
-            weather_data = get_weather_data(profile)
-            
-            # Return mock data if no API key is configured
-            if not weather_data:
-                weather_data = {
-                    'location': 'Melbourne, Australia',
-                    'condition': 'Partly Cloudy',
-                    'temp': 22,
-                    'uv_index': 6,
-                    'humidity': 65
-                }
-            
-            return JsonResponse({
-                'success': True,
-                'weather': weather_data,
-                'is_good_conditions': is_good_conditions(weather_data)
-            })
-                
-        except Exception as e:
-            return JsonResponse({
-                'success': False,
-                'error': str(e)
-            })
-    
-    return JsonResponse({'success': False, 'error': 'Invalid request method'})
-
-
-@csrf_exempt
-def get_skin_types_api(request):
-    """API endpoint to get all skin types"""
-    if request.method == 'GET':
-        try:
-            skin_types = SkinType.objects.all()
-            data = []
-            for skin_type in skin_types:
-                data.append({
-                    'id': skin_type.id,
-                    'type': skin_type.type,
-                    'name': skin_type.get_type_display(),
-                    'min_exposure_minutes': skin_type.min_exposure_minutes,
-                    'max_exposure_minutes': skin_type.max_exposure_minutes
-                })
-            
-            return JsonResponse({
-                'success': True,
-                'skin_types': data
-            })
-            
-        except Exception as e:
-            return JsonResponse({
-                'success': False,
-                'error': str(e)
-            })
-    
-    return JsonResponse({'success': False, 'error': 'Invalid request method'})
-
-
-@csrf_exempt
-def get_recommendation_api(request):
-    """API endpoint to get sun exposure recommendation"""
-    if request.method == 'GET':
-        try:
-            skin_type_id = request.GET.get('skin_type_id')
-            
-            if not skin_type_id:
-                return JsonResponse({
-                    'success': False,
-                    'error': 'skin_type_id parameter is required'
-                })
-            
-            try:
-                skin_type = SkinType.objects.get(id=skin_type_id)
-                
-                # Calculate recommended time (midpoint of range)
-                recommended_minutes = (skin_type.min_exposure_minutes + skin_type.max_exposure_minutes) // 2
-                
-                return JsonResponse({
-                    'success': True,
-                    'recommendation': {
-                        'skin_type': {
-                            'id': skin_type.id,
-                            'type': skin_type.type,
-                            'name': skin_type.get_type_display()
-                        },
-                        'min_minutes': skin_type.min_exposure_minutes,
-                        'max_minutes': skin_type.max_exposure_minutes,
-                        'recommended_minutes': recommended_minutes,
-                        'recommended_seconds': recommended_minutes * 60
-                    }
-                })
-                
-            except SkinType.DoesNotExist:
-                return JsonResponse({
-                    'success': False,
-                    'error': 'Skin type not found'
-                })
-                
-        except Exception as e:
-            return JsonResponse({
-                'success': False,
-                'error': str(e)
-            })
-    
-    return JsonResponse({'success': False, 'error': 'Invalid request method'})
