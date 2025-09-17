@@ -1,0 +1,50 @@
+[
+  {
+    "model": "nutrition.fooditem",
+    "pk": 1,
+    "fields": {
+      "name": "Salmon",
+      "category": "Fish",
+      "vitamin_d_iu": 360,
+      "is_vegetarian": false,
+      "is_lactose_free": true,
+      "is_nut_free": true
+    }
+  },
+  {
+    "model": "nutrition.fooditem",
+    "pk": 2,
+    "fields": {
+      "name": "Egg Yolks",
+      "category": "Poultry",
+      "vitamin_d_iu": 40,
+      "is_vegetarian": false,
+      "is_lactose_free": true,
+      "is_nut_free": true
+    }
+  },
+  {
+    "model": "nutrition.fooditem",
+    "pk": 3,
+    "fields": {
+      "name": "Mushrooms (UV exposed)",
+      "category": "Vegetable",
+      "vitamin_d_iu": 400,
+      "is_vegetarian": true,
+      "is_lactose_free": true,
+      "is_nut_free": true
+    }
+  },
+  {
+    "model": "nutrition.fooditem",
+    "pk": 4,
+    "fields": {
+      "name": "Fortified Milk",
+      "category": "Dairy",
+      "vitamin_d_iu": 120,
+      "is_vegetarian": true,
+      "is_lactose_free": false,
+      "is_nut_free": true
+    }
+  }
+]

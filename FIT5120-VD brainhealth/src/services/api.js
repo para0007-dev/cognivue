@@ -97,3 +97,11 @@ export const insightsAPI = {
 
 // Export API base URL for other components
 export { API_BASE_URL };
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE, // e.g. http://127.0.0.1:8000
+  timeout: 10000,
+});
+
+export default api;

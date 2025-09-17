@@ -6,6 +6,7 @@ import VitaminDQuestionnaireView from '@/views/VitaminDQuestionnaireView.vue'
 import VitaminDResultView from '@/views/VitaminDResultView.vue'
 import VitaminDInadequateView from '@/views/VitaminDInadequateView.vue'
 import HealthImpactView from '@/views/HealthImpactView.vue'
+import Nutrition from '@/views/Nutrition.vue'
 
 const routes = [
   {
@@ -42,7 +43,12 @@ const routes = [
     path: '/health-impact',
     name: 'HealthImpact',
     component: HealthImpactView
+  },
+  { path: "/nutrition", 
+    name: "Nutrition", 
+    component: () => import("@/views/Nutrition.vue") 
   }
+
 ]
 
 const router = createRouter({

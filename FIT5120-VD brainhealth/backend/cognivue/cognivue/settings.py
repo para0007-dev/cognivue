@@ -41,17 +41,20 @@ LOGIN_REDIRECT_URL = '/vitamin-d-helper/'  # Where to redirect after login
 # Application definition
 
 INSTALLED_APPS = [
-    'news_scraper',
-    'timer',
-    'vitamin_d_helper',
-    'django_countries',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'insights',
+    "corsheaders",
+    "news_scraper",
+    "timer",
+    "vitamin_d_helper",
+    "django_countries",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "insights",
+    "rest_framework",
+    "nutrition",
 ]
 
 MIDDLEWARE = [
@@ -87,20 +90,37 @@ WSGI_APPLICATION = 'cognivue.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'news_scraper',
-        'USER': 'postgres',
-        'PASSWORD': 'Derivation1@',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.parse(
+            os.environ["DATABASE_URL"],
+            conn_max_age=600,
+        )
+    }
+else:
+    
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql",
+    #         "NAME": os.getenv("DB_NAME", "cognivue"),
+    #         "USER": os.getenv("DB_USER", "cognivue"),
+    #         "PASSWORD": os.getenv("DB_PASSWORD", ""),
+    #         "HOST": os.getenv("DB_HOST", "127.0.0.1"),
+    #         "PORT": os.getenv("DB_PORT", "5432"),
+    #     }
+    # }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'news_scraper',
+            'USER': 'postgres',
+            'PASSWORD': 'cltalt5!',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {

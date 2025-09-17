@@ -10,6 +10,7 @@
         <ul class="nav-menu">
           <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
           <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
+          <router-link to="/nutrition" class="nav-link">Food Plan</router-link>
           <li><a href="#" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Intake</span></a></li>
           <li><router-link to="/health-impact" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Health Impact"><span>Health Impact</span></router-link></li>
           <li><a href="#" class="nav-link"><img src="@/assets/images/garden-icon.svg" alt="Garden"><span>Garden</span></a></li>
