@@ -1,0 +1,22 @@
+[
+  {
+    "model": "nutrition.nutritiontip",
+    "pk": 1,
+    "fields": {
+      "title": "Fatty fish for brain health",
+      "tip_text": "Eating salmon or mackerel twice a week can boost vitamin D levels.",
+      "expanded_text": "Vitamin D from fatty fish supports cognitive function and may lower risk of dementia.",
+      "related_foods": [1]
+    }
+  },
+  {
+    "model": "nutrition.nutritiontip",
+    "pk": 2,
+    "fields": {
+      "title": "Mushrooms as a vegan source",
+      "tip_text": "Mushrooms exposed to UV light provide plant-based vitamin D.",
+      "expanded_text": "They help vegans maintain healthy vitamin D intake for bone and brain health.",
+      "related_foods": [3]
+    }
+  }
+]
