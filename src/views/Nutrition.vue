@@ -1,17 +1,30 @@
 <template>
-  <main class="max-w-5xl mx-auto p-4 space-y-4">
-    <h1 class="text-2xl font-bold">Food Plan Tracker</h1>
+  <section class="nutrition">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="title">Food Plan Tracker</h1>
+    </header>
 
-    <nav class="flex gap-2">
-      <button :class="btn('planner')" @click="tab='planner'">Meal Planner</button>
-      <button :class="btn('search')"  @click="tab='search'">Food Search</button>
-      <button :class="btn('tips')"    @click="tab='tips'">Nutrition Tips</button>
-    </nav>
+    <!-- Tab Switcher -->
+    <div class="tab-switcher">
+      <button
+        v-for="tab in tabs"
+        :key="tab"
+        @click="currentTab = tab"
+        class="pill"
+        :class="{ active: currentTab === tab }"
+      >
+        {{ tab }}
+      </button>
+    </div>
 
-    <MealPlanner v-if="tab==='planner'" />
-    <FoodSearch  v-else-if="tab==='search'" />
-    <NutritionTips v-else />
-  </main>
+    <!-- Dynamic Tab Content -->
+    <div class="content">
+      <MealPlanner v-if="currentTab === 'Meal Planner'" />
+      <FoodSearch v-if="currentTab === 'Food Search'" />
+      <NutritionTips v-if="currentTab === 'Nutrition Tips'" />
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -20,13 +33,45 @@ import MealPlanner from "@/components/nutrition/MealPlanner.vue";
 import FoodSearch from "@/components/nutrition/FoodSearch.vue";
 import NutritionTips from "@/components/nutrition/NutritionTips.vue";
 
-const tab = ref("planner");
-const btn = (name) => [
-  "px-3 py-2 rounded border",
-  tab.value===name ? "bg-emerald-600 text-white border-emerald-600" : "bg-white"
-].join(" ");
+const tabs = ["Meal Planner", "Food Search", "Nutrition Tips"];
+const currentTab = ref("Meal Planner");
 </script>
 
-<style>
-:root { font-family: Inter, ui-sans-serif, system-ui; background:#f7faf9; }
+<style scoped>
+.nutrition { padding: 16px; }
+
+.header { margin-bottom: 12px; text-align: center; }
+.title { font-size: 26px; font-weight: 700; color: #064e3b; }
+
+.tab-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid #10b981;
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.pill:hover {
+  background: #d1fae5;
+}
+
+.pill.active {
+  background: #10b981;
+  color: white;
+  border-color: #059669;
+}
+
+.content { margin-top: 20px; }
 </style>
