@@ -3,7 +3,7 @@
     "model": "nutrition.fooditem",
     "pk": 1,
     "fields": {
-      "name": "Protein powder, whey based, protein >70%, unfortified",
+      "name": "Protein Powder, Whey, Protein",
       "category": "Supplement",
       "vitamin_d_iu": 24.0,
       "is_vegetarian": true,
@@ -15,7 +15,7 @@
     "model": "nutrition.fooditem",
     "pk": 2,
     "fields": {
-      "name": "Protein powder, whey based, protein >70%, unfortified, prepared with water",
+      "name": "Protein Powder, Whey, Protein",
       "category": "Supplement",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -27,7 +27,7 @@
     "model": "nutrition.fooditem",
     "pk": 3,
     "fields": {
-      "name": "Beverage base, chocolate flavour, added vitamins A, B1, B2, C & D, Ca & Fe (Milo)",
+      "name": "Drink, Chocolate, Added Vitamins A, B1, B2, C & D, Ca & Fe (Milo)",
       "category": "Beverage",
       "vitamin_d_iu": 540.0,
       "is_vegetarian": true,
@@ -39,7 +39,7 @@
     "model": "nutrition.fooditem",
     "pk": 4,
     "fields": {
-      "name": "Beverage, chocolate flavour, from Nesquik powder, with regular fat cows milk",
+      "name": "Beverage, Chocolate, From Nesquik Powder, With Regular Fat Cows Milk",
       "category": "Dairy",
       "vitamin_d_iu": 3.6,
       "is_vegetarian": true,
@@ -51,7 +51,7 @@
     "model": "nutrition.fooditem",
     "pk": 5,
     "fields": {
-      "name": "Beverage, chocolate flavour, from Milo powder, with regular fat cows milk",
+      "name": "Beverage, Chocolate, From Milo Powder, With Regular Fat Cows Milk",
       "category": "Dairy",
       "vitamin_d_iu": 52.0,
       "is_vegetarian": true,
@@ -63,7 +63,7 @@
     "model": "nutrition.fooditem",
     "pk": 6,
     "fields": {
-      "name": "Beverage, chocolate flavour, from drinking chocolate, with regular fat cows milk",
+      "name": "Beverage, Chocolate, From Drinking",
       "category": "Dairy",
       "vitamin_d_iu": 3.2,
       "is_vegetarian": true,
@@ -75,7 +75,7 @@
     "model": "nutrition.fooditem",
     "pk": 7,
     "fields": {
-      "name": "Coffee mix, with beverage whitener & sugar, dry powder",
+      "name": "Coffee Mix, With Beverage",
       "category": "Beverage",
       "vitamin_d_iu": 10.8,
       "is_vegetarian": true,
@@ -87,7 +87,7 @@
     "model": "nutrition.fooditem",
     "pk": 8,
     "fields": {
-      "name": "Coffee, prepared from coffee mix with sugar & whitener, no added milk",
+      "name": "Coffee, Prepared From Coffee",
       "category": "Dairy",
       "vitamin_d_iu": 0.4,
       "is_vegetarian": true,
@@ -99,7 +99,7 @@
     "model": "nutrition.fooditem",
     "pk": 9,
     "fields": {
-      "name": "Coffee, flat white/latte/cappuccino, from ground coffee beans, with regular fat cows milk",
+      "name": "Coffee, Flat White/Latte/Cappuccino, From",
       "category": "Dairy",
       "vitamin_d_iu": 2.4,
       "is_vegetarian": true,
@@ -111,7 +111,7 @@
     "model": "nutrition.fooditem",
     "pk": 10,
     "fields": {
-      "name": "Biscuit, sweet, Anzac style, homemade from basic ingredients",
+      "name": "Biscuit, Sweet, Anzac Style,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 8.0,
       "is_vegetarian": true,
@@ -123,7 +123,7 @@
     "model": "nutrition.fooditem",
     "pk": 11,
     "fields": {
-      "name": "Biscuit, sweet, shortbread style, commercial",
+      "name": "Biscuit, Sweet, Shortbread Style,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -135,7 +135,7 @@
     "model": "nutrition.fooditem",
     "pk": 12,
     "fields": {
-      "name": "Bread roll, topped with cheese",
+      "name": "Bread Roll, Topped With",
       "category": "Dairy",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -147,7 +147,7 @@
     "model": "nutrition.fooditem",
     "pk": 13,
     "fields": {
-      "name": "Bread roll, topped with cheese & bacon",
+      "name": "Bread Roll, Topped With",
       "category": "Dairy",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -159,7 +159,7 @@
     "model": "nutrition.fooditem",
     "pk": 14,
     "fields": {
-      "name": "Bread, garlic, commercial, cooked",
+      "name": "Bread, Garlic, Commercial, Cooked",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -171,7 +171,7 @@
     "model": "nutrition.fooditem",
     "pk": 15,
     "fields": {
-      "name": "Bread, garlic or herb, homemade, cooked",
+      "name": "Bread, Garlic Or Herb,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 4.4,
       "is_vegetarian": true,
@@ -183,7 +183,7 @@
     "model": "nutrition.fooditem",
     "pk": 16,
     "fields": {
-      "name": "Bun, sweet, with dried fruit, iced",
+      "name": "Bun, Sweet, With Dried",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -195,7 +195,7 @@
     "model": "nutrition.fooditem",
     "pk": 17,
     "fields": {
-      "name": "Slice, brownie, chocolate, with nuts, homemade",
+      "name": "Slice, Brownie, Chocolate, With",
       "category": "Beverage",
       "vitamin_d_iu": 42.8,
       "is_vegetarian": true,
@@ -207,7 +207,7 @@
     "model": "nutrition.fooditem",
     "pk": 18,
     "fields": {
-      "name": "Cake, carrot, homemade, uniced",
+      "name": "Cake, Carrot, Homemade, Uniced",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 33.6,
       "is_vegetarian": true,
@@ -219,7 +219,7 @@
     "model": "nutrition.fooditem",
     "pk": 19,
     "fields": {
-      "name": "Cake, carrot, homemade, iced",
+      "name": "Cake, Carrot, Homemade, Iced",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 28.4,
       "is_vegetarian": true,
@@ -231,7 +231,7 @@
     "model": "nutrition.fooditem",
     "pk": 20,
     "fields": {
-      "name": "Cake, chocolate, homemade, uniced",
+      "name": "Cake, Chocolate, Homemade, Uniced",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 43.6,
       "is_vegetarian": true,
@@ -243,7 +243,7 @@
     "model": "nutrition.fooditem",
     "pk": 21,
     "fields": {
-      "name": "Cake, chocolate, homemade, iced",
+      "name": "Cake, Chocolate, Homemade, Iced",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 36.4,
       "is_vegetarian": true,
@@ -255,7 +255,7 @@
     "model": "nutrition.fooditem",
     "pk": 22,
     "fields": {
-      "name": "Cake, fruit, homemade, uniced",
+      "name": "Cake, Fruit, Homemade, Uniced",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 19.6,
       "is_vegetarian": true,
@@ -267,7 +267,7 @@
     "model": "nutrition.fooditem",
     "pk": 23,
     "fields": {
-      "name": "Cake, mud, dark chocolate, homemade, uniced",
+      "name": "Cake, Mud, Dark Chocolate,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 71.6,
       "is_vegetarian": true,
@@ -279,7 +279,7 @@
     "model": "nutrition.fooditem",
     "pk": 24,
     "fields": {
-      "name": "Cake, mud, dark chocolate, homemade, chocolate ganache icing",
+      "name": "Cake, Mud, Dark Chocolate,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 57.2,
       "is_vegetarian": true,
@@ -291,7 +291,7 @@
     "model": "nutrition.fooditem",
     "pk": 25,
     "fields": {
-      "name": "Cake, plain butter cake, homemade, uniced",
+      "name": "Cake, Plain Butter Cake,",
       "category": "Dairy",
       "vitamin_d_iu": 39.6,
       "is_vegetarian": true,
@@ -303,7 +303,7 @@
     "model": "nutrition.fooditem",
     "pk": 26,
     "fields": {
-      "name": "Cake, plain butter cake, homemade, iced",
+      "name": "Cake, Plain Butter Cake,",
       "category": "Dairy",
       "vitamin_d_iu": 32.8,
       "is_vegetarian": true,
@@ -315,7 +315,7 @@
     "model": "nutrition.fooditem",
     "pk": 27,
     "fields": {
-      "name": "Pancake, plain, homemade",
+      "name": "Pancake, Plain, Homemade",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 30.8,
       "is_vegetarian": true,
@@ -327,7 +327,7 @@
     "model": "nutrition.fooditem",
     "pk": 28,
     "fields": {
-      "name": "Pudding, chocolate, homemade",
+      "name": "Pudding, Chocolate, Homemade",
       "category": "Beverage",
       "vitamin_d_iu": 1.6,
       "is_vegetarian": true,
@@ -339,7 +339,7 @@
     "model": "nutrition.fooditem",
     "pk": 29,
     "fields": {
-      "name": "Pudding, plum, steamed or boiled, homemade",
+      "name": "Pudding, Plum, Steamed Or",
       "category": "General",
       "vitamin_d_iu": 25.2,
       "is_vegetarian": true,
@@ -351,7 +351,7 @@
     "model": "nutrition.fooditem",
     "pk": 30,
     "fields": {
-      "name": "Pudding, sticky date, homemade",
+      "name": "Pudding, Sticky Date, Homemade",
       "category": "General",
       "vitamin_d_iu": 22.8,
       "is_vegetarian": true,
@@ -363,7 +363,7 @@
     "model": "nutrition.fooditem",
     "pk": 31,
     "fields": {
-      "name": "Scone, plain, homemade",
+      "name": "Scone, Plain, Homemade",
       "category": "General",
       "vitamin_d_iu": 11.6,
       "is_vegetarian": true,
@@ -375,7 +375,7 @@
     "model": "nutrition.fooditem",
     "pk": 32,
     "fields": {
-      "name": "Scone, pumpkin, homemade",
+      "name": "Scone, Pumpkin, Homemade",
       "category": "General",
       "vitamin_d_iu": 21.200000000000003,
       "is_vegetarian": true,
@@ -387,7 +387,7 @@
     "model": "nutrition.fooditem",
     "pk": 33,
     "fields": {
-      "name": "Slice, caramel",
+      "name": "Slice, Caramel",
       "category": "General",
       "vitamin_d_iu": 8.4,
       "is_vegetarian": true,
@@ -399,7 +399,7 @@
     "model": "nutrition.fooditem",
     "pk": 34,
     "fields": {
-      "name": "Porridge, rolled oats, prepared with regular fat cows milk",
+      "name": "Porridge, Rolled Oats, Prepared",
       "category": "Dairy",
       "vitamin_d_iu": 3.2,
       "is_vegetarian": true,
@@ -411,7 +411,7 @@
     "model": "nutrition.fooditem",
     "pk": 35,
     "fields": {
-      "name": "Porridge, rolled oats mixed with sugar or honey & other flavours, prepared with cows milk",
+      "name": "Porridge, Rolled Oats Mixed",
       "category": "Dairy",
       "vitamin_d_iu": 2.8000000000000003,
       "is_vegetarian": true,
@@ -423,7 +423,7 @@
     "model": "nutrition.fooditem",
     "pk": 36,
     "fields": {
-      "name": "Hamburger, white roll, beef patty, with cheese, onion, pickles & sauce, fast food chain",
+      "name": "Hamburger, White Roll, Beef",
       "category": "Dairy",
       "vitamin_d_iu": 46.4,
       "is_vegetarian": false,
@@ -435,7 +435,7 @@
     "model": "nutrition.fooditem",
     "pk": 37,
     "fields": {
-      "name": "Hamburger, white roll, beef patty, with salad, independent takeaway outlet",
+      "name": "Hamburger, White Roll, Beef",
       "category": "Meat",
       "vitamin_d_iu": 46.4,
       "is_vegetarian": false,
@@ -447,7 +447,7 @@
     "model": "nutrition.fooditem",
     "pk": 38,
     "fields": {
-      "name": "Hot dog, bread roll, frankfurt & sauce filling",
+      "name": "Hot Dog, Bread Roll,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 4.8,
       "is_vegetarian": true,
@@ -459,7 +459,7 @@
     "model": "nutrition.fooditem",
     "pk": 39,
     "fields": {
-      "name": "Pizza, cheese & tomato, commercial",
+      "name": "Pizza, Cheese & Tomato,",
       "category": "Dairy",
       "vitamin_d_iu": 1.2,
       "is_vegetarian": true,
@@ -471,7 +471,7 @@
     "model": "nutrition.fooditem",
     "pk": 40,
     "fields": {
-      "name": "Pizza, vegetable, fast food chain",
+      "name": "Pizza, Vegetable, Fast Food",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -483,7 +483,7 @@
     "model": "nutrition.fooditem",
     "pk": 41,
     "fields": {
-      "name": "Noodle, wheat with egg, plain, boiled, no added fat",
+      "name": "Noodle, Wheat With Egg,",
       "category": "Poultry",
       "vitamin_d_iu": 118.0,
       "is_vegetarian": false,
@@ -495,7 +495,7 @@
     "model": "nutrition.fooditem",
     "pk": 42,
     "fields": {
-      "name": "Pasta, white wheat flour & egg, dry",
+      "name": "Pasta, White Wheat Flour",
       "category": "Poultry",
       "vitamin_d_iu": 8.8,
       "is_vegetarian": false,
@@ -507,7 +507,7 @@
     "model": "nutrition.fooditem",
     "pk": 43,
     "fields": {
-      "name": "Pasta, white wheat flour & egg, boiled from dry, no added salt",
+      "name": "Pasta, White Wheat Flour",
       "category": "Poultry",
       "vitamin_d_iu": 118.0,
       "is_vegetarian": false,
@@ -519,7 +519,7 @@
     "model": "nutrition.fooditem",
     "pk": 44,
     "fields": {
-      "name": "Lasagne, beef, homemade",
+      "name": "Lasagne, Beef, Homemade",
       "category": "Meat",
       "vitamin_d_iu": 23.6,
       "is_vegetarian": false,
@@ -531,7 +531,7 @@
     "model": "nutrition.fooditem",
     "pk": 45,
     "fields": {
-      "name": "Macaroni & cheese, homemade, cooked unfilled pasta, homemade cheese sauce",
+      "name": "Macaroni & Cheese, Homemade,",
       "category": "Dairy",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -543,7 +543,7 @@
     "model": "nutrition.fooditem",
     "pk": 46,
     "fields": {
-      "name": "Pasta in cream based sauce, prepared from dry mix",
+      "name": "Pasta In Cream Based",
       "category": "Dairy",
       "vitamin_d_iu": 5.6000000000000005,
       "is_vegetarian": true,
@@ -555,7 +555,7 @@
     "model": "nutrition.fooditem",
     "pk": 47,
     "fields": {
-      "name": "Pastry, filled with spinach & cheese, purchased frozen, baked",
+      "name": "Pastry, Filled With Spinach",
       "category": "Dairy",
       "vitamin_d_iu": 1.2,
       "is_vegetarian": true,
@@ -567,7 +567,7 @@
     "model": "nutrition.fooditem",
     "pk": 48,
     "fields": {
-      "name": "Pie, savoury, meat, commercial, ready to eat",
+      "name": "Pie, Savoury, Meat, Commercial,",
       "category": "Meat",
       "vitamin_d_iu": 35.2,
       "is_vegetarian": false,
@@ -579,7 +579,7 @@
     "model": "nutrition.fooditem",
     "pk": 49,
     "fields": {
-      "name": "Pie, savoury, meat, purchased frozen, baked",
+      "name": "Pie, Savoury, Meat, Purchased",
       "category": "Meat",
       "vitamin_d_iu": 35.2,
       "is_vegetarian": false,
@@ -591,7 +591,7 @@
     "model": "nutrition.fooditem",
     "pk": 50,
     "fields": {
-      "name": "Sausage roll, commercial, ready to eat",
+      "name": "Sausage Roll, Commercial, Ready",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -603,7 +603,7 @@
     "model": "nutrition.fooditem",
     "pk": 51,
     "fields": {
-      "name": "Pie, steak & kidney, canned",
+      "name": "Pie, Steak & Kidney,",
       "category": "Meat",
       "vitamin_d_iu": 11.2,
       "is_vegetarian": false,
@@ -615,7 +615,7 @@
     "model": "nutrition.fooditem",
     "pk": 52,
     "fields": {
-      "name": "Sausage roll, purchased frozen, baked",
+      "name": "Sausage Roll, Purchased Frozen,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -627,7 +627,7 @@
     "model": "nutrition.fooditem",
     "pk": 53,
     "fields": {
-      "name": "Spring roll, meat & vegetable filling, commercial, deep fried",
+      "name": "Spring Roll, Meat &",
       "category": "Meat",
       "vitamin_d_iu": 8.0,
       "is_vegetarian": false,
@@ -639,7 +639,7 @@
     "model": "nutrition.fooditem",
     "pk": 54,
     "fields": {
-      "name": "Mayonnaise, traditional (greater than 65% fat), commercial",
+      "name": "Mayonnaise, Traditional (Greater Than",
       "category": "General",
       "vitamin_d_iu": 12.0,
       "is_vegetarian": true,
@@ -651,7 +651,7 @@
     "model": "nutrition.fooditem",
     "pk": 55,
     "fields": {
-      "name": "Sauce, pasta, bolognese, homemade using beef mince & commercial tomato based sauce",
+      "name": "Sauce, Pasta, Bolognese, Homemade",
       "category": "Meat",
       "vitamin_d_iu": 38.4,
       "is_vegetarian": false,
@@ -663,7 +663,7 @@
     "model": "nutrition.fooditem",
     "pk": 56,
     "fields": {
-      "name": "Sauce, pasta, bolognese, homemade using beef mince & homemade tomato based sauce",
+      "name": "Sauce, Pasta, Bolognese, Homemade",
       "category": "Meat",
       "vitamin_d_iu": 37.6,
       "is_vegetarian": false,
@@ -675,7 +675,7 @@
     "model": "nutrition.fooditem",
     "pk": 57,
     "fields": {
-      "name": "Sauce, pasta, cheese or cream-based, commercial",
+      "name": "Sauce, Pasta, Cheese Or",
       "category": "Dairy",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -687,7 +687,7 @@
     "model": "nutrition.fooditem",
     "pk": 58,
     "fields": {
-      "name": "Sauce, white, savoury, homemade",
+      "name": "Sauce, White, Savoury, Homemade",
       "category": "General",
       "vitamin_d_iu": 8.8,
       "is_vegetarian": true,
@@ -699,7 +699,7 @@
     "model": "nutrition.fooditem",
     "pk": 59,
     "fields": {
-      "name": "Cheese, blue vein",
+      "name": "Cheese, Blue Vein",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -711,7 +711,7 @@
     "model": "nutrition.fooditem",
     "pk": 60,
     "fields": {
-      "name": "Cheese, bocconcini",
+      "name": "Cheese, Bocconcini",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -723,7 +723,7 @@
     "model": "nutrition.fooditem",
     "pk": 61,
     "fields": {
-      "name": "Cheese, brie",
+      "name": "Cheese, Brie",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -735,7 +735,7 @@
     "model": "nutrition.fooditem",
     "pk": 62,
     "fields": {
-      "name": "Cheese, camembert",
+      "name": "Cheese, Camembert",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -747,7 +747,7 @@
     "model": "nutrition.fooditem",
     "pk": 63,
     "fields": {
-      "name": "Cheese, cheddar, natural, regular fat",
+      "name": "Cheese, Cheddar, Natural, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -759,7 +759,7 @@
     "model": "nutrition.fooditem",
     "pk": 64,
     "fields": {
-      "name": "Cheese, cheddar, natural, reduced fat (approximately 25%)",
+      "name": "Cheese, Cheddar, Natural, Reduced",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -771,7 +771,7 @@
     "model": "nutrition.fooditem",
     "pk": 65,
     "fields": {
-      "name": "Cheese, cheddar, natural, reduced fat (approximately 15%)",
+      "name": "Cheese, Cheddar, Natural, Reduced",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -783,7 +783,7 @@
     "model": "nutrition.fooditem",
     "pk": 66,
     "fields": {
-      "name": "Cheese, cheddar, processed, regular fat",
+      "name": "Cheese, Cheddar, Processed, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -795,7 +795,7 @@
     "model": "nutrition.fooditem",
     "pk": 67,
     "fields": {
-      "name": "Cheese, cheddar, processed, reduced fat (approximately 15%), added vitamin D",
+      "name": "Cheese, Cheddar, Processed, Reduced",
       "category": "Dairy",
       "vitamin_d_iu": 124.0,
       "is_vegetarian": true,
@@ -807,7 +807,7 @@
     "model": "nutrition.fooditem",
     "pk": 68,
     "fields": {
-      "name": "Cheese, cottage",
+      "name": "Cheese, Cottage",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -819,7 +819,7 @@
     "model": "nutrition.fooditem",
     "pk": 69,
     "fields": {
-      "name": "Cheese, cream, plain",
+      "name": "Cheese, Cream, Plain",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -831,7 +831,7 @@
     "model": "nutrition.fooditem",
     "pk": 70,
     "fields": {
-      "name": "Cheese, edam",
+      "name": "Cheese, Edam",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -843,7 +843,7 @@
     "model": "nutrition.fooditem",
     "pk": 71,
     "fields": {
-      "name": "Cheese, fetta (feta)",
+      "name": "Cheese, Fetta (Feta)",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -855,7 +855,7 @@
     "model": "nutrition.fooditem",
     "pk": 72,
     "fields": {
-      "name": "Cheese, goat, firm",
+      "name": "Cheese, Goat, Firm",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -867,7 +867,7 @@
     "model": "nutrition.fooditem",
     "pk": 73,
     "fields": {
-      "name": "Cheese, goat, soft",
+      "name": "Cheese, Goat, Soft",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -879,7 +879,7 @@
     "model": "nutrition.fooditem",
     "pk": 74,
     "fields": {
-      "name": "Cheese, haloumi",
+      "name": "Cheese, Haloumi",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -891,7 +891,7 @@
     "model": "nutrition.fooditem",
     "pk": 75,
     "fields": {
-      "name": "Cheese, mozzarella",
+      "name": "Cheese, Mozzarella",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -903,7 +903,7 @@
     "model": "nutrition.fooditem",
     "pk": 76,
     "fields": {
-      "name": "Cheese, parmesan, dried, finely grated",
+      "name": "Cheese, Parmesan, Dried, Finely",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -915,7 +915,7 @@
     "model": "nutrition.fooditem",
     "pk": 77,
     "fields": {
-      "name": "Cheese, parmesan, fresh, regular fat",
+      "name": "Cheese, Parmesan, Fresh, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -927,7 +927,7 @@
     "model": "nutrition.fooditem",
     "pk": 78,
     "fields": {
-      "name": "Cheese, ricotta",
+      "name": "Cheese, Ricotta",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -939,7 +939,7 @@
     "model": "nutrition.fooditem",
     "pk": 79,
     "fields": {
-      "name": "Ice confection, stick, milk-based, various flavours",
+      "name": "Ice Confection, Stick, Milk-Based,",
       "category": "Dairy",
       "vitamin_d_iu": 1.2,
       "is_vegetarian": true,
@@ -951,7 +951,7 @@
     "model": "nutrition.fooditem",
     "pk": 80,
     "fields": {
-      "name": "Milk, cow, fluid, regular fat (3.5% fat)",
+      "name": "Milk, Cow, Fluid, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -963,7 +963,7 @@
     "model": "nutrition.fooditem",
     "pk": 81,
     "fields": {
-      "name": "Milk, cow, fluid, regular fat (3.5% fat), added omega 3 polyunsaturates",
+      "name": "Milk, Cow, Fluid, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -975,7 +975,7 @@
     "model": "nutrition.fooditem",
     "pk": 82,
     "fields": {
-      "name": "Milk, cow, fluid, reduced fat (1% fat)",
+      "name": "Milk, Cow, Fluid, Reduced",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -987,7 +987,7 @@
     "model": "nutrition.fooditem",
     "pk": 83,
     "fields": {
-      "name": "Milk, cow, fluid, reduced fat (1.5% fat), added omega 3 polyunsaturates",
+      "name": "Milk, Cow, Fluid, Reduced",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -999,7 +999,7 @@
     "model": "nutrition.fooditem",
     "pk": 84,
     "fields": {
-      "name": "Milk, cow, fluid, skim (0.15% fat)",
+      "name": "Milk, Cow, Fluid, Skim",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -1011,7 +1011,7 @@
     "model": "nutrition.fooditem",
     "pk": 85,
     "fields": {
-      "name": "Milk, cow, fluid, skim (0.15% fat), added milk solids",
+      "name": "Milk, Cow, Fluid, Skim",
       "category": "Dairy",
       "vitamin_d_iu": 4.4,
       "is_vegetarian": true,
@@ -1023,7 +1023,7 @@
     "model": "nutrition.fooditem",
     "pk": 86,
     "fields": {
-      "name": "Milk, cow, fluid, lactose free, regular fat (3.5% fat)",
+      "name": "Milk, Cow, Fluid, Lactose",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -1035,7 +1035,7 @@
     "model": "nutrition.fooditem",
     "pk": 87,
     "fields": {
-      "name": "Milk, cow, fluid, lactose free, reduced fat (1% fat)",
+      "name": "Milk, Cow, Fluid, Lactose",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -1047,7 +1047,7 @@
     "model": "nutrition.fooditem",
     "pk": 88,
     "fields": {
-      "name": "Milk, cow, fluid, flavoured, chocolate, reduced fat",
+      "name": "Milk, Cow, Fluid, Flavoured,",
       "category": "Dairy",
       "vitamin_d_iu": 3.2,
       "is_vegetarian": true,
@@ -1059,7 +1059,7 @@
     "model": "nutrition.fooditem",
     "pk": 89,
     "fields": {
-      "name": "Milk, cow, canned, evaporated, regular",
+      "name": "Milk, Cow, Canned, Evaporated,",
       "category": "Dairy",
       "vitamin_d_iu": 2.4,
       "is_vegetarian": true,
@@ -1071,7 +1071,7 @@
     "model": "nutrition.fooditem",
     "pk": 90,
     "fields": {
-      "name": "Milk, cow, canned, evaporated, reduced fat (approximately 2% fat)",
+      "name": "Milk, Cow, Canned, Evaporated,",
       "category": "Dairy",
       "vitamin_d_iu": 2.4,
       "is_vegetarian": true,
@@ -1083,7 +1083,7 @@
     "model": "nutrition.fooditem",
     "pk": 91,
     "fields": {
-      "name": "Milk, cow, canned, sweetened, condensed, regular",
+      "name": "Milk, Cow, Canned, Sweetened,",
       "category": "Dairy",
       "vitamin_d_iu": 2.4,
       "is_vegetarian": true,
@@ -1095,7 +1095,7 @@
     "model": "nutrition.fooditem",
     "pk": 92,
     "fields": {
-      "name": "Milk, cow, powder, regular fat, unfortified",
+      "name": "Milk, Cow, Powder, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 24.0,
       "is_vegetarian": true,
@@ -1107,7 +1107,7 @@
     "model": "nutrition.fooditem",
     "pk": 93,
     "fields": {
-      "name": "Milk, cow, powder, regular fat, added vitamins A & D",
+      "name": "Milk, Cow, Powder, Regular",
       "category": "Dairy",
       "vitamin_d_iu": 212.0,
       "is_vegetarian": true,
@@ -1119,7 +1119,7 @@
     "model": "nutrition.fooditem",
     "pk": 94,
     "fields": {
-      "name": "Milk, cow, powder, skim",
+      "name": "Milk, Cow, Powder, Skim",
       "category": "Dairy",
       "vitamin_d_iu": 24.0,
       "is_vegetarian": true,
@@ -1131,7 +1131,7 @@
     "model": "nutrition.fooditem",
     "pk": 95,
     "fields": {
-      "name": "Milk, human/breast, mature, fluid",
+      "name": "Milk, Human/Breast, Mature, Fluid",
       "category": "Dairy",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -1143,7 +1143,7 @@
     "model": "nutrition.fooditem",
     "pk": 96,
     "fields": {
-      "name": "Custard, vanilla, regular fat",
+      "name": "Custard, Vanilla, Regular Fat",
       "category": "General",
       "vitamin_d_iu": 3.2,
       "is_vegetarian": true,
@@ -1155,7 +1155,7 @@
     "model": "nutrition.fooditem",
     "pk": 97,
     "fields": {
-      "name": "Custard, vanilla, prepared from dry mix",
+      "name": "Custard, Vanilla, Prepared From",
       "category": "General",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -1167,7 +1167,7 @@
     "model": "nutrition.fooditem",
     "pk": 98,
     "fields": {
-      "name": "Butter, plain, salted",
+      "name": "Butter, Plain, Salted",
       "category": "Dairy",
       "vitamin_d_iu": 48.0,
       "is_vegetarian": true,
@@ -1179,7 +1179,7 @@
     "model": "nutrition.fooditem",
     "pk": 99,
     "fields": {
-      "name": "Butter, plain, no added salt",
+      "name": "Butter, Plain, No Added",
       "category": "Dairy",
       "vitamin_d_iu": 48.0,
       "is_vegetarian": true,
@@ -1191,7 +1191,7 @@
     "model": "nutrition.fooditem",
     "pk": 100,
     "fields": {
-      "name": "Ghee, clarified butter",
+      "name": "Ghee, Clarified Butter",
       "category": "Dairy",
       "vitamin_d_iu": 48.0,
       "is_vegetarian": true,
@@ -1203,7 +1203,7 @@
     "model": "nutrition.fooditem",
     "pk": 101,
     "fields": {
-      "name": "Dairy blend, butter & edible oil spread (approximately 80% fat), sodium 600 mg/100 g",
+      "name": "Dairy Blend, Butter &",
       "category": "Dairy",
       "vitamin_d_iu": 232.0,
       "is_vegetarian": true,
@@ -1215,7 +1215,7 @@
     "model": "nutrition.fooditem",
     "pk": 102,
     "fields": {
-      "name": "Dairy blend, butter & edible oil spread (approximately 80% fat), reduced salt (sodium 400 mg/100 g)",
+      "name": "Dairy Blend, Butter &",
       "category": "Dairy",
       "vitamin_d_iu": 232.0,
       "is_vegetarian": true,
@@ -1227,7 +1227,7 @@
     "model": "nutrition.fooditem",
     "pk": 103,
     "fields": {
-      "name": "Margarine spread, polyunsaturated (70% fat)",
+      "name": "Margarine Spread, Polyunsaturated (70%",
       "category": "General",
       "vitamin_d_iu": 297.2,
       "is_vegetarian": true,
@@ -1239,7 +1239,7 @@
     "model": "nutrition.fooditem",
     "pk": 104,
     "fields": {
-      "name": "Margarine spread, polyunsaturated (70% fat), reduced salt (sodium 280 mg/100 g)",
+      "name": "Margarine Spread, Polyunsaturated (70%",
       "category": "General",
       "vitamin_d_iu": 297.2,
       "is_vegetarian": true,
@@ -1251,7 +1251,7 @@
     "model": "nutrition.fooditem",
     "pk": 105,
     "fields": {
-      "name": "Margarine spread, monounsaturated (70% fat), reduced salt (sodium 350 mg/100 g), added phytosterols",
+      "name": "Margarine Spread, Monounsaturated (70%",
       "category": "General",
       "vitamin_d_iu": 297.2,
       "is_vegetarian": true,
@@ -1263,7 +1263,7 @@
     "model": "nutrition.fooditem",
     "pk": 106,
     "fields": {
-      "name": "Margarine spread, monounsaturated (greater than 65% fat)",
+      "name": "Margarine Spread, Monounsaturated (Greater",
       "category": "General",
       "vitamin_d_iu": 297.2,
       "is_vegetarian": true,
@@ -1275,7 +1275,7 @@
     "model": "nutrition.fooditem",
     "pk": 107,
     "fields": {
-      "name": "Margarine spread, monounsaturated (greater than 65% fat), reduced salt (sodium 360 mg/100 g)",
+      "name": "Margarine Spread, Monounsaturated (Greater",
       "category": "General",
       "vitamin_d_iu": 232.0,
       "is_vegetarian": true,
@@ -1287,7 +1287,7 @@
     "model": "nutrition.fooditem",
     "pk": 108,
     "fields": {
-      "name": "Margarine spread, monounsaturated, reduced fat (55% fat) & salt (sodium 380 mg/100 g)",
+      "name": "Margarine Spread, Monounsaturated, Reduced",
       "category": "General",
       "vitamin_d_iu": 297.2,
       "is_vegetarian": true,
@@ -1299,7 +1299,7 @@
     "model": "nutrition.fooditem",
     "pk": 109,
     "fields": {
-      "name": "Margarine spread, monounsaturated, reduced fat (less than 65% fat)",
+      "name": "Margarine Spread, Monounsaturated, Reduced",
       "category": "General",
       "vitamin_d_iu": 297.2,
       "is_vegetarian": true,
@@ -1311,7 +1311,7 @@
     "model": "nutrition.fooditem",
     "pk": 110,
     "fields": {
-      "name": "Margarine spread, monounsaturated (65% fat), rice bran oil, fortified",
+      "name": "Margarine Spread, Monounsaturated (65%",
       "category": "General",
       "vitamin_d_iu": 300.0,
       "is_vegetarian": true,
@@ -1323,7 +1323,7 @@
     "model": "nutrition.fooditem",
     "pk": 111,
     "fields": {
-      "name": "Egg, chicken, whole, raw",
+      "name": "Egg, Chicken, Whole, Raw",
       "category": "Poultry",
       "vitamin_d_iu": 236.0,
       "is_vegetarian": false,
@@ -1335,7 +1335,7 @@
     "model": "nutrition.fooditem",
     "pk": 112,
     "fields": {
-      "name": "Egg, chicken, whole, hard-boiled",
+      "name": "Egg, Chicken, Whole, Hard-Boiled",
       "category": "Poultry",
       "vitamin_d_iu": 236.0,
       "is_vegetarian": false,
@@ -1347,7 +1347,7 @@
     "model": "nutrition.fooditem",
     "pk": 113,
     "fields": {
-      "name": "Egg, chicken, whole, poached",
+      "name": "Egg, Chicken, Whole, Poached",
       "category": "Poultry",
       "vitamin_d_iu": 221.2,
       "is_vegetarian": false,
@@ -1359,7 +1359,7 @@
     "model": "nutrition.fooditem",
     "pk": 114,
     "fields": {
-      "name": "Egg, chicken, whole, fried, no fat added",
+      "name": "Egg, Chicken, Whole, Fried,",
       "category": "Poultry",
       "vitamin_d_iu": 241.2,
       "is_vegetarian": false,
@@ -1371,7 +1371,7 @@
     "model": "nutrition.fooditem",
     "pk": 115,
     "fields": {
-      "name": "Egg, chicken, whole, omega-3 polyunsaturate enriched, raw",
+      "name": "Egg, Chicken, Whole, Omega-3",
       "category": "Poultry",
       "vitamin_d_iu": 236.0,
       "is_vegetarian": false,
@@ -1383,7 +1383,7 @@
     "model": "nutrition.fooditem",
     "pk": 116,
     "fields": {
-      "name": "Egg, chicken, whole, omega-3 polyunsaturate enriched, boiled",
+      "name": "Egg, Chicken, Whole, Omega-3",
       "category": "Poultry",
       "vitamin_d_iu": 216.8,
       "is_vegetarian": false,
@@ -1395,7 +1395,7 @@
     "model": "nutrition.fooditem",
     "pk": 117,
     "fields": {
-      "name": "Egg, chicken, whole, scrambled, with regular fat cows milk, no fat added",
+      "name": "Egg, Chicken, Whole, Scrambled,",
       "category": "Dairy",
       "vitamin_d_iu": 164.8,
       "is_vegetarian": false,
@@ -1407,7 +1407,7 @@
     "model": "nutrition.fooditem",
     "pk": 118,
     "fields": {
-      "name": "Egg, chicken, yolk, raw",
+      "name": "Egg, Chicken, Yolk, Raw",
       "category": "Poultry",
       "vitamin_d_iu": 680.0,
       "is_vegetarian": false,
@@ -1419,7 +1419,7 @@
     "model": "nutrition.fooditem",
     "pk": 119,
     "fields": {
-      "name": "Egg, chicken, yolk, hard-boiled",
+      "name": "Egg, Chicken, Yolk, Hard-Boiled",
       "category": "Poultry",
       "vitamin_d_iu": 680.0,
       "is_vegetarian": false,
@@ -1431,7 +1431,7 @@
     "model": "nutrition.fooditem",
     "pk": 120,
     "fields": {
-      "name": "Quandong, fruit, flesh",
+      "name": "Quandong, Fruit, Flesh",
       "category": "General",
       "vitamin_d_iu": 2.0,
       "is_vegetarian": true,
@@ -1443,7 +1443,7 @@
     "model": "nutrition.fooditem",
     "pk": 121,
     "fields": {
-      "name": "Beef, all cuts, separable fat, raw",
+      "name": "Beef, All Cuts, Separable",
       "category": "Meat",
       "vitamin_d_iu": 40.0,
       "is_vegetarian": false,
@@ -1455,7 +1455,7 @@
     "model": "nutrition.fooditem",
     "pk": 122,
     "fields": {
-      "name": "Beef, all cuts, separable fat, cooked, no added fat",
+      "name": "Beef, All Cuts, Separable",
       "category": "Meat",
       "vitamin_d_iu": 24.0,
       "is_vegetarian": false,
@@ -1467,7 +1467,7 @@
     "model": "nutrition.fooditem",
     "pk": 123,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, shin, lean, raw",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1479,7 +1479,7 @@
     "model": "nutrition.fooditem",
     "pk": 124,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, shin, lean, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1491,7 +1491,7 @@
     "model": "nutrition.fooditem",
     "pk": 125,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, shin, semi-trimmed, raw",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 148.8,
       "is_vegetarian": false,
@@ -1503,7 +1503,7 @@
     "model": "nutrition.fooditem",
     "pk": 126,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, shin, semi-trimmed, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1515,7 +1515,7 @@
     "model": "nutrition.fooditem",
     "pk": 127,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, shin, untrimmed, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -1527,7 +1527,7 @@
     "model": "nutrition.fooditem",
     "pk": 128,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, shin, untrimmed, raw",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 145.2,
       "is_vegetarian": false,
@@ -1539,7 +1539,7 @@
     "model": "nutrition.fooditem",
     "pk": 129,
     "fields": {
-      "name": "Beef, boneless dice or strips, lean, raw",
+      "name": "Beef, Boneless Dice Or",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1551,7 +1551,7 @@
     "model": "nutrition.fooditem",
     "pk": 130,
     "fields": {
-      "name": "Beef, boneless dice or strips, lean, stir-fried, no added fat",
+      "name": "Beef, Boneless Dice Or",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1563,7 +1563,7 @@
     "model": "nutrition.fooditem",
     "pk": 131,
     "fields": {
-      "name": "Beef, boneless dice or strips, lean, casseroled, no added fat",
+      "name": "Beef, Boneless Dice Or",
       "category": "Meat",
       "vitamin_d_iu": 183.6,
       "is_vegetarian": false,
@@ -1575,7 +1575,7 @@
     "model": "nutrition.fooditem",
     "pk": 132,
     "fields": {
-      "name": "Beef, boneless dice or strips, untrimmed, raw",
+      "name": "Beef, Boneless Dice Or",
       "category": "Meat",
       "vitamin_d_iu": 150.0,
       "is_vegetarian": false,
@@ -1587,7 +1587,7 @@
     "model": "nutrition.fooditem",
     "pk": 133,
     "fields": {
-      "name": "Beef, boneless dice or strips, untrimmed, stir-fried, no added fat",
+      "name": "Beef, Boneless Dice Or",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1599,7 +1599,7 @@
     "model": "nutrition.fooditem",
     "pk": 134,
     "fields": {
-      "name": "Beef, boneless dice or strips, untrimmed, casseroled, no added fat",
+      "name": "Beef, Boneless Dice Or",
       "category": "Meat",
       "vitamin_d_iu": 182.0,
       "is_vegetarian": false,
@@ -1611,7 +1611,7 @@
     "model": "nutrition.fooditem",
     "pk": 135,
     "fields": {
-      "name": "Beef, steak, boneless or bone-in, blade, lean, raw",
+      "name": "Beef, Steak, Boneless Or",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1623,7 +1623,7 @@
     "model": "nutrition.fooditem",
     "pk": 136,
     "fields": {
-      "name": "Beef, steak, boneless or bone-in, blade, lean, grilled, no added fat",
+      "name": "Beef, Steak, Boneless Or",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1635,7 +1635,7 @@
     "model": "nutrition.fooditem",
     "pk": 137,
     "fields": {
-      "name": "Beef, casserole meat, boneless or bone-in, blade, lean, casseroled",
+      "name": "Beef, Casserole Meat, Boneless",
       "category": "Meat",
       "vitamin_d_iu": 188.8,
       "is_vegetarian": false,
@@ -1647,7 +1647,7 @@
     "model": "nutrition.fooditem",
     "pk": 138,
     "fields": {
-      "name": "Beef, steak, boneless or bone-in, blade, semi-trimmed, raw",
+      "name": "Beef, Steak, Boneless Or",
       "category": "Meat",
       "vitamin_d_iu": 145.2,
       "is_vegetarian": false,
@@ -1659,7 +1659,7 @@
     "model": "nutrition.fooditem",
     "pk": 139,
     "fields": {
-      "name": "Beef, steak, boneless or bone-in, blade, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless Or",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -1671,7 +1671,7 @@
     "model": "nutrition.fooditem",
     "pk": 140,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade, semi-trimmed, casseroled",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 179.60000000000002,
       "is_vegetarian": false,
@@ -1683,7 +1683,7 @@
     "model": "nutrition.fooditem",
     "pk": 141,
     "fields": {
-      "name": "Beef, steak, boneless or bone-in, blade, untrimmed, raw",
+      "name": "Beef, Steak, Boneless Or",
       "category": "Meat",
       "vitamin_d_iu": 138.8,
       "is_vegetarian": false,
@@ -1695,7 +1695,7 @@
     "model": "nutrition.fooditem",
     "pk": 142,
     "fields": {
-      "name": "Beef, steak, with bone, blade, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -1707,7 +1707,7 @@
     "model": "nutrition.fooditem",
     "pk": 143,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade, untrimmed, casseroled",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 174.8,
       "is_vegetarian": false,
@@ -1719,7 +1719,7 @@
     "model": "nutrition.fooditem",
     "pk": 144,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade or chuck, lean, raw",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1731,7 +1731,7 @@
     "model": "nutrition.fooditem",
     "pk": 145,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade or chuck, lean, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 108.4,
       "is_vegetarian": false,
@@ -1743,7 +1743,7 @@
     "model": "nutrition.fooditem",
     "pk": 146,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade or chuck, semi-trimmed, raw",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 143.6,
       "is_vegetarian": false,
@@ -1755,7 +1755,7 @@
     "model": "nutrition.fooditem",
     "pk": 147,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade or chuck, semi-trimmed, casseroled",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": false,
@@ -1767,7 +1767,7 @@
     "model": "nutrition.fooditem",
     "pk": 148,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade or chuck, untrimmed, raw",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 138.8,
       "is_vegetarian": false,
@@ -1779,7 +1779,7 @@
     "model": "nutrition.fooditem",
     "pk": 149,
     "fields": {
-      "name": "Beef, casserole meat, boneless, blade or chuck, untrimmed, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 101.2,
       "is_vegetarian": false,
@@ -1791,7 +1791,7 @@
     "model": "nutrition.fooditem",
     "pk": 150,
     "fields": {
-      "name": "Beef, casserole meat, boneless, chuck, lean, raw",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1803,7 +1803,7 @@
     "model": "nutrition.fooditem",
     "pk": 151,
     "fields": {
-      "name": "Beef, casserole meat, boneless, chuck, lean, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1815,7 +1815,7 @@
     "model": "nutrition.fooditem",
     "pk": 152,
     "fields": {
-      "name": "Beef, casserole meat, boneless, chuck, semi-trimmed, raw",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 142.0,
       "is_vegetarian": false,
@@ -1827,7 +1827,7 @@
     "model": "nutrition.fooditem",
     "pk": 153,
     "fields": {
-      "name": "Beef, casserole meat, boneless, chuck, semi-trimmed, casseroled",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -1839,7 +1839,7 @@
     "model": "nutrition.fooditem",
     "pk": 154,
     "fields": {
-      "name": "Beef, casserole meat, boneless, chuck, untrimmed, raw",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 138.4,
       "is_vegetarian": false,
@@ -1851,7 +1851,7 @@
     "model": "nutrition.fooditem",
     "pk": 155,
     "fields": {
-      "name": "Beef, casserole meat, boneless, chuck, untrimmed, casseroled, no added fat",
+      "name": "Beef, Casserole Meat, Boneless,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -1863,7 +1863,7 @@
     "model": "nutrition.fooditem",
     "pk": 156,
     "fields": {
-      "name": "Beef, diced, lean, raw",
+      "name": "Beef, Diced, Lean, Raw",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1875,7 +1875,7 @@
     "model": "nutrition.fooditem",
     "pk": 157,
     "fields": {
-      "name": "Beef, diced, lean, dry-fried, no added fat",
+      "name": "Beef, Diced, Lean, Dry-Fried,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1887,7 +1887,7 @@
     "model": "nutrition.fooditem",
     "pk": 158,
     "fields": {
-      "name": "Beef, diced, lean, casseroled, no added fat",
+      "name": "Beef, Diced, Lean, Casseroled,",
       "category": "Meat",
       "vitamin_d_iu": 178.79999999999998,
       "is_vegetarian": false,
@@ -1899,7 +1899,7 @@
     "model": "nutrition.fooditem",
     "pk": 159,
     "fields": {
-      "name": "Beef, diced, untrimmed, raw",
+      "name": "Beef, Diced, Untrimmed, Raw",
       "category": "Meat",
       "vitamin_d_iu": 149.60000000000002,
       "is_vegetarian": false,
@@ -1911,7 +1911,7 @@
     "model": "nutrition.fooditem",
     "pk": 160,
     "fields": {
-      "name": "Beef, diced, untrimmed, dry-fried, no added fat",
+      "name": "Beef, Diced, Untrimmed, Dry-Fried,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1923,7 +1923,7 @@
     "model": "nutrition.fooditem",
     "pk": 161,
     "fields": {
-      "name": "Beef, diced, untrimmed, casseroled, no added fat",
+      "name": "Beef, Diced, Untrimmed, Casseroled,",
       "category": "Meat",
       "vitamin_d_iu": 176.4,
       "is_vegetarian": false,
@@ -1935,7 +1935,7 @@
     "model": "nutrition.fooditem",
     "pk": 162,
     "fields": {
-      "name": "Beef, steak, boneless, fillet or tenderloin, lean, raw",
+      "name": "Beef, Steak, Boneless, Fillet",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -1947,7 +1947,7 @@
     "model": "nutrition.fooditem",
     "pk": 163,
     "fields": {
-      "name": "Beef, steak, boneless, fillet or tenderloin, lean, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Fillet",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1959,7 +1959,7 @@
     "model": "nutrition.fooditem",
     "pk": 164,
     "fields": {
-      "name": "Beef, steak, boneless, fillet or tenderloin, semi-trimmed, raw",
+      "name": "Beef, Steak, Boneless, Fillet",
       "category": "Meat",
       "vitamin_d_iu": 146.4,
       "is_vegetarian": false,
@@ -1971,7 +1971,7 @@
     "model": "nutrition.fooditem",
     "pk": 165,
     "fields": {
-      "name": "Beef, steak, boneless, fillet or tenderloin, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Fillet",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -1983,7 +1983,7 @@
     "model": "nutrition.fooditem",
     "pk": 166,
     "fields": {
-      "name": "Beef, steak, boneless, fillet or tenderloin, untrimmed, raw",
+      "name": "Beef, Steak, Boneless, Fillet",
       "category": "Meat",
       "vitamin_d_iu": 143.6,
       "is_vegetarian": false,
@@ -1995,7 +1995,7 @@
     "model": "nutrition.fooditem",
     "pk": 167,
     "fields": {
-      "name": "Beef, steak, boneless, fillet or tenderloin, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Fillet",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2007,7 +2007,7 @@
     "model": "nutrition.fooditem",
     "pk": 168,
     "fields": {
-      "name": "Beef, mince, lower fat, raw",
+      "name": "Beef, Mince, Lower Fat,",
       "category": "Meat",
       "vitamin_d_iu": 128.0,
       "is_vegetarian": false,
@@ -2019,7 +2019,7 @@
     "model": "nutrition.fooditem",
     "pk": 169,
     "fields": {
-      "name": "Beef, mince, lower fat, stir-fried, no added fat",
+      "name": "Beef, Mince, Lower Fat,",
       "category": "Meat",
       "vitamin_d_iu": 116.0,
       "is_vegetarian": false,
@@ -2031,7 +2031,7 @@
     "model": "nutrition.fooditem",
     "pk": 170,
     "fields": {
-      "name": "Beef, mince, regular fat, raw",
+      "name": "Beef, Mince, Regular Fat,",
       "category": "Meat",
       "vitamin_d_iu": 128.0,
       "is_vegetarian": false,
@@ -2043,7 +2043,7 @@
     "model": "nutrition.fooditem",
     "pk": 171,
     "fields": {
-      "name": "Beef, mince, regular fat, stir-fried, no added fat",
+      "name": "Beef, Mince, Regular Fat,",
       "category": "Meat",
       "vitamin_d_iu": 116.0,
       "is_vegetarian": false,
@@ -2055,7 +2055,7 @@
     "model": "nutrition.fooditem",
     "pk": 172,
     "fields": {
-      "name": "Beef, mince, higher fat, raw",
+      "name": "Beef, Mince, Higher Fat,",
       "category": "Meat",
       "vitamin_d_iu": 128.0,
       "is_vegetarian": false,
@@ -2067,7 +2067,7 @@
     "model": "nutrition.fooditem",
     "pk": 173,
     "fields": {
-      "name": "Beef, mince, higher fat, stir-fried, no added fat",
+      "name": "Beef, Mince, Higher Fat,",
       "category": "Meat",
       "vitamin_d_iu": 116.0,
       "is_vegetarian": false,
@@ -2079,7 +2079,7 @@
     "model": "nutrition.fooditem",
     "pk": 174,
     "fields": {
-      "name": "Beef, roasting piece, silverside or topside, lean, raw",
+      "name": "Beef, Roasting Piece, Silverside",
       "category": "Meat",
       "vitamin_d_iu": 150.0,
       "is_vegetarian": false,
@@ -2091,7 +2091,7 @@
     "model": "nutrition.fooditem",
     "pk": 175,
     "fields": {
-      "name": "Beef, roasting piece, silverside or topside, lean, roasted, no added fat",
+      "name": "Beef, Roasting Piece, Silverside",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2103,7 +2103,7 @@
     "model": "nutrition.fooditem",
     "pk": 176,
     "fields": {
-      "name": "Beef, roasting piece, silverside or topside, semi-trimmed, raw",
+      "name": "Beef, Roasting Piece, Silverside",
       "category": "Meat",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -2115,7 +2115,7 @@
     "model": "nutrition.fooditem",
     "pk": 177,
     "fields": {
-      "name": "Beef, roasting piece, silverside or topside, semi-trimmed, roasted, no added fat",
+      "name": "Beef, Roasting Piece, Silverside",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2127,7 +2127,7 @@
     "model": "nutrition.fooditem",
     "pk": 178,
     "fields": {
-      "name": "Beef, roasting piece, silverside or topside, untrimmed, raw",
+      "name": "Beef, Roasting Piece, Silverside",
       "category": "Meat",
       "vitamin_d_iu": 140.39999999999998,
       "is_vegetarian": false,
@@ -2139,7 +2139,7 @@
     "model": "nutrition.fooditem",
     "pk": 179,
     "fields": {
-      "name": "Beef, roasting piece, silverside or topside, untrimmed, roasted, no added fat",
+      "name": "Beef, Roasting Piece, Silverside",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2151,7 +2151,7 @@
     "model": "nutrition.fooditem",
     "pk": 180,
     "fields": {
-      "name": "Beef, steak, boneless, round, lean, raw",
+      "name": "Beef, Steak, Boneless, Round,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2163,7 +2163,7 @@
     "model": "nutrition.fooditem",
     "pk": 181,
     "fields": {
-      "name": "Beef, steak, boneless, round, lean, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Round,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2175,7 +2175,7 @@
     "model": "nutrition.fooditem",
     "pk": 182,
     "fields": {
-      "name": "Beef, steak, boneless, round, semi-trimmed, raw",
+      "name": "Beef, Steak, Boneless, Round,",
       "category": "Meat",
       "vitamin_d_iu": 146.4,
       "is_vegetarian": false,
@@ -2187,7 +2187,7 @@
     "model": "nutrition.fooditem",
     "pk": 183,
     "fields": {
-      "name": "Beef, steak, boneless, round, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Round,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2199,7 +2199,7 @@
     "model": "nutrition.fooditem",
     "pk": 184,
     "fields": {
-      "name": "Beef, steak, boneless, round, untrimmed, raw",
+      "name": "Beef, Steak, Boneless, Round,",
       "category": "Meat",
       "vitamin_d_iu": 144.0,
       "is_vegetarian": false,
@@ -2211,7 +2211,7 @@
     "model": "nutrition.fooditem",
     "pk": 185,
     "fields": {
-      "name": "Beef, steak, boneless, round, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Round,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2223,7 +2223,7 @@
     "model": "nutrition.fooditem",
     "pk": 186,
     "fields": {
-      "name": "Beef, rump steak, lean, raw",
+      "name": "Beef, Rump Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2235,7 +2235,7 @@
     "model": "nutrition.fooditem",
     "pk": 187,
     "fields": {
-      "name": "Beef, rump steak, lean, grilled, no added fat",
+      "name": "Beef, Rump Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2247,7 +2247,7 @@
     "model": "nutrition.fooditem",
     "pk": 188,
     "fields": {
-      "name": "Beef, rump steak, semi-trimmed, raw",
+      "name": "Beef, Rump Steak, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 146.8,
       "is_vegetarian": false,
@@ -2259,7 +2259,7 @@
     "model": "nutrition.fooditem",
     "pk": 189,
     "fields": {
-      "name": "Beef, rump steak, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Rump Steak, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2271,7 +2271,7 @@
     "model": "nutrition.fooditem",
     "pk": 190,
     "fields": {
-      "name": "Beef, rump steak, untrimmed, raw",
+      "name": "Beef, Rump Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 132.0,
       "is_vegetarian": false,
@@ -2283,7 +2283,7 @@
     "model": "nutrition.fooditem",
     "pk": 191,
     "fields": {
-      "name": "Beef, rump steak, untrimmed, grilled, no added fat",
+      "name": "Beef, Rump Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2295,7 +2295,7 @@
     "model": "nutrition.fooditem",
     "pk": 192,
     "fields": {
-      "name": "Beef, steak, boneless, scotch fillet, lean, raw",
+      "name": "Beef, Steak, Boneless, Scotch",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2307,7 +2307,7 @@
     "model": "nutrition.fooditem",
     "pk": 193,
     "fields": {
-      "name": "Beef, steak, boneless, scotch fillet, lean, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Scotch",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2319,7 +2319,7 @@
     "model": "nutrition.fooditem",
     "pk": 194,
     "fields": {
-      "name": "Beef, steak, boneless rump or sirloin, lean, raw",
+      "name": "Beef, Steak, Boneless Rump",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2331,7 +2331,7 @@
     "model": "nutrition.fooditem",
     "pk": 195,
     "fields": {
-      "name": "Beef, steak, boneless rump or sirloin, lean, grilled, no added fat",
+      "name": "Beef, Steak, Boneless Rump",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2343,7 +2343,7 @@
     "model": "nutrition.fooditem",
     "pk": 196,
     "fields": {
-      "name": "Beef, steak, boneless rump or sirloin, semi-trimmed, raw",
+      "name": "Beef, Steak, Boneless Rump",
       "category": "Meat",
       "vitamin_d_iu": 146.0,
       "is_vegetarian": false,
@@ -2355,7 +2355,7 @@
     "model": "nutrition.fooditem",
     "pk": 197,
     "fields": {
-      "name": "Beef, steak, boneless rump or sirloin, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless Rump",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2367,7 +2367,7 @@
     "model": "nutrition.fooditem",
     "pk": 198,
     "fields": {
-      "name": "Beef, steak, boneless rump or sirloin, untrimmed, raw",
+      "name": "Beef, Steak, Boneless Rump",
       "category": "Meat",
       "vitamin_d_iu": 129.2,
       "is_vegetarian": false,
@@ -2379,7 +2379,7 @@
     "model": "nutrition.fooditem",
     "pk": 199,
     "fields": {
-      "name": "Beef, steak, boneless rump or sirloin, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless Rump",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -2391,7 +2391,7 @@
     "model": "nutrition.fooditem",
     "pk": 200,
     "fields": {
-      "name": "Beef, steak, boneless, scotch fillet, semi-trimmed, raw",
+      "name": "Beef, Steak, Boneless, Scotch",
       "category": "Meat",
       "vitamin_d_iu": 138.0,
       "is_vegetarian": false,
@@ -2403,7 +2403,7 @@
     "model": "nutrition.fooditem",
     "pk": 201,
     "fields": {
-      "name": "Beef, steak, boneless, scotch fillet, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Scotch",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2415,7 +2415,7 @@
     "model": "nutrition.fooditem",
     "pk": 202,
     "fields": {
-      "name": "Beef, steak, boneless, scotch fillet, untrimmed, raw",
+      "name": "Beef, Steak, Boneless, Scotch",
       "category": "Meat",
       "vitamin_d_iu": 130.8,
       "is_vegetarian": false,
@@ -2427,7 +2427,7 @@
     "model": "nutrition.fooditem",
     "pk": 203,
     "fields": {
-      "name": "Beef, steak, boneless, scotch fillet, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, Boneless, Scotch",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -2439,7 +2439,7 @@
     "model": "nutrition.fooditem",
     "pk": 204,
     "fields": {
-      "name": "Beef, silverside roast, lean, raw",
+      "name": "Beef, Silverside Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2451,7 +2451,7 @@
     "model": "nutrition.fooditem",
     "pk": 205,
     "fields": {
-      "name": "Beef, silverside roast, lean, roasted, no added fat",
+      "name": "Beef, Silverside Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2463,7 +2463,7 @@
     "model": "nutrition.fooditem",
     "pk": 206,
     "fields": {
-      "name": "Beef, silverside roast, semi-trimmed, raw",
+      "name": "Beef, Silverside Roast, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -2475,7 +2475,7 @@
     "model": "nutrition.fooditem",
     "pk": 207,
     "fields": {
-      "name": "Beef, silverside roast, semi-trimmed, roasted, no added fat",
+      "name": "Beef, Silverside Roast, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2487,7 +2487,7 @@
     "model": "nutrition.fooditem",
     "pk": 208,
     "fields": {
-      "name": "Beef, silverside roast, untrimmed, raw",
+      "name": "Beef, Silverside Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 140.0,
       "is_vegetarian": false,
@@ -2499,7 +2499,7 @@
     "model": "nutrition.fooditem",
     "pk": 209,
     "fields": {
-      "name": "Beef, silverside roast, untrimmed, roasted, no added fat",
+      "name": "Beef, Silverside Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2511,7 +2511,7 @@
     "model": "nutrition.fooditem",
     "pk": 210,
     "fields": {
-      "name": "Beef, sirloin steak, lean, raw",
+      "name": "Beef, Sirloin Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2523,7 +2523,7 @@
     "model": "nutrition.fooditem",
     "pk": 211,
     "fields": {
-      "name": "Beef, sirloin steak, lean, grilled, no added fat",
+      "name": "Beef, Sirloin Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2535,7 +2535,7 @@
     "model": "nutrition.fooditem",
     "pk": 212,
     "fields": {
-      "name": "Beef, sirloin steak, semi-trimmed, raw",
+      "name": "Beef, Sirloin Steak, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 145.2,
       "is_vegetarian": false,
@@ -2547,7 +2547,7 @@
     "model": "nutrition.fooditem",
     "pk": 213,
     "fields": {
-      "name": "Beef, sirloin steak, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Sirloin Steak, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2559,7 +2559,7 @@
     "model": "nutrition.fooditem",
     "pk": 214,
     "fields": {
-      "name": "Beef, sirloin steak, untrimmed, raw",
+      "name": "Beef, Sirloin Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 126.8,
       "is_vegetarian": false,
@@ -2571,7 +2571,7 @@
     "model": "nutrition.fooditem",
     "pk": 215,
     "fields": {
-      "name": "Beef, sirloin steak, untrimmed, grilled, no added fat",
+      "name": "Beef, Sirloin Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -2583,7 +2583,7 @@
     "model": "nutrition.fooditem",
     "pk": 216,
     "fields": {
-      "name": "Beef, stir-fry strips, lean, raw",
+      "name": "Beef, Stir-Fry Strips, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2595,7 +2595,7 @@
     "model": "nutrition.fooditem",
     "pk": 217,
     "fields": {
-      "name": "Beef, stir-fry strips, lean, dry-fried, no added fat",
+      "name": "Beef, Stir-Fry Strips, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2607,7 +2607,7 @@
     "model": "nutrition.fooditem",
     "pk": 218,
     "fields": {
-      "name": "Beef, strips, lean, casseroled, no added fat",
+      "name": "Beef, Strips, Lean, Casseroled,",
       "category": "Meat",
       "vitamin_d_iu": 188.8,
       "is_vegetarian": false,
@@ -2619,7 +2619,7 @@
     "model": "nutrition.fooditem",
     "pk": 219,
     "fields": {
-      "name": "Beef, stir-fry strips, untrimmed, raw",
+      "name": "Beef, Stir-Fry Strips, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 150.8,
       "is_vegetarian": false,
@@ -2631,7 +2631,7 @@
     "model": "nutrition.fooditem",
     "pk": 220,
     "fields": {
-      "name": "Beef, stir-fry strips, untrimmed, dry-fried, no added fat",
+      "name": "Beef, Stir-Fry Strips, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2643,7 +2643,7 @@
     "model": "nutrition.fooditem",
     "pk": 221,
     "fields": {
-      "name": "Beef, strips, untrimmed, casseroled, no added fat",
+      "name": "Beef, Strips, Untrimmed, Casseroled,",
       "category": "Meat",
       "vitamin_d_iu": 187.2,
       "is_vegetarian": false,
@@ -2655,7 +2655,7 @@
     "model": "nutrition.fooditem",
     "pk": 222,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone or blade, lean, raw",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2667,7 +2667,7 @@
     "model": "nutrition.fooditem",
     "pk": 223,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone or blade, lean, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2679,7 +2679,7 @@
     "model": "nutrition.fooditem",
     "pk": 224,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone or blade, semi-trimmed, raw",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 141.6,
       "is_vegetarian": false,
@@ -2691,7 +2691,7 @@
     "model": "nutrition.fooditem",
     "pk": 225,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone or blade, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2703,7 +2703,7 @@
     "model": "nutrition.fooditem",
     "pk": 226,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone or blade, untrimmed, raw",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 131.2,
       "is_vegetarian": false,
@@ -2715,7 +2715,7 @@
     "model": "nutrition.fooditem",
     "pk": 227,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone or blade, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -2727,7 +2727,7 @@
     "model": "nutrition.fooditem",
     "pk": 228,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone, lean, raw",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2739,7 +2739,7 @@
     "model": "nutrition.fooditem",
     "pk": 229,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone, lean, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2751,7 +2751,7 @@
     "model": "nutrition.fooditem",
     "pk": 230,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone, semi-trimmed, raw",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 138.0,
       "is_vegetarian": false,
@@ -2763,7 +2763,7 @@
     "model": "nutrition.fooditem",
     "pk": 231,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone, semi-trimmed, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2775,7 +2775,7 @@
     "model": "nutrition.fooditem",
     "pk": 232,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone, untrimmed, raw",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 123.6,
       "is_vegetarian": false,
@@ -2787,7 +2787,7 @@
     "model": "nutrition.fooditem",
     "pk": 233,
     "fields": {
-      "name": "Beef, steak, with bone, T-bone, untrimmed, grilled, no added fat",
+      "name": "Beef, Steak, With Bone,",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -2799,7 +2799,7 @@
     "model": "nutrition.fooditem",
     "pk": 234,
     "fields": {
-      "name": "Beef, topside roast, lean, raw",
+      "name": "Beef, Topside Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -2811,7 +2811,7 @@
     "model": "nutrition.fooditem",
     "pk": 235,
     "fields": {
-      "name": "Beef, topside roast, lean, roasted, no added fat",
+      "name": "Beef, Topside Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2823,7 +2823,7 @@
     "model": "nutrition.fooditem",
     "pk": 236,
     "fields": {
-      "name": "Beef, topside roast, semi-trimmed, raw",
+      "name": "Beef, Topside Roast, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -2835,7 +2835,7 @@
     "model": "nutrition.fooditem",
     "pk": 237,
     "fields": {
-      "name": "Beef, topside roast, semi-trimmed, roasted, no added fat",
+      "name": "Beef, Topside Roast, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -2847,7 +2847,7 @@
     "model": "nutrition.fooditem",
     "pk": 238,
     "fields": {
-      "name": "Beef, topside roast, untrimmed, raw",
+      "name": "Beef, Topside Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 141.2,
       "is_vegetarian": false,
@@ -2859,7 +2859,7 @@
     "model": "nutrition.fooditem",
     "pk": 239,
     "fields": {
-      "name": "Beef, topside roast, untrimmed, roasted, no added fat",
+      "name": "Beef, Topside Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": false,
@@ -2871,7 +2871,7 @@
     "model": "nutrition.fooditem",
     "pk": 240,
     "fields": {
-      "name": "Veal, all cuts, separable fat, raw",
+      "name": "Veal, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 40.0,
       "is_vegetarian": true,
@@ -2883,7 +2883,7 @@
     "model": "nutrition.fooditem",
     "pk": 241,
     "fields": {
-      "name": "Veal, all cuts, separable fat, cooked",
+      "name": "Veal, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 24.0,
       "is_vegetarian": true,
@@ -2895,7 +2895,7 @@
     "model": "nutrition.fooditem",
     "pk": 242,
     "fields": {
-      "name": "Veal, boneless dice or strips, lean, raw",
+      "name": "Veal, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": true,
@@ -2907,7 +2907,7 @@
     "model": "nutrition.fooditem",
     "pk": 243,
     "fields": {
-      "name": "Veal, boneless dice or strips, lean, stir-fried, no added fat",
+      "name": "Veal, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -2919,7 +2919,7 @@
     "model": "nutrition.fooditem",
     "pk": 244,
     "fields": {
-      "name": "Veal, boneless dice or strips, untrimmed, raw",
+      "name": "Veal, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 150.0,
       "is_vegetarian": true,
@@ -2931,7 +2931,7 @@
     "model": "nutrition.fooditem",
     "pk": 245,
     "fields": {
-      "name": "Veal, boneless dice or strips, untrimmed, stir-fried, no added fat",
+      "name": "Veal, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -2943,7 +2943,7 @@
     "model": "nutrition.fooditem",
     "pk": 246,
     "fields": {
-      "name": "Veal, cutlet, with bone, lean, raw",
+      "name": "Veal, Cutlet, With Bone,",
       "category": "General",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": true,
@@ -2955,7 +2955,7 @@
     "model": "nutrition.fooditem",
     "pk": 247,
     "fields": {
-      "name": "Veal, cutlet, with bone, lean, grilled, no added fat",
+      "name": "Veal, Cutlet, With Bone,",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -2967,7 +2967,7 @@
     "model": "nutrition.fooditem",
     "pk": 248,
     "fields": {
-      "name": "Veal, cutlet, with bone, semi-trimmed, raw",
+      "name": "Veal, Cutlet, With Bone,",
       "category": "General",
       "vitamin_d_iu": 145.6,
       "is_vegetarian": true,
@@ -2979,7 +2979,7 @@
     "model": "nutrition.fooditem",
     "pk": 249,
     "fields": {
-      "name": "Veal, cutlet, with bone, semi-trimmed, grilled, no added fat",
+      "name": "Veal, Cutlet, With Bone,",
       "category": "General",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": true,
@@ -2991,7 +2991,7 @@
     "model": "nutrition.fooditem",
     "pk": 250,
     "fields": {
-      "name": "Veal, cutlet, with bone, untrimmed, raw",
+      "name": "Veal, Cutlet, With Bone,",
       "category": "General",
       "vitamin_d_iu": 144.4,
       "is_vegetarian": true,
@@ -3003,7 +3003,7 @@
     "model": "nutrition.fooditem",
     "pk": 251,
     "fields": {
-      "name": "Veal, cutlet, with bone, untrimmed, grilled, no added fat",
+      "name": "Veal, Cutlet, With Bone,",
       "category": "General",
       "vitamin_d_iu": 27.6,
       "is_vegetarian": true,
@@ -3015,7 +3015,7 @@
     "model": "nutrition.fooditem",
     "pk": 252,
     "fields": {
-      "name": "Veal, diced, lean, raw",
+      "name": "Veal, Diced, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": true,
@@ -3027,7 +3027,7 @@
     "model": "nutrition.fooditem",
     "pk": 253,
     "fields": {
-      "name": "Veal, diced, lean, stir-fried, no added fat",
+      "name": "Veal, Diced, Lean, Stir-Fried,",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -3039,7 +3039,7 @@
     "model": "nutrition.fooditem",
     "pk": 254,
     "fields": {
-      "name": "Veal, diced, untrimmed, raw",
+      "name": "Veal, Diced, Untrimmed, Raw",
       "category": "General",
       "vitamin_d_iu": 150.0,
       "is_vegetarian": true,
@@ -3051,7 +3051,7 @@
     "model": "nutrition.fooditem",
     "pk": 255,
     "fields": {
-      "name": "Veal, diced, untrimmed, stir-fried, no added fat",
+      "name": "Veal, Diced, Untrimmed, Stir-Fried,",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -3063,7 +3063,7 @@
     "model": "nutrition.fooditem",
     "pk": 256,
     "fields": {
-      "name": "Veal, steak, boneless, leg, lean, raw",
+      "name": "Veal, Steak, Boneless, Leg,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -3075,7 +3075,7 @@
     "model": "nutrition.fooditem",
     "pk": 257,
     "fields": {
-      "name": "Veal, steak, boneless, leg, lean, grilled, no added fat",
+      "name": "Veal, Steak, Boneless, Leg,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -3087,7 +3087,7 @@
     "model": "nutrition.fooditem",
     "pk": 258,
     "fields": {
-      "name": "Veal, steak, boneless, leg, untrimmed, raw",
+      "name": "Veal, Steak, Boneless, Leg,",
       "category": "Meat",
       "vitamin_d_iu": 150.39999999999998,
       "is_vegetarian": false,
@@ -3099,7 +3099,7 @@
     "model": "nutrition.fooditem",
     "pk": 259,
     "fields": {
-      "name": "Veal, steak, boneless, leg, untrimmed, grilled, no added fat",
+      "name": "Veal, Steak, Boneless, Leg,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -3111,7 +3111,7 @@
     "model": "nutrition.fooditem",
     "pk": 260,
     "fields": {
-      "name": "Veal, stir-fry strips, lean, raw",
+      "name": "Veal, Stir-Fry Strips, Lean,",
       "category": "General",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": true,
@@ -3123,7 +3123,7 @@
     "model": "nutrition.fooditem",
     "pk": 261,
     "fields": {
-      "name": "Veal, stir-fry strips, lean, stir-fried, no added fat",
+      "name": "Veal, Stir-Fry Strips, Lean,",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -3135,7 +3135,7 @@
     "model": "nutrition.fooditem",
     "pk": 262,
     "fields": {
-      "name": "Veal, stir-fry strips, untrimmed, raw",
+      "name": "Veal, Stir-Fry Strips, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 150.0,
       "is_vegetarian": true,
@@ -3147,7 +3147,7 @@
     "model": "nutrition.fooditem",
     "pk": 263,
     "fields": {
-      "name": "Veal, stir-fry strips, untrimmed, stir-fried, no added fat",
+      "name": "Veal, Stir-Fry Strips, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -3159,7 +3159,7 @@
     "model": "nutrition.fooditem",
     "pk": 264,
     "fields": {
-      "name": "Lamb, all cuts, separable fat, raw",
+      "name": "Lamb, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -3171,7 +3171,7 @@
     "model": "nutrition.fooditem",
     "pk": 265,
     "fields": {
-      "name": "Lamb, all cuts, separable fat, cooked",
+      "name": "Lamb, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 64.0,
       "is_vegetarian": true,
@@ -3183,7 +3183,7 @@
     "model": "nutrition.fooditem",
     "pk": 266,
     "fields": {
-      "name": "Lamb, boneless, fillet or loin, untrimmed, raw",
+      "name": "Lamb, Boneless, Fillet Or",
       "category": "General",
       "vitamin_d_iu": 116.4,
       "is_vegetarian": true,
@@ -3195,7 +3195,7 @@
     "model": "nutrition.fooditem",
     "pk": 267,
     "fields": {
-      "name": "Lamb, boneless, fillet or loin, untrimmed, grilled, no added fat",
+      "name": "Lamb, Boneless, Fillet Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3207,7 +3207,7 @@
     "model": "nutrition.fooditem",
     "pk": 268,
     "fields": {
-      "name": "Lamb, boneless, fillet or loin, lean, raw",
+      "name": "Lamb, Boneless, Fillet Or",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3219,7 +3219,7 @@
     "model": "nutrition.fooditem",
     "pk": 269,
     "fields": {
-      "name": "Lamb, boneless, fillet or loin, lean, grilled, no added fat",
+      "name": "Lamb, Boneless, Fillet Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3231,7 +3231,7 @@
     "model": "nutrition.fooditem",
     "pk": 270,
     "fields": {
-      "name": "Lamb, chop, with bone, loin or chump, lean, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3243,7 +3243,7 @@
     "model": "nutrition.fooditem",
     "pk": 271,
     "fields": {
-      "name": "Lamb, chop, with bone, loin or chump, lean, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3255,7 +3255,7 @@
     "model": "nutrition.fooditem",
     "pk": 272,
     "fields": {
-      "name": "Lamb, chop, with bone, loin or chump, semi-trimmed, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 109.2,
       "is_vegetarian": true,
@@ -3267,7 +3267,7 @@
     "model": "nutrition.fooditem",
     "pk": 273,
     "fields": {
-      "name": "Lamb, chop, with bone, loin or chump, semi-trimmed, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -3279,7 +3279,7 @@
     "model": "nutrition.fooditem",
     "pk": 274,
     "fields": {
-      "name": "Lamb, chop, with bone, loin or chump, untrimmed, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 91.6,
       "is_vegetarian": true,
@@ -3291,7 +3291,7 @@
     "model": "nutrition.fooditem",
     "pk": 275,
     "fields": {
-      "name": "Lamb, chop, with bone, loin or chump, untrimmed, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3303,7 +3303,7 @@
     "model": "nutrition.fooditem",
     "pk": 276,
     "fields": {
-      "name": "Lamb, chop, with bone, chump, lean, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3315,7 +3315,7 @@
     "model": "nutrition.fooditem",
     "pk": 277,
     "fields": {
-      "name": "Lamb, chop, with bone, chump, lean, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3327,7 +3327,7 @@
     "model": "nutrition.fooditem",
     "pk": 278,
     "fields": {
-      "name": "Lamb, chop, with bone, chump, semi-trimmed, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 109.2,
       "is_vegetarian": true,
@@ -3339,7 +3339,7 @@
     "model": "nutrition.fooditem",
     "pk": 279,
     "fields": {
-      "name": "Lamb, chop, with bone, chump, semi-trimmed, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -3351,7 +3351,7 @@
     "model": "nutrition.fooditem",
     "pk": 280,
     "fields": {
-      "name": "Lamb, chop, with bone, chump, untrimmed, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 97.2,
       "is_vegetarian": true,
@@ -3363,7 +3363,7 @@
     "model": "nutrition.fooditem",
     "pk": 281,
     "fields": {
-      "name": "Lamb, chop, with bone, chump, untrimmed, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3375,7 +3375,7 @@
     "model": "nutrition.fooditem",
     "pk": 282,
     "fields": {
-      "name": "Lamb, diced, lean, raw",
+      "name": "Lamb, Diced, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3387,7 +3387,7 @@
     "model": "nutrition.fooditem",
     "pk": 283,
     "fields": {
-      "name": "Lamb, diced, lean, stir-fried, no added fat",
+      "name": "Lamb, Diced, Lean, Stir-Fried,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3399,7 +3399,7 @@
     "model": "nutrition.fooditem",
     "pk": 284,
     "fields": {
-      "name": "Lamb, diced, lean, casseroled, no added fat",
+      "name": "Lamb, Diced, Lean, Casseroled,",
       "category": "General",
       "vitamin_d_iu": 158.8,
       "is_vegetarian": true,
@@ -3411,7 +3411,7 @@
     "model": "nutrition.fooditem",
     "pk": 285,
     "fields": {
-      "name": "Lamb, diced, untrimmed, raw",
+      "name": "Lamb, Diced, Untrimmed, Raw",
       "category": "General",
       "vitamin_d_iu": 118.4,
       "is_vegetarian": true,
@@ -3423,7 +3423,7 @@
     "model": "nutrition.fooditem",
     "pk": 286,
     "fields": {
-      "name": "Lamb, diced, untrimmed, stir-fried, no added fat",
+      "name": "Lamb, Diced, Untrimmed, Stir-Fried,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3435,7 +3435,7 @@
     "model": "nutrition.fooditem",
     "pk": 287,
     "fields": {
-      "name": "Lamb, diced, untrimmed, casseroled, no added fat",
+      "name": "Lamb, Diced, Untrimmed, Casseroled,",
       "category": "General",
       "vitamin_d_iu": 156.8,
       "is_vegetarian": true,
@@ -3447,7 +3447,7 @@
     "model": "nutrition.fooditem",
     "pk": 288,
     "fields": {
-      "name": "Lamb, boneless dice or strips, lean, raw",
+      "name": "Lamb, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3459,7 +3459,7 @@
     "model": "nutrition.fooditem",
     "pk": 289,
     "fields": {
-      "name": "Lamb, boneless dice or strips, lean, stir-fried, no added fat",
+      "name": "Lamb, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3471,7 +3471,7 @@
     "model": "nutrition.fooditem",
     "pk": 290,
     "fields": {
-      "name": "Lamb, boneless dice or strips, lean, casseroled, no added fat",
+      "name": "Lamb, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 158.8,
       "is_vegetarian": true,
@@ -3483,7 +3483,7 @@
     "model": "nutrition.fooditem",
     "pk": 291,
     "fields": {
-      "name": "Lamb, boneless dice or strips, untrimmed, raw",
+      "name": "Lamb, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 117.6,
       "is_vegetarian": true,
@@ -3495,7 +3495,7 @@
     "model": "nutrition.fooditem",
     "pk": 292,
     "fields": {
-      "name": "Lamb, boneless dice or strips, untrimmed, stir-fried, no added fat",
+      "name": "Lamb, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3507,7 +3507,7 @@
     "model": "nutrition.fooditem",
     "pk": 293,
     "fields": {
-      "name": "Lamb, boneless dice or strips, untrimmed, casseroled, no added fat",
+      "name": "Lamb, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 157.20000000000002,
       "is_vegetarian": true,
@@ -3519,7 +3519,7 @@
     "model": "nutrition.fooditem",
     "pk": 294,
     "fields": {
-      "name": "Lamb, eye of loin, lean, raw",
+      "name": "Lamb, Eye Of Loin,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3531,7 +3531,7 @@
     "model": "nutrition.fooditem",
     "pk": 295,
     "fields": {
-      "name": "Lamb, eye of loin, lean, microwaved, no added fat",
+      "name": "Lamb, Eye Of Loin,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3543,7 +3543,7 @@
     "model": "nutrition.fooditem",
     "pk": 296,
     "fields": {
-      "name": "Lamb, eye of loin, untrimmed, raw",
+      "name": "Lamb, Eye Of Loin,",
       "category": "General",
       "vitamin_d_iu": 117.6,
       "is_vegetarian": true,
@@ -3555,7 +3555,7 @@
     "model": "nutrition.fooditem",
     "pk": 297,
     "fields": {
-      "name": "Lamb, eye of loin, untrimmed, microwaved, no added fat",
+      "name": "Lamb, Eye Of Loin,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3567,7 +3567,7 @@
     "model": "nutrition.fooditem",
     "pk": 298,
     "fields": {
-      "name": "Lamb, roasting piece, shoulder, lean, raw",
+      "name": "Lamb, Roasting Piece, Shoulder,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3579,7 +3579,7 @@
     "model": "nutrition.fooditem",
     "pk": 299,
     "fields": {
-      "name": "Lamb, roasting piece, shoulder, lean, roasted, no added fat",
+      "name": "Lamb, Roasting Piece, Shoulder,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3591,7 +3591,7 @@
     "model": "nutrition.fooditem",
     "pk": 300,
     "fields": {
-      "name": "Lamb, roasting piece, shoulder, semi-trimmed, raw",
+      "name": "Lamb, Roasting Piece, Shoulder,",
       "category": "General",
       "vitamin_d_iu": 56.0,
       "is_vegetarian": true,
@@ -3603,7 +3603,7 @@
     "model": "nutrition.fooditem",
     "pk": 301,
     "fields": {
-      "name": "Lamb, roasting piece, shoulder, semi-trimmed, roasted, no added fat",
+      "name": "Lamb, Roasting Piece, Shoulder,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -3615,7 +3615,7 @@
     "model": "nutrition.fooditem",
     "pk": 302,
     "fields": {
-      "name": "Lamb, roasting piece, shoulder, untrimmed, raw",
+      "name": "Lamb, Roasting Piece, Shoulder,",
       "category": "General",
       "vitamin_d_iu": 52.8,
       "is_vegetarian": true,
@@ -3627,7 +3627,7 @@
     "model": "nutrition.fooditem",
     "pk": 303,
     "fields": {
-      "name": "Lamb, roasting piece, shoulder, untrimmed, roasted, no added fat",
+      "name": "Lamb, Roasting Piece, Shoulder,",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3639,7 +3639,7 @@
     "model": "nutrition.fooditem",
     "pk": 304,
     "fields": {
-      "name": "Lamb, chop, with bone, forequarter, lean, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3651,7 +3651,7 @@
     "model": "nutrition.fooditem",
     "pk": 305,
     "fields": {
-      "name": "Lamb, chop, with bone, forequarter, lean, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3663,7 +3663,7 @@
     "model": "nutrition.fooditem",
     "pk": 306,
     "fields": {
-      "name": "Lamb, chop, with bone, forequarter, semi-trimmed, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 98.4,
       "is_vegetarian": true,
@@ -3675,7 +3675,7 @@
     "model": "nutrition.fooditem",
     "pk": 307,
     "fields": {
-      "name": "Lamb, chop, with bone, forequarter, semi-trimmed, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3687,7 +3687,7 @@
     "model": "nutrition.fooditem",
     "pk": 308,
     "fields": {
-      "name": "Lamb, chop, with bone, forequarter, untrimmed, raw",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 90.4,
       "is_vegetarian": true,
@@ -3699,7 +3699,7 @@
     "model": "nutrition.fooditem",
     "pk": 309,
     "fields": {
-      "name": "Lamb, chop, with bone, forequarter, grilled, no added fat",
+      "name": "Lamb, Chop, With Bone,",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3711,7 +3711,7 @@
     "model": "nutrition.fooditem",
     "pk": 310,
     "fields": {
-      "name": "Lamb, cutlet or frenched cutlet, with bone, lean, raw",
+      "name": "Lamb, Cutlet Or Frenched",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3723,7 +3723,7 @@
     "model": "nutrition.fooditem",
     "pk": 311,
     "fields": {
-      "name": "Lamb, cutlet or frenched cutlet, with bone, lean, grilled, no added fat",
+      "name": "Lamb, Cutlet Or Frenched",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3735,7 +3735,7 @@
     "model": "nutrition.fooditem",
     "pk": 312,
     "fields": {
-      "name": "Lamb, cutlet or frenched cutlet, with bone, semi-trimmed, raw",
+      "name": "Lamb, Cutlet Or Frenched",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -3747,7 +3747,7 @@
     "model": "nutrition.fooditem",
     "pk": 313,
     "fields": {
-      "name": "Lamb, cutlet or frenched cutlet, with bone, semi-trimmed, grilled, no added fat",
+      "name": "Lamb, Cutlet Or Frenched",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3759,7 +3759,7 @@
     "model": "nutrition.fooditem",
     "pk": 314,
     "fields": {
-      "name": "Lamb, cutlet or frenched cutlet, with bone, untrimmed, raw",
+      "name": "Lamb, Cutlet Or Frenched",
       "category": "General",
       "vitamin_d_iu": 99.2,
       "is_vegetarian": true,
@@ -3771,7 +3771,7 @@
     "model": "nutrition.fooditem",
     "pk": 315,
     "fields": {
-      "name": "Lamb, cutlet or frenched cutlet, with bone, untrimmed, grilled, no added fat",
+      "name": "Lamb, Cutlet Or Frenched",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3783,7 +3783,7 @@
     "model": "nutrition.fooditem",
     "pk": 316,
     "fields": {
-      "name": "Lamb, fillet, lean, raw",
+      "name": "Lamb, Fillet, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3795,7 +3795,7 @@
     "model": "nutrition.fooditem",
     "pk": 317,
     "fields": {
-      "name": "Lamb, fillet, lean, grilled, no added fat",
+      "name": "Lamb, Fillet, Lean, Grilled,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3807,7 +3807,7 @@
     "model": "nutrition.fooditem",
     "pk": 318,
     "fields": {
-      "name": "Lamb, fillet, untrimmed, raw",
+      "name": "Lamb, Fillet, Untrimmed, Raw",
       "category": "General",
       "vitamin_d_iu": 115.2,
       "is_vegetarian": true,
@@ -3819,7 +3819,7 @@
     "model": "nutrition.fooditem",
     "pk": 319,
     "fields": {
-      "name": "Lamb, fillet, untrimmed, grilled, no added fat",
+      "name": "Lamb, Fillet, Untrimmed, Grilled,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3831,7 +3831,7 @@
     "model": "nutrition.fooditem",
     "pk": 320,
     "fields": {
-      "name": "Lamb, leg roast, lean, raw",
+      "name": "Lamb, Leg Roast, Lean,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3843,7 +3843,7 @@
     "model": "nutrition.fooditem",
     "pk": 321,
     "fields": {
-      "name": "Lamb, leg roast, lean, roasted, no added fat",
+      "name": "Lamb, Leg Roast, Lean,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3855,7 +3855,7 @@
     "model": "nutrition.fooditem",
     "pk": 322,
     "fields": {
-      "name": "Lamb, leg roast, semi-trimmed, raw",
+      "name": "Lamb, Leg Roast, Semi-Trimmed,",
       "category": "General",
       "vitamin_d_iu": 113.6,
       "is_vegetarian": true,
@@ -3867,7 +3867,7 @@
     "model": "nutrition.fooditem",
     "pk": 323,
     "fields": {
-      "name": "Lamb, leg roast, semi-trimmed, roasted, no added fat",
+      "name": "Lamb, Leg Roast, Semi-Trimmed,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -3879,7 +3879,7 @@
     "model": "nutrition.fooditem",
     "pk": 324,
     "fields": {
-      "name": "Lamb, leg roast, untrimmed, raw",
+      "name": "Lamb, Leg Roast, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 104.4,
       "is_vegetarian": true,
@@ -3891,7 +3891,7 @@
     "model": "nutrition.fooditem",
     "pk": 325,
     "fields": {
-      "name": "Lamb, leg roast, untrimmed, roasted, no added fat",
+      "name": "Lamb, Leg Roast, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -3903,7 +3903,7 @@
     "model": "nutrition.fooditem",
     "pk": 326,
     "fields": {
-      "name": "Lamb, loin chop, lean, raw",
+      "name": "Lamb, Loin Chop, Lean,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3915,7 +3915,7 @@
     "model": "nutrition.fooditem",
     "pk": 327,
     "fields": {
-      "name": "Lamb, loin chop, lean, grilled, no added fat",
+      "name": "Lamb, Loin Chop, Lean,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -3927,7 +3927,7 @@
     "model": "nutrition.fooditem",
     "pk": 328,
     "fields": {
-      "name": "Lamb, loin chop, semi-trimmed, raw",
+      "name": "Lamb, Loin Chop, Semi-Trimmed,",
       "category": "General",
       "vitamin_d_iu": 109.6,
       "is_vegetarian": true,
@@ -3939,7 +3939,7 @@
     "model": "nutrition.fooditem",
     "pk": 329,
     "fields": {
-      "name": "Lamb, loin chop, semi-trimmed, grilled, no added fat",
+      "name": "Lamb, Loin Chop, Semi-Trimmed,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -3951,7 +3951,7 @@
     "model": "nutrition.fooditem",
     "pk": 330,
     "fields": {
-      "name": "Lamb, loin chop, untrimmed, raw",
+      "name": "Lamb, Loin Chop, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 86.0,
       "is_vegetarian": true,
@@ -3963,7 +3963,7 @@
     "model": "nutrition.fooditem",
     "pk": 331,
     "fields": {
-      "name": "Lamb, loin chop, untrimmed, grilled, no added fat",
+      "name": "Lamb, Loin Chop, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 60.8,
       "is_vegetarian": true,
@@ -3975,7 +3975,7 @@
     "model": "nutrition.fooditem",
     "pk": 332,
     "fields": {
-      "name": "Lamb, mince, raw",
+      "name": "Lamb, Mince, Raw",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -3987,7 +3987,7 @@
     "model": "nutrition.fooditem",
     "pk": 333,
     "fields": {
-      "name": "Lamb, mince, stir-fried, no added fat",
+      "name": "Lamb, Mince, Stir-Fried, No",
       "category": "General",
       "vitamin_d_iu": 30.0,
       "is_vegetarian": true,
@@ -3999,7 +3999,7 @@
     "model": "nutrition.fooditem",
     "pk": 334,
     "fields": {
-      "name": "Lamb, mini roast, lean, roasted, no added fat",
+      "name": "Lamb, Mini Roast, Lean,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4011,7 +4011,7 @@
     "model": "nutrition.fooditem",
     "pk": 335,
     "fields": {
-      "name": "Lamb, mini roast, semi-trimmed, roasted, no added fat",
+      "name": "Lamb, Mini Roast, Semi-Trimmed,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -4023,7 +4023,7 @@
     "model": "nutrition.fooditem",
     "pk": 336,
     "fields": {
-      "name": "Lamb, mini roast, untrimmed, roasted, no added fat",
+      "name": "Lamb, Mini Roast, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -4035,7 +4035,7 @@
     "model": "nutrition.fooditem",
     "pk": 337,
     "fields": {
-      "name": "Lamb, roasting piece, leg or mini roast, lean, raw",
+      "name": "Lamb, Roasting Piece, Leg",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -4047,7 +4047,7 @@
     "model": "nutrition.fooditem",
     "pk": 338,
     "fields": {
-      "name": "Lamb, roasting piece, leg or mini roast, lean, roasted, no added fat",
+      "name": "Lamb, Roasting Piece, Leg",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4059,7 +4059,7 @@
     "model": "nutrition.fooditem",
     "pk": 339,
     "fields": {
-      "name": "Lamb, roasting piece, leg or mini roast, semi-trimmed, raw",
+      "name": "Lamb, Roasting Piece, Leg",
       "category": "General",
       "vitamin_d_iu": 113.6,
       "is_vegetarian": true,
@@ -4071,7 +4071,7 @@
     "model": "nutrition.fooditem",
     "pk": 340,
     "fields": {
-      "name": "Lamb, roasting piece, leg or mini roast, semi-trimmed, roasted, no added fat",
+      "name": "Lamb, Roasting Piece, Leg",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -4083,7 +4083,7 @@
     "model": "nutrition.fooditem",
     "pk": 341,
     "fields": {
-      "name": "Lamb, roasting piece, leg or mini roast, untrimmed, raw",
+      "name": "Lamb, Roasting Piece, Leg",
       "category": "General",
       "vitamin_d_iu": 106.0,
       "is_vegetarian": true,
@@ -4095,7 +4095,7 @@
     "model": "nutrition.fooditem",
     "pk": 342,
     "fields": {
-      "name": "Lamb, roasting piece, leg or mini roast, untrimmed, roasted, no added fat",
+      "name": "Lamb, Roasting Piece, Leg",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -4107,7 +4107,7 @@
     "model": "nutrition.fooditem",
     "pk": 343,
     "fields": {
-      "name": "Lamb, steak, boneless, lean, raw",
+      "name": "Lamb, Steak, Boneless, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": false,
@@ -4119,7 +4119,7 @@
     "model": "nutrition.fooditem",
     "pk": 344,
     "fields": {
-      "name": "Lamb, steak, boneless, lean, grilled, no added fat",
+      "name": "Lamb, Steak, Boneless, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": false,
@@ -4131,7 +4131,7 @@
     "model": "nutrition.fooditem",
     "pk": 345,
     "fields": {
-      "name": "Lamb, steak, boneless, semi-trimmed, raw",
+      "name": "Lamb, Steak, Boneless, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 114.0,
       "is_vegetarian": false,
@@ -4143,7 +4143,7 @@
     "model": "nutrition.fooditem",
     "pk": 346,
     "fields": {
-      "name": "Lamb, steak, boneless, semi-trimmed, grilled, no added fat",
+      "name": "Lamb, Steak, Boneless, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 146.4,
       "is_vegetarian": false,
@@ -4155,7 +4155,7 @@
     "model": "nutrition.fooditem",
     "pk": 347,
     "fields": {
-      "name": "Lamb, steak, boneless, untrimmed, raw",
+      "name": "Lamb, Steak, Boneless, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 107.6,
       "is_vegetarian": false,
@@ -4167,7 +4167,7 @@
     "model": "nutrition.fooditem",
     "pk": 348,
     "fields": {
-      "name": "Lamb, steak, boneless, untrimmed, grilled, no added fat",
+      "name": "Lamb, Steak, Boneless, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 142.0,
       "is_vegetarian": false,
@@ -4179,7 +4179,7 @@
     "model": "nutrition.fooditem",
     "pk": 349,
     "fields": {
-      "name": "Lamb, with bone, shin, lean, raw",
+      "name": "Lamb, With Bone, Shin,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -4191,7 +4191,7 @@
     "model": "nutrition.fooditem",
     "pk": 350,
     "fields": {
-      "name": "Lamb, with bone, shin, lean, casseroled, no added fat",
+      "name": "Lamb, With Bone, Shin,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4203,7 +4203,7 @@
     "model": "nutrition.fooditem",
     "pk": 351,
     "fields": {
-      "name": "Lamb, with bone, shin, semi-trimmed, raw",
+      "name": "Lamb, With Bone, Shin,",
       "category": "General",
       "vitamin_d_iu": 112.8,
       "is_vegetarian": true,
@@ -4215,7 +4215,7 @@
     "model": "nutrition.fooditem",
     "pk": 352,
     "fields": {
-      "name": "Lamb, with bone, shin, semi-trimmed, casseroled, no added fat",
+      "name": "Lamb, With Bone, Shin,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -4227,7 +4227,7 @@
     "model": "nutrition.fooditem",
     "pk": 353,
     "fields": {
-      "name": "Lamb, with bone, shin, untrimmed, raw",
+      "name": "Lamb, With Bone, Shin,",
       "category": "General",
       "vitamin_d_iu": 104.4,
       "is_vegetarian": true,
@@ -4239,7 +4239,7 @@
     "model": "nutrition.fooditem",
     "pk": 354,
     "fields": {
-      "name": "Lamb, with bone, shin, untrimmed, casseroled, no added fat",
+      "name": "Lamb, With Bone, Shin,",
       "category": "General",
       "vitamin_d_iu": 60.4,
       "is_vegetarian": true,
@@ -4251,7 +4251,7 @@
     "model": "nutrition.fooditem",
     "pk": 355,
     "fields": {
-      "name": "Lamb, stir-fry strips, lean, raw",
+      "name": "Lamb, Stir-Fry Strips, Lean,",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -4263,7 +4263,7 @@
     "model": "nutrition.fooditem",
     "pk": 356,
     "fields": {
-      "name": "Lamb, stir-fry strips, lean, stir-fried, no added fat",
+      "name": "Lamb, Stir-Fry Strips, Lean,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4275,7 +4275,7 @@
     "model": "nutrition.fooditem",
     "pk": 357,
     "fields": {
-      "name": "Lamb, stir-fry strips, lean, casseroled, no added fat",
+      "name": "Lamb, Stir-Fry Strips, Lean,",
       "category": "General",
       "vitamin_d_iu": 158.8,
       "is_vegetarian": true,
@@ -4287,7 +4287,7 @@
     "model": "nutrition.fooditem",
     "pk": 358,
     "fields": {
-      "name": "Lamb, stir-fry strips, untrimmed, raw",
+      "name": "Lamb, Stir-Fry Strips, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 117.6,
       "is_vegetarian": true,
@@ -4299,7 +4299,7 @@
     "model": "nutrition.fooditem",
     "pk": 359,
     "fields": {
-      "name": "Lamb, stir-fry strips, untrimmed, stir-fried, no added fat",
+      "name": "Lamb, Stir-Fry Strips, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4311,7 +4311,7 @@
     "model": "nutrition.fooditem",
     "pk": 360,
     "fields": {
-      "name": "Lamb, stir-fry strips, untrimmed, casseroled, no added fat",
+      "name": "Lamb, Stir-Fry Strips, Untrimmed,",
       "category": "General",
       "vitamin_d_iu": 157.6,
       "is_vegetarian": true,
@@ -4323,7 +4323,7 @@
     "model": "nutrition.fooditem",
     "pk": 361,
     "fields": {
-      "name": "Mutton, all cuts, separable fat, raw",
+      "name": "Mutton, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -4335,7 +4335,7 @@
     "model": "nutrition.fooditem",
     "pk": 362,
     "fields": {
-      "name": "Mutton, all cuts, separable fat, cooked",
+      "name": "Mutton, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 64.0,
       "is_vegetarian": true,
@@ -4347,7 +4347,7 @@
     "model": "nutrition.fooditem",
     "pk": 363,
     "fields": {
-      "name": "Mutton, boneless dice or strips, shoulder, lean, raw",
+      "name": "Mutton, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -4359,7 +4359,7 @@
     "model": "nutrition.fooditem",
     "pk": 364,
     "fields": {
-      "name": "Mutton, boneless dice or strips, shoulder, lean, casseroled, no added fat",
+      "name": "Mutton, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4371,7 +4371,7 @@
     "model": "nutrition.fooditem",
     "pk": 365,
     "fields": {
-      "name": "Mutton, boneless dice or strips, shoulder, semi-trimmed, raw",
+      "name": "Mutton, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 112.8,
       "is_vegetarian": true,
@@ -4383,7 +4383,7 @@
     "model": "nutrition.fooditem",
     "pk": 366,
     "fields": {
-      "name": "Mutton, boneless dice or strips, shoulder, semi-trimmed, casseroled, no added fat",
+      "name": "Mutton, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4395,7 +4395,7 @@
     "model": "nutrition.fooditem",
     "pk": 367,
     "fields": {
-      "name": "Mutton, boneless dice or strips, shoulder, untrimmed, raw",
+      "name": "Mutton, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 110.8,
       "is_vegetarian": true,
@@ -4407,7 +4407,7 @@
     "model": "nutrition.fooditem",
     "pk": 368,
     "fields": {
-      "name": "Mutton, boneless dice or strips, shoulder, untrimmed, casseroled, no added fat",
+      "name": "Mutton, Boneless Dice Or",
       "category": "General",
       "vitamin_d_iu": 60.0,
       "is_vegetarian": true,
@@ -4419,7 +4419,7 @@
     "model": "nutrition.fooditem",
     "pk": 369,
     "fields": {
-      "name": "Mutton, roasting piece, with bone, leg, lean, raw",
+      "name": "Mutton, Roasting Piece, With",
       "category": "General",
       "vitamin_d_iu": 120.0,
       "is_vegetarian": true,
@@ -4431,7 +4431,7 @@
     "model": "nutrition.fooditem",
     "pk": 370,
     "fields": {
-      "name": "Mutton, roasting piece, with bone, leg, lean, roasted, no added fat",
+      "name": "Mutton, Roasting Piece, With",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -4443,7 +4443,7 @@
     "model": "nutrition.fooditem",
     "pk": 371,
     "fields": {
-      "name": "Mutton, roasting piece, with bone, leg, semi-trimmed, raw",
+      "name": "Mutton, Roasting Piece, With",
       "category": "General",
       "vitamin_d_iu": 114.4,
       "is_vegetarian": true,
@@ -4455,7 +4455,7 @@
     "model": "nutrition.fooditem",
     "pk": 372,
     "fields": {
-      "name": "Mutton, roasting piece, with bone, leg, semi-trimmed, roasted, no added fat",
+      "name": "Mutton, Roasting Piece, With",
       "category": "General",
       "vitamin_d_iu": 30.4,
       "is_vegetarian": true,
@@ -4467,7 +4467,7 @@
     "model": "nutrition.fooditem",
     "pk": 373,
     "fields": {
-      "name": "Mutton, roasting piece, with bone, leg, untrimmed, raw",
+      "name": "Mutton, Roasting Piece, With",
       "category": "General",
       "vitamin_d_iu": 106.4,
       "is_vegetarian": true,
@@ -4479,7 +4479,7 @@
     "model": "nutrition.fooditem",
     "pk": 374,
     "fields": {
-      "name": "Mutton, roasting piece, with bone, leg, untrimmed, roasted, no added fat",
+      "name": "Mutton, Roasting Piece, With",
       "category": "General",
       "vitamin_d_iu": 33.6,
       "is_vegetarian": true,
@@ -4491,7 +4491,7 @@
     "model": "nutrition.fooditem",
     "pk": 375,
     "fields": {
-      "name": "Goat, all cuts, separable fat, raw",
+      "name": "Goat, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 140.0,
       "is_vegetarian": true,
@@ -4503,7 +4503,7 @@
     "model": "nutrition.fooditem",
     "pk": 376,
     "fields": {
-      "name": "Goat, all cuts, separable fat, baked, no added fat",
+      "name": "Goat, All Cuts, Separable",
       "category": "General",
       "vitamin_d_iu": 168.0,
       "is_vegetarian": true,
@@ -4515,7 +4515,7 @@
     "model": "nutrition.fooditem",
     "pk": 377,
     "fields": {
-      "name": "Goat, forequarter, lean, raw",
+      "name": "Goat, Forequarter, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -4527,7 +4527,7 @@
     "model": "nutrition.fooditem",
     "pk": 378,
     "fields": {
-      "name": "Goat, forequarter, lean, baked, no added fat",
+      "name": "Goat, Forequarter, Lean, Baked,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -4539,7 +4539,7 @@
     "model": "nutrition.fooditem",
     "pk": 379,
     "fields": {
-      "name": "Goat, leg, lean, raw",
+      "name": "Goat, Leg, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -4551,7 +4551,7 @@
     "model": "nutrition.fooditem",
     "pk": 380,
     "fields": {
-      "name": "Goat, leg, lean, baked, no added fat",
+      "name": "Goat, Leg, Lean, Baked,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -4563,7 +4563,7 @@
     "model": "nutrition.fooditem",
     "pk": 381,
     "fields": {
-      "name": "Goat, loin, lean, raw",
+      "name": "Goat, Loin, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -4575,7 +4575,7 @@
     "model": "nutrition.fooditem",
     "pk": 382,
     "fields": {
-      "name": "Goat, loin, lean, baked, no added fat",
+      "name": "Goat, Loin, Lean, Baked,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -4587,7 +4587,7 @@
     "model": "nutrition.fooditem",
     "pk": 383,
     "fields": {
-      "name": "Goat, meat, all cuts, lean, raw",
+      "name": "Goat, Meat, All Cuts,",
       "category": "Meat",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": false,
@@ -4599,7 +4599,7 @@
     "model": "nutrition.fooditem",
     "pk": 384,
     "fields": {
-      "name": "Goat, meat, all cuts, lean, baked, no added fat",
+      "name": "Goat, Meat, All Cuts,",
       "category": "Meat",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": false,
@@ -4611,7 +4611,7 @@
     "model": "nutrition.fooditem",
     "pk": 385,
     "fields": {
-      "name": "Goat, meat, all cuts, lean, casseroled, no added fat",
+      "name": "Goat, Meat, All Cuts,",
       "category": "Meat",
       "vitamin_d_iu": 192.4,
       "is_vegetarian": false,
@@ -4623,7 +4623,7 @@
     "model": "nutrition.fooditem",
     "pk": 386,
     "fields": {
-      "name": "Goat, meat, all cuts, untrimmed, raw",
+      "name": "Goat, Meat, All Cuts,",
       "category": "Meat",
       "vitamin_d_iu": 110.8,
       "is_vegetarian": false,
@@ -4635,7 +4635,7 @@
     "model": "nutrition.fooditem",
     "pk": 387,
     "fields": {
-      "name": "Goat, meat, all cuts, untrimmed, casseroled, no added fat ",
+      "name": "Goat, Meat, All Cuts,",
       "category": "Meat",
       "vitamin_d_iu": 178.0,
       "is_vegetarian": false,
@@ -4647,7 +4647,7 @@
     "model": "nutrition.fooditem",
     "pk": 388,
     "fields": {
-      "name": "Goat, meat, all cuts, untrimmed, baked, no added fat",
+      "name": "Goat, Meat, All Cuts,",
       "category": "Meat",
       "vitamin_d_iu": 96.0,
       "is_vegetarian": false,
@@ -4659,7 +4659,7 @@
     "model": "nutrition.fooditem",
     "pk": 389,
     "fields": {
-      "name": "Pork, belly, rind removed, raw",
+      "name": "Pork, Belly, Rind Removed,",
       "category": "Meat",
       "vitamin_d_iu": 68.4,
       "is_vegetarian": false,
@@ -4671,7 +4671,7 @@
     "model": "nutrition.fooditem",
     "pk": 390,
     "fields": {
-      "name": "Pork, belly, rind removed, baked, no added fat",
+      "name": "Pork, Belly, Rind Removed,",
       "category": "Meat",
       "vitamin_d_iu": 90.4,
       "is_vegetarian": false,
@@ -4683,7 +4683,7 @@
     "model": "nutrition.fooditem",
     "pk": 391,
     "fields": {
-      "name": "Pork, butterfly steak, lean, raw",
+      "name": "Pork, Butterfly Steak, Lean,",
       "category": "Dairy",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4695,7 +4695,7 @@
     "model": "nutrition.fooditem",
     "pk": 392,
     "fields": {
-      "name": "Pork, butterfly steak, lean, grilled, no added fat",
+      "name": "Pork, Butterfly Steak, Lean,",
       "category": "Dairy",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4707,7 +4707,7 @@
     "model": "nutrition.fooditem",
     "pk": 393,
     "fields": {
-      "name": "Pork, butterfly steak, untrimmed, raw",
+      "name": "Pork, Butterfly Steak, Untrimmed,",
       "category": "Dairy",
       "vitamin_d_iu": 32.400000000000006,
       "is_vegetarian": false,
@@ -4719,7 +4719,7 @@
     "model": "nutrition.fooditem",
     "pk": 394,
     "fields": {
-      "name": "Pork, butterfly steak, untrimmed, grilled, no added fat",
+      "name": "Pork, Butterfly Steak, Untrimmed,",
       "category": "Dairy",
       "vitamin_d_iu": 34.0,
       "is_vegetarian": false,
@@ -4731,7 +4731,7 @@
     "model": "nutrition.fooditem",
     "pk": 395,
     "fields": {
-      "name": "Pork, diced, untrimmed, raw",
+      "name": "Pork, Diced, Untrimmed, Raw",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4743,7 +4743,7 @@
     "model": "nutrition.fooditem",
     "pk": 396,
     "fields": {
-      "name": "Pork, diced, untrimmed, fried, no added fat",
+      "name": "Pork, Diced, Untrimmed, Fried,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4755,7 +4755,7 @@
     "model": "nutrition.fooditem",
     "pk": 397,
     "fields": {
-      "name": "Pork, fillet, lean, raw",
+      "name": "Pork, Fillet, Lean, Raw",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4767,7 +4767,7 @@
     "model": "nutrition.fooditem",
     "pk": 398,
     "fields": {
-      "name": "Pork, fillet, fully-trimmed, baked, no added fat",
+      "name": "Pork, Fillet, Fully-Trimmed, Baked,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4779,7 +4779,7 @@
     "model": "nutrition.fooditem",
     "pk": 399,
     "fields": {
-      "name": "Pork, forequarter (chop, roast, neck), separable fat, raw",
+      "name": "Pork, Forequarter (Chop, Roast,",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -4791,7 +4791,7 @@
     "model": "nutrition.fooditem",
     "pk": 400,
     "fields": {
-      "name": "Pork, forequarter, separable fat, BBQ'd, no added fat",
+      "name": "Pork, Forequarter, Separable Fat,",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -4803,7 +4803,7 @@
     "model": "nutrition.fooditem",
     "pk": 401,
     "fields": {
-      "name": "Pork, forequarter chop, lean, raw",
+      "name": "Pork, Forequarter Chop, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4815,7 +4815,7 @@
     "model": "nutrition.fooditem",
     "pk": 402,
     "fields": {
-      "name": "Pork, forequarter chop, lean, BBQ'd, no added fat",
+      "name": "Pork, Forequarter Chop, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4827,7 +4827,7 @@
     "model": "nutrition.fooditem",
     "pk": 403,
     "fields": {
-      "name": "Pork, forequarter chop, semi-trimmed, BBQ'd, no added fat",
+      "name": "Pork, Forequarter Chop, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 29.6,
       "is_vegetarian": false,
@@ -4839,7 +4839,7 @@
     "model": "nutrition.fooditem",
     "pk": 404,
     "fields": {
-      "name": "Pork, forequarter chop, untrimmed, raw",
+      "name": "Pork, Forequarter Chop, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 56.4,
       "is_vegetarian": false,
@@ -4851,7 +4851,7 @@
     "model": "nutrition.fooditem",
     "pk": 405,
     "fields": {
-      "name": "Pork, forequarter chop, untrimmed, BBQ'd, no added fat",
+      "name": "Pork, Forequarter Chop, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 62.0,
       "is_vegetarian": false,
@@ -4863,7 +4863,7 @@
     "model": "nutrition.fooditem",
     "pk": 406,
     "fields": {
-      "name": "Pork, forequarter shoulder roast, lean, raw",
+      "name": "Pork, Forequarter Shoulder Roast,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4875,7 +4875,7 @@
     "model": "nutrition.fooditem",
     "pk": 407,
     "fields": {
-      "name": "Pork, forequarter shoulder roast, lean, BBQ'd, no added fat",
+      "name": "Pork, Forequarter Shoulder Roast,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4887,7 +4887,7 @@
     "model": "nutrition.fooditem",
     "pk": 408,
     "fields": {
-      "name": "Pork, forequarter shoulder roast, semi-trimmed, BBQ'd, no added fat",
+      "name": "Pork, Forequarter Shoulder Roast,",
       "category": "Meat",
       "vitamin_d_iu": 29.2,
       "is_vegetarian": false,
@@ -4899,7 +4899,7 @@
     "model": "nutrition.fooditem",
     "pk": 409,
     "fields": {
-      "name": "Pork, forequarter shoulder roast, untrimmed, raw",
+      "name": "Pork, Forequarter Shoulder Roast,",
       "category": "Meat",
       "vitamin_d_iu": 56.4,
       "is_vegetarian": false,
@@ -4911,7 +4911,7 @@
     "model": "nutrition.fooditem",
     "pk": 410,
     "fields": {
-      "name": "Pork, forequarter shoulder roast, untrimmed, BBQ'd, no added fat",
+      "name": "Pork, Forequarter Shoulder Roast,",
       "category": "Meat",
       "vitamin_d_iu": 52.0,
       "is_vegetarian": false,
@@ -4923,7 +4923,7 @@
     "model": "nutrition.fooditem",
     "pk": 411,
     "fields": {
-      "name": "Pork, leg roast, untrimmed, raw",
+      "name": "Pork, Leg Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 51.2,
       "is_vegetarian": false,
@@ -4935,7 +4935,7 @@
     "model": "nutrition.fooditem",
     "pk": 412,
     "fields": {
-      "name": "Pork, leg roast, untrimmed, baked, no added fat",
+      "name": "Pork, Leg Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 58.8,
       "is_vegetarian": false,
@@ -4947,7 +4947,7 @@
     "model": "nutrition.fooditem",
     "pk": 413,
     "fields": {
-      "name": "Pork, leg steak (rump), separable fat, raw",
+      "name": "Pork, Leg Steak (Rump),",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -4959,7 +4959,7 @@
     "model": "nutrition.fooditem",
     "pk": 414,
     "fields": {
-      "name": "Pork, leg steak (rump), separable fat, fried, no added fat",
+      "name": "Pork, Leg Steak (Rump),",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -4971,7 +4971,7 @@
     "model": "nutrition.fooditem",
     "pk": 415,
     "fields": {
-      "name": "Pork, leg steak (round, rump, topside, silverside), lean, raw",
+      "name": "Pork, Leg Steak (Round,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4983,7 +4983,7 @@
     "model": "nutrition.fooditem",
     "pk": 416,
     "fields": {
-      "name": "Pork, leg steak (round, rump, topside, silverside), lean, fried, no added fat",
+      "name": "Pork, Leg Steak (Round,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -4995,7 +4995,7 @@
     "model": "nutrition.fooditem",
     "pk": 417,
     "fields": {
-      "name": "Pork, leg steak (round, rump, topside, silverside), untrimmed, raw",
+      "name": "Pork, Leg Steak (Round,",
       "category": "Meat",
       "vitamin_d_iu": 18.0,
       "is_vegetarian": false,
@@ -5007,7 +5007,7 @@
     "model": "nutrition.fooditem",
     "pk": 418,
     "fields": {
-      "name": "Pork, leg steak (round, rump, topside, silverside), untrimmed, fried, no added fat",
+      "name": "Pork, Leg Steak (Round,",
       "category": "Meat",
       "vitamin_d_iu": 18.0,
       "is_vegetarian": false,
@@ -5019,7 +5019,7 @@
     "model": "nutrition.fooditem",
     "pk": 419,
     "fields": {
-      "name": "Pork, loin chop, separable fat, raw",
+      "name": "Pork, Loin Chop, Separable",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -5031,7 +5031,7 @@
     "model": "nutrition.fooditem",
     "pk": 420,
     "fields": {
-      "name": "Pork, loin chop, separable fat, BBQ'd, no added fat",
+      "name": "Pork, Loin Chop, Separable",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5043,7 +5043,7 @@
     "model": "nutrition.fooditem",
     "pk": 421,
     "fields": {
-      "name": "Pork, loin chop, lean, raw",
+      "name": "Pork, Loin Chop, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5055,7 +5055,7 @@
     "model": "nutrition.fooditem",
     "pk": 422,
     "fields": {
-      "name": "Pork, loin chop, lean, BBQ'd, no added fat",
+      "name": "Pork, Loin Chop, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5067,7 +5067,7 @@
     "model": "nutrition.fooditem",
     "pk": 423,
     "fields": {
-      "name": "Pork, loin chop, semi-trimmed, raw",
+      "name": "Pork, Loin Chop, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 26.4,
       "is_vegetarian": false,
@@ -5079,7 +5079,7 @@
     "model": "nutrition.fooditem",
     "pk": 424,
     "fields": {
-      "name": "Pork, loin chop, semi-trimmed, BBQ'd, no added fat",
+      "name": "Pork, Loin Chop, Semi-Trimmed,",
       "category": "Meat",
       "vitamin_d_iu": 27.200000000000003,
       "is_vegetarian": false,
@@ -5091,7 +5091,7 @@
     "model": "nutrition.fooditem",
     "pk": 425,
     "fields": {
-      "name": "Pork, loin chop, untrimmed, raw",
+      "name": "Pork, Loin Chop, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 38.4,
       "is_vegetarian": false,
@@ -5103,7 +5103,7 @@
     "model": "nutrition.fooditem",
     "pk": 426,
     "fields": {
-      "name": "Pork, loin chop, untrimmed, BBQ'd, no added fat",
+      "name": "Pork, Loin Chop, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 42.400000000000006,
       "is_vegetarian": false,
@@ -5115,7 +5115,7 @@
     "model": "nutrition.fooditem",
     "pk": 427,
     "fields": {
-      "name": "Pork, loin cutlet, untrimmed, raw",
+      "name": "Pork, Loin Cutlet, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 51.2,
       "is_vegetarian": false,
@@ -5127,7 +5127,7 @@
     "model": "nutrition.fooditem",
     "pk": 428,
     "fields": {
-      "name": "Pork, loin cutlet, untrimmed, fried, no added fat",
+      "name": "Pork, Loin Cutlet, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 67.6,
       "is_vegetarian": false,
@@ -5139,7 +5139,7 @@
     "model": "nutrition.fooditem",
     "pk": 429,
     "fields": {
-      "name": "Pork, loin roast, separable fat, raw",
+      "name": "Pork, Loin Roast, Separable",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -5151,7 +5151,7 @@
     "model": "nutrition.fooditem",
     "pk": 430,
     "fields": {
-      "name": "Pork, loin roast, separable fat, baked, no added fat",
+      "name": "Pork, Loin Roast, Separable",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5163,7 +5163,7 @@
     "model": "nutrition.fooditem",
     "pk": 431,
     "fields": {
-      "name": "Pork, loin roast, lean, raw",
+      "name": "Pork, Loin Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5175,7 +5175,7 @@
     "model": "nutrition.fooditem",
     "pk": 432,
     "fields": {
-      "name": "Pork, loin roast, lean, baked, no added fat",
+      "name": "Pork, Loin Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5187,7 +5187,7 @@
     "model": "nutrition.fooditem",
     "pk": 433,
     "fields": {
-      "name": "Pork, loin roast, untrimmed, raw",
+      "name": "Pork, Loin Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 54.400000000000006,
       "is_vegetarian": false,
@@ -5199,7 +5199,7 @@
     "model": "nutrition.fooditem",
     "pk": 434,
     "fields": {
-      "name": "Pork, loin roast, untrimmed, baked, no added fat",
+      "name": "Pork, Loin Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 45.6,
       "is_vegetarian": false,
@@ -5211,7 +5211,7 @@
     "model": "nutrition.fooditem",
     "pk": 435,
     "fields": {
-      "name": "Pork, medallion or loin steak, separable fat, raw",
+      "name": "Pork, Medallion Or Loin",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -5223,7 +5223,7 @@
     "model": "nutrition.fooditem",
     "pk": 436,
     "fields": {
-      "name": "Pork, medallion or loin steak, separable fat, fried, no added fat",
+      "name": "Pork, Medallion Or Loin",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5235,7 +5235,7 @@
     "model": "nutrition.fooditem",
     "pk": 437,
     "fields": {
-      "name": "Pork, medallion or loin steak, lean, raw",
+      "name": "Pork, Medallion Or Loin",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5247,7 +5247,7 @@
     "model": "nutrition.fooditem",
     "pk": 438,
     "fields": {
-      "name": "Pork, medallion or loin steak, lean, fried, no added fat",
+      "name": "Pork, Medallion Or Loin",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5259,7 +5259,7 @@
     "model": "nutrition.fooditem",
     "pk": 439,
     "fields": {
-      "name": "Pork, medallion or loin steak, untrimmed, raw",
+      "name": "Pork, Medallion Or Loin",
       "category": "Meat",
       "vitamin_d_iu": 29.6,
       "is_vegetarian": false,
@@ -5271,7 +5271,7 @@
     "model": "nutrition.fooditem",
     "pk": 440,
     "fields": {
-      "name": "Pork, medallion or loin steak, untrimmed, fried, no added fat",
+      "name": "Pork, Medallion Or Loin",
       "category": "Meat",
       "vitamin_d_iu": 38.8,
       "is_vegetarian": false,
@@ -5283,7 +5283,7 @@
     "model": "nutrition.fooditem",
     "pk": 441,
     "fields": {
-      "name": "Pork, mince, untrimmed, raw",
+      "name": "Pork, Mince, Untrimmed, Raw",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5295,7 +5295,7 @@
     "model": "nutrition.fooditem",
     "pk": 442,
     "fields": {
-      "name": "Pork, mince, as purchased, fried, no added fat",
+      "name": "Pork, Mince, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5307,7 +5307,7 @@
     "model": "nutrition.fooditem",
     "pk": 443,
     "fields": {
-      "name": "Pork, round mini roast, separable fat, raw",
+      "name": "Pork, Round Mini Roast,",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -5319,7 +5319,7 @@
     "model": "nutrition.fooditem",
     "pk": 444,
     "fields": {
-      "name": "Pork, round mini roast, separable fat, baked, no added fat",
+      "name": "Pork, Round Mini Roast,",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5331,7 +5331,7 @@
     "model": "nutrition.fooditem",
     "pk": 445,
     "fields": {
-      "name": "Pork, round mini roast, lean, raw",
+      "name": "Pork, Round Mini Roast,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5343,7 +5343,7 @@
     "model": "nutrition.fooditem",
     "pk": 446,
     "fields": {
-      "name": "Pork, round mini roast, lean, baked, no added fat",
+      "name": "Pork, Round Mini Roast,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5355,7 +5355,7 @@
     "model": "nutrition.fooditem",
     "pk": 447,
     "fields": {
-      "name": "Pork, round mini roast, untrimmed, raw",
+      "name": "Pork, Round Mini Roast,",
       "category": "Meat",
       "vitamin_d_iu": 20.0,
       "is_vegetarian": false,
@@ -5367,7 +5367,7 @@
     "model": "nutrition.fooditem",
     "pk": 448,
     "fields": {
-      "name": "Pork, round mini roast, untrimmed, baked, no added fat",
+      "name": "Pork, Round Mini Roast,",
       "category": "Meat",
       "vitamin_d_iu": 18.8,
       "is_vegetarian": false,
@@ -5379,7 +5379,7 @@
     "model": "nutrition.fooditem",
     "pk": 449,
     "fields": {
-      "name": "Pork, round steak, lean, raw",
+      "name": "Pork, Round Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5391,7 +5391,7 @@
     "model": "nutrition.fooditem",
     "pk": 450,
     "fields": {
-      "name": "Pork, round steak, lean, fried, no added fat",
+      "name": "Pork, Round Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5403,7 +5403,7 @@
     "model": "nutrition.fooditem",
     "pk": 451,
     "fields": {
-      "name": "Pork, rump steak, lean, raw",
+      "name": "Pork, Rump Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5415,7 +5415,7 @@
     "model": "nutrition.fooditem",
     "pk": 452,
     "fields": {
-      "name": "Pork, rump steak, lean, fried, no added fat",
+      "name": "Pork, Rump Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5427,7 +5427,7 @@
     "model": "nutrition.fooditem",
     "pk": 453,
     "fields": {
-      "name": "Pork, rump steak, untrimmed, raw",
+      "name": "Pork, Rump Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 22.0,
       "is_vegetarian": false,
@@ -5439,7 +5439,7 @@
     "model": "nutrition.fooditem",
     "pk": 454,
     "fields": {
-      "name": "Pork, rump steak, untrimmed, fried, no added fat",
+      "name": "Pork, Rump Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 28.8,
       "is_vegetarian": false,
@@ -5451,7 +5451,7 @@
     "model": "nutrition.fooditem",
     "pk": 455,
     "fields": {
-      "name": "Pork, scotch roast, separable fat, raw",
+      "name": "Pork, Scotch Roast, Separable",
       "category": "Meat",
       "vitamin_d_iu": 220.0,
       "is_vegetarian": false,
@@ -5463,7 +5463,7 @@
     "model": "nutrition.fooditem",
     "pk": 456,
     "fields": {
-      "name": "Pork, scotch roast, separable fat, baked, no added fat",
+      "name": "Pork, Scotch Roast, Separable",
       "category": "Meat",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5475,7 +5475,7 @@
     "model": "nutrition.fooditem",
     "pk": 457,
     "fields": {
-      "name": "Pork, scotch roast, lean, raw",
+      "name": "Pork, Scotch Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5487,7 +5487,7 @@
     "model": "nutrition.fooditem",
     "pk": 458,
     "fields": {
-      "name": "Pork, scotch roast, lean, baked, no added fat",
+      "name": "Pork, Scotch Roast, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5499,7 +5499,7 @@
     "model": "nutrition.fooditem",
     "pk": 459,
     "fields": {
-      "name": "Pork, scotch roast, untrimmed, raw",
+      "name": "Pork, Scotch Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 51.6,
       "is_vegetarian": false,
@@ -5511,7 +5511,7 @@
     "model": "nutrition.fooditem",
     "pk": 460,
     "fields": {
-      "name": "Pork, scotch roast, untrimmed, baked, no added fat",
+      "name": "Pork, Scotch Roast, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -5523,7 +5523,7 @@
     "model": "nutrition.fooditem",
     "pk": 461,
     "fields": {
-      "name": "Pork, silverside steak, lean, raw",
+      "name": "Pork, Silverside Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5535,7 +5535,7 @@
     "model": "nutrition.fooditem",
     "pk": 462,
     "fields": {
-      "name": "Pork, silverside steak, lean, fried, no added fat",
+      "name": "Pork, Silverside Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5547,7 +5547,7 @@
     "model": "nutrition.fooditem",
     "pk": 463,
     "fields": {
-      "name": "Pork, silverside steak, untrimmed, raw",
+      "name": "Pork, Silverside Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 17.6,
       "is_vegetarian": false,
@@ -5559,7 +5559,7 @@
     "model": "nutrition.fooditem",
     "pk": 464,
     "fields": {
-      "name": "Pork, spare ribs, untrimmed, raw",
+      "name": "Pork, Spare Ribs, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 83.2,
       "is_vegetarian": false,
@@ -5571,7 +5571,7 @@
     "model": "nutrition.fooditem",
     "pk": 465,
     "fields": {
-      "name": "Pork, spare ribs, untrimmed, baked, no added fat",
+      "name": "Pork, Spare Ribs, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 102.0,
       "is_vegetarian": false,
@@ -5583,7 +5583,7 @@
     "model": "nutrition.fooditem",
     "pk": 466,
     "fields": {
-      "name": "Pork, strips, untrimmed, raw",
+      "name": "Pork, Strips, Untrimmed, Raw",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5595,7 +5595,7 @@
     "model": "nutrition.fooditem",
     "pk": 467,
     "fields": {
-      "name": "Pork, strips, untrimmed, fried, no added fat",
+      "name": "Pork, Strips, Untrimmed, Fried,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5607,7 +5607,7 @@
     "model": "nutrition.fooditem",
     "pk": 468,
     "fields": {
-      "name": "Pork, topside steak, lean, raw",
+      "name": "Pork, Topside Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5619,7 +5619,7 @@
     "model": "nutrition.fooditem",
     "pk": 469,
     "fields": {
-      "name": "Pork, topside steak, lean, fried, no added fat",
+      "name": "Pork, Topside Steak, Lean,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5631,7 +5631,7 @@
     "model": "nutrition.fooditem",
     "pk": 470,
     "fields": {
-      "name": "Pork, topside steak, untrimmed, fried, no added fat",
+      "name": "Pork, Topside Steak, Untrimmed,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -5643,7 +5643,7 @@
     "model": "nutrition.fooditem",
     "pk": 471,
     "fields": {
-      "name": "Chicken, barbecued, with skin",
+      "name": "Chicken, Barbecued, With Skin",
       "category": "General",
       "vitamin_d_iu": 254.8,
       "is_vegetarian": false,
@@ -5655,7 +5655,7 @@
     "model": "nutrition.fooditem",
     "pk": 472,
     "fields": {
-      "name": "Chicken, breast, lean flesh, raw",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -5667,7 +5667,7 @@
     "model": "nutrition.fooditem",
     "pk": 473,
     "fields": {
-      "name": "Chicken, breast, lean flesh, baked, no added fat",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5679,7 +5679,7 @@
     "model": "nutrition.fooditem",
     "pk": 474,
     "fields": {
-      "name": "Chicken, breast, lean flesh, grilled, no added fat",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5691,7 +5691,7 @@
     "model": "nutrition.fooditem",
     "pk": 475,
     "fields": {
-      "name": "Chicken, breast, lean flesh, fried, no added fat",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5703,7 +5703,7 @@
     "model": "nutrition.fooditem",
     "pk": 476,
     "fields": {
-      "name": "Chicken, breast, lean flesh, casseroled, no added fat",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5715,7 +5715,7 @@
     "model": "nutrition.fooditem",
     "pk": 477,
     "fields": {
-      "name": "Chicken, breast, lean flesh, skin & fat, raw",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 170.79999999999998,
       "is_vegetarian": false,
@@ -5727,7 +5727,7 @@
     "model": "nutrition.fooditem",
     "pk": 478,
     "fields": {
-      "name": "Chicken, breast, lean flesh, skin & fat, baked, no added fat",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 245.2,
       "is_vegetarian": false,
@@ -5739,7 +5739,7 @@
     "model": "nutrition.fooditem",
     "pk": 479,
     "fields": {
-      "name": "Chicken, breast, lean flesh, skin & fat, casseroled, no added fat",
+      "name": "Chicken, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 244.4,
       "is_vegetarian": false,
@@ -5751,7 +5751,7 @@
     "model": "nutrition.fooditem",
     "pk": 480,
     "fields": {
-      "name": "Chicken, drumstick, lean flesh, raw",
+      "name": "Chicken, Drumstick, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -5763,7 +5763,7 @@
     "model": "nutrition.fooditem",
     "pk": 481,
     "fields": {
-      "name": "Chicken, drumstick, lean flesh, baked, no added fat",
+      "name": "Chicken, Drumstick, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5775,7 +5775,7 @@
     "model": "nutrition.fooditem",
     "pk": 482,
     "fields": {
-      "name": "Chicken, drumstick, lean flesh, casseroled, no added fat",
+      "name": "Chicken, Drumstick, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5787,7 +5787,7 @@
     "model": "nutrition.fooditem",
     "pk": 483,
     "fields": {
-      "name": "Chicken, drumstick, lean flesh, skin & fat, raw",
+      "name": "Chicken, Drumstick, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 165.6,
       "is_vegetarian": false,
@@ -5799,7 +5799,7 @@
     "model": "nutrition.fooditem",
     "pk": 484,
     "fields": {
-      "name": "Chicken, drumstick, lean flesh, skin & fat, baked, no added fat",
+      "name": "Chicken, Drumstick, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 248.0,
       "is_vegetarian": false,
@@ -5811,7 +5811,7 @@
     "model": "nutrition.fooditem",
     "pk": 485,
     "fields": {
-      "name": "Chicken, drumstick, lean flesh, skin & fat, casseroled, no added fat",
+      "name": "Chicken, Drumstick, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 247.2,
       "is_vegetarian": false,
@@ -5823,7 +5823,7 @@
     "model": "nutrition.fooditem",
     "pk": 486,
     "fields": {
-      "name": "Chicken, mince, raw",
+      "name": "Chicken, Mince, Raw",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -5835,7 +5835,7 @@
     "model": "nutrition.fooditem",
     "pk": 487,
     "fields": {
-      "name": "Chicken, mince, fried, no added fat",
+      "name": "Chicken, Mince, Fried, No",
       "category": "General",
       "vitamin_d_iu": 175.2,
       "is_vegetarian": false,
@@ -5847,7 +5847,7 @@
     "model": "nutrition.fooditem",
     "pk": 488,
     "fields": {
-      "name": "Chicken, nugget, purchased frozen, baked, no added fat",
+      "name": "Chicken, Nugget, Purchased Frozen,",
       "category": "General",
       "vitamin_d_iu": 175.2,
       "is_vegetarian": false,
@@ -5859,7 +5859,7 @@
     "model": "nutrition.fooditem",
     "pk": 489,
     "fields": {
-      "name": "Chicken, nugget, purchased from independent takeaway & fast food chain, fried, undefined oil",
+      "name": "Chicken, Nugget, Purchased From",
       "category": "General",
       "vitamin_d_iu": 175.2,
       "is_vegetarian": false,
@@ -5871,7 +5871,7 @@
     "model": "nutrition.fooditem",
     "pk": 490,
     "fields": {
-      "name": "Chicken, nugget, purchased from fast food chain, grilled",
+      "name": "Chicken, Nugget, Purchased From",
       "category": "General",
       "vitamin_d_iu": 175.2,
       "is_vegetarian": false,
@@ -5883,7 +5883,7 @@
     "model": "nutrition.fooditem",
     "pk": 491,
     "fields": {
-      "name": "Chicken, separable fat, composite, raw",
+      "name": "Chicken, Separable Fat, Composite,",
       "category": "General",
       "vitamin_d_iu": 276.0,
       "is_vegetarian": false,
@@ -5895,7 +5895,7 @@
     "model": "nutrition.fooditem",
     "pk": 492,
     "fields": {
-      "name": "Chicken, separable fat, composite, cooked, no added fat",
+      "name": "Chicken, Separable Fat, Composite,",
       "category": "General",
       "vitamin_d_iu": 211.2,
       "is_vegetarian": false,
@@ -5907,7 +5907,7 @@
     "model": "nutrition.fooditem",
     "pk": 493,
     "fields": {
-      "name": "Chicken, skin, composite, raw",
+      "name": "Chicken, Skin, Composite, Raw",
       "category": "General",
       "vitamin_d_iu": 276.0,
       "is_vegetarian": false,
@@ -5919,7 +5919,7 @@
     "model": "nutrition.fooditem",
     "pk": 494,
     "fields": {
-      "name": "Chicken, skin, composite, baked, no added fat",
+      "name": "Chicken, Skin, Composite, Baked,",
       "category": "General",
       "vitamin_d_iu": 304.0,
       "is_vegetarian": false,
@@ -5931,7 +5931,7 @@
     "model": "nutrition.fooditem",
     "pk": 495,
     "fields": {
-      "name": "Chicken, skin, composite, casseroled, no added fat",
+      "name": "Chicken, Skin, Composite, Casseroled,",
       "category": "General",
       "vitamin_d_iu": 304.0,
       "is_vegetarian": false,
@@ -5943,7 +5943,7 @@
     "model": "nutrition.fooditem",
     "pk": 496,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, raw",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -5955,7 +5955,7 @@
     "model": "nutrition.fooditem",
     "pk": 497,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, baked, no added fat",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5967,7 +5967,7 @@
     "model": "nutrition.fooditem",
     "pk": 498,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, fried, no added fat",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5979,7 +5979,7 @@
     "model": "nutrition.fooditem",
     "pk": 499,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, casseroled, no added fat",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -5991,7 +5991,7 @@
     "model": "nutrition.fooditem",
     "pk": 500,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, skin & fat, raw",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 187.6,
       "is_vegetarian": false,
@@ -6003,7 +6003,7 @@
     "model": "nutrition.fooditem",
     "pk": 501,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, skin & fat, baked, no added fat",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 247.6,
       "is_vegetarian": false,
@@ -6015,7 +6015,7 @@
     "model": "nutrition.fooditem",
     "pk": 502,
     "fields": {
-      "name": "Chicken, thigh, lean flesh, skin & fat, casseroled, no added fat",
+      "name": "Chicken, Thigh, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 248.0,
       "is_vegetarian": false,
@@ -6027,7 +6027,7 @@
     "model": "nutrition.fooditem",
     "pk": 503,
     "fields": {
-      "name": "Chicken, wing, lean flesh, raw",
+      "name": "Chicken, Wing, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -6039,7 +6039,7 @@
     "model": "nutrition.fooditem",
     "pk": 504,
     "fields": {
-      "name": "Chicken, wing, lean flesh, baked, no added fat",
+      "name": "Chicken, Wing, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -6051,7 +6051,7 @@
     "model": "nutrition.fooditem",
     "pk": 505,
     "fields": {
-      "name": "Chicken, wing, lean flesh, casseroled, no added fat",
+      "name": "Chicken, Wing, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -6063,7 +6063,7 @@
     "model": "nutrition.fooditem",
     "pk": 506,
     "fields": {
-      "name": "Chicken, wing, lean flesh, skin & fat, raw",
+      "name": "Chicken, Wing, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 254.8,
       "is_vegetarian": false,
@@ -6075,7 +6075,7 @@
     "model": "nutrition.fooditem",
     "pk": 507,
     "fields": {
-      "name": "Chicken, wing, lean flesh, skin & fat, baked, no added fat",
+      "name": "Chicken, Wing, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 256.4,
       "is_vegetarian": false,
@@ -6087,7 +6087,7 @@
     "model": "nutrition.fooditem",
     "pk": 508,
     "fields": {
-      "name": "Chicken, wing, lean flesh, skin & fat, casseroled, no added fat",
+      "name": "Chicken, Wing, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 256.0,
       "is_vegetarian": false,
@@ -6099,7 +6099,7 @@
     "model": "nutrition.fooditem",
     "pk": 509,
     "fields": {
-      "name": "Turkey, breast, lean flesh, raw",
+      "name": "Turkey, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": true,
@@ -6111,7 +6111,7 @@
     "model": "nutrition.fooditem",
     "pk": 510,
     "fields": {
-      "name": "Turkey, breast, lean flesh, baked, no added fat",
+      "name": "Turkey, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": true,
@@ -6123,7 +6123,7 @@
     "model": "nutrition.fooditem",
     "pk": 511,
     "fields": {
-      "name": "Turkey, breast, lean flesh, skin & fat, raw",
+      "name": "Turkey, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 84.80000000000001,
       "is_vegetarian": true,
@@ -6135,7 +6135,7 @@
     "model": "nutrition.fooditem",
     "pk": 512,
     "fields": {
-      "name": "Turkey, breast, lean flesh, skin & fat, baked, no added fat",
+      "name": "Turkey, Breast, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -6147,7 +6147,7 @@
     "model": "nutrition.fooditem",
     "pk": 513,
     "fields": {
-      "name": "Turkey, hindquarter, lean flesh, raw",
+      "name": "Turkey, Hindquarter, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": true,
@@ -6159,7 +6159,7 @@
     "model": "nutrition.fooditem",
     "pk": 514,
     "fields": {
-      "name": "Turkey, hindquarter, lean flesh, baked, no added fat",
+      "name": "Turkey, Hindquarter, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": true,
@@ -6171,7 +6171,7 @@
     "model": "nutrition.fooditem",
     "pk": 515,
     "fields": {
-      "name": "Turkey, hindquarter, lean flesh, skin & fat, raw",
+      "name": "Turkey, Hindquarter, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 84.80000000000001,
       "is_vegetarian": true,
@@ -6183,7 +6183,7 @@
     "model": "nutrition.fooditem",
     "pk": 516,
     "fields": {
-      "name": "Turkey, hindquarter, lean flesh, skin & fat, baked, no added fat",
+      "name": "Turkey, Hindquarter, Lean Flesh,",
       "category": "General",
       "vitamin_d_iu": 100.0,
       "is_vegetarian": true,
@@ -6195,7 +6195,7 @@
     "model": "nutrition.fooditem",
     "pk": 517,
     "fields": {
-      "name": "Duck, lean flesh, raw",
+      "name": "Duck, Lean Flesh, Raw",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": true,
@@ -6207,7 +6207,7 @@
     "model": "nutrition.fooditem",
     "pk": 518,
     "fields": {
-      "name": "Duck, breast, lean, raw",
+      "name": "Duck, Breast, Lean, Raw",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": true,
@@ -6219,7 +6219,7 @@
     "model": "nutrition.fooditem",
     "pk": 519,
     "fields": {
-      "name": "Duck, breast, lean, fried, no added fat",
+      "name": "Duck, Breast, Lean, Fried,",
       "category": "General",
       "vitamin_d_iu": 284.0,
       "is_vegetarian": true,
@@ -6231,7 +6231,7 @@
     "model": "nutrition.fooditem",
     "pk": 520,
     "fields": {
-      "name": "Duck, lean flesh, baked, no added fat",
+      "name": "Duck, Lean Flesh, Baked,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": true,
@@ -6243,7 +6243,7 @@
     "model": "nutrition.fooditem",
     "pk": 521,
     "fields": {
-      "name": "Duck, skin & fat, raw",
+      "name": "Duck, Skin & Fat,",
       "category": "General",
       "vitamin_d_iu": 276.0,
       "is_vegetarian": true,
@@ -6255,7 +6255,7 @@
     "model": "nutrition.fooditem",
     "pk": 522,
     "fields": {
-      "name": "Duck, skin & fat, baked, no added fat",
+      "name": "Duck, Skin & Fat,",
       "category": "General",
       "vitamin_d_iu": 236.0,
       "is_vegetarian": true,
@@ -6267,7 +6267,7 @@
     "model": "nutrition.fooditem",
     "pk": 523,
     "fields": {
-      "name": "Duck, lean flesh, skin & fat, raw",
+      "name": "Duck, Lean Flesh, Skin",
       "category": "General",
       "vitamin_d_iu": 222.8,
       "is_vegetarian": true,
@@ -6279,7 +6279,7 @@
     "model": "nutrition.fooditem",
     "pk": 524,
     "fields": {
-      "name": "Duck, lean flesh, skin & fat, baked, no added fat",
+      "name": "Duck, Lean Flesh, Skin",
       "category": "General",
       "vitamin_d_iu": 267.2,
       "is_vegetarian": true,
@@ -6291,7 +6291,7 @@
     "model": "nutrition.fooditem",
     "pk": 525,
     "fields": {
-      "name": "Quail, lean flesh & skin, raw",
+      "name": "Quail, Lean Flesh &",
       "category": "General",
       "vitamin_d_iu": 348.0,
       "is_vegetarian": true,
@@ -6303,7 +6303,7 @@
     "model": "nutrition.fooditem",
     "pk": 526,
     "fields": {
-      "name": "Quail, lean flesh & skin, baked, no added fat",
+      "name": "Quail, Lean Flesh &",
       "category": "General",
       "vitamin_d_iu": 272.0,
       "is_vegetarian": true,
@@ -6315,7 +6315,7 @@
     "model": "nutrition.fooditem",
     "pk": 527,
     "fields": {
-      "name": "Buffalo, swamp, cube roll, raw",
+      "name": "Buffalo, Swamp, Cube Roll,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": true,
@@ -6327,7 +6327,7 @@
     "model": "nutrition.fooditem",
     "pk": 528,
     "fields": {
-      "name": "Buffalo, swamp, topside, raw",
+      "name": "Buffalo, Swamp, Topside, Raw",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -6339,7 +6339,7 @@
     "model": "nutrition.fooditem",
     "pk": 529,
     "fields": {
-      "name": "Buffalo, riverine, cube roll, raw",
+      "name": "Buffalo, Riverine, Cube Roll,",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 152.0,
       "is_vegetarian": true,
@@ -6351,7 +6351,7 @@
     "model": "nutrition.fooditem",
     "pk": 530,
     "fields": {
-      "name": "Buffalo, riverine, topside, raw",
+      "name": "Buffalo, Riverine, Topside, Raw",
       "category": "General",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": true,
@@ -6363,7 +6363,7 @@
     "model": "nutrition.fooditem",
     "pk": 531,
     "fields": {
-      "name": "Camel, steak, as purchased, raw",
+      "name": "Camel, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": false,
@@ -6375,7 +6375,7 @@
     "model": "nutrition.fooditem",
     "pk": 532,
     "fields": {
-      "name": "Camel, steak, as purchased, fried, no added fat",
+      "name": "Camel, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 149.60000000000002,
       "is_vegetarian": false,
@@ -6387,7 +6387,7 @@
     "model": "nutrition.fooditem",
     "pk": 533,
     "fields": {
-      "name": "Camel, cube roll, raw",
+      "name": "Camel, Cube Roll, Raw",
       "category": "Grain/Bakery",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -6399,7 +6399,7 @@
     "model": "nutrition.fooditem",
     "pk": 534,
     "fields": {
-      "name": "Camel, rump, raw",
+      "name": "Camel, Rump, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -6411,7 +6411,7 @@
     "model": "nutrition.fooditem",
     "pk": 535,
     "fields": {
-      "name": "Crocodile, steak, as purchased, raw",
+      "name": "Crocodile, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": false,
@@ -6423,7 +6423,7 @@
     "model": "nutrition.fooditem",
     "pk": 536,
     "fields": {
-      "name": "Crocodile, steak, as purchased, fried, no added fat",
+      "name": "Crocodile, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 162.0,
       "is_vegetarian": false,
@@ -6435,7 +6435,7 @@
     "model": "nutrition.fooditem",
     "pk": 537,
     "fields": {
-      "name": "Crocodile, back leg, raw",
+      "name": "Crocodile, Back Leg, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -6447,7 +6447,7 @@
     "model": "nutrition.fooditem",
     "pk": 538,
     "fields": {
-      "name": "Crocodile, tail fillet, raw",
+      "name": "Crocodile, Tail Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -6459,7 +6459,7 @@
     "model": "nutrition.fooditem",
     "pk": 539,
     "fields": {
-      "name": "Emu, steak, as purchased, raw",
+      "name": "Emu, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": false,
@@ -6471,7 +6471,7 @@
     "model": "nutrition.fooditem",
     "pk": 540,
     "fields": {
-      "name": "Emu, steak, as purchased, fried, no added fat",
+      "name": "Emu, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 175.2,
       "is_vegetarian": false,
@@ -6483,7 +6483,7 @@
     "model": "nutrition.fooditem",
     "pk": 541,
     "fields": {
-      "name": "Emu, fan fillet, raw",
+      "name": "Emu, Fan Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 148.0,
       "is_vegetarian": true,
@@ -6495,7 +6495,7 @@
     "model": "nutrition.fooditem",
     "pk": 542,
     "fields": {
-      "name": "Kangaroo, steak, as purchased, raw",
+      "name": "Kangaroo, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": false,
@@ -6507,7 +6507,7 @@
     "model": "nutrition.fooditem",
     "pk": 543,
     "fields": {
-      "name": "Kangaroo, steak, as purchased, fried, no added fat",
+      "name": "Kangaroo, Steak, As Purchased,",
       "category": "Meat",
       "vitamin_d_iu": 122.0,
       "is_vegetarian": false,
@@ -6519,7 +6519,7 @@
     "model": "nutrition.fooditem",
     "pk": 544,
     "fields": {
-      "name": "Kangaroo, tail, raw",
+      "name": "Kangaroo, Tail, Raw",
       "category": "General",
       "vitamin_d_iu": 95.2,
       "is_vegetarian": true,
@@ -6531,7 +6531,7 @@
     "model": "nutrition.fooditem",
     "pk": 545,
     "fields": {
-      "name": "Kangaroo, tail, cooked, no added fat",
+      "name": "Kangaroo, Tail, Cooked, No",
       "category": "General",
       "vitamin_d_iu": 104.4,
       "is_vegetarian": true,
@@ -6543,7 +6543,7 @@
     "model": "nutrition.fooditem",
     "pk": 546,
     "fields": {
-      "name": "Kangaroo, loin fillet, raw",
+      "name": "Kangaroo, Loin Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 95.2,
       "is_vegetarian": true,
@@ -6555,7 +6555,7 @@
     "model": "nutrition.fooditem",
     "pk": 547,
     "fields": {
-      "name": "Kangaroo, loin fillet, grilled, no added fat",
+      "name": "Kangaroo, Loin Fillet, Grilled,",
       "category": "General",
       "vitamin_d_iu": 34.0,
       "is_vegetarian": true,
@@ -6567,7 +6567,7 @@
     "model": "nutrition.fooditem",
     "pk": 548,
     "fields": {
-      "name": "Kangaroo, rump, baked, no added fat",
+      "name": "Kangaroo, Rump, Baked, No",
       "category": "General",
       "vitamin_d_iu": 34.0,
       "is_vegetarian": true,
@@ -6579,7 +6579,7 @@
     "model": "nutrition.fooditem",
     "pk": 549,
     "fields": {
-      "name": "Kangaroo, rump, raw",
+      "name": "Kangaroo, Rump, Raw",
       "category": "General",
       "vitamin_d_iu": 95.2,
       "is_vegetarian": true,
@@ -6591,7 +6591,7 @@
     "model": "nutrition.fooditem",
     "pk": 550,
     "fields": {
-      "name": "Ostrich, fan fillet, raw",
+      "name": "Ostrich, Fan Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -6603,7 +6603,7 @@
     "model": "nutrition.fooditem",
     "pk": 551,
     "fields": {
-      "name": "Ostrich, moon steak, raw",
+      "name": "Ostrich, Moon Steak, Raw",
       "category": "Meat",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": false,
@@ -6615,7 +6615,7 @@
     "model": "nutrition.fooditem",
     "pk": 552,
     "fields": {
-      "name": "Pigeon (squab), whole, raw",
+      "name": "Pigeon (Squab), Whole, Raw",
       "category": "General",
       "vitamin_d_iu": 348.0,
       "is_vegetarian": true,
@@ -6627,7 +6627,7 @@
     "model": "nutrition.fooditem",
     "pk": 553,
     "fields": {
-      "name": "Rabbit, farmed, whole, raw",
+      "name": "Rabbit, Farmed, Whole, Raw",
       "category": "General",
       "vitamin_d_iu": 64.0,
       "is_vegetarian": true,
@@ -6639,7 +6639,7 @@
     "model": "nutrition.fooditem",
     "pk": 554,
     "fields": {
-      "name": "Rabbit, flesh, casseroled, no added fat",
+      "name": "Rabbit, Flesh, Casseroled, No",
       "category": "General",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": true,
@@ -6651,7 +6651,7 @@
     "model": "nutrition.fooditem",
     "pk": 555,
     "fields": {
-      "name": "Chicken, liver, fried, added butter",
+      "name": "Chicken, Liver, Fried, Added",
       "category": "Dairy",
       "vitamin_d_iu": 2.8000000000000003,
       "is_vegetarian": false,
@@ -6663,7 +6663,7 @@
     "model": "nutrition.fooditem",
     "pk": 556,
     "fields": {
-      "name": "Beef, corned, canned",
+      "name": "Beef, Corned, Canned",
       "category": "Meat",
       "vitamin_d_iu": 28.0,
       "is_vegetarian": false,
@@ -6675,7 +6675,7 @@
     "model": "nutrition.fooditem",
     "pk": 557,
     "fields": {
-      "name": "Braised steak & onions, canned",
+      "name": "Braised Steak & Onions,",
       "category": "Meat",
       "vitamin_d_iu": 16.0,
       "is_vegetarian": false,
@@ -6687,7 +6687,7 @@
     "model": "nutrition.fooditem",
     "pk": 558,
     "fields": {
-      "name": "Chicken, processed luncheon meat, low or reduced fat",
+      "name": "Chicken, Processed Luncheon Meat,",
       "category": "Meat",
       "vitamin_d_iu": 156.0,
       "is_vegetarian": false,
@@ -6699,7 +6699,7 @@
     "model": "nutrition.fooditem",
     "pk": 559,
     "fields": {
-      "name": "Frankfurt, cooked",
+      "name": "Frankfurt, Cooked",
       "category": "General",
       "vitamin_d_iu": 12.8,
       "is_vegetarian": true,
@@ -6711,7 +6711,7 @@
     "model": "nutrition.fooditem",
     "pk": 560,
     "fields": {
-      "name": "Sausage, beef, raw",
+      "name": "Sausage, Beef, Raw",
       "category": "Meat",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -6723,7 +6723,7 @@
     "model": "nutrition.fooditem",
     "pk": 561,
     "fields": {
-      "name": "Sausage, beef, fried, no added fat",
+      "name": "Sausage, Beef, Fried, No",
       "category": "Meat",
       "vitamin_d_iu": 20.0,
       "is_vegetarian": false,
@@ -6735,7 +6735,7 @@
     "model": "nutrition.fooditem",
     "pk": 562,
     "fields": {
-      "name": "Sausage, beef, grilled, no added fat",
+      "name": "Sausage, Beef, Grilled, No",
       "category": "Meat",
       "vitamin_d_iu": 20.0,
       "is_vegetarian": false,
@@ -6747,7 +6747,7 @@
     "model": "nutrition.fooditem",
     "pk": 563,
     "fields": {
-      "name": "Sausage, chicken, plain, fried, no added fat",
+      "name": "Sausage, Chicken, Plain, Fried,",
       "category": "General",
       "vitamin_d_iu": 156.0,
       "is_vegetarian": false,
@@ -6759,7 +6759,7 @@
     "model": "nutrition.fooditem",
     "pk": 564,
     "fields": {
-      "name": "Sausage, chicken, flavoured, fried, no added fat",
+      "name": "Sausage, Chicken, Flavoured, Fried,",
       "category": "General",
       "vitamin_d_iu": 192.0,
       "is_vegetarian": false,
@@ -6771,7 +6771,7 @@
     "model": "nutrition.fooditem",
     "pk": 565,
     "fields": {
-      "name": "Sausage, lamb, plain, fried, no added fat",
+      "name": "Sausage, Lamb, Plain, Fried,",
       "category": "General",
       "vitamin_d_iu": 48.0,
       "is_vegetarian": true,
@@ -6783,7 +6783,7 @@
     "model": "nutrition.fooditem",
     "pk": 566,
     "fields": {
-      "name": "Sausage, lamb, flavoured, fried, no added fat",
+      "name": "Sausage, Lamb, Flavoured, Fried,",
       "category": "General",
       "vitamin_d_iu": 48.0,
       "is_vegetarian": true,
@@ -6795,7 +6795,7 @@
     "model": "nutrition.fooditem",
     "pk": 567,
     "fields": {
-      "name": "Sausage, pork, fried, no added fat",
+      "name": "Sausage, Pork, Fried, No",
       "category": "Meat",
       "vitamin_d_iu": 12.8,
       "is_vegetarian": false,
@@ -6807,7 +6807,7 @@
     "model": "nutrition.fooditem",
     "pk": 568,
     "fields": {
-      "name": "Sausages & vegetables, canned",
+      "name": "Sausages & Vegetables, Canned",
       "category": "General",
       "vitamin_d_iu": 3.2,
       "is_vegetarian": true,
@@ -6819,7 +6819,7 @@
     "model": "nutrition.fooditem",
     "pk": 569,
     "fields": {
-      "name": "Steak & vegetables, canned",
+      "name": "Steak & Vegetables, Canned",
       "category": "Meat",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": false,
@@ -6831,7 +6831,7 @@
     "model": "nutrition.fooditem",
     "pk": 570,
     "fields": {
-      "name": "Barramundi, aquacultured, fillet, raw",
+      "name": "Barramundi, Aquacultured, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 428.0,
       "is_vegetarian": true,
@@ -6843,7 +6843,7 @@
     "model": "nutrition.fooditem",
     "pk": 571,
     "fields": {
-      "name": "Barramundi, aquacultured, fillet, grilled, no added fat",
+      "name": "Barramundi, Aquacultured, Fillet, Grilled,",
       "category": "General",
       "vitamin_d_iu": 527.6,
       "is_vegetarian": true,
@@ -6855,7 +6855,7 @@
     "model": "nutrition.fooditem",
     "pk": 572,
     "fields": {
-      "name": "Barramundi, aquacultured, fillet, steamed with no added fat",
+      "name": "Barramundi, Aquacultured, Fillet, Steamed",
       "category": "General",
       "vitamin_d_iu": 407.6,
       "is_vegetarian": true,
@@ -6867,7 +6867,7 @@
     "model": "nutrition.fooditem",
     "pk": 573,
     "fields": {
-      "name": "Bassa, fillet, raw",
+      "name": "Bassa, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -6879,7 +6879,7 @@
     "model": "nutrition.fooditem",
     "pk": 574,
     "fields": {
-      "name": "Bassa (basa), fillet, baked, no added fat",
+      "name": "Bassa (Basa), Fillet, Baked,",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -6891,7 +6891,7 @@
     "model": "nutrition.fooditem",
     "pk": 575,
     "fields": {
-      "name": "Bassa (basa), fillet, steamed, no added fat",
+      "name": "Bassa (Basa), Fillet, Steamed,",
       "category": "General",
       "vitamin_d_iu": 90.0,
       "is_vegetarian": true,
@@ -6903,7 +6903,7 @@
     "model": "nutrition.fooditem",
     "pk": 576,
     "fields": {
-      "name": "Blue grenadier, flesh, raw",
+      "name": "Blue Grenadier, Flesh, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -6915,7 +6915,7 @@
     "model": "nutrition.fooditem",
     "pk": 577,
     "fields": {
-      "name": "Blue grenadier, flesh, baked, no added fat",
+      "name": "Blue Grenadier, Flesh, Baked,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -6927,7 +6927,7 @@
     "model": "nutrition.fooditem",
     "pk": 578,
     "fields": {
-      "name": "Blue grenadier, flesh, steamed, no added fat",
+      "name": "Blue Grenadier, Flesh, Steamed,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -6939,7 +6939,7 @@
     "model": "nutrition.fooditem",
     "pk": 579,
     "fields": {
-      "name": "Bream, fillet, raw",
+      "name": "Bream, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -6951,7 +6951,7 @@
     "model": "nutrition.fooditem",
     "pk": 580,
     "fields": {
-      "name": "Bream, fillet, baked, no added fat",
+      "name": "Bream, Fillet, Baked, No",
       "category": "General",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": true,
@@ -6963,7 +6963,7 @@
     "model": "nutrition.fooditem",
     "pk": 581,
     "fields": {
-      "name": "Bream, fillet, steamed, no added fat",
+      "name": "Bream, Fillet, Steamed, No",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -6975,7 +6975,7 @@
     "model": "nutrition.fooditem",
     "pk": 582,
     "fields": {
-      "name": "Flathead, flesh, raw",
+      "name": "Flathead, Flesh, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -6987,7 +6987,7 @@
     "model": "nutrition.fooditem",
     "pk": 583,
     "fields": {
-      "name": "Flathead, flesh, baked, no added fat",
+      "name": "Flathead, Flesh, Baked, No",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -6999,7 +6999,7 @@
     "model": "nutrition.fooditem",
     "pk": 584,
     "fields": {
-      "name": "Flathead, flesh, steamed, no added fat",
+      "name": "Flathead, Flesh, Steamed, No",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7011,7 +7011,7 @@
     "model": "nutrition.fooditem",
     "pk": 585,
     "fields": {
-      "name": "Gemfish, flesh, raw",
+      "name": "Gemfish, Flesh, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7023,7 +7023,7 @@
     "model": "nutrition.fooditem",
     "pk": 586,
     "fields": {
-      "name": "Gemfish, flesh, baked, no added fat",
+      "name": "Gemfish, Flesh, Baked, No",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7035,7 +7035,7 @@
     "model": "nutrition.fooditem",
     "pk": 587,
     "fields": {
-      "name": "Gemfish, flesh, steamed, no added fat",
+      "name": "Gemfish, Flesh, Steamed, No",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": false,
@@ -7047,7 +7047,7 @@
     "model": "nutrition.fooditem",
     "pk": 588,
     "fields": {
-      "name": "Kingfish, yellowtail, aquacultured, fillet, with skin, raw",
+      "name": "Kingfish, Yellowtail, Aquacultured, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7059,7 +7059,7 @@
     "model": "nutrition.fooditem",
     "pk": 589,
     "fields": {
-      "name": "Kingfish, yellowtail, aquacultured, fillet, with skin, grilled, no added fat",
+      "name": "Kingfish, Yellowtail, Aquacultured, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7071,7 +7071,7 @@
     "model": "nutrition.fooditem",
     "pk": 590,
     "fields": {
-      "name": "Kingfish, yellowtail, aquacultured, fillet, with skin, steamed, no added fat",
+      "name": "Kingfish, Yellowtail, Aquacultured, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -7083,7 +7083,7 @@
     "model": "nutrition.fooditem",
     "pk": 591,
     "fields": {
-      "name": "Mackerel, raw",
+      "name": "Mackerel, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7095,7 +7095,7 @@
     "model": "nutrition.fooditem",
     "pk": 592,
     "fields": {
-      "name": "Mackerel, grilled, no added fat",
+      "name": "Mackerel, Grilled, No Added",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7107,7 +7107,7 @@
     "model": "nutrition.fooditem",
     "pk": 593,
     "fields": {
-      "name": "Mackerel, steamed, no added fat",
+      "name": "Mackerel, Steamed, No Added",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -7119,7 +7119,7 @@
     "model": "nutrition.fooditem",
     "pk": 594,
     "fields": {
-      "name": "Milkfish, aquacultured, flesh, raw",
+      "name": "Milkfish, Aquacultured, Flesh, Raw",
       "category": "Dairy",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7131,7 +7131,7 @@
     "model": "nutrition.fooditem",
     "pk": 595,
     "fields": {
-      "name": "Milkfish, aquacultured, flesh, grilled, no added fat",
+      "name": "Milkfish, Aquacultured, Flesh, Grilled,",
       "category": "Dairy",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7143,7 +7143,7 @@
     "model": "nutrition.fooditem",
     "pk": 596,
     "fields": {
-      "name": "Milkfish, aquacultured, flesh, steamed, no added fat",
+      "name": "Milkfish, Aquacultured, Flesh, Steamed,",
       "category": "Dairy",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -7155,7 +7155,7 @@
     "model": "nutrition.fooditem",
     "pk": 597,
     "fields": {
-      "name": "Morwong, fillet, raw",
+      "name": "Morwong, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7167,7 +7167,7 @@
     "model": "nutrition.fooditem",
     "pk": 598,
     "fields": {
-      "name": "Morwong, fillet, grilled, no added fat",
+      "name": "Morwong, Fillet, Grilled, No",
       "category": "General",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": true,
@@ -7179,7 +7179,7 @@
     "model": "nutrition.fooditem",
     "pk": 599,
     "fields": {
-      "name": "Morwong, fillet, steamed, no added fat",
+      "name": "Morwong, Fillet, Steamed, No",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7191,7 +7191,7 @@
     "model": "nutrition.fooditem",
     "pk": 600,
     "fields": {
-      "name": "Mullet, yelloweye, fillet, raw",
+      "name": "Mullet, Yelloweye, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7203,7 +7203,7 @@
     "model": "nutrition.fooditem",
     "pk": 601,
     "fields": {
-      "name": "Mullet, yelloweye, fillet, baked, no added fat",
+      "name": "Mullet, Yelloweye, Fillet, Baked,",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -7215,7 +7215,7 @@
     "model": "nutrition.fooditem",
     "pk": 602,
     "fields": {
-      "name": "Mullet, yelloweye, fillet, steamed, no added fat",
+      "name": "Mullet, Yelloweye, Fillet, Steamed,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7227,7 +7227,7 @@
     "model": "nutrition.fooditem",
     "pk": 603,
     "fields": {
-      "name": "Mulloway, flesh, raw",
+      "name": "Mulloway, Flesh, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7239,7 +7239,7 @@
     "model": "nutrition.fooditem",
     "pk": 604,
     "fields": {
-      "name": "Mulloway, flesh, baked, no added fat",
+      "name": "Mulloway, Flesh, Baked, No",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -7251,7 +7251,7 @@
     "model": "nutrition.fooditem",
     "pk": 605,
     "fields": {
-      "name": "Mulloway, flesh, steamed, no added fat",
+      "name": "Mulloway, Flesh, Steamed, No",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7263,7 +7263,7 @@
     "model": "nutrition.fooditem",
     "pk": 606,
     "fields": {
-      "name": "Salmon, Atlantic, fillet, raw",
+      "name": "Salmon, Atlantic, Fillet, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -7275,7 +7275,7 @@
     "model": "nutrition.fooditem",
     "pk": 607,
     "fields": {
-      "name": "Salmon, Atlantic, fillet, grilled, no added fat",
+      "name": "Salmon, Atlantic, Fillet, Grilled,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 214.4,
       "is_vegetarian": false,
@@ -7287,7 +7287,7 @@
     "model": "nutrition.fooditem",
     "pk": 608,
     "fields": {
-      "name": "Salmon, Atlantic, fillet, steamed, no added fat",
+      "name": "Salmon, Atlantic, Fillet, Steamed,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 226.0,
       "is_vegetarian": false,
@@ -7299,7 +7299,7 @@
     "model": "nutrition.fooditem",
     "pk": 609,
     "fields": {
-      "name": "Salmon, Pacific King, fillet, skinless, raw",
+      "name": "Salmon, Pacific King, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -7311,7 +7311,7 @@
     "model": "nutrition.fooditem",
     "pk": 610,
     "fields": {
-      "name": "Salmon, Pacific King, fillet, skinless, grilled, no added fat",
+      "name": "Salmon, Pacific King, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 214.4,
       "is_vegetarian": false,
@@ -7323,7 +7323,7 @@
     "model": "nutrition.fooditem",
     "pk": 611,
     "fields": {
-      "name": "Salmon, Pacific King, fillet, steamed, no added fat",
+      "name": "Salmon, Pacific King, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 226.0,
       "is_vegetarian": false,
@@ -7335,7 +7335,7 @@
     "model": "nutrition.fooditem",
     "pk": 612,
     "fields": {
-      "name": "Sardine, Australian, whole, raw",
+      "name": "Sardine, Australian, Whole, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": false,
@@ -7347,7 +7347,7 @@
     "model": "nutrition.fooditem",
     "pk": 613,
     "fields": {
-      "name": "Sardine, Australian, whole, fried, no added fat",
+      "name": "Sardine, Australian, Whole, Fried,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 226.0,
       "is_vegetarian": false,
@@ -7359,7 +7359,7 @@
     "model": "nutrition.fooditem",
     "pk": 614,
     "fields": {
-      "name": "Sprat, blue, wild caught, flesh, skin & bones, raw",
+      "name": "Sprat, Blue, Wild Caught,",
       "category": "General",
       "vitamin_d_iu": 240.0,
       "is_vegetarian": true,
@@ -7371,7 +7371,7 @@
     "model": "nutrition.fooditem",
     "pk": 615,
     "fields": {
-      "name": "Sprat, blue, wild caught, flesh, skin & bones, fried, no added fat",
+      "name": "Sprat, Blue, Wild Caught,",
       "category": "General",
       "vitamin_d_iu": 254.0,
       "is_vegetarian": true,
@@ -7383,7 +7383,7 @@
     "model": "nutrition.fooditem",
     "pk": 616,
     "fields": {
-      "name": "Shark, fillet, without skin, raw",
+      "name": "Shark, Fillet, Without Skin,",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7395,7 +7395,7 @@
     "model": "nutrition.fooditem",
     "pk": 617,
     "fields": {
-      "name": "Shark, fillet, without skin, baked, no added fat",
+      "name": "Shark, Fillet, Without Skin,",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -7407,7 +7407,7 @@
     "model": "nutrition.fooditem",
     "pk": 618,
     "fields": {
-      "name": "Shark, fillet, without skin, steamed, no added fat",
+      "name": "Shark, Fillet, Without Skin,",
       "category": "General",
       "vitamin_d_iu": 84.80000000000001,
       "is_vegetarian": true,
@@ -7419,7 +7419,7 @@
     "model": "nutrition.fooditem",
     "pk": 619,
     "fields": {
-      "name": "Shark, battered, deep-fried, takeaway outlet",
+      "name": "Shark, Battered, Deep-Fried, Takeaway",
       "category": "General",
       "vitamin_d_iu": 12.0,
       "is_vegetarian": true,
@@ -7431,7 +7431,7 @@
     "model": "nutrition.fooditem",
     "pk": 620,
     "fields": {
-      "name": "Silver perch, aquacultured, raw",
+      "name": "Silver Perch, Aquacultured, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7443,7 +7443,7 @@
     "model": "nutrition.fooditem",
     "pk": 621,
     "fields": {
-      "name": "Silver perch, aquacultured, baked, no added fat",
+      "name": "Silver Perch, Aquacultured, Baked,",
       "category": "General",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": true,
@@ -7455,7 +7455,7 @@
     "model": "nutrition.fooditem",
     "pk": 622,
     "fields": {
-      "name": "Silver perch, aquacultured, steamed, no added fat",
+      "name": "Silver Perch, Aquacultured, Steamed,",
       "category": "General",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": true,
@@ -7467,7 +7467,7 @@
     "model": "nutrition.fooditem",
     "pk": 623,
     "fields": {
-      "name": "Snapper, fillet, raw",
+      "name": "Snapper, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7479,7 +7479,7 @@
     "model": "nutrition.fooditem",
     "pk": 624,
     "fields": {
-      "name": "Snapper, fillet, baked, no added fat",
+      "name": "Snapper, Fillet, Baked, No",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -7491,7 +7491,7 @@
     "model": "nutrition.fooditem",
     "pk": 625,
     "fields": {
-      "name": "Snapper, fillet, steamed, no added fat",
+      "name": "Snapper, Fillet, Steamed, No",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -7503,7 +7503,7 @@
     "model": "nutrition.fooditem",
     "pk": 626,
     "fields": {
-      "name": "Tilapia, fillet, raw",
+      "name": "Tilapia, Fillet, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7515,7 +7515,7 @@
     "model": "nutrition.fooditem",
     "pk": 627,
     "fields": {
-      "name": "Tilapia, fillet, baked, no added fat",
+      "name": "Tilapia, Fillet, Baked, No",
       "category": "General",
       "vitamin_d_iu": 103.6,
       "is_vegetarian": true,
@@ -7527,7 +7527,7 @@
     "model": "nutrition.fooditem",
     "pk": 628,
     "fields": {
-      "name": "Tilapia, fillet, steamed, no added fat",
+      "name": "Tilapia, Fillet, Steamed, No",
       "category": "General",
       "vitamin_d_iu": 90.0,
       "is_vegetarian": true,
@@ -7539,7 +7539,7 @@
     "model": "nutrition.fooditem",
     "pk": 629,
     "fields": {
-      "name": "Trout, ocean, aquacultured, fillet, without skin, raw",
+      "name": "Trout, Ocean, Aquacultured, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7551,7 +7551,7 @@
     "model": "nutrition.fooditem",
     "pk": 630,
     "fields": {
-      "name": "Trout, ocean, aquacultured, fillet, without skin, baked, no added fat",
+      "name": "Trout, Ocean, Aquacultured, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7563,7 +7563,7 @@
     "model": "nutrition.fooditem",
     "pk": 631,
     "fields": {
-      "name": "Trout, ocean, aquacultured, fillet, without skin, steamed, no added fat",
+      "name": "Trout, Ocean, Aquacultured, Fillet,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -7575,7 +7575,7 @@
     "model": "nutrition.fooditem",
     "pk": 632,
     "fields": {
-      "name": "Trout, rainbow, aquacultured, raw",
+      "name": "Trout, Rainbow, Aquacultured, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7587,7 +7587,7 @@
     "model": "nutrition.fooditem",
     "pk": 633,
     "fields": {
-      "name": "Trout, rainbow, aquacultured, baked, no added fat",
+      "name": "Trout, Rainbow, Aquacultured, Baked,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7599,7 +7599,7 @@
     "model": "nutrition.fooditem",
     "pk": 634,
     "fields": {
-      "name": "Trout, rainbow, aquacultured, steamed, no added fat",
+      "name": "Trout, Rainbow, Aquacultured, Steamed,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -7611,7 +7611,7 @@
     "model": "nutrition.fooditem",
     "pk": 635,
     "fields": {
-      "name": "Tuna, yellowfin, flesh, raw",
+      "name": "Tuna, Yellowfin, Flesh, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7623,7 +7623,7 @@
     "model": "nutrition.fooditem",
     "pk": 636,
     "fields": {
-      "name": "Tuna, yellowfin, flesh, baked, no added fat",
+      "name": "Tuna, Yellowfin, Flesh, Baked,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 92.0,
       "is_vegetarian": false,
@@ -7635,7 +7635,7 @@
     "model": "nutrition.fooditem",
     "pk": 637,
     "fields": {
-      "name": "Tuna, yellowfin, flesh, steamed, no added fat",
+      "name": "Tuna, Yellowfin, Flesh, Steamed,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 80.0,
       "is_vegetarian": false,
@@ -7647,7 +7647,7 @@
     "model": "nutrition.fooditem",
     "pk": 638,
     "fields": {
-      "name": "Whiting, King George, flesh, raw",
+      "name": "Whiting, King George, Flesh,",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7659,7 +7659,7 @@
     "model": "nutrition.fooditem",
     "pk": 639,
     "fields": {
-      "name": "Whiting, King George, flesh, baked, no added fat",
+      "name": "Whiting, King George, Flesh,",
       "category": "General",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": true,
@@ -7671,7 +7671,7 @@
     "model": "nutrition.fooditem",
     "pk": 640,
     "fields": {
-      "name": "Whiting, King George, flesh, steamed, no added fat",
+      "name": "Whiting, King George, Flesh,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7683,7 +7683,7 @@
     "model": "nutrition.fooditem",
     "pk": 641,
     "fields": {
-      "name": "Fish, eel, raw",
+      "name": "Fish, Eel, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7695,7 +7695,7 @@
     "model": "nutrition.fooditem",
     "pk": 642,
     "fields": {
-      "name": "Fish, white flesh, battered, packaged frozen, baked, no added fat",
+      "name": "Fish, White Flesh, Battered,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 12.0,
       "is_vegetarian": false,
@@ -7707,7 +7707,7 @@
     "model": "nutrition.fooditem",
     "pk": 643,
     "fields": {
-      "name": "Fish, white flesh, crumbed, packaged frozen, baked, no added fat",
+      "name": "Fish, White Flesh, Crumbed,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 12.0,
       "is_vegetarian": false,
@@ -7719,7 +7719,7 @@
     "model": "nutrition.fooditem",
     "pk": 644,
     "fields": {
-      "name": "Fish, battered or crumbed, from takeaway outlet, deep fried, blended frying fat, ready to eat",
+      "name": "Fish, Battered Or Crumbed,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 12.0,
       "is_vegetarian": false,
@@ -7731,7 +7731,7 @@
     "model": "nutrition.fooditem",
     "pk": 645,
     "fields": {
-      "name": "Crab, flesh, purchased steamed or boiled",
+      "name": "Crab, Flesh, Purchased Steamed",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7743,7 +7743,7 @@
     "model": "nutrition.fooditem",
     "pk": 646,
     "fields": {
-      "name": "Lobster, southern rock, wild, flesh, raw",
+      "name": "Lobster, Southern Rock, Wild,",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7755,7 +7755,7 @@
     "model": "nutrition.fooditem",
     "pk": 647,
     "fields": {
-      "name": "Lobster, southern rock, wild, flesh, purchased steamed or boiled",
+      "name": "Lobster, Southern Rock, Wild,",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7767,7 +7767,7 @@
     "model": "nutrition.fooditem",
     "pk": 648,
     "fields": {
-      "name": "Mussel, blue, steamed",
+      "name": "Mussel, Blue, Steamed",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7779,7 +7779,7 @@
     "model": "nutrition.fooditem",
     "pk": 649,
     "fields": {
-      "name": "Octopus, raw",
+      "name": "Octopus, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7791,7 +7791,7 @@
     "model": "nutrition.fooditem",
     "pk": 650,
     "fields": {
-      "name": "Octopus, boiled, no added fat",
+      "name": "Octopus, Boiled, No Added",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7803,7 +7803,7 @@
     "model": "nutrition.fooditem",
     "pk": 651,
     "fields": {
-      "name": "Oyster, native, aquacultured, raw",
+      "name": "Oyster, Native, Aquacultured, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7815,7 +7815,7 @@
     "model": "nutrition.fooditem",
     "pk": 652,
     "fields": {
-      "name": "Oyster, Pacific, aquacultured, raw",
+      "name": "Oyster, Pacific, Aquacultured, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7827,7 +7827,7 @@
     "model": "nutrition.fooditem",
     "pk": 653,
     "fields": {
-      "name": "Oyster, Sydney rock, aquacultured, raw",
+      "name": "Oyster, Sydney Rock, Aquacultured,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7839,7 +7839,7 @@
     "model": "nutrition.fooditem",
     "pk": 654,
     "fields": {
-      "name": "Oyster, aquacultured, raw",
+      "name": "Oyster, Aquacultured, Raw",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": false,
@@ -7851,7 +7851,7 @@
     "model": "nutrition.fooditem",
     "pk": 655,
     "fields": {
-      "name": "Scallop, raw",
+      "name": "Scallop, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7863,7 +7863,7 @@
     "model": "nutrition.fooditem",
     "pk": 656,
     "fields": {
-      "name": "Scallop, fried, no added fat",
+      "name": "Scallop, Fried, No Added",
       "category": "General",
       "vitamin_d_iu": 94.4,
       "is_vegetarian": true,
@@ -7875,7 +7875,7 @@
     "model": "nutrition.fooditem",
     "pk": 657,
     "fields": {
-      "name": "Squid or calamari, raw",
+      "name": "Squid Or Calamari, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7887,7 +7887,7 @@
     "model": "nutrition.fooditem",
     "pk": 658,
     "fields": {
-      "name": "Squid or calamari, fried, no added fat",
+      "name": "Squid Or Calamari, Fried,",
       "category": "General",
       "vitamin_d_iu": 94.4,
       "is_vegetarian": true,
@@ -7899,7 +7899,7 @@
     "model": "nutrition.fooditem",
     "pk": 659,
     "fields": {
-      "name": "Anchovy, canned in oil, drained",
+      "name": "Anchovy, Canned In Oil,",
       "category": "General",
       "vitamin_d_iu": 254.4,
       "is_vegetarian": true,
@@ -7911,7 +7911,7 @@
     "model": "nutrition.fooditem",
     "pk": 660,
     "fields": {
-      "name": "Cod, smoked, raw",
+      "name": "Cod, Smoked, Raw",
       "category": "General",
       "vitamin_d_iu": 84.0,
       "is_vegetarian": true,
@@ -7923,7 +7923,7 @@
     "model": "nutrition.fooditem",
     "pk": 661,
     "fields": {
-      "name": "Cod or hake, smoked, steamed",
+      "name": "Cod Or Hake, Smoked,",
       "category": "General",
       "vitamin_d_iu": 88.0,
       "is_vegetarian": true,
@@ -7935,7 +7935,7 @@
     "model": "nutrition.fooditem",
     "pk": 662,
     "fields": {
-      "name": "Fish finger, crumbed, purchased frozen, raw",
+      "name": "Fish Finger, Crumbed, Purchased",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 24.0,
       "is_vegetarian": false,
@@ -7947,7 +7947,7 @@
     "model": "nutrition.fooditem",
     "pk": 663,
     "fields": {
-      "name": "Fish finger, crumbed, purchased frozen, grilled, no added fat",
+      "name": "Fish Finger, Crumbed, Purchased",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 24.4,
       "is_vegetarian": false,
@@ -7959,7 +7959,7 @@
     "model": "nutrition.fooditem",
     "pk": 664,
     "fields": {
-      "name": "Salmon, pink, canned in brine, drained",
+      "name": "Salmon, Pink, Canned In",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 424.0,
       "is_vegetarian": false,
@@ -7971,7 +7971,7 @@
     "model": "nutrition.fooditem",
     "pk": 665,
     "fields": {
-      "name": "Salmon, flavoured, canned, undrained",
+      "name": "Salmon, Flavoured, Canned, Undrained",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 424.0,
       "is_vegetarian": false,
@@ -7983,7 +7983,7 @@
     "model": "nutrition.fooditem",
     "pk": 666,
     "fields": {
-      "name": "Salmon, red, canned in brine, drained",
+      "name": "Salmon, Red, Canned In",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 424.0,
       "is_vegetarian": false,
@@ -7995,7 +7995,7 @@
     "model": "nutrition.fooditem",
     "pk": 667,
     "fields": {
-      "name": "Salmon, smoked, sliced",
+      "name": "Salmon, Smoked, Sliced",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 168.0,
       "is_vegetarian": false,
@@ -8007,7 +8007,7 @@
     "model": "nutrition.fooditem",
     "pk": 668,
     "fields": {
-      "name": "Tuna, canned in brine, drained",
+      "name": "Tuna, Canned In Brine,",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 108.0,
       "is_vegetarian": false,
@@ -8019,7 +8019,7 @@
     "model": "nutrition.fooditem",
     "pk": 669,
     "fields": {
-      "name": "Bar, snack, oat based, baked",
+      "name": "Bar, Snack, Oat Based,",
       "category": "General",
       "vitamin_d_iu": 4.0,
       "is_vegetarian": true,
@@ -8031,7 +8031,7 @@
     "model": "nutrition.fooditem",
     "pk": 670,
     "fields": {
-      "name": "Tuna, flavoured, canned in oil, drained",
+      "name": "Tuna, Flavoured, Canned In",
       "category": "Fish/Seafood",
       "vitamin_d_iu": 124.0,
       "is_vegetarian": false,
@@ -8043,7 +8043,7 @@
     "model": "nutrition.fooditem",
     "pk": 671,
     "fields": {
-      "name": "Snack, grain based, extruded, flavoured",
+      "name": "Snack, Grain Based, Extruded,",
       "category": "General",
       "vitamin_d_iu": 0.8,
       "is_vegetarian": true,
@@ -8055,7 +8055,7 @@
     "model": "nutrition.fooditem",
     "pk": 672,
     "fields": {
-      "name": "Mushroom, common, fresh, raw",
+      "name": "Mushroom, Common, Fresh, Raw",
       "category": "Vegetable",
       "vitamin_d_iu": 85.60000000000001,
       "is_vegetarian": true,
@@ -8067,7 +8067,7 @@
     "model": "nutrition.fooditem",
     "pk": 673,
     "fields": {
-      "name": "Mushroom, common, fresh, fried, no added fat",
+      "name": "Mushroom, Common, Fresh, Fried,",
       "category": "Vegetable",
       "vitamin_d_iu": 137.20000000000002,
       "is_vegetarian": true,
@@ -8079,7 +8079,7 @@
     "model": "nutrition.fooditem",
     "pk": 674,
     "fields": {
-      "name": "Mushroom, common, vitamin D enhanced, fresh, raw",
+      "name": "Mushroom, Common, Vitamin D",
       "category": "Vegetable",
       "vitamin_d_iu": 967.2,
       "is_vegetarian": true,
@@ -8091,7 +8091,7 @@
     "model": "nutrition.fooditem",
     "pk": 675,
     "fields": {
-      "name": "Mushroom, common, vitamin D enhanced, fresh, fried, no added fat",
+      "name": "Mushroom, Common, Vitamin D",
       "category": "Vegetable",
       "vitamin_d_iu": 1554.4,
       "is_vegetarian": true,
