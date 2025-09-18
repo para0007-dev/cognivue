@@ -10,5 +10,14 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src')
     }
-  }
+  },
+  server: {
+    proxy: {
+      // forward all /insights/* requests to Django dev server
+      '^/insights/': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+    },
+  },
 })

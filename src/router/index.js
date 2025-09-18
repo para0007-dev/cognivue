@@ -44,11 +44,17 @@ const routes = [
     name: 'HealthImpact',
     component: HealthImpactView
   },
-  { path: "/nutrition", 
-    name: "Nutrition", 
-    component: () => import("@/views/Nutrition.vue") 
+  {
+    path: "/nutrition",
+    name: "Nutrition",
+    component: () => import("@/views/Nutrition.vue")
+  },
+  {
+    path: '/data-awareness',
+    name: 'DataAwareness',
+    component: () => import("@/views/DataAwareness.vue"),
+    meta: { title: 'Data Awareness' },
   }
-
 ]
 
 const router = createRouter({

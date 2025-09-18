@@ -2,6 +2,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .questions import QUESTIONNAIRE, score_total, classify
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from .models import Factoid, LifestyleTip
 
 SESSION_KEYS = {
     "answers": "vd_answers",   # list[int|None]
@@ -94,3 +97,41 @@ def learn_more(request):
         },
     ]
     return render(request, "insights/learn_more.html", {"sources": sources})
+
+def dashboard(request):
+    """
+    Server-rendered shell for the Data Awareness page.
+    Vue (via CDN) fetches JSON from the two endpoints below.
+    """
+    return render(request, "insights/dashboard.html")
+
+@require_GET
+def api_factoids(request):
+    data = [
+        {
+            "id": f.id,
+            "title": f.title,
+            "text": f.text,
+            "badge": f.badge,
+            "source_name": f.source_name,
+            "source_url": f.source_url,
+            "icon": f.icon,
+        }
+        for f in Factoid.objects.filter(is_active=True).order_by("order_index", "id")
+    ]
+    return JsonResponse(data, safe=False)
+
+@require_GET
+def api_tips(request):
+    data = [
+        {
+            "id": t.id,
+            "title": t.title,
+            "impact": t.impact,
+            "front_summary": t.front_summary,
+            "back_detail": t.back_detail,
+            "icon": t.icon,
+        }
+        for t in LifestyleTip.objects.filter(is_active=True).order_by("order_index", "id")
+    ]
+    return JsonResponse(data, safe=False)
