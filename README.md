@@ -23,7 +23,7 @@ Now navigate to `cognivue/backend/cognivue/manage.py` and do the following:
 - (Make sure you are in the virtual environment) `python manage.py makemigrations`
 - `python manage.py migrate`
 - `python manage.py loaddata mealplans.json foods.json nutritiontips.json`.
-- If these datasets load successfully, your terminal should say something like "close to 700 items added from 3 fistures".
+- If these datasets load successfully, your terminal should say something like "close to 700 items added from 3 fixtures".
 - `python manage.py load_insights_csv --factoids "cognivue\backend\cognivue\insights\data\factoids.csv" --cards "cognivue\backend\cognivue\insights\data\cards.csv"` This command may need you to play around with the paths of where cards.csv and factoids.csv is located. But once it runs, you should get some green text letting you know the data loaded successfully.
 
 Now, all your setup is done and datasets loaded, you can finally proceed with trying to run the build locally.
@@ -35,6 +35,8 @@ Now, all your setup is done and datasets loaded, you can finally proceed with tr
 Then open the link that pops up on the frontend terminal and the build should be working.
 
 
+
+# Legacy instructions:
 ## Local Testing
 
 ```bash
