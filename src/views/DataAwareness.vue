@@ -160,7 +160,7 @@ function pickRandom<T>(arr: T[], n: number): T[] {
             <p>Take our 2-minute questionnaire to estimate your vitamin D level and brain-health risk.</p>
           </div>
           <!-- If your SPA already has a questionnaire route, point to it -->
-          <router-link class="cta-btn" to="/questionnaire">Test Your Level</router-link>
+          <router-link class="cta-btn" to="/vitamin-d-questionnaire">Test Your Level</router-link>
           <!-- otherwise temporarily use: <a class="cta-btn" href="/insights/questionnaire/">Test Your Level</a> -->
         </div>
       </div>
@@ -214,7 +214,7 @@ function pickRandom<T>(arr: T[], n: number): T[] {
   position: relative;
   border-radius: 18px;
   padding: 28px 24px 32px;
-  background: linear-gradient(180deg,#a5fa93 0%, #3ea962 100%); 
+  background: linear-gradient(180deg,#91dc95 0%, #1e5a2c 100%); 
   border: 1px solid rgba(16,24,40,.08);                         /* subtle edge */
   box-shadow:
     0 18px 40px rgba(16,24,40,.16),    /* main shadow */
@@ -245,7 +245,7 @@ function pickRandom<T>(arr: T[], n: number): T[] {
 }
 .title{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:28px;}
 .text{font-size:16px;color:#2a2a2a;margin:0 0 10px;}
-.source{font-size:13px;color:#6b7280;}
+.source{font-size:13px;color:#dbdde1;}
 .controls{display:flex;align-items: center; justify-content: center; gap: 10px; margin: 16px auto 0; width: 100%;}
 .controls>button{border:none;background:#ffffffaa;padding:8px 10px;border-radius:8px;cursor:pointer;}
 .dots{display:flex;gap:6px;}

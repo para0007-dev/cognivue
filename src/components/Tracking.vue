@@ -31,14 +31,6 @@
           <h3>Brain Health Insights</h3>
           <p>Learn how vitamin D protects your brain and cognitive function</p>
         </div>
-        
-        <div class="tracking-card purple">
-          <div class="card-icon purple-icon">
-            <img :src="gardenIcon" alt="Garden Icon" />
-          </div>
-          <h3>Virtual Garden</h3>
-          <p>Grow your virtual garden as you maintain healthy vitamin D habits</p>
-        </div>
       </div>
     </div>
   </section>

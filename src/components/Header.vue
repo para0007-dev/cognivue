@@ -5,14 +5,14 @@
       <nav class="desktop-nav">
         <div class="logo">
           <img src="@/assets/images/logo-icon.svg" alt="VitaminD Brain Logo" class="logo-icon">
-          <span class="logo-text">VitaminD Brain</span>
+          <span class="logo-text">Cognivue</span>
         </div>
         <ul class="nav-menu">
           <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
           <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
           <li><router-link to="/nutrition" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Plan</span></router-link></li>
-          <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Data Awareness"><span>Data Awareness</span></router-link></li>
-          <li><router-link to="/health-impact" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Health Impact"><span>Health Impact</span></router-link></li>
+          <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Education Hub"><span>Education Hub</span></router-link></li>
+          <!-- <li><router-link to="/health-impact" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Health Impact"><span>Health Impact</span></router-link></li> -->
         </ul>
       </nav>
 
@@ -20,7 +20,7 @@
       <nav class="mobile-nav">
         <div class="logo">
           <img src="@/assets/images/logo-icon.svg" alt="VitaminD Brain Logo" class="logo-icon">
-          <span class="logo-text">VitaminD Brain</span>
+          <span class="logo-text">Cognivue</span>
         </div>
         <button class="hamburger" @click="toggleMobileMenu" :class="{ active: isMobileMenuOpen }">
           <span></span>
@@ -32,12 +32,10 @@
       <!-- Mobile Menu -->
       <div class="mobile-menu" :class="{ active: isMobileMenuOpen }">
         <ul class="mobile-nav-menu">
-          <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }" @click="closeMobileMenu"><img src="@/assets/images/home-icon.svg" alt="Home">Home</router-link></li>
-          <li><router-link to="/sun-exposure" class="nav-link" @click="closeMobileMenu"><img src="@/assets/images/sun-icon.svg" alt="Sun">Sun Exposure</router-link></li>
-          <li><a href="#" class="nav-link" @click="closeMobileMenu"><img src="@/assets/images/food-icon.svg" alt="Food">Food Intake</a></li>
-          <li><router-link to="/health-impact" class="nav-link" @click="closeMobileMenu"><img src="@/assets/images/insights-icon.svg" alt="Health Impact">Health Impact</router-link></li>
-          <li><a href="#" class="nav-link" @click="closeMobileMenu"><img src="@/assets/images/garden-icon.svg" alt="Garden">Garden</a></li>
-          <li><a href="#" class="nav-link" @click="closeMobileMenu"><img src="@/assets/images/health-progress-icon.svg" alt="Health Progress">Health Progress</a></li>
+          <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
+          <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
+          <li><router-link to="/nutrition" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Plan</span></router-link></li>
+          <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Education Hub"><span>Education Hub</span></router-link></li>
         </ul>
       </div>
     </div>

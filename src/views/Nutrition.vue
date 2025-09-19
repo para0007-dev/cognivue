@@ -1,4 +1,5 @@
 <template>
+  <Header />
   <section class="nutrition">
     <!-- Header -->
     <header class="header">
@@ -28,6 +29,7 @@
 </template>
 
 <script setup>
+import Header from '@/components/Header.vue';
 import { ref } from "vue";
 import MealPlanner from "@/components/nutrition/MealPlanner.vue";
 import FoodSearch from "@/components/nutrition/FoodSearch.vue";

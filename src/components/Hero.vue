@@ -20,8 +20,10 @@
           </p>
         </div>
         <div class="hero-image">
-          <img src="@/assets/images/hero-image.svg" alt="Vitamin D and Brain Health" class="hero-img">
+          <img src="@/assets/images/bg-image.png" alt="Vitamin D and Brain Health" class="hero-img hero-img--base">
+          <img src="@/assets/images/target-audience.png" alt="" aria-hidden="true" class="hero-img hero-img--hover">
         </div>
+
       </div>
     </div>
   </section>
@@ -133,20 +135,32 @@ export default {
 }
 
 .hero-image {
+  position: relative;
   text-align: center;
+  display: inline-block;   
+  border-radius: 20px;
+  overflow: hidden;        
 }
 
 .hero-img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform .3s ease, opacity .25s ease;
+  will-change: transform, opacity;
 }
 
-.hero-img:hover {
-  transform: scale(1.05);
+/* stack the hover image on top, invisible by default */
+.hero-img--hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
 }
+
+/* on hover: crossfade + scale */
+.hero-image:hover .hero-img--hover { opacity: 1; }
+.hero-image:hover .hero-img--base  { opacity: 0; }
+.hero-image:hover .hero-img        { transform: scale(1.05); }
 
 /* Responsive Design */
 @media (max-width: 768px) {

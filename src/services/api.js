@@ -1,5 +1,5 @@
 // API configuration and service functions
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'http://127.0.0.1:8000';
 
 // API endpoints
 const API_ENDPOINTS = {
@@ -14,23 +14,23 @@ const API_ENDPOINTS = {
 // Helper function to make API requests
 async function apiRequest(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
-  
+
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
     },
     credentials: 'include', // Include cookies for authentication
   };
-  
+
   const config = { ...defaultOptions, ...options };
-  
+
   try {
     const response = await fetch(url, config);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
     return data;
   } catch (error) {
@@ -46,7 +46,7 @@ export const weatherAPI = {
     const params = new URLSearchParams({ lat, lon });
     return apiRequest(`${API_ENDPOINTS.weather}?${params}`);
   },
-  
+
   // Get weather data by city
   getWeatherByCity: async (city) => {
     const params = new URLSearchParams({ city });
