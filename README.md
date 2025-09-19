@@ -9,7 +9,7 @@ A responsive website focused on the importance of Vitamin D for brain health, fe
     - PostgreSQL PgAdmin or equivalent.
     - NodeJS and npm
     - Python 3.13 +
-- If you have the above installed, navigate to `cognivue/backend/cognivue/cognivue/settings.py`(~Please be careful of the multiple cognivues~) and under the databases codeblock, populate your credentials (database name, postgres username, postgres password).
+- If you have the above installed, navigate to `cognivue/backend/cognivue/cognivue/settings.py`(*Please be careful of the multiple cognivues*) and under the databases codeblock, populate your credentials (database name, postgres username, postgres password).
 - in the root repo directory (`/cognivue/`) run `npm install`
 - Create a python virtual environment with `python -m venv venv`.
 - Switch to the virtual environment
