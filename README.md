@@ -19,7 +19,7 @@ A responsive website focused on the importance of Vitamin D for brain health, fe
 
 Okay, hopefully you have all python and node dependancies installed and running without any problems.
 
-Now navigate to `cognivue/backend/cognivue/manage.py` and do the following:
+Now navigate to `cognivue/backend/cognivue/` (the folder where `manage.py` is) and do the following:
 - (Make sure you are in the virtual environment) `python manage.py makemigrations`
 - `python manage.py migrate`
 - `python manage.py loaddata mealplans.json foods.json nutritiontips.json`.
