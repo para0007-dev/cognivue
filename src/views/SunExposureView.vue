@@ -28,6 +28,7 @@
             <!-- Location Card -->
             <div class="location-card">
               <div class="location-header">
+
                 <div class="location-icon">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#ef4444" stroke-width="2" fill="#ef4444"/>
@@ -36,6 +37,19 @@
                 </div>
                 <span class="location-text">{{ locationData.city }}, {{ locationData.state }}</span>
               </div>
+
+              <!-- Manual location entry -->
+                <form class="manual-loc" @submit.prevent="applyManualCity">
+                  <input
+                    v-model.trim="manualCity"
+                    class="loc-input"
+                    type="text"
+                    placeholder="Enter city (e.g., Carlton, AU)"
+                    aria-label="Enter city"
+                  />
+                  <button class="loc-btn" type="submit">Update</button>
+                </form>
+                <div v-if="manualError" class="loc-error">{{ manualError }}</div>
               
               <div class="weather-info" v-if="!isLoadingWeather">
                 <div class="weather-item" v-if="weatherData">
@@ -302,7 +316,9 @@ export default {
       // Skin types from backend
       skinTypes: [],
       isLoadingSkinTypes: false,
-      skinTypesError: null
+      skinTypesError: null,
+      manualCity: '',
+      manualError: null,
     }
   },
   computed: {
@@ -471,52 +487,53 @@ export default {
     },
     
     async fetchWeatherData() {
-      this.isLoadingWeather = true
-      this.weatherError = null
-      
+      this.isLoadingWeather = true;
+      this.weatherError = null;
+
       try {
-        // Use fixed coordinates for Melbourne to avoid geolocation issues
-        this.locationData.lat = -37.8136
-        this.locationData.lon = 144.9631
-        
-        const response = await weatherAPI.getWeatherByCoords(this.locationData.lat, this.locationData.lon)
-        
+        let response;
+
+        // Try browser geolocation (no DB write)
+        try {
+          const pos = await this.getCurrentPosition();
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          this.locationData.lat = lat;
+          this.locationData.lon = lon;
+          response = await weatherAPI.getWeatherByCoords(lat, lon);
+        } catch {
+          // Fallback: server-chosen location (profile or default)
+          response = await weatherAPI.getWeather();
+        }
+
         if (response.success) {
-          // Adapt backend weather data to frontend format
           this.weatherData = {
             main: { temp: response.weather.temp },
             weather: [{ description: response.weather.condition }],
             name: response.weather.location || this.locationData.city,
             uv_index: response.weather.uv_index
-          }
-          // Update location data from weather response
+          };
+
           if (response.weather.location) {
-            const locationParts = response.weather.location.split(', ')
-            if (locationParts.length >= 2) {
-              this.locationData.city = locationParts[0]
-              this.locationData.state = locationParts[1]
-            } else {
-              // Handle single location name
-              this.locationData.city = response.weather.location
-              this.locationData.state = ''
-            }
+            const [city, state = ''] = response.weather.location.split(', ');
+            this.locationData.city = city;
+            this.locationData.state = state;
           }
         } else {
-          throw new Error(response.error || 'Failed to fetch weather data')
+          throw new Error(response.error || 'Failed to fetch weather data');
         }
       } catch (error) {
-        console.error('Error fetching weather data:', error)
-        // Set default weather data when API fails
+        console.error('Error fetching weather data:', error);
+        // Soft fallback so UI still renders
         this.weatherData = {
           main: { temp: 22 },
           weather: [{ description: 'Partly Cloudy' }],
-          name: this.locationData.city,
+          name: this.locationData.city || 'Melbourne',
           uv_index: 3
-        }
-        // Clear error since we're providing default data
-        this.weatherError = null
+        };
+        this.weatherError = null;
       } finally {
-        this.isLoadingWeather = false
+        this.isLoadingWeather = false;
       }
     },
     
@@ -594,7 +611,52 @@ export default {
          return 'Very high UV levels - protection essential, limit exposure'
        }
        return 'Extreme UV levels - avoid outdoor activities during peak hours'
-     }
+     },
+
+     async applyManualCity() {
+      if (!this.manualCity) return
+      this.isLoadingWeather = true
+      this.manualError = null
+      try {
+        const response = await weatherAPI.getWeatherByCity(this.manualCity) // uses /api/weather?city=
+        if (!response.success) throw new Error(response.error || 'Failed to fetch city weather')
+
+        this.weatherData = {
+          main: { temp: response.weather.temp },
+          weather: [{ description: response.weather.condition }],
+          name: response.weather.location || this.manualCity,
+          uv_index: response.weather.uv_index
+        }
+
+        // update UI location text
+        const [city, state = ''] = (response.weather.location || this.manualCity).split(', ')
+        this.locationData.city = city
+        this.locationData.state = state
+
+        // (optional) clear stored lat/lon since we’re in manual mode
+        this.locationData.lat = null
+        this.locationData.lon = null
+
+        // (optional) if your backend returns coords in JSON, you can persist as default:
+        // if (response.weather.coord) {
+        //   await fetch('/vitamin-d-helper/api/update-location/', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     credentials: 'include',
+        //     body: JSON.stringify({
+        //       latitude: response.weather.coord.lat,
+        //       longitude: response.weather.coord.lon
+        //     })
+        //   })
+        // }
+      } catch (e) {
+        console.error(e)
+        this.manualError = 'Could not find that location. Try "Suburb, AU".'
+      } finally {
+        this.isLoadingWeather = false
+      }
+    },
+
   },
   async mounted() {
     // Request notification permission on component mount
@@ -635,6 +697,20 @@ export default {
 </script>
 
 <style scoped>
+
+.manual-loc { display:flex; gap:.5rem; margin-top:.5rem; margin-bottom: 1rem;}
+.loc-input {
+  flex:1; min-width: 0; padding:.5rem .75rem; border:1px solid #e5e7eb;
+  border-radius:8px; font:inherit;
+}
+.loc-input:focus { outline:none; border-color:#93c5fd; box-shadow:0 0 0 3px rgba(147,197,253,.35); }
+.loc-btn {
+  padding:.5rem .9rem; border:none; border-radius:8px; cursor:pointer; font-weight:600;
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color:#fff;
+}
+.loc-error { color:#b91c1c; margin-top:.5rem; font-size:.875rem; }
+
+
 .sun-exposure-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);

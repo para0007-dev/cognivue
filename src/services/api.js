@@ -1,5 +1,5 @@
 // API configuration and service functions
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = '';
 
 // API endpoints
 const API_ENDPOINTS = {
@@ -41,16 +41,48 @@ async function apiRequest(endpoint, options = {}) {
 
 // Weather API
 export const weatherAPI = {
-  // Get weather data by coordinates
-  getWeatherByCoords: async (lat, lon) => {
-    const params = new URLSearchParams({ lat, lon });
-    return apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+  // DB/saved-location (or server fallback)
+  getWeather: async () => {
+    const json = await apiRequest(API_ENDPOINTS.weather);
+    return {
+      success: true,
+      weather: {
+        location: json.location,
+        condition: json.condition,
+        temp: json.temp,
+        uv_index: json.uv_index,
+      }
+    };
   },
 
-  // Get weather data by city
+  // Geolocated coords
+  getWeatherByCoords: async (lat, lon) => {
+    const params = new URLSearchParams({ lat, lon });
+    const json = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+    return {
+      success: true,
+      weather: {
+        location: json.location,
+        condition: json.condition,
+        temp: json.temp,
+        uv_index: json.uv_index,
+      }
+    };
+  },
+
+  // City query (optional)
   getWeatherByCity: async (city) => {
     const params = new URLSearchParams({ city });
-    return apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+    const json = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+    return {
+      success: true,
+      weather: {
+        location: json.location,
+        condition: json.condition,
+        temp: json.temp,
+        uv_index: json.uv_index,
+      }
+    };
   }
 };
 

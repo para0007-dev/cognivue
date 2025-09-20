@@ -4,4 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.vitamin_d_helper, name='vitamin_d_helper'),
     path('update-location/', views.update_location_from_coords, name='update_location_from_coords'),
+    path("api/weather/", views.weather_summary, name="weather_summary"),
+    path("api/update-location/", views.update_location_from_coords, name="update_location_from_coords"),
 ]

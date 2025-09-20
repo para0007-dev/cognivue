@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.conf import settings
 from .models import UserProfile, SkinType
 from .forms import SkinTypeForm, CityForm
@@ -212,3 +212,76 @@ def reverse_geocode(lat, lon):
         pass
     
     return None, None
+
+@require_GET
+def weather_summary(request):
+    lat = request.GET.get("lat")
+    lon = request.GET.get("lon")
+    city = request.GET.get("city")  # NEW
+
+    # 1) coords override
+    if lat and lon:
+        try:
+            data = get_weather_data_from(float(lat), float(lon))
+            return JsonResponse(data)
+        except Exception:
+            return JsonResponse({"error": "Weather unavailable"}, status=502)
+
+    # 2) city override
+    if city:
+        try:
+            data = get_weather_data_by_city(city)
+            return JsonResponse(data)
+        except Exception:
+            return JsonResponse({"error": "Weather unavailable"}, status=502)
+
+    # 3) fallback: user profile / default
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    data = get_weather_data(profile)
+    if not data:
+        return JsonResponse({"error": "Weather unavailable"}, status=502)
+    data.update({"has_location": profile.has_location(), "city": profile.city or ""})
+    return JsonResponse(data)
+
+
+def get_weather_data_from(lat: float, lon: float):
+    """Weather + UV by coordinates."""
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    params = {"lat": lat, "lon": lon, "appid": settings.OPENWEATHER_API_KEY, "units": "metric"}
+    r = requests.get(url, params=params, timeout=10); r.raise_for_status()
+    data = r.json()
+    uv_index = get_uv_index(data['coord']['lat'], data['coord']['lon'])
+    return {
+        'location': f"{data['name']}, Australia",
+        'condition': data['weather'][0]['description'].title(),
+        'temp': round(data['main']['temp']),
+        'uv_index': uv_index,
+        'humidity': data['main']['humidity'],
+    }
+
+
+def get_weather_data_by_city(city: str):
+    """
+    Weather + UV by city string. Accepts 'Carlton, AU' or 'Carlton'.
+    If no country is supplied, we’ll default to AU.
+    """
+    q = city.strip()
+    if ',' not in q:
+        q = f"{q},AU"
+
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    params = {"q": q, "appid": settings.OPENWEATHER_API_KEY, "units": "metric"}
+    r = requests.get(url, params=params, timeout=10); r.raise_for_status()
+    data = r.json()
+    uv_index = get_uv_index(data['coord']['lat'], data['coord']['lon'])
+    # Use the API’s resolved name (often includes suburb/city) and country
+    name = data.get('name') or q.split(',')[0].strip()
+    country = data.get('sys', {}).get('country') or 'AU'
+    return {
+        'location': f"{name}, {country}",
+        'condition': data['weather'][0]['description'].title(),
+        'temp': round(data['main']['temp']),
+        'uv_index': uv_index,
+        'humidity': data['main']['humidity'],
+    }
+

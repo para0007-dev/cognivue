@@ -13,15 +13,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // forward all /insights/* requests to Django dev server
-      '^/insights/': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
-      '^/nutrition/': {
-        target: 'http://localhost:8000',
-        changeOrigin: true
-      },
+      '^/vitamin-d-helper/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
+      '^/insights/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
+      '^/timer/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
+      '^/brain-health-news/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
     },
   },
 })
