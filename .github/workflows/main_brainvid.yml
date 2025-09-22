@@ -69,9 +69,15 @@ jobs:
           slot-name: 'Production'
 
                         # Run Django migrations & loaddata
-      - name: Run Django migrations and load fixtures
-        run: |
-          python manage.py migrate --noinput
-          python manage.py loaddata foods.json mealplans.json nutritiontips.json
-          python manage.py load_insights_csv --factoids "insights/data/factoids.csv" --cards "insights/data/cards.csv"
+      # - name: Run Django migrations and load fixtures
+      #   run: |
+      #     python manage.py migrate --noinput
+      #     python manage.py loaddata foods.json mealplans.json nutritiontips.json
+      #     python manage.py load_insights_csv --factoids "insights/data/factoids.csv" --cards "insights/data/cards.csv"
+
+      - name: Run migrations inside Azure
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            az webapp ssh --name BrainViD --resource-group brainhealth-app --command "python manage.py migrate --noinput && python manage.py loaddata foods.json mealplans.json nutritiontips.json && python manage.py load_insights_csv --factoids insights/data/factoids.csv --cards insights/data/cards.csv"
           
