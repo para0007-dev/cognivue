@@ -1,5 +1,5 @@
 // API configuration and service functions
-const API_BASE_URL = '';
+const API_BASE_URL = import.meta.env.VITE_API_BASE;
 
 // API endpoints
 const API_ENDPOINTS = {
