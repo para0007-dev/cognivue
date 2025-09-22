@@ -6,13 +6,13 @@
  */
 import { ref, computed, onMounted, onBeforeUnmount, nextTick} from 'vue'
 import Header from '@/components/Header.vue'
+import { insightsAPI } from '@/services/api'
 
 const factoids = ref<any[]>([])
 const tips = ref<any[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-// at top of <script setup>
 const CARD_BASELINE = 220; // px: pre-flip height target
 
 const vAutosizeVisible = {
@@ -91,7 +91,22 @@ async function load() {
 }
 
 
-onMounted(load)
+onMounted(async () => {
+  loading.value = true
+  error.value = null
+  try {
+    const [hub] = await Promise.all([
+      insightsAPI.getHub(),
+    ])
+    factoids.value = hub?.factoids || []
+    tips.value = hub?.tips || []
+  } catch (e:any) {
+    error.value = e?.message || 'Failed to load insights'
+  } finally {
+    loading.value = false
+    await nextTick()
+  }
+})
 onBeforeUnmount(stopAuto)
 
 // Flip handler for cards (keeps state on the object)
