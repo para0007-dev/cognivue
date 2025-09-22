@@ -162,6 +162,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://mango-dune-003323700.2.azurestaticapps.net",
 ]
 
-CSRF_TRUSTED_ORIGINS = ["https://mango-dune-003323700.2.azurestaticapps.net", "brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net"]
+CSRF_TRUSTED_ORIGINS = ["https://mango-dune-003323700.2.azurestaticapps.net", "https://brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net"]
 
 CORS_ALLOW_CREDENTIALS = True
