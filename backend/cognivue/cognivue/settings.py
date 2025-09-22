@@ -27,9 +27,9 @@ ALLOW_SCRAPER = os.getenv("ALLOW_SCRAPER", "0") == "1"
 SECRET_KEY = 'django-insecure-yv#d+1#y7&mpu$d52n64c2=h!2m*p@v*f^w_jwaprfpaf&tc_4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net"]
+ALLOWED_HOSTS = ["brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net", "127.0.0.1", "localhost"]
 
 # OpenWeather API Configuration
 OPENWEATHER_API_KEY = '0ba8d4e3b494e7864ea8b8ac09bf7275'
@@ -159,4 +159,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vue dev server
+    "brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net",
 ]
