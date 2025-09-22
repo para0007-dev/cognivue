@@ -1,10 +1,5 @@
 <script setup lang="ts">
-/**
- * Data Awareness page (EPIC 4)
- * - Pulls factoids & lifestyle tips from Django API
- * - Renders jumbotron (auto-rotates), a CTA, and flippable cards
- */
-import { ref, computed, onMounted, onBeforeUnmount, nextTick} from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import Header from '@/components/Header.vue'
 import { insightsAPI } from '@/services/api'
 
@@ -13,38 +8,31 @@ const tips = ref<any[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-const CARD_BASELINE = 220; // px: pre-flip height target
+const CARD_BASELINE = 220
 
 const vAutosizeVisible = {
   mounted(el: any) {
     const inner = el.querySelector('.inner') as HTMLElement | null
     if (!inner) return
-    inner.style.minHeight = CARD_BASELINE + 'px'   // nice baseline pre-flip
-
+    inner.style.minHeight = CARD_BASELINE + 'px'
     const measureNow = () => {
       const front = el.querySelector('.face.front') as HTMLElement | null
       const back  = el.querySelector('.face.back')  as HTMLElement | null
       const target = el.classList.contains('flipped') ? back : front
       if (!target || !inner) return
-      const h = Math.max(target.scrollHeight, CARD_BASELINE) // never below baseline
-      inner.style.height = h + 'px'                          // grow/shrink to visible face
+      const h = Math.max(target.scrollHeight, CARD_BASELINE)
+      inner.style.height = h + 'px'
     }
-
     const rafMeasure = () => requestAnimationFrame(measureNow)
     ;(el as any).__measure = rafMeasure
-
-    rafMeasure()                                    // initial size (front)
+    rafMeasure()
     window.addEventListener('resize', rafMeasure)
-    el.addEventListener('transitionend', (e: any) => {
-      if (e.propertyName === 'transform') rafMeasure() // after flip finishes, recheck height
-    })
+    el.addEventListener('transitionend', (e: any) => { if (e.propertyName === 'transform') rafMeasure() })
   },
-  updated(el: any) { el.__measure && el.__measure() },  // runs after flip class toggles
+  updated(el: any) { el.__measure && el.__measure() },
   unmounted(el: any) { window.removeEventListener('resize', el.__measure) }
 }
 
-
-// Carousel state
 const curIndex = ref(0)
 const current = computed(() => factoids.value[curIndex.value] || null)
 let timer: any = null
@@ -56,50 +44,43 @@ function go(i: number) { curIndex.value = i }
 function startAuto(){ stopAuto(); timer = setInterval(next, intervalMs) }
 function stopAuto(){ if (timer) { clearInterval(timer); timer = null } }
 
-async function load() {
-  loading.value = true;
-  try {
-    const [allFacts, allTips] = await Promise.all([
-      fetch('/insights/api/factoids/').then(r => r.json()),
-      fetch('/insights/api/tips/').then(r => r.json()),
-    ]);
-
-    // --- random 5 client-side ---
-    const saved = sessionStorage.getItem('rand5_factoid_ids'); // optional persistence
-    if (saved) {
-      const ids = JSON.parse(saved) as number[];
-      factoids.value = ids
-        .map(id => allFacts.find((f:any) => f.id === id))
-        .filter(Boolean);
-      if (factoids.value.length < 5) {
-        factoids.value = pickRandom(allFacts, 5);
-        sessionStorage.setItem('rand5_factoid_ids', JSON.stringify(factoids.value.map((f:any)=>f.id)));
-      }
-    } else {
-      factoids.value = pickRandom(allFacts, 5);
-      sessionStorage.setItem('rand5_factoid_ids', JSON.stringify(factoids.value.map((f:any)=>f.id)));
-    }
-    // ----------------------------
-
-    tips.value = allTips;
-    startAuto();
-  } catch (e:any) {
-    error.value = e?.message || 'Failed to load insights.';
-  } finally {
-    loading.value = false;
-  }
+function toggleFlip(t:any){
+  t._flipped = !t._flipped
+  nextTick(() => window.dispatchEvent(new Event('resize')))
 }
+function chipClass(impact: string){ return impact === 'beneficial' ? 'chip chip-green' : 'chip chip-amber' }
 
+function pickRandom<T>(arr: T[], n: number): T[] {
+  if (arr.length <= n) return [...arr]
+  const a = [...arr]
+  for (let i = a.length - 1; i > a.length - 1 - n; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a.slice(a.length - n)
+}
 
 onMounted(async () => {
   loading.value = true
   error.value = null
   try {
-    const [hub] = await Promise.all([
-      insightsAPI.getHub(),
-    ])
-    factoids.value = hub?.factoids || []
-    tips.value = hub?.tips || []
+    const hub = await insightsAPI.getHub()         // <- now calls /insights/api/factoids|tips/
+    const allFacts = hub.factoids || []
+    tips.value = hub.tips || []
+
+    // keep only 5 random factoids for the carousel
+    const saved = sessionStorage.getItem('rand5_factoid_ids')
+    if (saved) {
+      const ids = JSON.parse(saved) as number[]
+      const picked = ids.map(id => allFacts.find((f:any) => f.id === id)).filter(Boolean)
+      factoids.value = picked.length >= 5 ? picked : pickRandom(allFacts, 5)
+      sessionStorage.setItem('rand5_factoid_ids', JSON.stringify(factoids.value.map((f:any)=>f.id)))
+    } else {
+      factoids.value = pickRandom(allFacts, 5)
+      sessionStorage.setItem('rand5_factoid_ids', JSON.stringify(factoids.value.map((f:any)=>f.id)))
+    }
+
+    startAuto()
   } catch (e:any) {
     error.value = e?.message || 'Failed to load insights'
   } finally {
@@ -108,32 +89,8 @@ onMounted(async () => {
   }
 })
 onBeforeUnmount(stopAuto)
-
-// Flip handler for cards (keeps state on the object)
-function toggleFlip(t:any){
-  t._flipped = !t._flipped
-  nextTick(() => {
-    // nudge directives in case updated timing varies across browsers
-    window.dispatchEvent(new Event('resize'))
-  })
-}
-function chipClass(impact: string){
-  return impact === 'beneficial' ? 'chip chip-green' : 'chip chip-amber'
-}
-
-// Helper function for picking N unique items from factoids
-function pickRandom<T>(arr: T[], n: number): T[] {
-  if (arr.length <= n) return [...arr];
-  // Fisher–Yates partial shuffle
-  const a = [...arr];
-  for (let i = a.length - 1; i > a.length - 1 - n; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a.slice(a.length - n);
-}
-
 </script>
+
 
 <template>
     <Header />

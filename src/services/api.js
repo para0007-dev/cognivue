@@ -95,8 +95,17 @@ export const newsAPI = {
 };
 
 export const insightsAPI = {
-  getHub: async () => apiRequest(API_ENDPOINTS.insights),
+  getFactoids: async () => apiRequest("/insights/api/factoids/"),
+  getTips: async () => apiRequest("/insights/api/tips/"),
+  getHub: async () => {
+    const [factoids, tips] = await Promise.all([
+      apiRequest("/insights/api/factoids/"),
+      apiRequest("/insights/api/tips/"),
+    ]);
+    return { factoids, tips };
+  },
 };
+
 
 // Export base if needed elsewhere
 export const API_BASE_URL = BASE;
