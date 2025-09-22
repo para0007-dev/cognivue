@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-yv#d+1#y7&mpu$d52n64c2=h!2m*p@v*f^w_jwaprfpaf&tc_4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net"]
 
 # OpenWeather API Configuration
 OPENWEATHER_API_KEY = '0ba8d4e3b494e7864ea8b8ac09bf7275'
