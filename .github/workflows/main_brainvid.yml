@@ -32,12 +32,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r backend/cognivue/requirements.txt
       
-      - name: Run Django setup
-        run: |
-          cd backend/cognivue/
-          python manage.py migrate --noinput
-          python manage.py collectstatic --noinput
-      
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
