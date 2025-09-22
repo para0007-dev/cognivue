@@ -159,5 +159,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vue dev server
-    "brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net",
+    "https://mango-dune-003323700.2.azurestaticapps.net",
 ]
+
+CSRF_TRUSTED_ORIGINS = ["https://mango-dune-003323700.2.azurestaticapps.net"]
