@@ -122,3 +122,28 @@ SESSION_COOKIE_SAMESITE = "None"
 
 # Tell Django the original scheme behind Azure’s proxy
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# Dev Override (for local development):
+if os.getenv("DJANGO_DEV", "0") == "1":
+    DEBUG = True
+
+    # Frontend dev origin
+    CORS_ALLOWED_ORIGINS += [
+        "http://localhost:5173",
+    ]
+    CORS_ALLOW_CREDENTIALS = True
+
+    # CSRF for dev
+    CSRF_TRUSTED_ORIGINS += [
+        "http://localhost:5173",
+        "http://localhost:8000",
+    ]
+
+    # Cookies over HTTP in dev
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SAMESITE = "Lax"
+
+    # Not behind Azure proxy locally
+    SECURE_PROXY_SSL_HEADER = None
