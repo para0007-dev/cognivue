@@ -19,6 +19,8 @@ ALLOWED_HOSTS = [
     "brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net",
     "127.0.0.1",
     "localhost",
+    "api.brainvid.me",
+    "www.brainvid.me",
 ]
 
 # Third-party / apps
@@ -106,12 +108,15 @@ OPENWEATHER_API_KEY = "0ba8d4e3b494e7864ea8b8ac09bf7275"
 # --- CORS / CSRF for Vue on Azure SWA ---
 CORS_ALLOWED_ORIGINS = [
     "https://mango-dune-003323700.2.azurestaticapps.net",  # frontend prod
+    "https://www.brainvid.me",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://mango-dune-003323700.2.azurestaticapps.net",  # no :5173 in prod
     "https://brainvid-ggggfpc3cugra5aj.eastasia-01.azurewebsites.net",
+    "https://api.brainvid.me",
+    "https://www.brainvid.me",
 ]
 
 # Cross-site cookies over HTTPS
