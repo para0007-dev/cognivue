@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "insights",
     "rest_framework",
     "nutrition",
+    "simpleauth",
 ]
 
 MIDDLEWARE = [
