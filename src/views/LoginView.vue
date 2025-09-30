@@ -41,12 +41,14 @@ const route = useRoute()
 const password = ref("")
 const error = ref("")
 const loading = ref(false)
+const BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/+$/,'')
+
 
 async function handleLogin() {
   error.value = ""
   loading.value = true
   try {
-    const res = await axios.post("/simpleauth/api/login/", {
+    const res = await axios.post("${BASE}/simpleauth/api/login/", {
       username: "admin",            // fixed on backend
       password: password.value,
     })
