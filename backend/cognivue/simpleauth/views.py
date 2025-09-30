@@ -26,15 +26,31 @@ def logout_view(request):
 def api_login(request):
     if request.method != "POST":
         return JsonResponse({"error": "Method not allowed"}, status=405)
-
+ 
+    # --- robust body parsing: JSON first, fall back to form/urlencoded ---
+    data = {}
     try:
-        data = json.loads(request.body or "{}")
-    except json.JSONDecodeError:
-        return JsonResponse({"error": "Bad JSON"}, status=400)
-
-    if data.get("username") == USERNAME and data.get("password") == PASSWORD:
+        # If Content-Type is JSON or body looks like JSON
+        raw = request.body or b""
+        if raw:
+            try:
+                data = json.loads(raw.decode("utf-8"))
+            except Exception:
+                # Not valid JSON; fall back to form data
+                data = request.POST.dict()
+        else:
+            data = request.POST.dict()
+    except Exception:
+        # Final fallback
+        data = request.POST.dict()
+ 
+    username = data.get("username")
+    password = data.get("password")
+ 
+    if username == USERNAME and password == PASSWORD:
         request.session["logged_in"] = True
         return JsonResponse({"success": True})
+ 
     return JsonResponse({"success": False, "error": "Invalid credentials"}, status=401)
 
 @csrf_exempt
