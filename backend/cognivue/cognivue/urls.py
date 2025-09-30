@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # 👇 Force login to be the entry point
-    path('simpleauth/', include('simpleauth.urls')),
+    path('', include('simpleauth.urls')),
 
     # Other apps only accessible after login
     path('news/', include('news_scraper.urls')),

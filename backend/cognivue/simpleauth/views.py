@@ -13,7 +13,7 @@ def login_view(request):
         password = request.POST.get("password")
         if username == USERNAME and password == PASSWORD:
             request.session["logged_in"] = True
-            return redirect("/news")  # or any page
+            return redirect("/news/")  # or any page
         return render(request, "login.html", {"error": "Invalid username or password"})
     return render(request, "login.html")
 

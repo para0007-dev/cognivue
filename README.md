@@ -31,7 +31,7 @@ I've added some flags so that we can work isolated from the production build. Bu
 
 Now, all your setup is done and datasets loaded, you can finally proceed with trying to run the build locally.
 - #### Backend - in a terminal:
-    - in `cognivue\backend\cognivue` run `DJANGO_DEV=1 python manage.py runserver localhost:8000`
+    - in `cognivue\backend\cognivue` run `set DJANGO_DEV=1 && python manage.py runserver localhost:8000`
 - #### Frontend - in a diferent terminal:
     - in the root folder `cognivue\` run `npm run dev`
 

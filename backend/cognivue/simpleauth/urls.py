@@ -4,8 +4,8 @@ from .views import login_view, logout_view, api_login, api_logout
 
 urlpatterns = [
     # (optional) backend HTML login/logout:
-    path("", login_view, name="login"),
-    path("logout/", logout_view, name="logout"),
+    # path("", login_view, name="login"),
+    # path("logout/", logout_view, name="logout"),
 
     # API used by Vue:
     path("api/login/", api_login, name="api_login"),
