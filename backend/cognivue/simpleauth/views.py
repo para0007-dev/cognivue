@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 USERNAME = "admin"
-PASSWORD = "brainhealth123"
+PASSWORD = "sinepgib"
 
 # HTML login/logout (optional)
 def login_view(request):
