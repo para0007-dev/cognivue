@@ -11,6 +11,7 @@ import VitaminDInadequateView from '@/views/VitaminDInadequateView.vue'
 import HealthImpactView from '@/views/HealthImpactView.vue'
 import Nutrition from '@/views/Nutrition.vue'
 import DataAwareness from '@/views/DataAwareness.vue'
+import MealPlannerView from '../views/MealPlannerView.vue'
 
 const routes = [
   {
@@ -72,7 +73,13 @@ const routes = [
     name: 'DataAwareness',
     component: DataAwareness,
     meta: { requiresAuth: true }
-  }
+  },
+  {
+    path: '/mealplanner',
+    name: 'MealPlanner',
+    component: MealPlannerView,
+    meta: { requiresAuth: true }
+  },
 ]
 
 const router = createRouter({

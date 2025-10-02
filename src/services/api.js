@@ -106,6 +106,15 @@ export const insightsAPI = {
   },
 };
 
+export const mealAI = {
+  generate: (payload) =>
+    apiRequest('/mealplanner/api/meal-plan/ai-generate/', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+};
+
+
 
 // Export base if needed elsewhere
 export const API_BASE_URL = BASE;
