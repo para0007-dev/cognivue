@@ -5,7 +5,7 @@ import json
 import os
 
 USERNAME = "admin"
-PASSWORD = os.getenv('ADMIN_PASS')
+PASSWORD = str(os.getenv('ADMIN_PASS'))
 
 # HTML login/logout (optional)
 def login_view(request):
