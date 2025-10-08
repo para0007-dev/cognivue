@@ -165,13 +165,13 @@ export default {
 <style scoped>
 .vitamin-d-result {
   min-height: 100vh;
-  background: #FAD3CA;
+  background: #C7EED0;
   padding: 20px;
 }
 
 @keyframes backgroundShift {
-  0%, 100% { background: linear-gradient(135deg, #9BC7AF 0%, #FAD3CA 25%, #FAF3C1 50%, #C7EED0 75%, #9BC7AF 100%); }
-  50% { background: linear-gradient(135deg, #C7EED0 0%, #9BC7AF 25%, #FAD3CA 50%, #FAF3C1 75%, #C7EED0 100%); }
+  0%, 100% { background: linear-gradient(135deg, #9BC7AF 0%, #C7EED0 25%, #A7E6B7 50%, #B8F2C4 75%, #9BC7AF 100%); }
+  50% { background: linear-gradient(135deg, #B8F2C4 0%, #9BC7AF 25%, #C7EED0 50%, #A7E6B7 75%, #B8F2C4 100%); }
 }
 
 .background {
@@ -180,7 +180,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #FAD3CA;
+  background: #C7EED0;
   z-index: -1;
 }
 
