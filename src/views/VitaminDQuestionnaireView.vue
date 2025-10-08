@@ -187,172 +187,105 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
+  import Header from "@/components/Header.vue"
+  import axios from "axios"
+  import { v4 as uuidv4 } from "uuid"
 
-export default {
-  name: 'VitaminDQuestionnaireView',
-  components: {
-    Header
-  },
-  data() {
-    return {
-      currentQuestion: 1,
-      totalQuestions: 7,
-      answers: {
-         outdoorTime: '',
-         workPattern: '',
-         skinType: '',
-         location: '',
-         clothingCoverage: '',
-         vitaminDSupplement: '',
-         vitaminDFoods: ''
-       }
-    }
-  },
-  computed: {
-    progressPercentage() {
-      return (this.currentQuestion / this.totalQuestions) * 100
+  export default {
+    name: "VitaminDQuestionnaireView",
+    components: {
+      Header,
     },
-    isCurrentQuestionAnswered() {
-      const questionKeys = [
-         'outdoorTime',
-         'workPattern',
-         'skinType',
-         'location',
-         'clothingCoverage',
-         'vitaminDSupplement',
-         'vitaminDFoods'
-       ]
-      return this.answers[questionKeys[this.currentQuestion - 1]] !== ''
-    }
-  },
-  methods: {
-    nextQuestion() {
-      if (this.currentQuestion < this.totalQuestions) {
-        this.currentQuestion++
-      } else {
-        this.submitQuestionnaire()
+    data() {
+      return {
+        currentQuestion: 1,
+        totalQuestions: 7,
+        answers: {
+          outdoorTime: "",
+          workPattern: "",
+          skinType: "",
+          location: "",
+          clothingCoverage: "",
+          vitaminDSupplement: "",
+          vitaminDFoods: "",
+        },
       }
     },
-    previousQuestion() {
-      if (this.currentQuestion > 1) {
-        this.currentQuestion--
-      }
+    computed: {
+      progressPercentage() {
+        return (this.currentQuestion / this.totalQuestions) * 100
+      },
+      isCurrentQuestionAnswered() {
+        const questionKeys = [
+          "outdoorTime",
+          "workPattern",
+          "skinType",
+          "location",
+          "clothingCoverage",
+          "vitaminDSupplement",
+          "vitaminDFoods",
+        ]
+        return this.answers[questionKeys[this.currentQuestion - 1]] !== ""
+      },
     },
-    submitQuestionnaire() {
-      // Handle questionnaire submission
-      console.log('Questionnaire submitted:', this.answers)
-      
-      // Calculate vitamin D risk score
-       const riskScore = this.calculateVitaminDScore()
-       console.log('Vitamin D Risk Score:', riskScore)
-       
+    methods: {
+      nextQuestion() {
+        if (this.currentQuestion < this.totalQuestions) {
+          this.currentQuestion++
+        } else {
+          this.submitQuestionnaire()
+        }
+      },
+      previousQuestion() {
+        if (this.currentQuestion > 1) {
+          this.currentQuestion--
+        }
+      },
 
-       // Navigate to appropriate results page based on risk score
-       // Risk Score >= 35: Likely Vitamin D Deficient
-       // Risk Score < 35: Not Likely Deficient
-       if (riskScore >= 35) {
-         this.$router.push('/vitamin-d-inadequate') // Deficient
-       } else {
-         this.$router.push('/vitamin-d-result') // Adequate
-       }
-    },
-    calculateVitaminDScore() {
-      let riskScore = 0
-      console.log('=== Vitamin D Risk Score Calculation ===')
-      console.log('Answers:', this.answers)
-      
-      // A) Sun exposure & lifestyle (max 20)
-      // Outdoor time scoring
-      if (this.answers.outdoorTime === '>30min') {
-        riskScore += 0
-        console.log('Outdoor time: >30min (+0 points)')
-      } else if (this.answers.outdoorTime === '10-29min') {
-        riskScore += 8
-        console.log('Outdoor time: 10-29min (+8 points)')
-      } else if (this.answers.outdoorTime === '<10min') {
-        riskScore += 14
-        console.log('Outdoor time: <10min (+14 points)')
-      }
-      
-      // Work pattern scoring
-      if (this.answers.workPattern === 'outdoor') {
-        riskScore += 0
-        console.log('Work pattern: outdoor (+0 points)')
-      } else if (this.answers.workPattern === 'mixed') {
-        riskScore += 2
-        console.log('Work pattern: mixed (+2 points)')
-      } else if (this.answers.workPattern === 'indoor') {
-        riskScore += 6
-        console.log('Work pattern: indoor (+6 points)')
-      }
-      
-      // B) Skin type - Fitzpatrick (max 15)
-      if (this.answers.skinType === 'I-II') {
-        riskScore += 0
-        console.log('Skin type: I-II (+0 points)')
-      } else if (this.answers.skinType === 'III-IV') {
-        riskScore += 8
-        console.log('Skin type: III-IV (+8 points)')
-      } else if (this.answers.skinType === 'V-VI') {
-        riskScore += 15
-        console.log('Skin type: V-VI (+15 points)')
-      }
-      
-      // C) Location & season (max 15)
-      if (this.answers.location === 'QLD-NT-year-round') {
-        riskScore += 0
-        console.log('Location: QLD-NT-year-round (+0 points)')
-      } else if (this.answers.location === 'NSW-WA-autumn-winter') {
-        riskScore += 6
-        console.log('Location: NSW-WA-autumn-winter (+6 points)')
-      } else if (this.answers.location === 'VIC-TAS-ACT-autumn-winter') {
-        riskScore += 15
-        console.log('Location: VIC-TAS-ACT-autumn-winter (+15 points)')
-      }
-      
-      // D) Clothing coverage when outdoors (max 10)
-      if (this.answers.clothingCoverage === 'arms-legs-exposed') {
-        riskScore += 0
-        console.log('Clothing: arms-legs-exposed (+0 points)')
-      } else if (this.answers.clothingCoverage === 'one-area-covered') {
-        riskScore += 6
-        console.log('Clothing: one-area-covered (+6 points)')
-      } else if (this.answers.clothingCoverage === 'full-coverage') {
-        riskScore += 10
-        console.log('Clothing: full-coverage (+10 points)')
-      }
-      
-      // E) Diet & supplements (can reduce risk score)
-      // Vitamin D supplement
-      if (this.answers.vitaminDSupplement === 'yes') {
-        riskScore -= 10
-        console.log('Vitamin D supplement: yes (-10 points)')
-      } else if (this.answers.vitaminDSupplement === 'not-sure') {
-        console.log('Vitamin D supplement: not sure (+0 points)')
-      } else {
-        console.log('Vitamin D supplement: no (+0 points)')
-      }
+      async submitQuestionnaire() {
+        console.log("Submitting answers to backend:", this.answers)
 
-      
-      // Vitamin D-rich foods
-      if (this.answers.vitaminDFoods === 'yes') {
-        riskScore -= 5
-        console.log('Vitamin D foods: yes (-5 points)')
-      } else {
-        console.log('Vitamin D foods: no (+0 points)')
-      }
-      
-      // Floor at zero (don't go negative overall)
-      riskScore = Math.max(0, riskScore)
-      console.log('Final Risk Score:', riskScore)
-      console.log('=== End Calculation ===')
-      
-      return riskScore
-    }
+        try {
+          // 🧠 Ensure local device ID exists
+          let user_uuid = localStorage.getItem("user_uuid")
+          if (!user_uuid) {
+            user_uuid = uuidv4()
+            localStorage.setItem("user_uuid", user_uuid)
+            console.log("Generated new user UUID:", user_uuid)
+          }
+
+          // 🧠 Prepare data payload with UUID
+          const payload = {
+            ...this.answers,
+            user_uuid: user_uuid,
+          }
+
+          // 🧠 Send to backend (local Django endpoint)
+          const response = await axios.post(
+            "http://127.0.0.1:8000/vitamin-d-helper/api/questionnaire/",
+            payload
+          )
+
+          console.log("Backend result:", response.data)
+
+          // 🧠 Save backend response locally for later use
+          localStorage.setItem("questionnaire_result", JSON.stringify(response.data))
+
+          // 🧠 Navigate based on result
+          if (response.data.result === "Inadequate") {
+            this.$router.push("/vitamin-d-inadequate")
+          } else {
+            this.$router.push("/vitamin-d-result")
+          }
+        } catch (error) {
+          console.error("Error submitting questionnaire:", error)
+          alert("Failed to submit questionnaire. Please try again.")
+        }
+      },
+    },
   }
-}
 </script>
+
 
 <style scoped>
 .questionnaire-page {
