@@ -26,9 +26,12 @@ Now navigate to `cognivue/backend/cognivue/` (the folder where `manage.py` is) a
 - If these datasets load successfully, your terminal should say something like "close to 700 items added from 3 fixtures".
 - `python manage.py load_insights_csv --factoids "cognivue\backend\cognivue\insights\data\factoids.csv" --cards "cognivue\backend\cognivue\insights\data\cards.csv"` This command may need you to play around with the paths of where cards.csv and factoids.csv is located. But once it runs, you should get some green text letting you know the data loaded successfully.
 
+### Dev server specific instructions
+I've added some flags so that we can work isolated from the production build. But this need you to run the files in a certain way.
+
 Now, all your setup is done and datasets loaded, you can finally proceed with trying to run the build locally.
 - #### Backend - in a terminal:
-    - in `cognivue\backend\cognivue` run `python manage.py runserver`
+    - in `cognivue\backend\cognivue` run `set DJANGO_DEV=1 && python manage.py runserver localhost:8000`
 - #### Frontend - in a diferent terminal:
     - in the root folder `cognivue\` run `npm run dev`
 

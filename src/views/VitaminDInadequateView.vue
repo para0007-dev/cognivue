@@ -18,7 +18,6 @@ export default {
 <style scoped>
 .vitamin-d-result {
   min-height: 100vh;
-  background: linear-gradient(135deg, #C7EED0 0%, #9BC7AF 100%);
-  padding: 2rem;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); /* orange pastel */
 }
 </style>
