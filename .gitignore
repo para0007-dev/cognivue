@@ -1,86 +1,10 @@
-# ---- OS cruft ----
-.DS_Store
-Thumbs.db
-__MACOSX/
-
-# ---- Git internals (avoid archiving repo-inside-repo) ----
-.git/
-.git-*/
-
-# ---- Python general ----
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.so
-*.egg
-*.egg-info/
-.eggs/
-.Python
-.cache/
-pip-wheel-metadata/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.pyre/
-.coverage
-.coverage.*
-coverage.xml
-htmlcov/
-*.log
-
-# ---- Virtual environments ----
-venv/
-.venv/
-ENV/
-env/
-
-# ---- Django specifics ----
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-# Collected static and uploaded media (keep app static src)
-**/staticfiles/
-**/static_root/
-**/media/
-
-# ---- Node / Vite / Vue ----
 node_modules/
 dist/
-dist-ssr/
-.vite/
-.nuxt/
-.parcel-cache/
-.eslintcache
-*.local
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# ---- Cypress / Playwright / test artifacts ----
-cypress/videos/
-cypress/screenshots/
-playwright-report/
-test-results/
-
-# ---- Environment and secrets ----
+backend/
+venv/
 .env
 .env.*
-!.env.example
-!.env.development.example
-!.env.production.example
-
-# ---- IDE/editor metadata ----
-.idea/
+!*.example
+.DS_Store
 .vscode/
-*.code-workspace
-
-# ---- OS/package manager extras ----
-.DS_Store?
-Desktop.ini
-
-# ---- Lockfiles to keep (do NOT ignore) ----
-# package-lock.json, yarn.lock, pnpm-lock.yaml should be committed for reproducible builds.
-# requirements.txt should be committed as well.
-# migrations/*.py should be kept; only caches are ignored by patterns above.
+*.log
