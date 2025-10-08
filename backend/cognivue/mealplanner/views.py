@@ -14,10 +14,10 @@ def _coerce_f(x, d=0.0):
 def _enforce(items, prefs):
     dietary = set(prefs.get("dietary", []))
     max_prep = int(prefs.get("max_prep_minutes", 60))
-    scope    = prefs.get("budget_scope","weekly")
-    days     = int(prefs.get("days",1))
-    budget   = _coerce_f(prefs.get("budget_aud",0.0))
-    budget_total = budget if scope=="weekly" else budget*days
+    scope    = 'daily'
+    days     = 1
+    budget   = _coerce_f(prefs.get("budgetAud",0.0))
+    budget_total = budget
 
     cleaned, cost, has_snack, has_meal = [], 0.0, False, False
     for it in items:
@@ -92,6 +92,7 @@ def generate_ai_plan(request):
         return JsonResponse({"success": False, "error": "Missing GEMINI_API_KEY"}, status=500)
 
     prefs = json.loads(request.body or "{}")
+    print(prefs)
 
     try:
         genai.configure(api_key=settings.GEMINI_API_KEY)

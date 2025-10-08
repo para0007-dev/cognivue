@@ -5,33 +5,32 @@ import { mealAI } from '@/services/api.js'
 
 const dietaryOptions = ['Vegetarian','Vegan','Lactose-free','Gluten-free','Nut-free','Low-sodium']
 const selectedDietary = ref([])
-const budget = ref(150)
-const budgetScope = ref('weekly') // weekly | daily
+const budget = ref(30) // daily budget scope
 const maxPrep = ref(40)
-const mealTypes = ['Breakfast','Lunch','Dinner','Snack']
-const selectedMealTypes = ref(['Breakfast','Lunch','Dinner','Snack'])
 
 const loading = ref(false)
 const error = ref(null)
 const result = ref(null)
 
-function toggleChip(arr, v){ const i=arr.value.indexOf(v); i>=0?arr.value.splice(i,1):arr.value.push(v) }
+function toggleChip(v){
+  const i = selectedDietary.value.indexOf(v)
+  i>=0 ? selectedDietary.value.splice(i,1) : selectedDietary.value.push(v)
+}
 
 async function generate(){
-  loading.value = true; error.value = null; result.value = null
+  loading.value = true; error.value=null; result.value=null
   try{
-    const payload = {
-      days: 1,
-      budget_scope: budgetScope.value,
-      budget_aud: Number(budget.value),
+    const res = await mealAI.generate({
+      days: 1,                          
+      budget_scope: 'daily',            
+      budgetAud: Number(budget.value),
       max_prep_minutes: Number(maxPrep.value),
-      dietary: selectedDietary.value.map(s=>s.toLowerCase()),
-    }
-    const res = await mealAI.generate(payload)
+      dietary_restrictions: selectedDietary.value.map(s=>s.toLowerCase())
+    })
     if(!res.success) throw new Error(res.error || 'Failed')
     result.value = res
-  }catch(e){ error.value = e.message || 'Failed to generate' }
-  finally{ loading.value = false }
+  }catch(e){ error.value = e.message || 'Failed' }
+  finally{ loading.value=false }
 }
 </script>
 
@@ -45,30 +44,26 @@ async function generate(){
       <div class="goal-pill">Daily goal: 10–20 µg Vitamin D</div>
     </section>
 
-    <!-- Controls row -->
-    <section class="controls">
-      <!-- Dietary chips -->
+    <section class="controls two-col">
+      <!-- LEFT: Dietary -->
       <div class="card">
         <div class="card-title">Dietary Requirements</div>
         <div class="chips">
           <button v-for="opt in dietaryOptions" :key="opt"
                   :class="['chip', selectedDietary.includes(opt) && 'chip--on']"
-                  @click="toggleChip(selectedDietary,opt)">
+                  @click="toggleChip(opt)">
             {{ opt }}
           </button>
           <button class="chip ghost" @click="selectedDietary=[]">No Restrictions</button>
         </div>
       </div>
 
-      <!-- Budget card -->
+      <!-- RIGHT: Budget and Prep time -->
       <div class="card">
-        <div class="card-title">Weekly Budget</div>
-        <div class="budget">
-          <input type="number" min="0" step="5" v-model.number="budget" /> <span>AUD/{{ budgetScope }}</span>
-        </div>
-        <div class="scope">
-          <button :class="['scope-btn', budgetScope==='daily' && 'on']" @click="budgetScope='daily'">Daily</button>
-          <button :class="['scope-btn', budgetScope==='weekly' && 'on']" @click="budgetScope='weekly'">Weekly</button>
+        <div class="card-title">Daily Budget & Prep Time</div>
+        <div class="budget-row">
+          <label>Daily budget (AUD)</label>
+          <input type="number" min="0" step="1" v-model.number="budget" />
         </div>
         <div class="slider">
           <label>Max prep time</label>
@@ -76,21 +71,9 @@ async function generate(){
           <span>{{ maxPrep }} mins</span>
         </div>
       </div>
-
-      <!-- Meal type buttons -->
-      <div class="card">
-        <div class="card-title">Meal Types Needed</div>
-        <div class="types">
-          <button v-for="t in mealTypes" :key="t"
-                  :class="['type-btn', selectedMealTypes.includes(t) && 'on']"
-                  @click="toggleChip(selectedMealTypes,t)">
-            {{ t }}
-          </button>
-        </div>
-      </div>
     </section>
 
-    <!-- Generate CTA -->
+    <!-- CTA -->
     <div class="cta">
       <button class="generate" :disabled="loading" @click="generate">
         {{ loading ? 'Generating…' : 'Generate My AI Meal Plan' }}
@@ -157,27 +140,35 @@ async function generate(){
   --card:#ffffff;
   --ink:#0f172a;
   --muted:#64748b;
-  --brand:#16a34a;
+  --brand:#163321;
   --brand-600:#15803d;
   --accent:#60a5fa;
   --ring:rgba(22,163,74,.25);
 }
 
 .mp{max-width:1200px;margin:0 auto;padding:20px}
-.hero{background:linear-gradient(180deg,#ecfdf5, #d1fae5); border:1px solid #bbf7d0; padding:20px; border-radius:16px; text-align:center; margin-bottom:16px}
-.title{font-size:28px;font-weight:800;color:#14532d}
-.subtitle{color:#166534;margin-top:4px}
+.hero{background:linear-gradient(180deg,#33825d, #6febab); border:1px solid #bbf7d0; padding:20px; border-radius:16px; text-align:center; margin-bottom:16px}
+.title{font-size:28px;font-weight:800;color:#cdeeda}
+.subtitle{color:#effaf3;margin-top:4px}
 .goal-pill{display:inline-block;margin-top:10px;background:#14532d;color:#ecfdf5;padding:6px 10px;border-radius:999px;font-size:12px}
 
-.controls{display:grid;grid-template-columns:1fr 1fr; gap:16px}
-.card{background:var(--card);border:1px solid #e5e7eb;border-radius:14px;padding:14px}
+.controls.two-col{
+  display:grid;
+  grid-template-columns: 1fr 1fr;  
+  gap:16px;
+}
+.card{background:var(--card);border:1px solid #e5e7eb;border-radius:14px;padding: 30px;display: flex; flex-direction: column; align-items: center;}
 .card-title{font-weight:700;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1px solid #e5e7eb;background:#fff;border-radius:999px;padding:6px 10px;font-weight:600;cursor:pointer}
 .chip--on{background:#dcfce7;border-color:#86efac;color:#14532d}
 .chip.ghost{background:#f8fafc}
-.budget{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.budget input{width:110px;padding:6px 8px;border:1px solid #d1d5db;border-radius:10px}
+.budget-row{
+  display:flex; align-items:center; gap:10px; margin-bottom:12px;
+}
+.budget-row input{
+  width:140px; padding:6px 8px; border:1px solid #d1d5db; border-radius:10px;
+}
 .scope{display:flex;gap:8px;margin-bottom:10px}
 .scope-btn{padding:6px 10px;border:1px solid #e5e7eb;border-radius:999px;background:#fff;cursor:pointer}
 .scope-btn.on{background:#eefcf2;border-color:#86efac;color:#166534}
@@ -187,7 +178,7 @@ async function generate(){
 .type-btn.on{background:#f0fdf4;border-color:#86efac;color:#166534}
 
 .cta{display:flex;justify-content:center;margin:16px 0}
-.generate{background:linear-gradient(180deg,var(--brand),var(--brand-600));color:#fff;border:none;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px var(--ring)}
+.generate{background:black;color:#fff;border:none;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px var(--ring)}
 .generate:disabled{opacity:.6;cursor:not-allowed}
 
 .alert{color:#b91c1c;margin:10px 0}
@@ -212,6 +203,6 @@ async function generate(){
 .tag{background:#f1f5f9;border-radius:999px;padding:2px 8px;font-size:12px}
 
 @media (max-width: 900px){
-  .controls{grid-template-columns:1fr}
+  .controls.two-col{grid-template-columns:1fr;}
 }
 </style>
