@@ -30,6 +30,8 @@ def _enforce(items, prefs):
         vitd_mcg = _coerce_f(it.get("vitd_mcg"), 0)
         vitd_iu  = int(_coerce_f(it.get("vitd_iu"), vitd_mcg*40))
         cost_aud = round(_coerce_f(it.get("cost_aud"), 0), 2)
+        ingredients = it.get("ingredients") or []
+        recipe_steps = it.get("recipe_steps") or []
 
         cleaned.append({
           "name": (it.get("name") or "").strip(),
@@ -39,6 +41,8 @@ def _enforce(items, prefs):
           "vitd_mcg": round(vitd_mcg,1),
           "vitd_iu": vitd_iu,
           "tags": list(tags),
+          "ingredients": [str(x) for x in ingredients][:20],
+          "recipe_steps": [str(x) for x in recipe_steps][:12],
         })
         has_snack |= kind=="snack"; has_meal |= kind=="meal"; cost += cost_aud
 
@@ -96,7 +100,8 @@ def generate_ai_plan(request):
             system_instruction=(
                 "You are a diet assistant for middle-aged Australians. "
                 "Suggest vitamin-D rich foods available in AU supermarkets. "
-                "Respect dietary restrictions. Use AUD prices."
+                "Respect dietary restrictions. Use AUD prices and give realistic prep times."
+                "Avoid gimmicky foods with adjectives like 'Vitamin-D fortified', 'UV-enriched' and the like."
             ),
             generation_config={
                 "response_mime_type": "application/json",
@@ -115,8 +120,10 @@ def generate_ai_plan(request):
                                     "vitd_mcg": {"type": "number"},
                                     "vitd_iu": {"type": "integer"},
                                     "tags": {"type": "array", "items": {"type": "string"}},
+                                    "ingredients": {"type":"array","items":{"type":"string"}},
+                                    "recipe_steps": {"type":"array","items":{"type":"string"}}
                                 },
-                                "required": ["name","kind","cost_aud","prep_minutes","vitd_mcg","vitd_iu","tags"],
+                                "required": ["name","kind","cost_aud","prep_minutes","vitd_mcg","vitd_iu","tags","ingredients","recipe_steps"],
                             },
                         }
                     },
@@ -132,6 +139,8 @@ def generate_ai_plan(request):
                 "All items must satisfy every dietary tag in preferences.dietary.",
                 "Include cost_aud (AUD), prep_minutes, vitd_mcg and vitd_iu (1 µg = 40 IU).",
                 "Label each item with kind: 'meal' or 'snack'.",
+                "Provide an itemised ingredients list and short step-by-step recipe.",
+                "Return ONLY JSON matching the response schema."
             ],
         }
 
