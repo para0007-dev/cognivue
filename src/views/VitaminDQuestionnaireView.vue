@@ -126,8 +126,13 @@
                   <input type="radio" v-model="answers.vitaminDSupplement" value="no" name="vitaminDSupplement">
                   <span class="option-text">No</span>
                 </label>
+                <label class="option">
+                  <input type="radio" v-model="answers.vitaminDSupplement" value="not-sure" name="vitaminDSupplement">
+                  <span class="option-text">Not sure</span>
+                </label>
               </div>
             </div>
+
 
             <!-- Question 7: Vitamin D Rich Foods -->
             <div v-if="currentQuestion === 7" class="question">
@@ -147,13 +152,25 @@
 
           <!-- Navigation Buttons -->
           <div class="navigation">
+            <!-- If on Q1, show "Back to Home" -->
             <button 
+              v-if="currentQuestion === 1"
+              class="nav-btn back-btn"
+              @click="$router.push('/')"
+            >
+              Back to Home
+            </button>
+
+            <!-- Otherwise, normal Back -->
+            <button 
+              v-else
               class="nav-btn back-btn" 
-              @click="previousQuestion" 
-              :disabled="currentQuestion === 1"
+              @click="previousQuestion"
             >
               Back
             </button>
+
+            <!-- Next / Submit button aligned right -->
             <button 
               class="nav-btn next-btn" 
               @click="nextQuestion" 
@@ -162,6 +179,7 @@
               {{ currentQuestion === totalQuestions ? 'Submit' : 'Next' }}
             </button>
           </div>
+
         </div>
       </div>
     </main>
@@ -310,9 +328,12 @@ export default {
       if (this.answers.vitaminDSupplement === 'yes') {
         riskScore -= 10
         console.log('Vitamin D supplement: yes (-10 points)')
+      } else if (this.answers.vitaminDSupplement === 'not-sure') {
+        console.log('Vitamin D supplement: not sure (+0 points)')
       } else {
         console.log('Vitamin D supplement: no (+0 points)')
       }
+
       
       // Vitamin D-rich foods
       if (this.answers.vitaminDFoods === 'yes') {
@@ -466,16 +487,17 @@ export default {
 }
 
 .skin-type-1 {
-  background: linear-gradient(135deg, #fef7cd 0%, #fde68a 50%, #f59e0b 100%);
+  background-color: #f9d7b9; /* very fair / fair */
 }
 
 .skin-type-2 {
-  background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #ea580c 100%);
+  background-color: #c68642; /* medium / olive */
 }
 
 .skin-type-3 {
-  background: linear-gradient(135deg, #d2b48c 0%, #8b4513 50%, #654321 100%);
+  background-color: #8d5524; /* dark / very dark */
 }
+
 
 .skin-type-option:hover .skin-color-card {
   border-color: #22c55e;
@@ -490,9 +512,11 @@ export default {
 
 .navigation {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: space-between; /* pushes Back left, Next right */
+  align-items: center;
+  margin-top: 2rem;
 }
+
 
 .nav-btn {
   padding: 0.75rem 2rem;
