@@ -1,16 +1,38 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Header from '@/components/Header.vue'
-import { mealAI } from '@/services/api.js'
+import { mealAI, mealImages } from '@/services/api.js'
 
 const dietaryOptions = ['Vegetarian','Vegan','Lactose-free','Gluten-free','Nut-free','Low-sodium']
 const selectedDietary = ref([])
-const budget = ref(30) // daily budget scope
+const budget = ref(20) // daily budget scope
 const maxPrep = ref(40)
 
 const loading = ref(false)
 const error = ref(null)
 const result = ref(null)
+
+// Caching mealplan accross a session
+const CACHE_KEY = 'mealplan:v1';
+const CACHE_TTL_HOURS = 24;
+
+function saveCache(prefs, res){
+  const payload = {prefs, res, ts: Date.now()};
+  localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+}
+
+function loadCache(){
+  const raw = localStorage.getItem(CACHE_KEY);
+  if(!raw) return null;
+  try{
+    const {ts, res} = JSON.parse(raw);
+    const ageHrs = (Date.now() - ts) / 36e5;
+    if (ageHrs > CACHE_TTL_HOURS) return null;
+    return res;
+  } catch {return null;}
+}
+
+function clearCache(){localStorage.removeItem(CACHE_KEY);}
 
 function toggleChip(v){
   const i = selectedDietary.value.indexOf(v)
@@ -20,18 +42,34 @@ function toggleChip(v){
 async function generate(){
   loading.value = true; error.value=null; result.value=null
   try{
-    const res = await mealAI.generate({
+    const payload = {
       days: 1,                          
       budget_scope: 'daily',            
       budgetAud: Number(budget.value),
       max_prep_minutes: Number(maxPrep.value),
       dietary_restrictions: selectedDietary.value.map(s=>s.toLowerCase())
-    })
+    }
+    const res = await mealAI.generate(payload)
     if(!res.success) throw new Error(res.error || 'Failed')
-    result.value = res
+    const diet = selectedDietary.value.map(s => s.toLowerCase())
+
+    // fetching photos for each item
+    const withPhotos = await Promise.all(
+      res.items.map(async (it) => {
+        const p = await mealImages.get(it.name, diet)
+        return { ...it, image_url: (p && p.url) ? p.url : null}
+      })
+    )
+    result.value = {...res, items: withPhotos}
+    saveCache(payload, result.value)
   }catch(e){ error.value = e.message || 'Failed' }
   finally{ loading.value=false }
 }
+
+onMounted(()=>{
+  const cached = loadCache()
+  if (cached) result.value = cached
+})
 </script>
 
 <template>
@@ -41,7 +79,7 @@ async function generate(){
     <section class="hero">
       <div class="title">AI Vitamin D Meal Planner</div>
       <div class="subtitle">Personalised Australian meal plans for optimal brain health</div>
-      <div class="goal-pill">Daily goal: 10–20 µg Vitamin D</div>
+      <div class="goal-pill">Recommended daily goal: 10–20 µg Vitamin D</div>
     </section>
 
     <section class="controls two-col">
@@ -62,7 +100,7 @@ async function generate(){
       <div class="card">
         <div class="card-title">Daily Budget & Prep Time</div>
         <div class="budget-row">
-          <label>Daily budget (AUD)</label>
+          <label>Daily budget (AUD):</label>
           <input type="number" min="0" step="1" v-model.number="budget" />
         </div>
         <div class="slider">
@@ -85,7 +123,7 @@ async function generate(){
     <!-- Results -->
     <section v-if="result" class="results">
       <div class="results-head">
-        <div class="h">Your Personalised Meal Plan</div>
+        <div class="h">Here's your personalised meal plan:</div>
         <div class="summary">
           <span>Total: ${{ Number(result.summary.total_cost_aud).toFixed(2) }}</span>
           <span>Budget: ${{ Number(result.summary.budget_limit_aud).toFixed(2) }}</span>
@@ -98,13 +136,17 @@ async function generate(){
       <div class="cards">
         <article v-for="(it,i) in result.items" :key="i" class="meal-card">
           <header class="mc-head">
-            <span class="badge">{{ it.kind === 'snack' ? 'Snack' : it.kind }}</span>
-            <h3 class="mc-title">{{ it.name }}</h3>
-            <div class="meta">
-              <span>Vit D: {{ it.vitd_mcg }} µg ({{ it.vitd_iu }} IU)</span>
-              <span>Prep: {{ it.prep_minutes }} min</span>
-              <span>Cost: ${{ Number(it.cost_aud).toFixed(2) }}</span>
+            <div class="mc-info">
+              <span class="badge">{{ it.kind === 'snack' ? 'Snack' : 'Meal' }}</span>
+              <h3 class="mc-title">{{ it.name }}</h3>
+              <div class="meta">
+                <span>Vit D: {{ it.vitd_mcg }} µg ({{ it.vitd_iu }} IU)</span>
+                <span>Prep: {{ it.prep_minutes }} min</span>
+                <span>Cost: ${{ Number(it.cost_aud).toFixed(2) }}</span>
+              </div>
             </div>
+
+            <img v-if="it.image_url" :src="it.image_url" alt="" class="mc-img" loading="lazy" />
           </header>
 
           <div class="mc-body">
@@ -189,7 +231,26 @@ async function generate(){
 
 .cards{display:flex;flex-direction:column;gap:12px}
 .meal-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden}
-.mc-head{padding:14px;border-bottom:1px solid #eef2f7}
+.mc-head{
+  display:grid;
+  grid-template-columns: 1fr 140px;   /* left text | right image */
+  gap:16px;
+  align-items:start;
+  padding: 15px 15px 0px 15px;
+}
+.mc-info{ min-width:0; }              /* let text wrap nicely */
+.mc-img{
+  grid-column: 2;                     /* force to right column */
+  width:140px; height:110px;
+  object-fit:cover; border-radius:10px;
+}
+
+/* Stack on small screens */
+@media (max-width: 600px){
+  .mc-head{ grid-template-columns: 1fr; }
+  .mc-img{ grid-column: 1; width:100%; height:180px; }
+}
+
 .badge{background:#e0f2fe;color:#075985;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700}
 .mc-title{margin:6px 0 4px;font-size:18px}
 .meta{display:flex;gap:14px;color:#64748b;font-size:14px;flex-wrap:wrap}

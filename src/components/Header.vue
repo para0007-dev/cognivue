@@ -10,7 +10,7 @@
         <ul class="nav-menu">
           <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
           <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
-          <li><router-link to="/nutrition" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Plan</span></router-link></li>
+          <li><router-link to="/mealplanner" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Meal Plan</span></router-link></li>
           <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Education Hub"><span>Education Hub</span></router-link></li>
           <!-- <li><router-link to="/health-impact" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Health Impact"><span>Health Impact</span></router-link></li> -->
         </ul>
@@ -34,7 +34,7 @@
         <ul class="mobile-nav-menu">
           <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
           <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
-          <li><router-link to="/nutrition" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Plan</span></router-link></li>
+          <li><router-link to="/mealplanner" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Meal Plan</span></router-link></li>
           <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Education Hub"><span>Education Hub</span></router-link></li>
         </ul>
       </div>

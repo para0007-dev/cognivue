@@ -118,6 +118,7 @@ LOGIN_REDIRECT_URL = "/vitamin-d-helper/"
 # OpenWeather
 OPENWEATHER_API_KEY = "0ba8d4e3b494e7864ea8b8ac09bf7275"
 GEMINI_API_KEY = "AIzaSyAoPw1blUCe-nUSKWxQQx9-B4_RH4D2GBE"
+PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 
 # --- CORS / CSRF for Vue on Azure SWA ---
 CORS_ALLOWED_ORIGINS = [

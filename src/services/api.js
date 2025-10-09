@@ -114,6 +114,10 @@ export const mealAI = {
     }),
 };
 
+export const mealImages = {
+  get:async (q, dietArr = []) => apiRequest(`/mealplanner/api/photo/?q=${encodeURIComponent(q)}&diet=${encodeURIComponent(dietArr.join(','))}`)
+};
+
 
 
 // Export base if needed elsewhere

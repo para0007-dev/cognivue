@@ -1,12 +1,13 @@
-import os, json
+import os, json, requests, urllib.parse
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
+from django.core.cache import cache
+import hashlib
 
 from django.conf import settings
 import google.generativeai as genai
 
-# --- tiny guards (keeps your AC true even if model slips) ---
 def _coerce_f(x, d=0.0): 
     try: return float(x)
     except: return float(d)
@@ -157,3 +158,33 @@ def generate_ai_plan(request):
 
     cleaned, summary = _enforce(items, prefs)
     return JsonResponse({"success": True, "items": cleaned, "summary": summary, "preferences": prefs})
+
+# Image gathering
+# views.py
+@require_GET
+def photo_search(request):
+    q = (request.GET.get("q") or "").strip()
+    diet = (request.GET.get("diet") or "").lower()  # e.g. "vegan,gluten-free"
+    if not q or not settings.PEXELS_API_KEY:
+        return JsonResponse({"url": None})
+
+    q_full = " ".join([q] + [d.strip() for d in diet.split(",") if d.strip()])
+
+    cache_key = "pexels:" + hashlib.sha1(q_full.encode("utf-8")).hexdigest()
+    if (cached := cache.get(cache_key)):
+        return JsonResponse({"url": cached})
+
+    try:
+        r = requests.get(
+            "https://api.pexels.com/v1/search",
+            params={"query": q_full, "per_page": 1, "orientation": "landscape"},
+            headers={"Authorization": settings.PEXELS_API_KEY},
+            timeout=8,
+        )
+        r.raise_for_status()
+        photos = r.json().get("photos", [])
+        url = (photos[0]["src"].get("large") if photos else None)
+        cache.set(cache_key, url, 60*60*24*30)
+        return JsonResponse({"url": url})
+    except Exception:
+        return JsonResponse({"url": None})
