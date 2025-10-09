@@ -293,6 +293,7 @@ def groq_ping(request):
             "ok": False,
             "error": str(e),
             "base_url": os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1"),
+            "has_key": bool(os.getenv("GROQ_API_KEY", ""))
         }, status=502)
 
 
