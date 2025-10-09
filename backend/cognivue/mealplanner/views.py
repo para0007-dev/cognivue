@@ -160,7 +160,6 @@ def _enforce(items, prefs):
 def __groq_client():
     return Groq(
         api_key=os.getenv("GROQ_API_KEY", ""),
-        base_url="https://api.groq.com/openai/v1",
     )
 
 @csrf_exempt
@@ -224,14 +223,14 @@ def generate_ai_plan(request):
     try:
         client = __groq_client()
         resp = client.chat.completions.create(
-            model="openai/gpt-oss-20b",
+            model="openai/gpt-oss-120b",
             messages=[
                 {"role": "system", "content": system_msg},
                 {"role": "user", "content": json.dumps(user_prompt)},
             ],
             response_format={"type": "json_object"},
             temperature=0.4,
-            max_tokens=3000,
+            max_tokens=5000,
         )
         content = resp.choices[0].message.content or "{}"
         try:
@@ -292,7 +291,6 @@ def groq_ping(request):
         return JsonResponse({
             "ok": False,
             "error": str(e),
-            "base_url": os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1"),
             "has_key": bool(os.getenv("GROQ_API_KEY", ""))
         }, status=502)
 

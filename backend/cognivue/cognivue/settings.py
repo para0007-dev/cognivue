@@ -144,8 +144,8 @@ CSRF_COOKIE_DOMAIN    = ".brainvid.me"
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE    = True
-SESSION_COOKIE_SAMESITE = "None"
-CSRF_COOKIE_SAMESITE    = "None"
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SAMESITE    = "Lax"
 
 
 # Tell Django the original scheme behind Azure’s proxy
