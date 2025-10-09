@@ -117,6 +117,7 @@ LOGIN_REDIRECT_URL = "/vitamin-d-helper/"
 
 # OpenWeather
 OPENWEATHER_API_KEY = "0ba8d4e3b494e7864ea8b8ac09bf7275"
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 GEMINI_PROXY_URL = os.getenv("GEMINI_PROXY_URL", "https://gemini-proxy.brainvid.workers.dev")

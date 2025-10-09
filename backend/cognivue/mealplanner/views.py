@@ -5,7 +5,7 @@ from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from django.conf import settings
-
+from groq import Groq
 
 # --------- helpers ---------
 def _coerce_f(x, d=0.0):
@@ -19,66 +19,44 @@ def _split_recipe_to_steps(recipe):
     """Accept 'recipe' string and convert to recipe_steps[]."""
     if not recipe:
         return []
-    # split on occurrences like "1. step ..." "2. step ..."
     parts = [s.strip(" .\n") for s in re.split(r"\s*\d+\.\s*", str(recipe)) if s.strip()]
     return parts or [str(recipe)]
 
-def _extract_items_from_worker(payload):
+def _ingredients_to_strings(raw):
     """
-    Pull items[] whether the Worker returned:
-      A) already-parsed JSON with top-level 'items', or
-      B) raw GLM: candidates -> content.parts[].text containing a JSON string.
+    Accepts either:
+      - ["1 cup oats", "250 ml milk"]  OR
+      - [{"name":"oats","quantity":"1","unit":"cup"}, ...]
+    Returns list[str] like "1 cup oats".
     """
-    # A) direct dict with items
-    if isinstance(payload, dict) and "items" in payload:
-        return payload.get("items") or []
-
-    # A') sometimes wrapped under 'output'
-    if isinstance(payload, dict) and "output" in payload and isinstance(payload["output"], dict):
-        out = payload["output"]
-        if "items" in out:
-            return out.get("items") or []
-
-    # B) GLM structure
-    try:
-        for c in (payload or {}).get("candidates", []) or []:
-            for p in (c.get("content") or {}).get("parts", []) or []:
-                t = p.get("text")
-                if t:
-                    doc = json.loads(t)
-                    if isinstance(doc, dict) and "items" in doc:
-                        return doc.get("items") or []
-    except Exception:
-        pass
-    return []
-
+    out = []
+    if not raw:
+        return out
+    for x in raw:
+        if isinstance(x, dict):
+            name = str(x.get("name", "")).strip()
+            qty  = str(x.get("quantity", "")).strip()
+            unit = str(x.get("unit", "")).strip()
+            s = " ".join(p for p in [qty, unit, name] if p)
+            out.append(s or name)
+        else:
+            out.append(str(x).strip())
+    return out
 
 def _enforce(items, prefs):
     """
     Validate / normalise model output and enforce constraints:
-    - honor dietary tags (only if tags are present)
     - respect max prep time
     - ensure at least one snack and one meal
     - cap to exactly 3 items and compute budget summary
+    NOTE: dietary restrictions are NOT enforced.
     """
-    # accept either "dietary" or "dietary_restrictions" from the client
-    dietary_raw = (
-        prefs.get("dietary")
-        or prefs.get("dietary_restrictions")
-        or []
-    )
-    dietary = set(str(t).strip().lower() for t in dietary_raw if str(t).strip())
-
     max_prep = int(prefs.get("max_prep_minutes", 60))
     budget_total = _coerce_f(prefs.get("budgetAud", 0.0))
 
     cleaned, cost, has_snack, has_meal = [], 0.0, False, False
     for it in items or []:
         tags = set(str(x).strip().lower() for x in (it.get("tags") or []))
-
-        # Only enforce dietary inclusion if model actually supplied tags
-        if dietary and tags and not dietary.issubset(tags):
-            continue
 
         prep = int(_coerce_f(it.get("prep_minutes"), 999))
         if prep > max_prep:
@@ -97,16 +75,12 @@ def _enforce(items, prefs):
         if not recipe_steps and it.get("recipe"):
             recipe_steps = _split_recipe_to_steps(it.get("recipe"))
 
-        ingredients = [str(x) for x in (it.get("ingredients") or [])][:20]
+        # Ensure ingredients are strings for display
+        ingredients = _ingredients_to_strings(it.get("ingredients"))[:20]
         recipe_steps = [str(x) for x in (recipe_steps or [])][:12]
 
-        # Ensure name exists; derive from first ingredient if missing
-        name = (it.get("name") or "").strip()
-        if not name:
-            if ingredients:
-                name = str(ingredients[0]).split(",")[0].strip().title()
-            else:
-                name = "Suggested Option"
+        # Ensure name exists
+        name = (it.get("name") or "").strip() or (ingredients[0].split(",")[0].title() if ingredients else "Suggested Option")
 
         cleaned.append(
             {
@@ -182,104 +156,104 @@ def _enforce(items, prefs):
     }
     return cleaned[:3], summary
 
-
-# --------- AI endpoint (via Cloudflare Worker proxy) ---------
+# --------- AI endpoint (Groq: Llama-3.x) ---------
 @csrf_exempt
 @require_POST
 def generate_ai_plan(request):
-    """
-    Generates a 1-day plan (3 items: ≥1 snack, ≥1 meal) using your Cloudflare Worker
-    as the Gemini proxy. Expects JSON body with:
-      - budgetAud (number)
-      - max_prep_minutes (int)
-      - dietary OR dietary_restrictions (array[str])
-    """
-    proxy_url = getattr(settings, "GEMINI_PROXY_URL", "").strip()
-    if not proxy_url:
-        return JsonResponse({"success": False, "error": "GEMINI_PROXY_URL not configured"}, status=500)
+    if not getattr(settings, "GROQ_API_KEY", ""):
+        return JsonResponse({"success": False, "error": "GROQ_API_KEY not configured"}, status=500)
 
     prefs = json.loads(request.body or "{}")
+    budget = prefs.get("budgetAud")
+    max_prep = prefs.get("max_prep_minutes")
+    dietary_raw = prefs.get("dietary") or prefs.get("dietary_restrictions") or []
+    dietary = sorted({str(x).strip().lower() for x in dietary_raw if str(x).strip()})
 
-    prompt = {
-        "task": "Generate exactly 3 options with at least one snack and one full meal.",
-        "preferences": prefs,
+    # Strong instruction with inline schema (plain JSON)
+    system_msg = (
+        "You are a diet assistant for middle-aged Australians. Your goal is to design recipes rich in vitamin D. "
+        "Only suggest realistic AU-supermarket recipes. Use realistic AUD costs and realistic prep times. "
+        "Output STRICT JSON only (no extra text). The JSON MUST match this shape:\n"
+        "{\n"
+        '  "items": [\n'
+        "    {\n"
+        '      "name": string,\n'
+        '      "kind": "meal" | "snack",\n'
+        '      "cost_aud": number,\n'
+        '      "prep_minutes": integer,\n'
+        '      "vitd_mcg": number,\n'
+        '      "vitd_iu": integer,\n'
+        '      "tags": string[],\n'
+        '      "ingredients": [{"name": string, "quantity": string, "unit": string}],\n'
+        '      "recipe_steps": string[]\n'
+        "    }\n"
+        "  ]\n"
+        "}\n"
+        "Return exactly 3 items."
+    )
+
+    user_prompt = {
+        "task": "Generate exactly 3 items for one day: include at least 1 snack and 1 full meal.",
+        "preferences": {
+            "budgetAud": budget,
+            "max_prep_minutes": max_prep,
+            "budget_scope": "daily",
+            "days": 1,
+            "dietary": dietary,
+        },
         "rules": [
-            "All items must satisfy every dietary tag in preferences.dietary or preferences.dietary_restrictions.",
-            "Each item MUST include: name, kind ('meal'|'snack'), cost_aud, prep_minutes, vitd_mcg, vitd_iu, tags[], ingredients[], recipe_steps[].",
-            "Include cost_aud (AUD), prep_minutes, vitd_mcg and vitd_iu (1 µg = 40 IU).",
-            "Label each item with kind: 'meal' or 'snack'.",
-            "Provide an itemised ingredients list and short step-by-step recipe.",
-            "Return ONLY JSON with top-level key 'items'.",
-            "Don't use gimmicky ingredients or titles like 'UV treated mushrooms' or 'Fortified oats', just keep it simple food ingredients",
+            "If preferences.dietary is non-empty, every item MUST comply with ALL listed restrictions.",
+            "Do not include violating ingredients (e.g., meat/fish for vegetarian, any animal products for vegan, dairy for lactose-free, gluten for gluten-free, nuts for nut-free, high-sodium items for low-sodium).",
+            "Ensure that the recipes are rich in vitamin D.",
+            "Provide vitamin D in both µg and IU (1 µg = 40 IU).",
+            "Ingredients must be objects with name, quantity, unit (unit may be empty string if not applicable).",
+            "Return ONLY JSON matching the shape above. No prose.",
+            "Try to be reasonable with your recipes - if it's a meal it should be satiating.",
+            "Don't come up with gimmicky ingredients or meal options like 'fortified milk' or 'vitamin D treated mushrooms'. Keep it simple.",
+            "Include meaningful tags for each item, and copy the user dietary tags into tags as well."
+            "Don't hallucinate costs. If you are given 60 AUD to work with the cost of all meals don't strictly have to add up to 60 AUD.",
         ],
-        "region": "AU supermarkets; realistic prices and prep times.",
-    }
-
-    # Generative Language–style body; Worker returns JSON (or GLM payload)
-    body = {
-        "contents": [{"parts": [{"text": json.dumps(prompt)}]}],
-        "generationConfig": {"responseMimeType": "application/json"},
     }
 
     try:
-        r = requests.post(
-            proxy_url,
-            json=body,
-            headers={"content-type": "application/json"},
-            timeout=60,
+        client = Groq(api_key=settings.GROQ_API_KEY)
+        resp = client.chat.completions.create(
+            model="openai/gpt-oss-120b",
+            messages=[
+                {"role": "system", "content": system_msg},
+                {"role": "user", "content": json.dumps(user_prompt)},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.4,
+            max_tokens=5000,
         )
-        if r.status_code != 200:
-            return JsonResponse(
-                {"success": False, "error": f"Proxy {r.status_code}: {r.text[:400]}"},
-                status=502,
-            )
-
+        content = resp.choices[0].message.content or "{}"
         try:
-            parsed = r.json()
+            parsed = json.loads(content)
         except Exception:
-            parsed = json.loads(r.text)
-
-        print(parsed)
-
-        # Robustly extract items from either GLM payload or direct JSON
-        raw_items = _extract_items_from_worker(parsed)
-
-        # Normalise fields the model may omit / rename
-        items = []
-        for idx, it in enumerate(raw_items or []):
-            if not isinstance(it, dict):
-                continue
-            name = (it.get("name") or "").strip()
-            if not name:
-                ings = it.get("ingredients") or []
-                guess = (ings[0] if ings else f"Option {idx+1}")
-                name = str(guess).split(",")[0].strip().title()
-
-            recipe_steps = it.get("recipe_steps")
-            if not recipe_steps and it.get("recipe"):
-                recipe_steps = _split_recipe_to_steps(it.get("recipe"))
-
-            items.append({
-                "name": name,
-                "kind": (it.get("kind") or "meal").lower(),
-                "cost_aud": it.get("cost_aud"),
-                "prep_minutes": it.get("prep_minutes"),
-                "vitd_mcg": it.get("vitd_mcg"),
-                "vitd_iu": it.get("vitd_iu"),
-                "tags": it.get("tags") or [],
-                "ingredients": it.get("ingredients") or [],
-                "recipe_steps": recipe_steps or [],
-            })
-
-        if not items and getattr(settings, "DEBUG", False):
-            print("Gemini payload (truncated):", str(parsed)[:800])
-
+            s = content
+            start = s.find("{"); end = s.rfind("}")
+            parsed = json.loads(s[start:end+1]) if start >= 0 and end > start else {}
+        items = (parsed or {}).get("items", [])
     except Exception as e:
-        return JsonResponse({"success": False, "error": f"Gemini call failed: {e}"}, status=502)
+        return JsonResponse({"success": False, "error": f"Groq call failed: {e}"}, status=502)
 
-    cleaned, summary = _enforce(items, prefs)
-    return JsonResponse({"success": True, "items": cleaned, "summary": summary, "preferences": prefs})
+    cleaned_input = []
+    for it in items or []:
+        # normalise ingredients to strings so UI renders cleanly
+        it["ingredients"] = _ingredients_to_strings(it.get("ingredients"))
+        # accept items that have at least some structure
+        if len(it["ingredients"]) < 1:
+            continue
+        if len(it.get("recipe_steps") or []) < 1 and it.get("recipe"):
+            it["recipe_steps"] = _split_recipe_to_steps(it.get("recipe"))
+        cleaned_input.append(it)
 
+    items2, summary = _enforce(cleaned_input, {
+        "max_prep_minutes": max_prep,
+        "budgetAud": budget,
+    })
+    return JsonResponse({"success": True, "items": items2, "summary": summary, "preferences": prefs})
 
 # --------- Photo search (Pexels) ---------
 @require_GET
@@ -295,7 +269,6 @@ def photo_search(request):
     if not q or not api_key:
         return JsonResponse({"url": None})
 
-    # Memcached-safe cache key
     q_full = " ".join([q] + [d.strip() for d in diet.split(",") if d.strip()])
     cache_key = "pexels:" + hashlib.sha1(q_full.encode("utf-8")).hexdigest()
 
