@@ -3,13 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 // Views you actually have
 import LoginView from '@/views/LoginView.vue'
 import HomePageView from '@/views/HomePageView.vue'
-import SunExposureView from '@/views/SunExposureView.vue'
+import LetsGetOutsideView from '@/views/LetsGetOutsideView.vue'
 import TimerTestView from '@/views/TimerTestView.vue'
 import VitaminDQuestionnaireView from '@/views/VitaminDQuestionnaireView.vue'
 import VitaminDResultView from '@/views/VitaminDResultView.vue'
 import VitaminDInadequateView from '@/views/VitaminDInadequateView.vue'
 import HealthImpactView from '@/views/HealthImpactView.vue'
-import Nutrition from '@/views/Nutrition.vue'
+import MealPlannerView from '@/views/MealPlannerView.vue'
 import DataAwareness from '@/views/DataAwareness.vue'
 
 const routes = [
@@ -27,14 +27,14 @@ const routes = [
   },
   {
     path: '/sun-exposure',
-    name: 'SunExposure',
-    component: SunExposureView,
+    name: 'LetsGetOutside',
+    component: LetsGetOutsideView,
     meta: { requiresAuth: true }
   },
   {
     path: '/nutrition',
-    name: 'Nutrition',
-    component: Nutrition,
+    name: 'MealPlanner',
+    component: MealPlannerView,
     meta: { requiresAuth: true }
   },
   {

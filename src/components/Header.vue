@@ -3,25 +3,25 @@
     <div class="container">
       <!-- Desktop Navigation -->
       <nav class="desktop-nav">
-        <div class="logo">
-          <img src="@/assets/images/logo-icon.svg" alt="VitaminD Brain Logo" class="logo-icon">
-          <span class="logo-text">Cognivue</span>
-        </div>
+        <router-link to="/" class="logo">
+          <img src="@/assets/images/Cognivue (2).png" alt="VitaminD Brain Logo" class="logo-icon">
+          <span class="logo-text">BrainVD</span>
+        </router-link>
         <ul class="nav-menu">
-          <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
-          <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
-          <li><router-link to="/nutrition" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Plan</span></router-link></li>
-          <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Education Hub"><span>Education Hub</span></router-link></li>
-          <!-- <li><router-link to="/health-impact" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Health Impact"><span>Health Impact</span></router-link></li> -->
+          <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><Icon icon="material-symbols:home" :width="16" :height="16" /><span>Home</span></router-link></li>
+          <li><router-link to="/sun-exposure" class="nav-link"><Icon icon="wi:day-sunny" :width="16" :height="16" /><span>Let's get outside!</span></router-link></li>
+          <li><router-link to="/nutrition" class="nav-link"><Icon icon="material-symbols:restaurant" :width="16" :height="16" /><span>Meal planner</span></router-link></li>
+          <li><router-link to="/data-awareness" class="nav-link"><Icon icon="material-symbols:school" :width="16" :height="16" /><span>Education Hub</span></router-link></li>
+          <!-- <li><router-link to="/health-impact" class="nav-link"><Icon icon="material-symbols:school" :width="16" :height="16" /><span>Health Impact</span></router-link></li> -->
         </ul>
       </nav>
 
       <!-- Mobile Navigation -->
       <nav class="mobile-nav">
-        <div class="logo">
-          <img src="@/assets/images/logo-icon.svg" alt="VitaminD Brain Logo" class="logo-icon">
-          <span class="logo-text">Cognivue</span>
-        </div>
+        <router-link to="/" class="logo">
+          <img src="@/assets/images/Cognivue (2).png" alt="VitaminD Brain Logo" class="logo-icon">
+          <span class="logo-text">BrainVD</span>
+        </router-link>
         <button class="hamburger" @click="toggleMobileMenu" :class="{ active: isMobileMenuOpen }">
           <span></span>
           <span></span>
@@ -32,10 +32,10 @@
       <!-- Mobile Menu -->
       <div class="mobile-menu" :class="{ active: isMobileMenuOpen }">
         <ul class="mobile-nav-menu">
-          <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><img src="@/assets/images/home-icon.svg" alt="Home"><span>Home</span></router-link></li>
-          <li><router-link to="/sun-exposure" class="nav-link"><img src="@/assets/images/sun-icon.svg" alt="Sun"><span>Sun Exposure</span></router-link></li>
-          <li><router-link to="/nutrition" class="nav-link"><img src="@/assets/images/food-icon.svg" alt="Food"><span>Food Plan</span></router-link></li>
-          <li><router-link to="/data-awareness" class="nav-link"><img src="@/assets/images/insights-icon.svg" alt="Education Hub"><span>Education Hub</span></router-link></li>
+          <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><Icon icon="material-symbols:home" :width="16" :height="16" /><span>Home</span></router-link></li>
+          <li><router-link to="/sun-exposure" class="nav-link"><Icon icon="wi:day-sunny" :width="16" :height="16" /><span>Let's get outside!</span></router-link></li>
+          <li><router-link to="/nutrition" class="nav-link"><Icon icon="material-symbols:restaurant" :width="16" :height="16" /><span>Meal planner</span></router-link></li>
+          <li><router-link to="/data-awareness" class="nav-link"><Icon icon="material-symbols:school" :width="16" :height="16" /><span>Education Hub</span></router-link></li>
         </ul>
       </div>
     </div>
@@ -43,8 +43,13 @@
 </template>
 
 <script>
+import { Icon } from '@iconify/vue'
+
 export default {
   name: 'Header',
+  components: {
+    Icon
+  },
   data() {
     return {
       isMobileMenuOpen: false
@@ -88,6 +93,13 @@ export default {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 .logo-icon {
@@ -130,10 +142,8 @@ export default {
   box-shadow: 0 4px 12px rgba(199, 238, 208, 0.4);
 }
 
-.nav-link img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) saturate(100%) invert(19%) sepia(100%) saturate(1000%) hue-rotate(80deg);
+.nav-link .iconify {
+  color: #2d5016;
 }
 
 .nav-link span {

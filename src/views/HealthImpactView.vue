@@ -23,9 +23,7 @@
             <!-- Hippocampus Protection -->
              <div class="protection-item">
                <div class="item-icon">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                   <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5C15 12.3 14.3 13 13.5 13S12 12.3 12 11.5 12.7 10 13.5 10 15 10.7 15 11.5M5 7.5L11 7V9L5 9V7.5ZM11 11.5C11 12.3 10.3 13 9.5 13S8 12.3 8 11.5 8.7 10 9.5 10 11 10.7 11 11.5M12 14L13.5 14.5C14.8 15 15.5 16.2 15.5 17.5V22H12V18.5C12 17.1 11.4 15.8 10.3 15L8.5 14L12 14Z" fill="currentColor"/>
-                 </svg>
+                 <Icon icon="mdi:brain" :width="24" :height="24" color="#10b981" />
                </div>
                <div class="item-content">
                  <h3>Hippocampus Protection</h3>
@@ -37,9 +35,7 @@
              <!-- Cognitive Protection -->
              <div class="protection-item">
                <div class="item-icon">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                   <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10.5V11.5C14.8,12.4 14.1,13.2 13.2,13.2H10.8C9.9,13.2 9.2,12.4 9.2,11.5V10.5C9.2,8.6 10.6,7 12,7Z" fill="currentColor"/>
-                 </svg>
+                 <Icon icon="material-symbols:shield" :width="24" :height="24" color="#3b82f6" />
                </div>
                <div class="item-content">
                  <h3>Cognitive Protection</h3>
@@ -51,9 +47,7 @@
              <!-- Stroke Prevention -->
              <div class="protection-item">
                <div class="item-icon">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                   <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="currentColor"/>
-                 </svg>
+                 <Icon icon="material-symbols:favorite" :width="24" :height="24" color="#ef4444" />
                </div>
                <div class="item-content">
                  <h3>Stroke Prevention</h3>
@@ -65,10 +59,7 @@
              <!-- Mental Performance -->
              <div class="protection-item">
                <div class="item-icon">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                   <path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" fill="currentColor"/>
-                   <path d="M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" fill="currentColor"/>
-                 </svg>
+                 <Icon icon="material-symbols:psychology" :width="24" :height="24" color="#8b5cf6" />
                </div>
                <div class="item-content">
                  <h3>Mental Performance</h3>
@@ -90,11 +81,7 @@
           <!-- Test Your Vitamin D Level Card -->
           <div class="test-vitamin-d-card">
             <div class="test-card-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <circle cx="24" cy="24" r="20" fill="#10b981" opacity="0.1"/>
-                <path d="M24 8c8.837 0 16 7.163 16 16s-7.163 16-16 16S8 32.837 8 24 15.163 8 24 8z" stroke="#10b981" stroke-width="2"/>
-                <path d="M24 16v8l6 6" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <Icon icon="material-symbols:science" :width="48" :height="48" color="#10b981" />
             </div>
             <div class="test-card-content">
               <h3>Test Your Vitamin D Level</h3>
@@ -113,9 +100,7 @@
         <div class="statistics-section">
           <div class="statistics-header">
             <div class="statistics-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 17H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2m0 8h2m-2 0v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2m-2 0V7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <Icon icon="material-symbols:analytics" :width="24" :height="24" color="#8b5cf6" />
             </div>
             <h2>Key Statistics & Evidence</h2>
           </div>
@@ -124,9 +109,7 @@
             <div class="stat-card optimal-levels">
               <div class="stat-header">
                 <div class="stat-icon success">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M13.5 4.5L6 12l-3.5-3.5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                  <Icon icon="material-symbols:check" :width="16" :height="16" color="#10b981" />
                 </div>
                 <h3>Optimal Levels</h3>
               </div>
@@ -140,11 +123,7 @@
             <div class="stat-card global-impact">
               <div class="stat-header">
                 <div class="stat-icon warning">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 1l7 12H1L8 1z" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 5v3" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="8" cy="11" r="0.5" fill="#ef4444"/>
-                  </svg>
+                  <Icon icon="material-symbols:warning" :width="16" :height="16" color="#ef4444" />
                 </div>
                 <h3>Global Impact</h3>
               </div>
@@ -165,11 +144,7 @@
         <div class="disclaimer-section">
           <div class="disclaimer-header">
             <div class="disclaimer-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 1l2.5 7.5H20l-6 4.5 2.5 7.5L10 15l-6.5 5 2.5-7.5L0 8.5h7.5L10 1z" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
-                <path d="M10 6v4" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
-                <circle cx="10" cy="13" r="0.5" fill="#f59e0b"/>
-              </svg>
+              <Icon icon="material-symbols:info" :width="20" :height="20" color="#f59e0b" />
             </div>
             <h3>Medical Disclaimer</h3>
           </div>
@@ -186,11 +161,13 @@
 
 <script>
 import Header from '@/components/Header.vue'
+import { Icon } from '@iconify/vue'
 
 export default {
   name: 'HealthImpactView',
   components: {
-    Header
+    Header,
+    Icon
   },
   methods: {
     goToPreviousResults() {

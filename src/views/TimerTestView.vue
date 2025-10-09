@@ -11,7 +11,7 @@
     </div>
     
     <div class="controls">
-      <button @click="goToSunExposure">Back to Sun Exposure</button>
+      <button @click="goToLetsGetOutside">Back to Let's get outside!</button>
     </div>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
       const remainingSeconds = seconds % 60
       return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
     },
-    goToSunExposure() {
+    goToLetsGetOutside() {
       this.$router.push('/sun-exposure')
     }
   }

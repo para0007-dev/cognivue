@@ -8,9 +8,7 @@
           <div class="benefits-list">
             <div class="benefit-item">
               <div class="check-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="#16a34a"/>
-                </svg>
+                <Icon icon="material-symbols:check-circle" :width="20" :height="20" color="#16a34a" />
               </div>
               <div class="benefit-content">
                 <h3>Protects Brain Volume</h3>
@@ -20,9 +18,7 @@
             
             <div class="benefit-item">
               <div class="check-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="#22c55e"/>
-                </svg>
+                <Icon icon="material-symbols:check-circle" :width="20" :height="20" color="#22c55e" />
               </div>
               <div class="benefit-content">
                 <h3>Reduces Dementia Risk</h3>
@@ -32,9 +28,7 @@
             
             <div class="benefit-item">
               <div class="check-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="#22c55e"/>
-                </svg>
+                <Icon icon="material-symbols:check-circle" :width="20" :height="20" color="#22c55e" />
               </div>
               <div class="benefit-content">
                 <h3>Supports Cognitive Function</h3>
@@ -44,9 +38,7 @@
             
             <div class="benefit-item">
               <div class="check-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="#22c55e"/>
-                </svg>
+                <Icon icon="material-symbols:check-circle" :width="20" :height="20" color="#22c55e" />
               </div>
               <div class="benefit-content">
                 <h3>Prevents Cognitive Decline</h3>
@@ -61,10 +53,7 @@
             <h3>Research Source</h3>
             <div class="source-info">
               <div class="source-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="10" fill="#16a34a"/>
-                  <path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <Icon icon="material-symbols:school" :width="24" :height="24" color="#16a34a" />
               </div>
               <div class="source-details">
                 <h4>Queensland Brain Institute</h4>
@@ -87,8 +76,13 @@
 </template>
 
 <script>
+import { Icon } from '@iconify/vue'
+
 export default {
-  name: 'BrainHealth'
+  name: 'BrainHealth',
+  components: {
+    Icon
+  }
 }
 </script>
 

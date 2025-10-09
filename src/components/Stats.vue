@@ -4,7 +4,7 @@
       <div class="stats-grid">
         <div class="stat-card" v-for="stat in stats" :key="stat.id">
           <div class="stat-icon">
-            <img :src="stat.icon" :alt="stat.title" class="icon">
+            <Icon :icon="stat.icon" :width="40" :height="40" />
           </div>
           <div class="stat-content">
             <h3 class="stat-number">{{ stat.number }}</h3>
@@ -18,35 +18,36 @@
 </template>
 
 <script>
-import stat1Icon from '@/assets/images/stat1-icon.svg'
-import stat2Icon from '@/assets/images/stat2-icon.svg'
-import stat3Icon from '@/assets/images/stat3-icon.svg'
+import { Icon } from '@iconify/vue'
 
 export default {
   name: 'Stats',
+  components: {
+    Icon
+  },
   data() {
     return {
       stats: [
         {
           id: 1,
-          icon: stat1Icon,
+          icon: 'mdi:earth',
           number: '1+ Billion',
-          title: 'People with vitamin D deficiency',
-          description: 'worldwide'
+          title: 'Global Vitamin D Deficiency',
+          description: 'People worldwide lack sufficient vitamin D levels'
         },
         {
           id: 2,
-          icon: stat2Icon,
+          icon: 'emojione:flag-for-australia',
           number: '25%',
-          title: 'Of Australians are vitamin D',
-          description: 'deficient'
+          title: 'Australian Deficiency Rate',
+          description: 'Of Australians have inadequate vitamin D status'
         },
         {
           id: 3,
-          icon: stat3Icon,
+          icon: 'mdi:brain',
           number: '17%',
-          title: 'Reduction in dementia risk with optimal',
-          description: 'levels'
+          title: 'Brain Protection Benefit',
+          description: 'Lower dementia risk with optimal vitamin D levels'
         }
       ]
     }
@@ -105,11 +106,12 @@ export default {
 }
 
 .stat-number {
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: bold;
   color: #2d3748;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   transition: color 0.3s ease;
+  line-height: 1.1;
 }
 
 .stat-card:hover .stat-number {
@@ -117,11 +119,12 @@ export default {
 }
 
 .stat-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #4a5568;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   transition: color 0.3s ease;
+  line-height: 1.3;
 }
 
 .stat-card:hover .stat-title {
@@ -129,10 +132,12 @@ export default {
 }
 
 .stat-description {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #718096;
-  line-height: 1.5;
+  line-height: 1.4;
   transition: color 0.3s ease;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
 .stat-card:hover .stat-description {
@@ -159,7 +164,17 @@ export default {
   }
   
   .stat-number {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .stat-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-description {
+    font-size: 0.9rem;
   }
   
   .icon {
@@ -175,14 +190,17 @@ export default {
   
   .stat-number {
     font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
   
   .stat-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
   }
   
   .stat-description {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.3;
   }
   
   .icon {

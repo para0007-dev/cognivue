@@ -13,6 +13,7 @@ const API_ENDPOINTS = {
   timer: "/timer/api/timer/",
   news: "/brain-health-news/",
   insights: "/insights/",
+  nutrition: "/nutrition/",
 };
 
 // Safe join
@@ -103,6 +104,21 @@ export const insightsAPI = {
       apiRequest("/insights/api/tips/"),
     ]);
     return { factoids, tips };
+  },
+};
+
+export const nutritionAPI = {
+  getMealPlan: async () => apiRequest(`${API_ENDPOINTS.nutrition}meal-plan/`),
+  getFoods: async () => apiRequest(`${API_ENDPOINTS.nutrition}foods/`),
+  swapMeal: async (day, mealType, newFoodId) => {
+    return apiRequest(`${API_ENDPOINTS.nutrition}meal-plan/swap/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        day: day,
+        meal_type: mealType,
+        new_food_id: newFoodId
+      })
+    });
   },
 };
 

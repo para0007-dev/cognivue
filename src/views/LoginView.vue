@@ -18,7 +18,7 @@
         />
 
         <button type="submit" class="btn" :disabled="loading">
-          <span v-if="loading">Logging in…</span>
+          <span v-if="loading">Logging in...</span>
           <span v-else>Login</span>
         </button>
       </form>
@@ -41,7 +41,8 @@ const route = useRoute()
 const password = ref("")
 const error = ref("")
 const loading = ref(false)
-const BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/+$/,'')
+// Use relative path for proxy to work correctly
+const BASE = ''
 
 
 async function handleLogin() {
@@ -62,7 +63,7 @@ async function handleLogin() {
     if (err.response && err.response.status === 401) {
       error.value = err.response.data?.error || "Invalid password"
     } else {
-      error.value = "⚠️ Server error. Please try again."
+      error.value = "Server error. Please try again."
     }
   } finally {
     loading.value = false

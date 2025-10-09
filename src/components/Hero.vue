@@ -16,7 +16,7 @@
             <span class="button-arrow">&rarr;</span>
           </button>
           <p class="assessment-info">
-            Quick 5-question assessment &bull; Takes 2 minutes
+            Quick 7-question assessment &bull; Takes 2 minutes
           </p>
         </div>
         <div class="hero-image">
