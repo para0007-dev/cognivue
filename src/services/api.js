@@ -21,16 +21,22 @@ function joinUrl(endpoint) {
   return `${BASE}${p}`;
 }
 
+function getCookie(name) {
+  return document.cookie.split('; ')
+    .find(r => r.startsWith(name + '='))?.split('=')[1] || ''
+}
+
 // Generic fetch wrapper
 async function apiRequest(endpoint, options = {}) {
-  const url = joinUrl(endpoint);
-  const defaultOptions = {
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-  };
-  const res = await fetch(url, { ...defaultOptions, ...options });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const url = joinUrl(endpoint)
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': getCookie('csrftoken'),               // send CSRF with cookies
+    ...(options.headers || {})
+  }
+  const res = await fetch(url, { credentials: 'include', ...options, headers })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  return res.json()
 }
 
 // ---- Feature APIs ----
@@ -115,7 +121,7 @@ export const mealAI = {
 };
 
 export const mealImages = {
-  get:async (q, dietArr = []) => apiRequest(`/mealplanner/api/photo/?q=${encodeURIComponent(q)}&diet=${encodeURIComponent(dietArr.join(','))}`)
+  get: async (q, dietArr = []) => apiRequest(`/mealplanner/api/photo/?q=${encodeURIComponent(q)}&diet=${encodeURIComponent(dietArr.join(','))}`)
 };
 
 

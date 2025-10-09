@@ -117,7 +117,7 @@ LOGIN_REDIRECT_URL = "/vitamin-d-helper/"
 
 # OpenWeather
 OPENWEATHER_API_KEY = "0ba8d4e3b494e7864ea8b8ac09bf7275"
-GEMINI_API_KEY = "AIzaSyAoPw1blUCe-nUSKWxQQx9-B4_RH4D2GBE"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 
 # --- CORS / CSRF for Vue on Azure SWA ---
@@ -137,10 +137,14 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # Cross-site cookies over HTTPS
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_DOMAIN = ".brainvid.me"
+CSRF_COOKIE_DOMAIN    = ".brainvid.me"
+
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SECURE    = True
 SESSION_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE    = "None"
+
 
 # Tell Django the original scheme behind Azure’s proxy
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -164,11 +168,13 @@ if os.getenv("DJANGO_DEV", "0") == "1":
         "http://127.0.0.1:8000",
     ]
 
-    # Cookies over HTTP in dev
-    CSRF_COOKIE_SECURE = False
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SAMESITE = "Lax"
-    SESSION_COOKIE_SAMESITE = "Lax"
+    # Cookies over HTTP in dev    
+    CSRF_COOKIE_DOMAIN = ".brainvid.me"
+    SESSION_COOKIE_DOMAIN = ".brainvid.me"
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SAMESITE = "None"
+    SESSION_COOKIE_SAMESITE = "None"
 
     # Not behind Azure proxy locally
     SECURE_PROXY_SSL_HEADER = None

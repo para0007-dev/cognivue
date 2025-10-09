@@ -96,6 +96,7 @@ def generate_ai_plan(request):
     print(prefs)
 
     try:
+        print(settings.GEMINI_API_KEY)
         genai.configure(api_key=settings.GEMINI_API_KEY)
         model = genai.GenerativeModel(
             model_name=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
