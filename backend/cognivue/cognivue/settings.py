@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # keep first
+    "corsheaders.middleware.CorsMiddleware", 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -117,6 +117,8 @@ LOGIN_REDIRECT_URL = "/vitamin-d-helper/"
 
 # OpenWeather
 OPENWEATHER_API_KEY = "0ba8d4e3b494e7864ea8b8ac09bf7275"
+GEMINI_API_KEY = "AIzaSyAoPw1blUCe-nUSKWxQQx9-B4_RH4D2GBE"
+PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
 
 # --- CORS / CSRF for Vue on Azure SWA ---
 CORS_ALLOWED_ORIGINS = [
@@ -150,13 +152,16 @@ if os.getenv("DJANGO_DEV", "0") == "1":
     # Frontend dev origin
     CORS_ALLOWED_ORIGINS += [
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
     ]
     CORS_ALLOW_CREDENTIALS = True
 
     # CSRF for dev
     CSRF_TRUSTED_ORIGINS += [
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "http://localhost:8000",
+        "http://127.0.0.1:8000",
     ]
 
     # Cookies over HTTP in dev
