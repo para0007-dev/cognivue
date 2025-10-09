@@ -222,7 +222,7 @@ def generate_ai_plan(request):
     }
 
     try:
-        client = __groq_client
+        client = __groq_client()
         resp = client.chat.completions.create(
             model="openai/gpt-oss-20b",
             messages=[
@@ -277,7 +277,7 @@ def groq_ping(request):
         raw_body = r.text[:300]
 
         # B) SDK with explicit base_url
-        client = _groq_client()
+        client = __groq_client()
         models = client.models.list()
         names = [m.id for m in models.data][:5]
 
