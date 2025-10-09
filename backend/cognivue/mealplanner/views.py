@@ -157,6 +157,12 @@ def _enforce(items, prefs):
     return cleaned[:3], summary
 
 # --------- AI endpoint (Groq: Llama-3.x) ---------
+def __groq_client():
+    return Groq(
+        api_key=os.getenv("GROQ_API_KEY", ""),
+        base_url="https://api.groq.com/openai/v1",
+    )
+
 @csrf_exempt
 @require_POST
 def generate_ai_plan(request):
@@ -216,7 +222,7 @@ def generate_ai_plan(request):
     }
 
     try:
-        client = Groq(api_key=settings.GROQ_API_KEY)
+        client = __groq_client
         resp = client.chat.completions.create(
             model="openai/gpt-oss-20b",
             messages=[
