@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import generate_ai_plan, photo_search
+from .views import generate_ai_plan, photo_search, groq_ping
 
 urlpatterns = [
     path("api/meal-plan/ai-generate/", generate_ai_plan, name="ai_meal_plan"),
     path("api/photo/", photo_search, name="meal_photo"),
+    path("api/groq/ping/", groq_ping, name="groq_ping"),
 ]

@@ -218,14 +218,14 @@ def generate_ai_plan(request):
     try:
         client = Groq(api_key=settings.GROQ_API_KEY)
         resp = client.chat.completions.create(
-            model="openai/gpt-oss-120b",
+            model="openai/gpt-oss-20b",
             messages=[
                 {"role": "system", "content": system_msg},
                 {"role": "user", "content": json.dumps(user_prompt)},
             ],
             response_format={"type": "json_object"},
             temperature=0.4,
-            max_tokens=5000,
+            max_tokens=3000,
         )
         content = resp.choices[0].message.content or "{}"
         try:
@@ -237,7 +237,7 @@ def generate_ai_plan(request):
         items = (parsed or {}).get("items", [])
     except Exception as e:
         return JsonResponse({"success": False, "error": f"Groq call failed: {e}"}, status=502)
-
+    print(items)
     cleaned_input = []
     for it in items or []:
         # normalise ingredients to strings so UI renders cleanly
@@ -248,12 +248,25 @@ def generate_ai_plan(request):
         if len(it.get("recipe_steps") or []) < 1 and it.get("recipe"):
             it["recipe_steps"] = _split_recipe_to_steps(it.get("recipe"))
         cleaned_input.append(it)
-
+    print(cleaned_input)
     items2, summary = _enforce(cleaned_input, {
         "max_prep_minutes": max_prep,
         "budgetAud": budget,
     })
     return JsonResponse({"success": True, "items": items2, "summary": summary, "preferences": prefs})
+
+@require_GET
+def groq_ping(request):
+    try:
+        from groq import Groq
+        client = Groq(api_key=os.getenv("GROQ_API_KEY", ""))
+        # cheap call that proves key + egress
+        models = client.models.list()
+        names = [m.id for m in models.data][:5]
+        return JsonResponse({"ok": True, "models": names})
+    except Exception as e:
+        return JsonResponse({"ok": False, "error": str(e)}, status=502)
+
 
 # --------- Photo search (Pexels) ---------
 @require_GET
