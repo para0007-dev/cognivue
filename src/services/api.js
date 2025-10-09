@@ -31,12 +31,17 @@ async function apiRequest(endpoint, options = {}) {
   const url = joinUrl(endpoint)
   const headers = {
     'Content-Type': 'application/json',
-    'X-CSRFToken': getCookie('csrftoken'),               // send CSRF with cookies
+    'X-CSRFToken': getCookie('csrftoken'),
     ...(options.headers || {})
   }
   const res = await fetch(url, { credentials: 'include', ...options, headers })
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  return res.json()
+  let data = null
+  try { data = await res.json() } catch {}
+  if (!res.ok) {
+    const msg = data?.error || `HTTP ${res.status}`
+    throw new Error(msg)
+  }
+  return data
 }
 
 // ---- Feature APIs ----
