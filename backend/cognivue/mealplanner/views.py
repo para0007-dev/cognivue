@@ -258,14 +258,37 @@ def generate_ai_plan(request):
 @require_GET
 def groq_ping(request):
     try:
-        from groq import Groq
-        client = Groq(api_key=os.getenv("GROQ_API_KEY", ""))
-        # cheap call that proves key + egress
+        # A) raw HTTP (bypasses SDK defaults)
+        r = requests.get(
+            "https://api.groq.com/openai/v1/models",
+            headers={
+                "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
+                "Accept": "application/json",
+            },
+            timeout=15,
+        )
+        raw_ok = r.status_code
+        raw_body = r.text[:300]
+
+        # B) SDK with explicit base_url
+        client = _groq_client()
         models = client.models.list()
         names = [m.id for m in models.data][:5]
-        return JsonResponse({"ok": True, "models": names})
+
+        return JsonResponse({
+            "ok": True,
+            "raw_status": raw_ok,
+            "raw_sample": raw_body,
+            "sdk_models": names,
+            "base_url": client.client.base_url,  # sanity check
+        })
     except Exception as e:
-        return JsonResponse({"ok": False, "error": str(e)}, status=502)
+        return JsonResponse({
+            "ok": False,
+            "error": str(e),
+            "base_url": os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1"),
+        }, status=502)
+
 
 
 # --------- Photo search (Pexels) ---------
