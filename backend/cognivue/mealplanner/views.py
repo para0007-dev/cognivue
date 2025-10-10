@@ -228,7 +228,7 @@ def generate_ai_plan(request):
     try:
         client = __groq_client()
         resp = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
             messages=[
                 {"role": "system", "content": system_msg},
                 {"role": "user", "content": json.dumps(user_prompt)},
