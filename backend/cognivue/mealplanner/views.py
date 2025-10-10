@@ -7,6 +7,8 @@ from django.core.cache import cache
 from django.conf import settings
 from groq import Groq
 
+GROQ_BASE = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
+
 # --------- helpers ---------
 def _coerce_f(x, d=0.0):
     """Best-effort float coercion with default."""
@@ -160,6 +162,8 @@ def _enforce(items, prefs):
 def __groq_client():
     return Groq(
         api_key=os.getenv("GROQ_API_KEY", ""),
+        base_url=GROQ_BASE,            # prevent wrong default
+        timeout=20,                    # fail fast
     )
 
 @csrf_exempt
@@ -263,36 +267,35 @@ def generate_ai_plan(request):
 @require_GET
 def groq_ping(request):
     try:
-        # A) raw HTTP (bypasses SDK defaults)
+        # Raw HTTP
         r = requests.get(
-            "https://api.groq.com/openai/v1/models",
-            headers={
-                "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
-                "Accept": "application/json",
-            },
+            f"{GROQ_BASE}/models",
+            headers={"Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
+                     "Accept": "application/json"},
             timeout=15,
         )
-        raw_ok = r.status_code
-        raw_body = r.text[:300]
+        raw_status = r.status_code
+        raw_body = r.text[:500]
 
-        # B) SDK with explicit base_url
+        # SDK
         client = __groq_client()
         models = client.models.list()
-        names = [m.id for m in models.data][:5]
+        names = [m.id for m in models.data][:8]
 
         return JsonResponse({
             "ok": True,
-            "raw_status": raw_ok,
+            "raw_status": raw_status,
             "raw_sample": raw_body,
             "sdk_models": names,
+            "base_url": GROQ_BASE,
         })
     except Exception as e:
         return JsonResponse({
             "ok": False,
-            "error": str(e),
-            "has_key": bool(os.getenv("GROQ_API_KEY", ""))
+            "error": f"Error code: {getattr(e, 'status', 'n/a')} - {str(e)}",
+            "has_key": bool(os.getenv("GROQ_API_KEY","")),
+            "base_url": GROQ_BASE,
         }, status=502)
-
 
 
 # --------- Photo search (Pexels) ---------
