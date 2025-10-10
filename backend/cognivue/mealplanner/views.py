@@ -7,7 +7,8 @@ from django.core.cache import cache
 from django.conf import settings
 from groq import Groq
 
-GROQ_BASE = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
+GROQ_BASE = os.getenv("GROQ_BASE_URL", "https://api.groq.com")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
 # --------- helpers ---------
 def _coerce_f(x, d=0.0):
@@ -266,36 +267,25 @@ def generate_ai_plan(request):
 
 @require_GET
 def groq_ping(request):
+    import requests, json, os
     try:
-        # Raw HTTP
-        r = requests.get(
-            f"{GROQ_BASE}/models",
-            headers={"Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
-                     "Accept": "application/json"},
+        r = requests.post(
+            f"{GROQ_BASE}/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": GROQ_MODEL,
+                "messages": [{"role":"user","content":"ping"}],
+                "max_tokens": 4,
+            },
             timeout=15,
         )
-        raw_status = r.status_code
-        raw_body = r.text[:500]
-
-        # SDK
-        client = __groq_client()
-        models = client.models.list()
-        names = [m.id for m in models.data][:8]
-
-        return JsonResponse({
-            "ok": True,
-            "raw_status": raw_status,
-            "raw_sample": raw_body,
-            "sdk_models": names,
-            "base_url": GROQ_BASE,
-        })
+        return JsonResponse({"ok": r.ok, "status_": r.status_code, "base": GROQ_BASE, "sample": (r.text or "")[:200]})
     except Exception as e:
-        return JsonResponse({
-            "ok": False,
-            "error": f"Error code: {getattr(e, 'status', 'n/a')} - {str(e)}",
-            "has_key": bool(os.getenv("GROQ_API_KEY","")),
-            "base_url": GROQ_BASE,
-        }, status=502)
+        return JsonResponse({"ok": False, "error": str(e), "base": GROQ_BASE}, status=502)
+
 
 
 # --------- Photo search (Pexels) ---------
