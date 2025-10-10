@@ -3,7 +3,7 @@ export default {
 		const url = new URL(req.url);
 
 		console.log("PATH:", url.pathname); // <-- see exact path
-		if (!u.pathname.startsWith("/openai/v1/")) {
+		if (!url.pathname.startsWith("/openai/v1/")) {
 			return new Response("Not Found", { status: 404 });
 		}
 

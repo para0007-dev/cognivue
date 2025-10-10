@@ -269,7 +269,7 @@ def generate_ai_plan(request):
 def groq_ping(request):
     import requests, json, os
     try:
-        # in mealplanner/views.py (ping handler just before requests.post)
+        # (ping handler just before requests.post)
         import logging; log = logging.getLogger(__name__)
         full_url = f"{GROQ_BASE.rstrip('/')}/openai/v1/chat/completions"
         log.info("groq full_url=%s", full_url)
