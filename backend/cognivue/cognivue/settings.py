@@ -115,7 +115,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/vitamin-d-helper/"
 
-# OpenWeather
+# API KEYS
 OPENWEATHER_API_KEY = "0ba8d4e3b494e7864ea8b8ac09bf7275"
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
@@ -146,8 +146,8 @@ CSRF_COOKIE_DOMAIN    = ".brainvid.me"
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE    = True
-SESSION_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_SAMESITE    = "Lax"
+SESSION_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE    = "None"
 
 
 # Tell Django the original scheme behind Azure’s proxy

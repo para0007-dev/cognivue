@@ -47,7 +47,7 @@ async function generate(){
       budget_scope: 'daily',            
       budgetAud: Number(budget.value),
       max_prep_minutes: Number(maxPrep.value),
-      dietary_restrictions: selectedDietary.value.map(s=>s.toLowerCase())
+      dietary: selectedDietary.value.map(s=>s.toLowerCase())
     }
     const res = await mealAI.generate(payload)
     if(!res.success) throw new Error(res.error || 'Failed')

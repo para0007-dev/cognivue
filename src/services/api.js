@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Normalize base: add scheme if missing, strip trailing slashes
 const raw = import.meta.env.VITE_API_BASE || "";
-const BASE = (raw.startsWith("http") ? raw : `https://${raw}`).replace(/\/+$/, "");
+export const API_BASE_URL = (raw.startsWith("http") ? raw : `https://${raw}`).replace(/\/+$/, "");
 
 // Central endpoints (leading slash only)
 const API_ENDPOINTS = {
@@ -18,30 +18,43 @@ const API_ENDPOINTS = {
 // Safe join
 function joinUrl(endpoint) {
   const p = `${endpoint}`.startsWith("/") ? endpoint : `/${endpoint}`;
-  return `${BASE}${p}`;
+  return `${API_BASE_URL}${p}`;
 }
 
 function getCookie(name) {
-  return document.cookie.split('; ')
-    .find(r => r.startsWith(name + '='))?.split('=')[1] || ''
+  return document.cookie.split("; ").find(r => r.startsWith(name + "="))?.split("=")[1] || "";
 }
 
-// Generic fetch wrapper
+// Generic fetch wrapper with strong error surfacing
 async function apiRequest(endpoint, options = {}) {
-  const url = joinUrl(endpoint)
+  const url = joinUrl(endpoint);
+  const hasBody = !!options.body;
   const headers = {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': getCookie('csrftoken'),
-    ...(options.headers || {})
+    ...(hasBody ? { "Content-Type": "application/json" } : {}),
+    "X-CSRFToken": getCookie("csrftoken"),
+    ...(options.headers || {}),
+  };
+
+  const res = await fetch(url, {
+    credentials: "include",
+    redirect: "follow",
+    ...options,
+    headers,
+  });
+
+  const text = await res.text();
+  let json = null;
+  try {
+    json = text ? JSON.parse(text) : null;
+  } catch (e) {
+    console.error("Non-JSON response from", url, "status", res.status, "body:", text?.slice(0, 800));
   }
-  const res = await fetch(url, { credentials: 'include', ...options, headers })
-  let data = null
-  try { data = await res.json() } catch {}
-  if (!res.ok) {
-    const msg = data?.error || `HTTP ${res.status}`
-    throw new Error(msg)
+
+  if (!res.ok || (json && json.success === false)) {
+    const msg = (json && (json.error || json.detail)) || `HTTP ${res.status}`;
+    throw new Error(msg);
   }
-  return data
+  return json ?? {};
 }
 
 // ---- Feature APIs ----
@@ -119,24 +132,24 @@ export const insightsAPI = {
 
 export const mealAI = {
   generate: (payload) =>
-    apiRequest('/mealplanner/api/meal-plan/ai-generate/', {
-      method: 'POST',
+    apiRequest("/mealplanner/api/meal-plan/ai-generate/", {
+      method: "POST",
       body: JSON.stringify(payload),
     }),
 };
 
 export const mealImages = {
-  get: async (q, dietArr = []) => apiRequest(`/mealplanner/api/photo/?q=${encodeURIComponent(q)}&diet=${encodeURIComponent(dietArr.join(','))}`)
+  get: async (q, dietArr = []) =>
+    apiRequest(
+      `/mealplanner/api/photo/?q=${encodeURIComponent(q)}&diet=${encodeURIComponent(
+        (dietArr || []).join(",")
+      )}`
+    ),
 };
 
-
-
-// Export base if needed elsewhere
-export const API_BASE_URL = BASE;
-
-// Axios instance for components that use axios
+// Axios instance for optional axios users
 const api = axios.create({
-  baseURL: BASE,
+  baseURL: API_BASE_URL,
   timeout: 10000,
   withCredentials: true,
 });

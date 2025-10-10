@@ -285,7 +285,6 @@ def groq_ping(request):
             "raw_status": raw_ok,
             "raw_sample": raw_body,
             "sdk_models": names,
-            "base_url": client.client.base_url,  # sanity check
         })
     except Exception as e:
         return JsonResponse({
