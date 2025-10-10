@@ -262,7 +262,7 @@
 
           // 🧠 Send to backend (local Django endpoint)
           const response = await axios.post(
-            "http://127.0.0.1:8000/vitamin-d-helper/api/questionnaire/",
+            `${import.meta.env.VITE_API_BASE}/vitamin-d-helper/api/questionnaire/`,
             payload
           )
 
