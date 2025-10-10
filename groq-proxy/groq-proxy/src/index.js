@@ -1,55 +1,60 @@
 export default {
-	async fetch(req, env) {
-		const url = new URL(req.url);
+  async fetch(req, env) {
+    const url = new URL(req.url);
 
-		// 1) Simple echo to prove the Worker is live
-		if (url.pathname === "/echo") {
-			return new Response(JSON.stringify({ ok: true, now: Date.now() }), {
-				status: 200,
-				headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-			});
-		}
+    // Health + echo
+    if (url.pathname === "/echo") {
+      return new Response(JSON.stringify({ ok: true, now: Date.now() }), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    if (url.pathname === "/health") {
+      const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${env.GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [{ role: "user", content: "ping" }],
+          max_tokens: 4,
+        }),
+      });
+      const sample = await r.text();
+      return new Response(JSON.stringify({ ok: r.ok, status: r.status, sample: sample.slice(0, 200) }), {
+        status: r.ok ? 200 : 502,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-		// 2) Health check: do a tiny Groq chat call via the Worker
-		if (url.pathname === "/health") {
-			const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-				method: "POST",
-				headers: {
-					"Authorization": `Bearer ${env.GROQ_API_KEY}`,
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					model: "llama-3.3-70b-versatile",
-					messages: [{ role: "user", content: "ping" }],
-					max_tokens: 4,
-				}),
-			});
-			const text = await r.text();
-			return new Response(JSON.stringify({
-				ok: r.ok, status: r.status, sample: text.slice(0, 200)
-			}), {
-				status: r.ok ? 200 : 502,
-				headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-			});
-		}
+    // Only proxy OpenAI-compatible paths
+    if (!url.pathname.startsWith("/openai/v1/")) {
+      return new Response("Not Found", { status: 404 });
+    }
 
-		// 3) Proxy only OpenAI-compatible paths
-		if (!url.pathname.startsWith("/openai/v1/")) {
-			return new Response("Not Found", { status: 404 });
-		}
+    // Build upstream URL
+    const upstreamUrl = new URL(url.toString());
+    upstreamUrl.hostname = "api.groq.com";
 
-		url.hostname = "api.groq.com"; // keep path as-is
-		const hdrs = new Headers(req.headers);
-		hdrs.set("Authorization", `Bearer ${env.GROQ_API_KEY}`);
-		hdrs.set("Host", "api.groq.com");
+    // Construct a clean request (avoid cloning hop-by-hop headers)
+    const isBody = !(req.method === "GET" || req.method === "HEAD");
+    const body = isBody ? await req.arrayBuffer() : undefined;
 
-		const init = {
-			method: req.method,
-			headers: hdrs,
-			body: (req.method === "GET" || req.method === "HEAD") ? undefined : await req.arrayBuffer(),
-		};
+    const headers = new Headers();
+    headers.set("Authorization", `Bearer ${env.GROQ_API_KEY}`);
+    if (isBody) headers.set("Content-Type", req.headers.get("Content-Type") || "application/json");
+    headers.set("Accept", "application/json");
 
-		const upstream = await fetch(url, init);
-		return new Response(upstream.body, { status: upstream.status, headers: upstream.headers });
-	},
+    const resp = await fetch(upstreamUrl, {
+      method: req.method,
+      headers,
+      body,
+    });
+
+    // Pass through response
+    const outHeaders = new Headers(resp.headers);
+    return new Response(resp.body, { status: resp.status, headers: outHeaders });
+  },
 };

@@ -274,6 +274,7 @@ def groq_ping(request):
             headers={
                 "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
                 "Content-Type": "application/json",
+                "Accept": "application/json",
             },
             json={
                 "model": GROQ_MODEL,
