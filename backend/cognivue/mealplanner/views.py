@@ -273,7 +273,6 @@ def groq_ping(request):
         import logging; log = logging.getLogger(__name__)
         full_url = f"{GROQ_BASE.rstrip('/')}/openai/v1/chat/completions"
         log.info("groq full_url=%s", full_url)
-        r = requests.post(full_url, headers={...}, json={...}, timeout=15)
 
         r = requests.post(
             f"{GROQ_BASE}/openai/v1/chat/completions",
