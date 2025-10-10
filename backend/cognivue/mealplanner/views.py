@@ -7,7 +7,7 @@ from django.core.cache import cache
 from django.conf import settings
 from groq import Groq
 
-GROQ_BASE = os.getenv("GROQ_BASE_URL", "https://api.groq.com")
+GROQ_BASE = os.getenv("GROQ_BASE_URL", "https://api.groq.com").rstrip("/")
 GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
 # --------- helpers ---------
@@ -267,30 +267,24 @@ def generate_ai_plan(request):
 
 @require_GET
 def groq_ping(request):
-    import requests, json, os
-    try:
-        # (ping handler just before requests.post)
-        import logging; log = logging.getLogger(__name__)
-        full_url = f"{GROQ_BASE.rstrip('/')}/openai/v1/chat/completions"
-        log.info("groq full_url=%s", full_url)
-
-        r = requests.post(
-            f"{GROQ_BASE}/openai/v1/chat/completions",
-            headers={
-                "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            json={
-                "model": GROQ_MODEL,
-                "messages": [{"role":"user","content":"ping"}],
-                "max_tokens": 4,
-            },
-            timeout=15,
-        )
-        return JsonResponse({"ok": r.ok, "status_": r.status_code, "base": GROQ_BASE, "sample": (r.text or "")[:200]})
-    except Exception as e:
-        return JsonResponse({"ok": False, "error": str(e), "base": GROQ_BASE}, status=502)
+    import requests, os
+    base = os.getenv("GROQ_BASE_URL", "https://api.groq.com").rstrip("/")
+    model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    url = f"{base}/openai/v1/chat/completions"
+    r = requests.post(
+        url,
+        headers={"Content-Type": "application/json", "Accept": "application/json"},
+        json={"model": model, "messages":[{"role":"user","content":"ping"}], "max_tokens": 4},
+        timeout=15,
+    )
+    return JsonResponse({
+        "ok": r.ok,
+        "status": r.status_code,
+        "base": base,
+        "x_upstream_status": r.headers.get("x-upstream-status"),
+        "x_upstream_url": r.headers.get("x-upstream-url"),
+        "sample": (r.text or "")[:200],
+    }, status=(200 if r.ok else 502))
 
 
 

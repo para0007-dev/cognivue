@@ -1,19 +1,14 @@
 export default {
 	async fetch(req, env) {
-		const url = new URL(req.url);
+		const u = new URL(req.url);
 
-		console.log("PATH:", url.pathname); // <-- see exact path
-		if (!url.pathname.startsWith("/openai/v1/")) {
-			return new Response("Not Found", { status: 404 });
-		}
-
-		// Health + echo
-		if (url.pathname === "/echo") {
-			return new Response(JSON.stringify({ ok: true, now: Date.now() }), {
+		// Debug endpoints
+		if (u.pathname === "/echo") {
+			return new Response(JSON.stringify({ ok: true, path: u.pathname, now: Date.now() }), {
 				headers: { "Content-Type": "application/json" },
 			});
 		}
-		if (url.pathname === "/health") {
+		if (u.pathname === "/health") {
 			const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
 				method: "POST",
 				headers: {
@@ -34,32 +29,28 @@ export default {
 			});
 		}
 
-		// Only proxy OpenAI-compatible paths
-		if (!url.pathname.startsWith("/openai/v1/")) {
+		// Normalize and gate the proxied path
+		u.pathname = u.pathname.replace(/^\/+/, "/"); // collapse // to /
+		if (!u.pathname.startsWith("/openai/v1/")) {
 			return new Response("Not Found", { status: 404 });
 		}
 
-		// Build upstream URL
-		const upstreamUrl = new URL(url.toString());
-		upstreamUrl.hostname = "api.groq.com";
+		// Forward to Groq
+		const upstream = new URL(u.toString());
+		upstream.hostname = "api.groq.com";
 
-		// Construct a clean request (avoid cloning hop-by-hop headers)
-		const isBody = !(req.method === "GET" || req.method === "HEAD");
-		const body = isBody ? await req.arrayBuffer() : undefined;
+		const hasBody = !(req.method === "GET" || req.method === "HEAD");
+		const body = hasBody ? await req.arrayBuffer() : undefined;
 
 		const headers = new Headers();
 		headers.set("Authorization", `Bearer ${env.GROQ_API_KEY}`);
-		if (isBody) headers.set("Content-Type", req.headers.get("Content-Type") || "application/json");
+		if (hasBody) headers.set("Content-Type", req.headers.get("Content-Type") || "application/json");
 		headers.set("Accept", "application/json");
 
-		const resp = await fetch(upstreamUrl, {
-			method: req.method,
-			headers,
-			body,
-		});
-
-		// Pass through response
-		const outHeaders = new Headers(resp.headers);
-		return new Response(resp.body, { status: resp.status, headers: outHeaders });
+		const r = await fetch(upstream, { method: req.method, headers, body });
+		const h = new Headers(r.headers);
+		h.set("x-upstream-status", String(r.status));  // help debug
+		h.set("x-upstream-url", upstream.pathname);    // help debug
+		return new Response(r.body, { status: r.status, headers: h });
 	},
 };
