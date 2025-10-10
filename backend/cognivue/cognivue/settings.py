@@ -124,6 +124,8 @@ GEMINI_PROXY_URL = os.getenv("GEMINI_PROXY_URL", "https://gemini-proxy.brainvid.
 
 # --- CORS / CSRF for Vue on Azure SWA ---
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://mango-dune-003323700.2.azurestaticapps.net",  # frontend prod
     "https://www.brainvid.me",
     "https://brainvid.me",
