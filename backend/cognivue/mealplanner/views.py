@@ -1,190 +1,332 @@
-import os, json, requests, urllib.parse
+# mealplanner/views.py
+import os, json, requests, hashlib, re
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
-import hashlib
-
 from django.conf import settings
-import google.generativeai as genai
+from groq import Groq
 
-def _coerce_f(x, d=0.0): 
-    try: return float(x)
-    except: return float(d)
+# --------- helpers ---------
+def _coerce_f(x, d=0.0):
+    """Best-effort float coercion with default."""
+    try:
+        return float(x)
+    except Exception:
+        return float(d)
+
+def _split_recipe_to_steps(recipe):
+    """Accept 'recipe' string and convert to recipe_steps[]."""
+    if not recipe:
+        return []
+    parts = [s.strip(" .\n") for s in re.split(r"\s*\d+\.\s*", str(recipe)) if s.strip()]
+    return parts or [str(recipe)]
+
+def _ingredients_to_strings(raw):
+    """
+    Accepts either:
+      - ["1 cup oats", "250 ml milk"]  OR
+      - [{"name":"oats","quantity":"1","unit":"cup"}, ...]
+    Returns list[str] like "1 cup oats".
+    """
+    out = []
+    if not raw:
+        return out
+    for x in raw:
+        if isinstance(x, dict):
+            name = str(x.get("name", "")).strip()
+            qty  = str(x.get("quantity", "")).strip()
+            unit = str(x.get("unit", "")).strip()
+            s = " ".join(p for p in [qty, unit, name] if p)
+            out.append(s or name)
+        else:
+            out.append(str(x).strip())
+    return out
 
 def _enforce(items, prefs):
-    dietary = set(prefs.get("dietary", []))
+    """
+    Validate / normalise model output and enforce constraints:
+    - respect max prep time
+    - ensure at least one snack and one meal
+    - cap to exactly 3 items and compute budget summary
+    NOTE: dietary restrictions are NOT enforced.
+    """
     max_prep = int(prefs.get("max_prep_minutes", 60))
-    scope    = 'daily'
-    days     = 1
-    budget   = _coerce_f(prefs.get("budgetAud",0.0))
-    budget_total = budget
+    budget_total = _coerce_f(prefs.get("budgetAud", 0.0))
 
     cleaned, cost, has_snack, has_meal = [], 0.0, False, False
-    for it in items:
-        tags = set(it.get("tags",[]))
-        if not dietary.issubset(tags): continue
+    for it in items or []:
+        tags = set(str(x).strip().lower() for x in (it.get("tags") or []))
+
         prep = int(_coerce_f(it.get("prep_minutes"), 999))
-        if prep > max_prep: continue
-        kind = (it.get("kind") or "meal").lower()
-        if kind not in ("meal","snack"): kind = "meal"
+        if prep > max_prep:
+            continue
+
+        kind = (it.get("kind") or "meal").strip().lower()
+        if kind not in ("meal", "snack"):
+            kind = "meal"
+
         vitd_mcg = _coerce_f(it.get("vitd_mcg"), 0)
-        vitd_iu  = int(_coerce_f(it.get("vitd_iu"), vitd_mcg*40))
+        vitd_iu = int(_coerce_f(it.get("vitd_iu"), vitd_mcg * 40))
         cost_aud = round(_coerce_f(it.get("cost_aud"), 0), 2)
-        ingredients = it.get("ingredients") or []
-        recipe_steps = it.get("recipe_steps") or []
 
-        cleaned.append({
-          "name": (it.get("name") or "").strip(),
-          "kind": kind,
-          "cost_aud": cost_aud,
-          "prep_minutes": prep,
-          "vitd_mcg": round(vitd_mcg,1),
-          "vitd_iu": vitd_iu,
-          "tags": list(tags),
-          "ingredients": [str(x) for x in ingredients][:20],
-          "recipe_steps": [str(x) for x in recipe_steps][:12],
-        })
-        has_snack |= kind=="snack"; has_meal |= kind=="meal"; cost += cost_aud
+        # Accept 'recipe_steps' or a single 'recipe' string
+        recipe_steps = it.get("recipe_steps")
+        if not recipe_steps and it.get("recipe"):
+            recipe_steps = _split_recipe_to_steps(it.get("recipe"))
 
-    # ensure ≥1 snack & ≥1 meal
-    if cleaned and not has_snack: cleaned[0]["kind"]="snack"; has_snack=True
-    if len(cleaned)>1 and not has_meal: cleaned[1]["kind"]="meal"; has_meal=True
+        # Ensure ingredients are strings for display
+        ingredients = _ingredients_to_strings(it.get("ingredients"))[:20]
+        recipe_steps = [str(x) for x in (recipe_steps or [])][:12]
 
-    # pad to exactly 3 if needed
+        # Ensure name exists
+        name = (it.get("name") or "").strip() or (ingredients[0].split(",")[0].title() if ingredients else "Suggested Option")
+
+        cleaned.append(
+            {
+                "name": name,
+                "kind": kind,
+                "cost_aud": cost_aud,
+                "prep_minutes": prep,
+                "vitd_mcg": round(vitd_mcg, 1),
+                "vitd_iu": vitd_iu,
+                "tags": list(tags),
+                "ingredients": ingredients,
+                "recipe_steps": recipe_steps,
+            }
+        )
+
+        has_snack |= kind == "snack"
+        has_meal |= kind == "meal"
+        cost += cost_aud
+
+    # ensure ≥1 snack & ≥1 meal where possible
+    if cleaned and not has_snack:
+        cleaned[0]["kind"] = "snack"
+        has_snack = True
+    if len(cleaned) > 1 and not has_meal:
+        cleaned[1]["kind"] = "meal"
+        has_meal = True
+
+    # pad to exactly 3 if needed (simple, safe defaults)
     FALLBACKS = [
-      {"name":"Fortified oat milk (250ml)","kind":"snack","cost_aud":1.2,"prep_minutes":1,"vitd_mcg":3.0,"vitd_iu":120,"tags":["vegan","lactose-free","nut-free"]},
-      {"name":"Eggs on toast","kind":"meal","cost_aud":2.1,"prep_minutes":10,"vitd_mcg":2.0,"vitd_iu":80,"tags":["nut-free"]},
-      {"name":"Canned tuna on crackers","kind":"snack","cost_aud":2.2,"prep_minutes":3,"vitd_mcg":2.0,"vitd_iu":80,"tags":["nut-free"]},
+        {
+            "name": "Fortified oat milk (250ml)",
+            "kind": "snack",
+            "cost_aud": 1.2,
+            "prep_minutes": 1,
+            "vitd_mcg": 3.0,
+            "vitd_iu": 120,
+            "tags": ["vegan", "lactose-free", "nut-free"],
+            "ingredients": ["250ml fortified oat milk"],
+            "recipe_steps": ["Serve chilled."],
+        },
+        {
+            "name": "Eggs on toast",
+            "kind": "meal",
+            "cost_aud": 2.1,
+            "prep_minutes": 10,
+            "vitd_mcg": 2.0,
+            "vitd_iu": 80,
+            "tags": ["nut-free"],
+            "ingredients": ["2 eggs", "2 slices wholegrain bread", "salt", "pepper"],
+            "recipe_steps": ["Toast bread.", "Pan-fry eggs to preference.", "Season and serve."],
+        },
+        {
+            "name": "Canned tuna on crackers",
+            "kind": "snack",
+            "cost_aud": 2.2,
+            "prep_minutes": 3,
+            "vitd_mcg": 2.0,
+            "vitd_iu": 80,
+            "tags": ["nut-free"],
+            "ingredients": ["Tuna in springwater", "Wholegrain crackers", "Lemon wedge"],
+            "recipe_steps": ["Drain tuna.", "Top crackers with tuna.", "Finish with lemon."],
+        },
     ]
     while len(cleaned) < 3 and FALLBACKS:
         cleaned.append(FALLBACKS.pop(0))
 
-    return cleaned[:3], {
-        "total_cost_aud": round(cost,2),
-        "budget_limit_aud": round(budget_total,2),
-        "within_budget": (cost <= budget_total) if budget_total>0 else True,
-        "has_snack": has_snack, "has_meal": has_meal,
+    summary = {
+        "total_cost_aud": round(cost, 2),
+        "budget_limit_aud": round(budget_total, 2),
+        "within_budget": (cost <= budget_total) if budget_total > 0 else True,
+        "has_snack": has_snack,
+        "has_meal": has_meal,
     }
+    return cleaned[:3], summary
 
-# --- Gemini call ---
-def _extract_json_from_gemini(resp):
-    # Prefer .text when response_mime_type is JSON; else stitch parts
-    data = getattr(resp, "text", None)
-    if not data:
-        parts = []
-        for cand in getattr(resp, "candidates", []) or []:
-            content = getattr(cand, "content", None)
-            for p in (getattr(content, "parts", []) or []):
-                t = getattr(p, "text", None)
-                if t: parts.append(t)
-        data = "".join(parts)
-    if not data:
-        raise ValueError("Empty response from Gemini")
-    try:
-        return json.loads(data)
-    except Exception as e:
-        raise ValueError(f"Gemini returned non-JSON: {data[:300]} ... ({e})")
+# --------- AI endpoint (Groq: Llama-3.x) ---------
+def __groq_client():
+    return Groq(
+        api_key=os.getenv("GROQ_API_KEY", ""),
+    )
 
 @csrf_exempt
 @require_POST
 def generate_ai_plan(request):
-    if not settings.GEMINI_API_KEY:
-        return JsonResponse({"success": False, "error": "Missing GEMINI_API_KEY"}, status=500)
+    if not getattr(settings, "GROQ_API_KEY", ""):
+        return JsonResponse({"success": False, "error": "GROQ_API_KEY not configured"}, status=500)
 
     prefs = json.loads(request.body or "{}")
-    print(prefs)
+    budget = prefs.get("budgetAud")
+    max_prep = prefs.get("max_prep_minutes")
+    dietary_raw = prefs.get("dietary") or prefs.get("dietary_restrictions") or []
+    dietary = sorted({str(x).strip().lower() for x in dietary_raw if str(x).strip()})
+
+    # Strong instruction with inline schema (plain JSON)
+    system_msg = (
+        "You are a diet assistant for middle-aged Australians. Your goal is to design recipes rich in vitamin D. "
+        "Only suggest realistic AU-supermarket recipes. Use realistic AUD costs and realistic prep times. "
+        "Output STRICT JSON only (no extra text). The JSON MUST match this shape:\n"
+        "{\n"
+        '  "items": [\n'
+        "    {\n"
+        '      "name": string,\n'
+        '      "kind": "meal" | "snack",\n'
+        '      "cost_aud": number,\n'
+        '      "prep_minutes": integer,\n'
+        '      "vitd_mcg": number,\n'
+        '      "vitd_iu": integer,\n'
+        '      "tags": string[],\n'
+        '      "ingredients": [{"name": string, "quantity": string, "unit": string}],\n'
+        '      "recipe_steps": string[]\n'
+        "    }\n"
+        "  ]\n"
+        "}\n"
+        "Return exactly 3 items."
+    )
+
+    user_prompt = {
+        "task": "Generate exactly 3 items for one day: include at least 1 snack and 1 full meal.",
+        "preferences": {
+            "budgetAud": budget,
+            "max_prep_minutes": max_prep,
+            "budget_scope": "daily",
+            "days": 1,
+            "dietary": dietary,
+        },
+        "rules": [
+            "If preferences.dietary is non-empty, every item MUST comply with ALL listed restrictions.",
+            "Do not include violating ingredients (e.g., meat/fish for vegetarian, any animal products for vegan, dairy for lactose-free, gluten for gluten-free, nuts for nut-free, high-sodium items for low-sodium).",
+            "Ensure that the recipes are rich in vitamin D.",
+            "Provide vitamin D in both µg and IU (1 µg = 40 IU).",
+            "Ingredients must be objects with name, quantity, unit (unit may be empty string if not applicable).",
+            "Return ONLY JSON matching the shape above. No prose.",
+            "Try to be reasonable with your recipes - if it's a meal it should be satiating.",
+            "Don't come up with gimmicky ingredients or meal options like 'fortified milk' or 'vitamin D treated mushrooms'. Keep it simple.",
+            "Include meaningful tags for each item, and copy the user dietary tags into tags as well."
+            "Don't hallucinate costs. If you are given 60 AUD to work with the cost of all meals don't strictly have to add up to 60 AUD.",
+        ],
+    }
 
     try:
-        genai.configure(api_key=settings.GEMINI_API_KEY)
-        model = genai.GenerativeModel(
-            model_name=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
-            system_instruction=(
-                "You are a diet assistant for middle-aged Australians. "
-                "Suggest vitamin-D rich foods available in AU supermarkets. "
-                "Respect dietary restrictions. Use AUD prices and give realistic prep times."
-                "Avoid gimmicky foods with adjectives like 'Vitamin-D fortified', 'UV-enriched' and the like."
-            ),
-            generation_config={
-                "response_mime_type": "application/json",
-                "response_schema": {
-                    "type": "object",
-                    "properties": {
-                        "items": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {"type": "string"},
-                                    "kind": {"type": "string", "enum": ["meal", "snack"]},
-                                    "cost_aud": {"type": "number"},
-                                    "prep_minutes": {"type": "integer"},
-                                    "vitd_mcg": {"type": "number"},
-                                    "vitd_iu": {"type": "integer"},
-                                    "tags": {"type": "array", "items": {"type": "string"}},
-                                    "ingredients": {"type":"array","items":{"type":"string"}},
-                                    "recipe_steps": {"type":"array","items":{"type":"string"}}
-                                },
-                                "required": ["name","kind","cost_aud","prep_minutes","vitd_mcg","vitd_iu","tags","ingredients","recipe_steps"],
-                            },
-                        }
-                    },
-                    "required": ["items"],
-                },
-            },
-        )
-
-        prompt = {
-            "task": "Generate exactly 3 options with at least one snack and one full meal.",
-            "preferences": prefs,
-            "rules": [
-                "All items must satisfy every dietary tag in preferences.dietary.",
-                "Include cost_aud (AUD), prep_minutes, vitd_mcg and vitd_iu (1 µg = 40 IU).",
-                "Label each item with kind: 'meal' or 'snack'.",
-                "Provide an itemised ingredients list and short step-by-step recipe.",
-                "Return ONLY JSON matching the response schema."
+        client = __groq_client()
+        resp = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": system_msg},
+                {"role": "user", "content": json.dumps(user_prompt)},
             ],
-        }
-
-        resp = model.generate_content(
-            [json.dumps(prompt)],
-            request_options={"timeout": 30},
+            response_format={"type": "json_object"},
+            temperature=0.4,
+            max_tokens=5000,
         )
-        parsed = _extract_json_from_gemini(resp)
-        items = parsed.get("items", [])
+        content = resp.choices[0].message.content or "{}"
+        try:
+            parsed = json.loads(content)
+        except Exception:
+            s = content
+            start = s.find("{"); end = s.rfind("}")
+            parsed = json.loads(s[start:end+1]) if start >= 0 and end > start else {}
+        items = (parsed or {}).get("items", [])
     except Exception as e:
-        # Surface a clear message instead of generic 502
-        return JsonResponse({"success": False, "error": f"Gemini call failed: {e}"}, status=502)
+        return JsonResponse({"success": False, "error": f"Groq call failed: {e}"}, status=502)
+    print(items)
+    cleaned_input = []
+    for it in items or []:
+        # normalise ingredients to strings so UI renders cleanly
+        it["ingredients"] = _ingredients_to_strings(it.get("ingredients"))
+        # accept items that have at least some structure
+        if len(it["ingredients"]) < 1:
+            continue
+        if len(it.get("recipe_steps") or []) < 1 and it.get("recipe"):
+            it["recipe_steps"] = _split_recipe_to_steps(it.get("recipe"))
+        cleaned_input.append(it)
+    print(cleaned_input)
+    items2, summary = _enforce(cleaned_input, {
+        "max_prep_minutes": max_prep,
+        "budgetAud": budget,
+    })
+    return JsonResponse({"success": True, "items": items2, "summary": summary, "preferences": prefs})
 
-    cleaned, summary = _enforce(items, prefs)
-    return JsonResponse({"success": True, "items": cleaned, "summary": summary, "preferences": prefs})
+@require_GET
+def groq_ping(request):
+    try:
+        # A) raw HTTP (bypasses SDK defaults)
+        r = requests.get(
+            "https://api.groq.com/openai/v1/models",
+            headers={
+                "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
+                "Accept": "application/json",
+            },
+            timeout=15,
+        )
+        raw_ok = r.status_code
+        raw_body = r.text[:300]
 
-# Image gathering
-# views.py
+        # B) SDK with explicit base_url
+        client = __groq_client()
+        models = client.models.list()
+        names = [m.id for m in models.data][:5]
+
+        return JsonResponse({
+            "ok": True,
+            "raw_status": raw_ok,
+            "raw_sample": raw_body,
+            "sdk_models": names,
+            "base_url": client.client.base_url,  # sanity check
+        })
+    except Exception as e:
+        return JsonResponse({
+            "ok": False,
+            "error": str(e),
+            "has_key": bool(os.getenv("GROQ_API_KEY", ""))
+        }, status=502)
+
+
+
+# --------- Photo search (Pexels) ---------
 @require_GET
 def photo_search(request):
+    """
+    GET /mealplanner/api/photo/?q=<dish>&diet=vegan,gluten-free
+    Returns: {"url": <image_or_null>}
+    """
     q = (request.GET.get("q") or "").strip()
     diet = (request.GET.get("diet") or "").lower()  # e.g. "vegan,gluten-free"
-    if not q or not settings.PEXELS_API_KEY:
+    api_key = getattr(settings, "PEXELS_API_KEY", "")
+
+    if not q or not api_key:
         return JsonResponse({"url": None})
 
     q_full = " ".join([q] + [d.strip() for d in diet.split(",") if d.strip()])
-
     cache_key = "pexels:" + hashlib.sha1(q_full.encode("utf-8")).hexdigest()
+
     if (cached := cache.get(cache_key)):
         return JsonResponse({"url": cached})
 
     try:
-        r = requests.get(
+        resp = requests.get(
             "https://api.pexels.com/v1/search",
             params={"query": q_full, "per_page": 1, "orientation": "landscape"},
-            headers={"Authorization": settings.PEXELS_API_KEY},
+            headers={"Authorization": api_key},
             timeout=8,
         )
-        r.raise_for_status()
-        photos = r.json().get("photos", [])
-        url = (photos[0]["src"].get("large") if photos else None)
-        cache.set(cache_key, url, 60*60*24*30)
+        resp.raise_for_status()
+        photos = resp.json().get("photos", []) or []
+        url = photos[0]["src"].get("large") if photos else None
+        cache.set(cache_key, url, 60 * 60 * 24 * 30)  # 30 days
         return JsonResponse({"url": url})
     except Exception:
         return JsonResponse({"url": None})
