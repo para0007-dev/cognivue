@@ -5,7 +5,7 @@ from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from django.conf import settings
-from groq import Groq
+from .llm import chat_json
 
 # --------- helpers ---------
 def _coerce_f(x, d=0.0):
@@ -70,16 +70,13 @@ def _enforce(items, prefs):
         vitd_iu = int(_coerce_f(it.get("vitd_iu"), vitd_mcg * 40))
         cost_aud = round(_coerce_f(it.get("cost_aud"), 0), 2)
 
-        # Accept 'recipe_steps' or a single 'recipe' string
         recipe_steps = it.get("recipe_steps")
         if not recipe_steps and it.get("recipe"):
             recipe_steps = _split_recipe_to_steps(it.get("recipe"))
 
-        # Ensure ingredients are strings for display
         ingredients = _ingredients_to_strings(it.get("ingredients"))[:20]
         recipe_steps = [str(x) for x in (recipe_steps or [])][:12]
 
-        # Ensure name exists
         name = (it.get("name") or "").strip() or (ingredients[0].split(",")[0].title() if ingredients else "Suggested Option")
 
         cleaned.append(
@@ -100,7 +97,6 @@ def _enforce(items, prefs):
         has_meal |= kind == "meal"
         cost += cost_aud
 
-    # ensure ≥1 snack & ≥1 meal where possible
     if cleaned and not has_snack:
         cleaned[0]["kind"] = "snack"
         has_snack = True
@@ -108,7 +104,6 @@ def _enforce(items, prefs):
         cleaned[1]["kind"] = "meal"
         has_meal = True
 
-    # pad to exactly 3 if needed (simple, safe defaults)
     FALLBACKS = [
         {
             "name": "Fortified oat milk (250ml)",
@@ -156,25 +151,16 @@ def _enforce(items, prefs):
     }
     return cleaned[:3], summary
 
-# --------- AI endpoint (Groq: Llama-3.x) ---------
-def __groq_client():
-    return Groq(
-        api_key=os.getenv("GROQ_API_KEY", ""),
-    )
-
+# --------- AI endpoint (provider-agnostic via llm.chat_json) ---------
 @csrf_exempt
 @require_POST
 def generate_ai_plan(request):
-    if not getattr(settings, "GROQ_API_KEY", ""):
-        return JsonResponse({"success": False, "error": "GROQ_API_KEY not configured"}, status=500)
-
     prefs = json.loads(request.body or "{}")
     budget = prefs.get("budgetAud")
     max_prep = prefs.get("max_prep_minutes")
     dietary_raw = prefs.get("dietary") or prefs.get("dietary_restrictions") or []
     dietary = sorted({str(x).strip().lower() for x in dietary_raw if str(x).strip()})
 
-    # Strong instruction with inline schema (plain JSON)
     system_msg = (
         "You are a diet assistant for middle-aged Australians. Your goal is to design recipes rich in vitamin D. "
         "Only suggest realistic AU-supermarket recipes. Use realistic AUD costs and realistic prep times. "
@@ -189,12 +175,12 @@ def generate_ai_plan(request):
         '      "vitd_mcg": number,\n'
         '      "vitd_iu": integer,\n'
         '      "tags": string[],\n'
-        '      "ingredients": [{"name": string, "quantity": string, "unit": string}],\n'
+        '      "ingredients": [{\"name\": string, \"quantity\": string, \"unit\": string}],\n'
         '      "recipe_steps": string[]\n'
         "    }\n"
         "  ]\n"
         "}\n"
-        "Return exactly 3 items."
+        "Return exactly 3 items. Return ONLY valid JSON per the schema."
     )
 
     user_prompt = {
@@ -215,86 +201,69 @@ def generate_ai_plan(request):
             "Return ONLY JSON matching the shape above. No prose.",
             "Try to be reasonable with your recipes - if it's a meal it should be satiating.",
             "Don't come up with gimmicky ingredients or meal options like 'fortified milk' or 'vitamin D treated mushrooms'. Keep it simple.",
-            "Include meaningful tags for each item, and copy the user dietary tags into tags as well."
-            "Don't hallucinate costs. If you are given 60 AUD to work with the cost of all meals don't strictly have to add up to 60 AUD.",
+            "Include meaningful tags for each item, and copy the user dietary tags into tags as well.",
+            "Don't hallucinate costs. If you are given 60 AUD to work with the cost of all meals don't strictly have to add up to 60 AUD."
         ],
     }
 
     try:
-        client = __groq_client()
-        resp = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+        content = chat_json(
             messages=[
                 {"role": "system", "content": system_msg},
                 {"role": "user", "content": json.dumps(user_prompt)},
             ],
-            response_format={"type": "json_object"},
             temperature=0.4,
             max_tokens=5000,
-        )
-        content = resp.choices[0].message.content or "{}"
+        ) or "{}"
         try:
-            parsed = json.loads(content)
+            parsed = json.loads(content) if isinstance(content, str) else content
         except Exception:
-            s = content
-            start = s.find("{"); end = s.rfind("}")
-            parsed = json.loads(s[start:end+1]) if start >= 0 and end > start else {}
+            s = str(content or "")
+            i, j = s.find("{"), s.rfind("}")
+            parsed = json.loads(s[i:j+1]) if i >= 0 and j > i else {}
         items = (parsed or {}).get("items", [])
     except Exception as e:
-        return JsonResponse({"success": False, "error": f"Groq call failed: {e}"}, status=502)
-    print(items)
+        # Fail soft: deterministic fallback so UI never 502s
+        items2, summary = _enforce([], {"max_prep_minutes": max_prep, "budgetAud": budget})
+        return JsonResponse(
+            {
+                "success": True,
+                "items": items2,
+                "summary": summary,
+                "preferences": prefs,
+                "note": f"AI offline: {str(e)[:120]}",
+            },
+            status=200,
+        )
+
     cleaned_input = []
     for it in items or []:
-        # normalise ingredients to strings so UI renders cleanly
         it["ingredients"] = _ingredients_to_strings(it.get("ingredients"))
-        # accept items that have at least some structure
         if len(it["ingredients"]) < 1:
             continue
         if len(it.get("recipe_steps") or []) < 1 and it.get("recipe"):
             it["recipe_steps"] = _split_recipe_to_steps(it.get("recipe"))
         cleaned_input.append(it)
-    print(cleaned_input)
-    items2, summary = _enforce(cleaned_input, {
-        "max_prep_minutes": max_prep,
-        "budgetAud": budget,
-    })
+
+    items2, summary = _enforce(
+        cleaned_input,
+        {"max_prep_minutes": max_prep, "budgetAud": budget},
+    )
     return JsonResponse({"success": True, "items": items2, "summary": summary, "preferences": prefs})
 
+# --------- Provider ping ---------
 @require_GET
-def groq_ping(request):
-    try:
-        # A) raw HTTP (bypasses SDK defaults)
-        r = requests.get(
-            "https://api.groq.com/openai/v1/models",
-            headers={
-                "Authorization": f"Bearer {os.getenv('GROQ_API_KEY','')}",
-                "Accept": "application/json",
-            },
-            timeout=15,
-        )
-        raw_ok = r.status_code
-        raw_body = r.text[:300]
-
-        # B) SDK with explicit base_url
-        client = __groq_client()
-        models = client.models.list()
-        names = [m.id for m in models.data][:5]
-
-        return JsonResponse({
-            "ok": True,
-            "raw_status": raw_ok,
-            "raw_sample": raw_body,
-            "sdk_models": names,
-            "base_url": client.client.base_url,  # sanity check
-        })
-    except Exception as e:
-        return JsonResponse({
-            "ok": False,
-            "error": str(e),
-            "has_key": bool(os.getenv("GROQ_API_KEY", ""))
-        }, status=502)
-
-
+def ai_ping(request):
+    return JsonResponse({
+        "provider": os.getenv("AI_PROVIDER"),
+        "gemini_model": os.getenv("GEMINI_MODEL"),
+        "has_gemini_key": bool(os.getenv("GEMINI_API_KEY")),
+        "openai_model": os.getenv("OPENAI_MODEL"),
+        "has_openai_key": bool(os.getenv("OPENAI_API_KEY")),
+        "groq_model": os.getenv("GROQ_MODEL"),
+        "groq_base": os.getenv("GROQ_BASE_URL"),
+        "has_groq_key": bool(os.getenv("GROQ_API_KEY")),
+    })
 
 # --------- Photo search (Pexels) ---------
 @require_GET
@@ -326,7 +295,7 @@ def photo_search(request):
         resp.raise_for_status()
         photos = resp.json().get("photos", []) or []
         url = photos[0]["src"].get("large") if photos else None
-        cache.set(cache_key, url, 60 * 60 * 24 * 30)  # 30 days
+        cache.set(cache_key, url, 60 * 60 * 24 * 30)
         return JsonResponse({"url": url})
     except Exception:
         return JsonResponse({"url": None})
