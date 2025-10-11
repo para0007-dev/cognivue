@@ -30,6 +30,5 @@ urlpatterns = [
     path('vitamin-d-helper/', include('vitamin_d_helper.urls')),
     path('insights/', include('insights.urls')),
     path('nutrition/', include('nutrition.urls')),
-
 ]
 
