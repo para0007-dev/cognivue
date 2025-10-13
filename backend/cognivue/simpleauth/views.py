@@ -6,7 +6,7 @@ import json
 USERNAME = "admin"
 PASSWORD = "sinepgib"
 
-# HTML login/logout (optional)
+# HTML login/logout (optional)dsadas
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
