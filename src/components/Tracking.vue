@@ -145,9 +145,9 @@ export default {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px; /* widen container for desktop */
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 12px; /* reduce side padding so cards get closer to edges */
   position: relative;
   z-index: 2;
 }
@@ -554,6 +554,13 @@ export default {
   
   .learn-more {
     font-size: 13px;
+  }
+}
+@media (min-width: 1440px) {
+  .container {
+    max-width: none; /* allow full-width on wide desktop */
+    width: 100%;
+    padding: 0 8px; /* very small side padding to get closer to page edges */
   }
 }
 </style>

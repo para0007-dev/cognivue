@@ -103,7 +103,7 @@ onBeforeUnmount(stopAuto)
         <div v-else-if="loading" class="skeleton" />
         <div v-else-if="current" class="slide">
           <h1 class="title">
-            <img src="@/assets/images/logo.png" alt="Education Hub" class="title-icon" />
+            <img src="@/assets/images/logo-icon.svg" alt="Education Hub" class="title-icon" />
             {{ current.title }}
           </h1>
           <p class="text">{{ current.text }}</p>

@@ -1,10 +1,10 @@
 <template>
   <section class="brain-health-section">
     <div class="container">
+      <h2 class="section-title">Why Vitamin D Matters for Your Brain</h2>
       <div class="content-wrapper">
         <div class="text-content">
-          <h2>Why Vitamin D Matters for Your Brain</h2>
-          
+          <!-- moved title above grid; keep only benefits list here -->
           <div class="benefits-list">
             <div class="benefit-item">
               <div class="check-icon">
@@ -53,7 +53,7 @@
             <h3>Research Source</h3>
             <div class="source-info">
               <div class="source-icon">
-                <Icon icon="material-symbols:school" :width="24" :height="24" color="#16a34a" />
+                <Icon icon="material-symbols:school" :width="28" :height="28" color="#ffffff" class="source-icon-svg" />
               </div>
               <div class="source-details">
                 <h4>Queensland Brain Institute</h4>
@@ -89,7 +89,7 @@ export default {
 <style scoped>
 .brain-health-section {
   background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
-  padding: 80px 0;
+  padding: 24px 0 80px 0; /* tighter top space */
   opacity: 0;
   animation: sectionFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
   position: relative;
@@ -138,11 +138,17 @@ export default {
   padding: 0 20px;
 }
 
+.section-title {
+  margin-top: 0; /* remove default h2 top margin to move title up */
+  text-align: center;
+  margin-bottom: 44px; /* keep spacing below title */
+}
+
 .content-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
+  gap: 48px; /* balanced layout */
+  align-items: stretch; /* ensure both columns share equal height tracks */
 }
 
 .text-content {
@@ -165,14 +171,17 @@ export default {
   font-size: 36px;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 40px;
+  margin-bottom: 44px; /* increase spacing under title */
   line-height: 1.2;
+  text-align: center; /* center the heading as per screenshot */
 }
 
 .benefits-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: space-between; /* distribute items to align top & bottom with right column */
+  gap: 0; /* use distributed spacing instead of fixed gap */
+  height: 100%; /* fill the column height for alignment */
 }
 
 .benefit-item {
@@ -314,6 +323,7 @@ export default {
 .research-content {
   opacity: 0;
   animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  margin-top: 0;
 }
 
 @keyframes slideInRight {
@@ -329,10 +339,10 @@ export default {
 
 .research-card {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  padding: 36px;
-  border-radius: 20px;
-  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.12);
-  border: 1px solid #d1fae5;
+  padding: 28px; /* was 36px */
+  border-radius: 16px; /* was 20px */
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.08); /* subtler shadow to match left cards */
+  border: 1px solid #e2e8f0; /* align border style with left cards */
   height: fit-content;
   position: relative;
   overflow: hidden;
@@ -345,14 +355,16 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #059669, #10b981, #34d399);
+  height: 3px; /* match left accent height */
+  background: linear-gradient(90deg, #10b981, #22c55e, #34d399);
+  opacity: 0; /* show accent only on hover, consistent with left cards */
+  transition: opacity 0.3s ease;
 }
 
 .research-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 50px rgba(16, 185, 129, 0.18);
-  border-color: #a7f3d0;
+  transform: translateY(-2px); /* was -3px */
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.12); /* consistent hover shadow */
+  border-color: #e2e8f0; /* keep border consistent on hover */
 }
 
 .research-card::after {
@@ -362,15 +374,15 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
-  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(34, 197, 94, 0.03) 100%);
+  border-radius: 16px; /* was 20px */
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .research-card:hover::after {
-  opacity: 1;
+  opacity: 0.08; /* was 1; subtler hover glow for harmony */
 }
 
 .research-card h3 {
@@ -401,14 +413,33 @@ export default {
 
 .source-icon {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #16a34a, #0f766e);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); /* was 0 6px 16px */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  position: relative;
+}
+
+.source-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 45%);
+  pointer-events: none;
+}
+
+.source-icon-svg {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+}
+
+.source-icon:hover {
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.45);
 }
 
 .source-details h4 {
@@ -478,15 +509,17 @@ blockquote::before {
 /* Responsive design */
 @media (max-width: 1024px) {
   .brain-health-section {
-    padding: 60px 0;
+    padding: 24px 0 60px 0; /* tighter top space on tablet */
   }
   
   .content-wrapper {
-    gap: 40px;
+    gap: 36px; /* was 40px */
   }
   
-  .text-content h2 {
+  .section-title {
     font-size: 32px;
+    margin-bottom: 36px; /* slightly reduced for tablet */
+    text-align: center; /* keep centered on tablet */
   }
   
   .benefit-item {
@@ -494,8 +527,11 @@ blockquote::before {
   }
   
   .research-card {
-    padding: 30px;
+    padding: 26px; /* was 30px */
   }
+  
+  /* columns aligned under global section title */
+  .research-content { margin-top: 0; }
 }
 
 @media (max-width: 768px) {
@@ -512,9 +548,10 @@ blockquote::before {
     gap: 30px;
   }
   
-  .text-content h2 {
+  .section-title {
     font-size: 28px;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
+    text-align: center; /* keep centered on mobile */
   }
   
   .benefit-item {
@@ -576,9 +613,10 @@ blockquote::before {
     padding: 0 12px;
   }
   
-  .text-content h2 {
+  .section-title {
     font-size: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
+    text-align: center; /* keep centered on small mobile */
   }
   
   .benefits-list {

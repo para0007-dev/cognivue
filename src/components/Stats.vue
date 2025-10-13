@@ -64,13 +64,13 @@ export default {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem; /* reduce side padding so cards get closer to section edges */
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 3rem; /* increase space between cards */
 }
 
 .stat-card {

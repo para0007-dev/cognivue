@@ -90,9 +90,6 @@
             <div class="plan-header">
               <div class="plan-header-content">
                 <div class="plan-title-section">
-                  <div class="plan-icon">
-                    <Icon icon="material-symbols:restaurant-menu-rounded" :width="32" :height="32" color="#16a34a" />
-                  </div>
                   <div class="plan-title-text">
                     <h2 class="plan-title">Here's your personalised meal plan:</h2>
                     <p class="plan-subtitle">Carefully crafted to meet your vitamin D goals and dietary preferences</p>
@@ -110,7 +107,7 @@
                   </div>
                   <div class="summary-card budget-card">
                     <div class="summary-icon">
-                      <Icon icon="material-symbols:account-balance-wallet-rounded" :width="20" :height="20" color="#0369a1" />
+                      <Icon icon="material-symbols:attach-money" :width="20" :height="20" color="#0369a1" />
                     </div>
                     <div class="summary-content">
                       <span class="summary-label">Weekly Budget</span>
@@ -133,90 +130,7 @@
 
             <!-- Meal Cards -->
             <div class="meal-cards-container">
-              <div 
-                v-for="meal in mealPlan" 
-                :key="meal.type"
-                class="meal-card"
-              >
-                <div class="meal-card-header">
-                  <div class="meal-image-container">
-                    <div class="meal-image-placeholder">
-                      <!-- Image interface reserved for backend integration -->
-                      <div class="image-placeholder">
-                        <Icon icon="material-symbols:restaurant" :width="32" :height="32" color="#9CA3AF" />
-                        <span class="placeholder-text">{{ meal.type }} Image</span>
-                      </div>
-                    </div>
-                    <div class="meal-type-badge">{{ meal.type }}</div>
-                  </div>
-                  
-                  <div class="meal-header-info">
-                    <h3 class="meal-title">{{ meal.name }}</h3>
-                    <div class="meal-stats-grid">
-                      <div class="stat-item vitamin-stat">
-                        <Icon icon="material-symbols:vitamins" :width="16" :height="16" color="#f59e0b" />
-                        <span class="stat-label">Vitamin D</span>
-                        <span class="stat-value">{{ meal.vitaminDUnit }}</span>
-                      </div>
-                      <div class="stat-item time-stat">
-                        <Icon icon="material-symbols:schedule" :width="16" :height="16" color="#3b82f6" />
-                        <span class="stat-label">Prep Time</span>
-                        <span class="stat-value">{{ meal.prepTime }} min</span>
-                      </div>
-                      <div class="stat-item cost-stat">
-                        <Icon icon="material-symbols:attach-money" :width="16" :height="16" color="#059669" />
-                        <span class="stat-label">Cost</span>
-                        <span class="stat-value">${{ meal.cost.toFixed(2) }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="meal-card-body">
-                  <div class="meal-details-grid">
-                    <div class="ingredients-section">
-                      <div class="section-header">
-                        <Icon icon="material-symbols:grocery" :width="20" :height="20" color="#059669" />
-                        <h4 class="section-title">Ingredients</h4>
-                      </div>
-                      <ul class="ingredients-list">
-                        <li v-for="ingredient in meal.ingredients" :key="ingredient" class="ingredient-item">
-                          <Icon icon="material-symbols:check-circle" :width="14" :height="14" color="#059669" />
-                          <span>{{ ingredient }}</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="recipe-section">
-                      <div class="section-header">
-                        <Icon icon="material-symbols:menu-book" :width="20" :height="20" color="#3b82f6" />
-                        <h4 class="section-title">Recipe Steps</h4>
-                      </div>
-                      <ol class="recipe-steps">
-                        <li v-for="(step, index) in meal.recipe" :key="index" class="recipe-step">
-                          {{ step }}
-                        </li>
-                      </ol>
-                    </div>
-                  </div>
-
-                  <div class="meal-footer">
-                    <div class="meal-tags">
-                      <span 
-                        v-for="tag in meal.tags" 
-                        :key="tag"
-                        class="tag"
-                      >
-                        {{ tag }}
-                      </span>
-                    </div>
-                    <button class="action-button">
-                      <Icon icon="material-symbols:favorite-border" :width="16" :height="16" />
-                      Save Recipe
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <MealCard v-for="meal in mealPlan" :key="meal.type + '-' + meal.name" :meal="meal" />
             </div>
           </div>
         </div>
@@ -259,6 +173,7 @@ import { ref, computed, onMounted } from 'vue'
 import api from '@/services/api'
 import { nutritionAPI } from '@/services/api'
 import { Icon } from '@iconify/vue'
+import MealCard from '@/components/nutrition/MealCard.vue'
 
 // Reactive data
 const loading = ref(false)
@@ -744,9 +659,9 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 0 24px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0 0 24px;
+  max-width: none;
+  margin: 0 24px;
 }
 
 /* Configuration Panel */
@@ -796,23 +711,24 @@ onMounted(() => {
 
 .preferences-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
   align-items: stretch;
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 /* Responsive design */
 @media (max-width: 1024px) {
   .preferences-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 600px;
+    gap: 24px;
+    width: 100%;
+    margin: 0 0;
   }
   
   .preference-group {
-    padding: 24px;
+    padding: 20px;
   }
 }
 
@@ -822,7 +738,7 @@ onMounted(() => {
   }
   
   .preference-group {
-    padding: 20px;
+    padding: 16px 14px;
   }
   
   .dietary-options {
@@ -870,7 +786,7 @@ onMounted(() => {
 
 .preference-group {
   margin-bottom: 24px;
-  padding: 28px;
+  padding: 20px 24px;
   background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
   border-radius: 16px;
   border: 1px solid #bbf7d0;
@@ -1129,20 +1045,21 @@ onMounted(() => {
 }
 
 .summary-card {
-  background: white;
-  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 14px;
   padding: 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 14px rgba(16, 185, 129, 0.06);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .summary-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 24px rgba(16, 185, 129, 0.1);
+  border-color: #d1fae5;
 }
 
 .summary-icon {
@@ -1153,6 +1070,9 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #f3f4f6 100%);
+  border: 1px solid #e5e7eb;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.6);
 }
 
 .total-card .summary-icon {
@@ -1661,12 +1581,34 @@ onMounted(() => {
 }
 
 .plan-header {
+  position: relative;
+  overflow: hidden;
   margin-bottom: 32px;
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-  border-radius: 16px;
-  padding: 24px;
-  border: 1px solid #bbf7d0;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+  background: linear-gradient(135deg, #f6fffa 0%, #effaf5 100%);
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid #d1fae5;
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.08);
+}
+
+.plan-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(900px 160px at -10% -10%, rgba(16, 185, 129, 0.12), transparent 60%),
+              radial-gradient(600px 120px at 110% -10%, rgba(16, 185, 129, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.plan-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0));
+  pointer-events: none;
 }
 
 .plan-header-content {
@@ -1678,19 +1620,7 @@ onMounted(() => {
 .plan-title-section {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.plan-icon {
-  width: 56px;
-  height: 56px;
-  background: white;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
-  border: 2px solid #bbf7d0;
+  gap: 0;
 }
 
 .plan-title-text {
@@ -1698,18 +1628,20 @@ onMounted(() => {
 }
 
 .plan-title {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
   color: #064e3b;
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
   line-height: 1.2;
 }
 
 .plan-subtitle {
-  font-size: 16px;
-  color: #059669;
+  font-size: 15px;
+  color: #0f766e;
   margin: 0;
   font-weight: 500;
+  opacity: 0.95;
 }
 
 .plan-actions {
@@ -2043,7 +1975,9 @@ onMounted(() => {
   grid-template-columns: 400px 1fr;
   gap: 32px;
   align-items: start;
-  padding: 0 24px 24px;
+  padding: 0 0 24px;
+  max-width: none;
+  margin: 0 24px;
 }
 
 @media (max-width: 1200px) {
@@ -2256,14 +2190,17 @@ onMounted(() => {
     font-size: 12px;
   }
   
-  .plan-icon {
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
-  }
-  
   .summary-card {
     padding: 12px;
+    border-radius: 12px;
+  }
+  
+  .plan-title {
+    font-size: 18px;
+  }
+  
+  .plan-subtitle {
+    font-size: 11px;
   }
   
   .summary-icon {
