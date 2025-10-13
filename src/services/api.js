@@ -40,43 +40,140 @@ async function apiRequest(endpoint, options = {}) {
 
 // ---- Feature APIs ----
 export const weatherAPI = {
+  // NOW - Current weather
   getWeather: async () => {
-    const json = await apiRequest(API_ENDPOINTS.weather);
-    return {
-      success: true,
-      weather: {
-        location: json.location,
-        condition: json.condition,
-        temp: json.temp,
-        uv_index: json.uv_index,
-      },
-    };
+    try {
+      const { ok, json, status } = await apiRequest(API_ENDPOINTS.weather);
+      if (!ok) {
+        const errorMsg = json?.error || `Weather request failed (HTTP ${status})`;
+        throw new Error(errorMsg);
+      }
+      return {
+        success: true,
+        weather: {
+          location: json.location || "Unknown",
+          condition: json.condition || "Unknown",
+          temp: json.temp || 0,
+          uv_index: json.uv_index || 0,
+        },
+      };
+    } catch (error) {
+      console.error("getWeather error:", error);
+      throw error;
+    }
   },
+
   getWeatherByCoords: async (lat, lon) => {
-    const params = new URLSearchParams({ lat, lon });
-    const json = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
-    return {
-      success: true,
-      weather: {
-        location: json.location,
-        condition: json.condition,
-        temp: json.temp,
-        uv_index: json.uv_index,
-      },
-    };
+    try {
+      const params = new URLSearchParams({ lat: lat.toString(), lon: lon.toString() });
+      const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+      if (!ok) {
+        const errorMsg = json?.error || `Weather request failed (HTTP ${status})`;
+        throw new Error(errorMsg);
+      }
+      return {
+        success: true,
+        weather: {
+          location: json.location || "Unknown",
+          condition: json.condition || "Unknown",
+          temp: json.temp || 0,
+          uv_index: json.uv_index || 0,
+        },
+      };
+    } catch (error) {
+      console.error("getWeatherByCoords error:", error);
+      throw error;
+    }
   },
+
   getWeatherByCity: async (city) => {
-    const params = new URLSearchParams({ city });
-    const json = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
-    return {
-      success: true,
-      weather: {
-        location: json.location,
-        condition: json.condition,
-        temp: json.temp,
-        uv_index: json.uv_index,
-      },
-    };
+    try {
+      const params = new URLSearchParams({ city: city.trim() });
+      const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+      if (!ok) {
+        const errorMsg = json?.error || json?.suggestion || `City not found (HTTP ${status})`;
+        const err = new Error(errorMsg);
+        err.code = status;
+        err.suggestion = json?.suggestion;
+        throw err;
+      }
+      return {
+        success: true,
+        weather: {
+          location: json.location || city,
+          condition: json.condition || "Unknown",
+          temp: json.temp || 0,
+          uv_index: json.uv_index || 0,
+        },
+      };
+    } catch (error) {
+      console.error("getWeatherByCity error:", error);
+      throw error;
+    }
+  },
+
+  // 7-day hourly forecast
+  getForecast: async () => {
+    try {
+      const { ok, json, status } = await apiRequest(API_ENDPOINTS.forecast);
+      if (!ok) {
+        const errorMsg = json?.error || `Forecast request failed (HTTP ${status})`;
+        throw new Error(errorMsg);
+      }
+      return normalizeForecast(json);
+    } catch (error) {
+      console.error("getForecast error:", error);
+      throw error;
+    }
+  },
+
+  getForecastByCoords: async (lat, lon) => {
+    try {
+      const params = new URLSearchParams({ lat: lat.toString(), lon: lon.toString() });
+      const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.forecast}?${params}`);
+      if (!ok) {
+        const errorMsg = json?.error || json?.suggestion || `Forecast request failed (HTTP ${status})`;
+        const err = new Error(errorMsg);
+        err.suggestion = json?.suggestion;
+        throw err;
+      }
+      return normalizeForecast(json);
+    } catch (error) {
+      console.error("getForecastByCoords error:", error);
+      throw error;
+    }
+  },
+
+  getForecastByCity: async (city) => {
+    try {
+      const params = new URLSearchParams({ city: city.trim() });
+      const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.forecast}?${params}`);
+      
+      if (!ok) {
+        const errorMsg = json?.error || json?.suggestion || `City not found (HTTP ${status})`;
+        const err = new Error(errorMsg);
+        err.code = status;
+        err.suggestion = json?.suggestion;
+        throw err;
+      }
+      
+      // Validate that we got forecast data
+      const normalized = normalizeForecast(json);
+      if (!normalized.days || normalized.days.length === 0) {
+        throw new Error(`No forecast data available for ${city}. Try a larger nearby city.`);
+      }
+      
+      // Check if we have hourly data
+      const hasHourlyData = normalized.days.some(day => day.hours && day.hours.length > 0);
+      if (!hasHourlyData) {
+        throw new Error(`Limited forecast data for ${city}. Try a major city for detailed UV forecasts.`);
+      }
+      
+      return normalized;
+    } catch (error) {
+      console.error("getForecastByCity error:", error);
+      throw error;
+    }
   },
 };
 
@@ -128,13 +225,20 @@ export const nutritionAPI = {
 // --- Back-compat adapter so MealPlannerView.vue keeps working ---
 // POST payload (days, budgetAud, max_prep_minutes, dietary, etc.)
 export const mealAI = {
-  generate: async (payload) =>
-    apiRequest(`${API_ENDPOINTS.nutrition}meal-plan/`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-    }),
+  generate: async (payload = {}) => {
+    const qs = new URLSearchParams({
+      // map your view’s fields to the API’s expected names:
+      budget_aud: payload.budgetAud ?? payload.budget_aud ?? 20,
+      max_prep_minutes:
+        payload.max_prep_minutes ?? payload.maxPrepMinutes ?? 40,
+      dietary: Array.isArray(payload.dietary) ? payload.dietary.join(",") : (payload.dietary || ""),
+      days: payload.days ?? 1,
+    });
+    return apiRequest(`${API_ENDPOINTS.nutrition}meal-plan/?${qs.toString()}`);
+  },
   swap: nutritionAPI.swapMeal,
 };
+
 
 // Tiny image helper; returns a plausible food photo URL so the UI shows something.
 // (Swap to your real image service anytime.)
