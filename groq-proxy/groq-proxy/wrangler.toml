@@ -1,0 +1,5 @@
+name = "groq-proxy"
+main = "src/index.js"
+compatibility_date = "2025-10-10"
+# uncomment after adding a custom domain in CF dashboard:
+# routes = [{ pattern = "groq-proxy.brainvid.me/*", zone_name = "brainvid.me" }]

@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import os
 
 USERNAME = "admin"
-PASSWORD = "sinepgib"
+PASSWORD = str(os.getenv('ADMIN_PASS'))
 
 # HTML login/logout (optional)dsadas
 def login_view(request):
