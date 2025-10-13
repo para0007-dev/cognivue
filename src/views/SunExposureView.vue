@@ -451,7 +451,7 @@
 
 <script>
 import Header from '@/components/Header.vue'
-import { weatherAPI } from '@/services/api.js'
+import { weatherAPI } from '@/services/apiSun.js'
 import { Icon } from '@iconify/vue'
 import { buildWeeklyPlan, vitaminDNudge, getQuestionnaireProfile } from '@/services/plan'
 

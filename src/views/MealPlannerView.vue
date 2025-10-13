@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import Header from '@/components/Header.vue'
-import { mealAI, mealImages } from '@/services/api.js'
+import { mealAI, mealImages } from '@/services/apiCore.js'
 
 const dietaryOptions = ['Vegetarian','Vegan','Lactose-free','Gluten-free','Nut-free','Low-sodium']
 const selectedDietary = ref([])
