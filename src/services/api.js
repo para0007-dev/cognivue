@@ -3,7 +3,14 @@ import axios from "axios";
 
 // Normalize base: add scheme if missing, strip trailing slashes
 const raw = import.meta.env.VITE_API_BASE || "";
-const BASE = (raw.startsWith("http") ? raw : `http://${raw || "localhost:8000"}`).replace(/\/+$/, "");
+// assume `raw` is your env var, e.g. import.meta.env.VITE_API_BASE?.trim() ?? ""
+const scheme = raw && !raw.includes("localhost") ? "https" : "http";
+
+export const API_BASE_URL = (
+  raw.startsWith("http")
+    ? raw
+    : `${scheme}://${raw || "localhost:8000"}`
+).replace(/\/+$/, "");
 
 // Central endpoints (leading slash only)
 const API_ENDPOINTS = {
