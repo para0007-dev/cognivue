@@ -20,7 +20,6 @@ const API_ENDPOINTS = {
   timer: "/timer/api/timer/",
   news: "/brain-health-news/",
   insights: "/insights/",
-  forecast: "/vitamin-d-helper/api/weather/forecast/",
 };
 
 // --- Join base + endpoint
@@ -72,56 +71,36 @@ async function apiRequest(endpoint, options = {}) {
     console.error("API Request failed:", error);
     throw new Error(`Network error: ${error.message}`);
   }
+  return json ?? {};
 }
 
 // ---- Feature APIs ----
 export const weatherAPI = {
-  // NOW - Current weather
   getWeather: async () => {
-    try {
-      const { ok, json, status } = await apiRequest(API_ENDPOINTS.weather);
-      if (!ok) {
-        const errorMsg = json?.error || `Weather request failed (HTTP ${status})`;
-        throw new Error(errorMsg);
-      }
-      return {
-        success: true,
-        weather: {
-          location: json.location || "Unknown",
-          condition: json.condition || "Unknown",
-          temp: json.temp || 0,
-          uv_index: json.uv_index || 0,
-        },
-      };
-    } catch (error) {
-      console.error("getWeather error:", error);
-      throw error;
-    }
+    const json = await apiRequest(API_ENDPOINTS.weather);
+    return {
+      success: true,
+      weather: {
+        location: json.location,
+        condition: json.condition,
+        temp: json.temp,
+        uv_index: json.uv_index,
+      },
+    };
   },
-
   getWeatherByCoords: async (lat, lon) => {
-    try {
-      const params = new URLSearchParams({ lat: lat.toString(), lon: lon.toString() });
-      const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
-      if (!ok) {
-        const errorMsg = json?.error || `Weather request failed (HTTP ${status})`;
-        throw new Error(errorMsg);
-      }
-      return {
-        success: true,
-        weather: {
-          location: json.location || "Unknown",
-          condition: json.condition || "Unknown",
-          temp: json.temp || 0,
-          uv_index: json.uv_index || 0,
-        },
-      };
-    } catch (error) {
-      console.error("getWeatherByCoords error:", error);
-      throw error;
-    }
+    const params = new URLSearchParams({ lat, lon });
+    const json = await apiRequest(`${API_ENDPOINTS.weather}?${params}`);
+    return {
+      success: true,
+      weather: {
+        location: json.location,
+        condition: json.condition,
+        temp: json.temp,
+        uv_index: json.uv_index,
+      },
+    };
   },
-
   getWeatherByCity: async (city) => {
     try {
       const params = new URLSearchParams({ city: city.trim() });
@@ -284,53 +263,31 @@ function normalizeForecast(json) {
 }
 
 export const skinTypesAPI = {
-  getAll: async () => {
-    const { ok, json, status } = await apiRequest(API_ENDPOINTS.skinTypes);
-    if (!ok) throw new Error(`Skin types failed (HTTP ${status})`);
-    return json;
-  },
+  getAll: async () => apiRequest(API_ENDPOINTS.skinTypes),
 };
 
 export const recommendationAPI = {
   getRecommendation: async (skinTypeId) => {
     const params = new URLSearchParams({ skin_type_id: skinTypeId });
-    const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.recommendation}?${params}`);
-    if (!ok) throw new Error(`Recommendation failed (HTTP ${status})`);
-    return json;
+    return apiRequest(`${API_ENDPOINTS.recommendation}?${params}`);
   },
 };
 
 export const timerAPI = {
-  getTimerData: async (minutes) => {
-    const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.timer}${minutes}/`);
-    if (!ok) throw new Error(`Timer failed (HTTP ${status})`);
-    return json;
-  },
+  getTimerData: async (minutes) => apiRequest(`${API_ENDPOINTS.timer}${minutes}/`),
 };
 
 export const newsAPI = {
-  getBrainHealthNews: async () => {
-    const { ok, json, status } = await apiRequest(API_ENDPOINTS.news);
-    if (!ok) throw new Error(`News failed (HTTP ${status})`);
-    return json;
-  },
+  getBrainHealthNews: async () => apiRequest(API_ENDPOINTS.news),
 };
 
 export const insightsAPI = {
-  getFactoids: async () => {
-    const { ok, json, status } = await apiRequest("/insights/api/factoids/");
-    if (!ok) throw new Error(`Factoids failed (HTTP ${status})`);
-    return json;
-  },
-  getTips: async () => {
-    const { ok, json, status } = await apiRequest("/insights/api/tips/");
-    if (!ok) throw new Error(`Tips failed (HTTP ${status})`);
-    return json;
-  },
+  getFactoids: async () => apiRequest("/insights/api/factoids/"),
+  getTips: async () => apiRequest("/insights/api/tips/"),
   getHub: async () => {
     const [factoids, tips] = await Promise.all([
-      insightsAPI.getFactoids(),
-      insightsAPI.getTips(),
+      apiRequest("/insights/api/factoids/"),
+      apiRequest("/insights/api/tips/"),
     ]);
     return { factoids, tips };
   },
@@ -362,5 +319,4 @@ const api = axios.create({
   xsrfCookieName: "csrftoken",
   xsrfHeaderName: "X-CSRFToken"
 });
-
 export default api;
