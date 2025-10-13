@@ -7,7 +7,7 @@ import os
 USERNAME = "admin"
 PASSWORD = str(os.getenv('ADMIN_PASS'))
 
-# HTML login/logout (optional)dsadas
+# HTML login/logout (optional)
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
