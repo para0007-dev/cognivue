@@ -72,6 +72,12 @@ const routes = [
     name: 'DataAwareness',
     component: DataAwareness,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/disclaimer',
+    name: 'Disclaimer',
+    component: () => import('@/views/Disclaimer.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -80,11 +86,11 @@ const router = createRouter({
   routes
 })
 
-// 🔒 Route guard
+// Route guard
 router.beforeEach((to, from, next) => {
   const loggedIn = sessionStorage.getItem("logged_in") === "true"
 
-  // If route requires authentication and user not logged in → redirect
+  // If route requires authentication and user not logged in -> redirect
   if (to.meta.requiresAuth && !loggedIn) {
     next({
       name: 'Login',
@@ -93,7 +99,7 @@ router.beforeEach((to, from, next) => {
     return
   }
 
-  // If already logged in and trying to go to /login → send to home
+  // If already logged in and trying to go to /login -> send to home
   if (to.name === 'Login' && loggedIn) {
     next({ name: 'Home' })
     return

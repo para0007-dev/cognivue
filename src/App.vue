@@ -9,6 +9,9 @@
         <component :is="Component" :key="route.path" />
       </transition>
     </router-view>
+    <footer class="footer">
+      <router-link to="/disclaimer">Disclaimer</router-link>
+    </footer>
   </div>
 </template>
 
@@ -134,4 +137,20 @@ a:hover {
 .page-content > *:nth-child(1) { animation-delay: 0s; }
 .page-content > *:nth-child(2) { animation-delay: 0.05s; }
 .page-content > *:nth-child(3) { animation-delay: 0.1s; }
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+.footer a {
+  color: #6b7280;
+  text-decoration: none;
+}
+.footer a:hover {
+  color: #4b5563;
+  text-decoration: underline;
+}
 </style>
