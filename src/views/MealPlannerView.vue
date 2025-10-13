@@ -49,20 +49,17 @@ async function generate(){
       max_prep_minutes: Number(maxPrep.value),
       dietary: selectedDietary.value.map(s=>s.toLowerCase())
     }
-    const { ok, json, status } = await mealAI.generate(payload)
-    if (!ok) throw new Error(`Generate failed (HTTP ${status})`)
-    const res = json
-    if (!res?.success) throw new Error(res?.error || 'Failed')
+    const res = await mealAI.generate(payload)
+    if(!res.success) throw new Error(res.error || 'Failed')
     const diet = selectedDietary.value.map(s => s.toLowerCase())
 
     // fetching photos for each item
-    const withPhotos = await Promise.all(res.items.map(async it => {
-      try {
-        const { ok: okP, json: pj } = await mealImages.get(it.name, diet)
-        const url = okP && pj?.url ? pj.url : null
-        return { ...it, image_url: url }
-      } catch { return { ...it, image_url: null } }
-    }))
+    const withPhotos = await Promise.all(
+      res.items.map(async (it) => {
+        const p = await mealImages.get(it.name, diet)
+        return { ...it, image_url: (p && p.url) ? p.url : null}
+      })
+    )
     result.value = {...res, items: withPhotos}
     saveCache(payload, result.value)
   }catch(e){ error.value = e.message || 'Failed' }
