@@ -9,5 +9,9 @@ urlpatterns = [
     path("api/weather/", views.weather_summary, name="weather_summary"),
     path("api/update-location/", views.update_location_from_coords, name="update_location_from_coords"),
     path('api/questionnaire/', QuestionnaireAPIView.as_view(), name='questionnaire_api'),
-
+    path(
+        "api/weather/forecast/",
+        views.weather_forecast,
+        name="weather-forecast",
+    ),
 ]
