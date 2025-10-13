@@ -71,6 +71,15 @@
                 <span class="today-label">Today</span>
               </div>
               
+              <!-- HIGH UV WARNING -->
+              <div v-if="currentUVValue > 7" class="uv-danger-warning">
+                <Icon icon="mdi:alert" :width="24" :height="24" />
+                <div>
+                  <strong>⚠️ High UV Advisory</strong>
+                  <p>UV levels are unsafe for extended outdoor exposure. Seek shade, wear sun protection, or consider indoor activities.</p>
+                </div>
+              </div>
+              
               <div class="uv-index-display">
                 <div class="uv-range-container">
                   <div class="uv-range-label">Today's UV Range</div>
@@ -309,13 +318,15 @@
             <!-- Today's Activities Card -->
             <div class="todays-activities-card">
               <div class="activities-header">
-                <div class="person-icon"><Icon icon="mdi:account" :width="20" :height="20" /></div>
-                <h3>Today's Activities</h3>
-                <span class="suggestions-count">{{ suggestionsCount }} Suggestions</span>
+                <div class="header-left">
+                  <div class="person-icon"><Icon icon="mdi:account" :width="20" :height="20" /></div>
+                  <h3>Today's Activities</h3>
+                </div>
+                <span class="suggestions-count">{{ suggestionsCount }} Suggested</span>
               </div>
 
               <div class="weather-summary">
-                <div class="weather-icon"><Icon icon="wi:day-cloudy" :width="32" :height="32" /></div>
+                <div class="weather-icon"><Icon icon="wi:day-cloudy" :width="40" :height="40" /></div>
                 <div class="weather-info">
                   <div class="temperature">{{ Math.round(weatherData?.main?.temp || 22) }}°C</div>
                   <div class="weather-desc">{{ weatherData?.weather?.[0]?.description || '—' }}</div>
@@ -323,58 +334,60 @@
               </div>
 
               <div class="activity-suggestions">
-                <div v-if="todaySlots.morning" class="activity-item">
-                  <div class="activity-icon"><Icon icon="mdi:walk" :width="24" :height="24" /></div>
-                  <div class="activity-details">
-                    <div class="activity-name">{{ todaySlots.morning.activity }}</div>
+                <div v-for="activity in todayActivitiesWithTips" :key="activity.activity + '-' + activity.timeISO" class="activity-card">
+                  <div class="activity-image" :style="{ backgroundImage: `url(${getActivityImage(activity.activity)})` }">
+                    <!-- Icon badge removed -->
+                  </div>
+                  <div class="activity-content">
+                    <div class="activity-header">
+                      <h4 class="activity-name">{{ activity.activity }}</h4>
+                      <div class="uv-badge" :class="getUVClass(activity.uv)">
+                        UV {{ activity.uv }}
+                      </div>
+                    </div>
                     <div class="activity-meta">
-                      {{ todaySlots.morning.minutes }} mins |
-                      UV {{ todaySlots.morning.uv }} |
-                      {{ new Date(todaySlots.morning.timeISO).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }}
+                      <span class="meta-item">
+                        <Icon icon="mdi:clock-outline" :width="14" :height="14" />
+                        {{ activity.minutes }} mins
+                      </span>
+                      <span class="meta-item">
+                        <Icon icon="mdi:calendar-clock" :width="14" :height="14" />
+                        {{ new Date(activity.timeISO).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }}
+                      </span>
+                    </div>
+                    <div class="activity-tip">
+                      <Icon icon="mdi:lightbulb-outline" :width="14" :height="14" />
+                      {{ activity.tip }}
                     </div>
                   </div>
                 </div>
 
-                <div v-if="todaySlots.afternoon" class="activity-item">
-                  <div class="activity-icon"><Icon icon="mdi:bike" :width="24" :height="24" /></div>
-                  <div class="activity-details">
-                    <div class="activity-name">{{ todaySlots.afternoon.activity }}</div>
-                    <div class="activity-meta">
-                      {{ todaySlots.afternoon.minutes }} mins |
-                      UV {{ todaySlots.afternoon.uv }} |
-                      {{ new Date(todaySlots.afternoon.timeISO).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }}
+                <div v-if="todayActivitiesWithTips.length === 0" class="activity-card empty-state">
+                  <div class="activity-image" :style="{ backgroundImage: `url(${getActivityImage('Indoor mobility')})` }">
+                    <!-- Icon badge removed -->
+                  </div>
+                  <div class="activity-content">
+                    <div class="activity-header">
+                      <h4 class="activity-name">Indoor mobility</h4>
+                      <div class="uv-badge uv-extreme">High UV</div>
                     </div>
+                    <div class="activity-meta">
+                      <span class="meta-item">
+                        <Icon icon="mdi:clock-outline" :width="14" :height="14" />
+                        10–15 mins
+                      </span>
+                      <span class="meta-item">Stretching / balance</span>
+                    </div>
+                    <div class="activity-tip">
+                      <Icon icon="mdi:lightbulb-outline" :width="14" :height="14" />
+                      Stay active indoors when UV levels are too high
+                    </div>
+                    
                   </div>
                 </div>
-
-                <div v-if="!todaySlots.morning && !todaySlots.afternoon" class="activity-item">
-                  <div class="activity-icon"><Icon icon="mdi:home" :width="24" :height="24" /></div>
-                  <div class="activity-details">
-                    <div class="activity-name">Indoor mobility</div>
-                    <div class="activity-meta">10–15 mins | Stretching / balance</div>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Week at a Glance -->
-          <div class="week-glance">
-            <div class="week-header">
-              <div class="calendar-icon">
-                <Icon icon="mdi:calendar" :width="20" :height="20" />
-              </div>
-              <h3>Week at a Glance</h3>
-              <button class="discover-btn" @click="toggleActivityGallery">Discover New Activities</button>
-            </div>
-            
-            <div class="week-days">
-              <div class="day-card" v-for="day in weekDays" :key="day.name" :class="{ active: day.isToday }">
-                <div class="day-name">{{ day.name }}</div>
-                <div class="day-image" :style="{ backgroundImage: `url(${day.image})` }"></div>
-                <div class="day-activity">{{ day.activity }}</div>
-              </div>
-            </div>
+            <button class="discover-btn" @click="toggleActivityGallery">Discover New Activities</button>
           </div>
           
           <!-- Activity Gallery -->
@@ -442,6 +455,9 @@ import { weatherAPI } from '@/services/api.js'
 import { Icon } from '@iconify/vue'
 import { buildWeeklyPlan, vitaminDNudge, getQuestionnaireProfile } from '@/services/plan'
 
+// --- Pexels minimal setup ---
+const PEXELS_KEY = 'WQsA4Ou7LIGydb7qRtGeignCSbeIj7FSxbge1FvHfEgvbMj8p1rqLTCG';
+
 export default {
   name: 'LetsGetOutsideView',
   components: { Header, Icon },
@@ -481,15 +497,95 @@ export default {
       // Auto-refresh interval
       refreshInterval: null,
 
+      // Activity rotation tracking
+      lastRotationDate: null,
+
+      // Enhanced activity pool with motivational tips
+      // IMPORTANT: Image filenames must match EXACTLY with files in src/assets/images/activities/
+      activityPool: [
+        { 
+          name: 'Morning Walk', 
+          image: 'morning-walk.jpg',
+          tip: 'Even 15 minutes outdoors supports brain health and mood',
+          icon: 'mdi:walk',
+          uvSafe: true,
+          aliases: ['morning walk (sunny)', 'morning walk (cloudy)', 'morning-walk', 'morningwalk']
+        },
+        { 
+          name: 'Beach Yoga', 
+          image: 'beach-yoga.jpg',
+          tip: 'Yoga in nature reduces stress by 40% more than indoor practice',
+          icon: 'mdi:yoga',
+          uvSafe: true,
+          aliases: ['beach-yoga', 'beachyoga']
+        },
+        { 
+          name: 'Park Cycling', 
+          image: 'park-cycling.jpg',
+          tip: 'Cycling boosts cardiovascular health and vitamin D levels',
+          icon: 'mdi:bike',
+          uvSafe: true,
+          aliases: ['cycling', 'gentle cycling', 'bike', 'biking', 'gentle cycling (cloudy)', 'park-cycling', 'parkcycling']
+        },
+        { 
+          name: 'Garden Visit', 
+          image: 'garden-visit.jpg',
+          tip: 'Nature exposure improves focus and reduces mental fatigue',
+          icon: 'mdi:flower',
+          uvSafe: true,
+          aliases: ['garden', 'gardening', 'garden activities', 'garden-visit', 'gardenvisit']
+        },
+        { 
+          name: 'River Trail', 
+          image: 'river-trial.jpg',
+          tip: 'Walking near water enhances relaxation and mindfulness',
+          icon: 'mdi:waves',
+          uvSafe: true,
+          aliases: ['river-trail', 'rivertrail']
+        },
+        { 
+          name: 'Outdoor Fitness', 
+          image: 'outdoor-fitness.jpg',
+          tip: 'Outdoor exercise burns 10% more calories than indoor workouts',
+          icon: 'mdi:dumbbell',
+          uvSafe: false,
+          aliases: ['light sports', 'fitness', 'exercise', 'workout', 'outdoor-fitness', 'outdoorfitness']
+        },
+        { 
+          name: 'Nature Hike', 
+          image: 'nature-hike.jpg',
+          tip: 'Hiking strengthens bones and improves balance',
+          icon: 'mdi:hiking',
+          uvSafe: true,
+          aliases: ['nature-hike', 'naturehike', 'hiking']
+        },
+        { 
+          name: 'Tai Chi', 
+          image: 'Tai-chi.jpg',
+          tip: 'Gentle movement improves flexibility and mental clarity',
+          icon: 'mdi:meditation',
+          uvSafe: true,
+          aliases: ['tai chi (sunny)', 'tai-chi', 'taichi', 'tai chi']
+        },
+        { 
+          name: 'Bird Watching', 
+          image: 'bird-watching.jpg',
+          tip: 'Mindful observation reduces stress and connects you with nature',
+          icon: 'mdi:bird',
+          uvSafe: true,
+          aliases: ['bird watching (sunny)', 'bird watching (cloudy)', 'birdwatching', 'bird-watching', 'bird watching']
+        }
+      ],
+
       // Visuals
       weekDays: [
-        { name: 'Mon', activity: 'Morning Walk', image: new URL('@/assets/images/activities/morning walk.jpg', import.meta.url).href, isToday: false },
-        { name: 'Tue', activity: 'Beach Yoga', image: new URL('@/assets/images/activities/beach yoga.jpg', import.meta.url).href, isToday: false },
-        { name: 'Wed', activity: 'Park Cycling', image: new URL('@/assets/images/activities/park cycling.jpg', import.meta.url).href, isToday: false },
-        { name: 'Thu', activity: 'Garden Visit', image: new URL('@/assets/images/activities/garden visit.jpg', import.meta.url).href, isToday: false },
-        { name: 'Fri', activity: 'River Trail', image: new URL('@/assets/images/activities/river trial.jpg', import.meta.url).href, isToday: false },
-        { name: 'Sat', activity: 'Outdoor Fitness', image: new URL('@/assets/images/activities/outdoor fitness.jpg', import.meta.url).href, isToday: false },
-        { name: 'Sun', activity: 'Nature Hike', image: new URL('@/assets/images/activities/nature hike.jpg', import.meta.url).href, isToday: false }
+        { name: 'Mon', activity: 'Morning Walk', image: '', tip: '', isToday: false },
+        { name: 'Tue', activity: 'Beach Yoga', image: '', tip: '', isToday: false },
+        { name: 'Wed', activity: 'Park Cycling', image: '', tip: '', isToday: false },
+        { name: 'Thu', activity: 'Garden Visit', image: '', tip: '', isToday: false },
+        { name: 'Fri', activity: 'River Trail', image: '', tip: '', isToday: false },
+        { name: 'Sat', activity: 'Outdoor Fitness', image: '', tip: '', isToday: false },
+        { name: 'Sun', activity: 'Nature Hike', image: '', tip: '', isToday: false }
       ],
 
       showActivityGallery: false,
@@ -500,7 +596,13 @@ export default {
         { id: 3, title: 'Tennis Match', subtitle: 'Competitive Court Action', image: new URL('@/assets/images/new-activities/play tennis.jpg', import.meta.url).href },
         { id: 4, title: 'Horse Riding', subtitle: 'Equestrian Adventure', image: new URL('@/assets/images/new-activities/riding.jpg', import.meta.url).href },
         { id: 5, title: 'Outdoor Swimming', subtitle: 'Natural Water Experience', image: new URL('@/assets/images/new-activities/swimming outside.jpg', import.meta.url).href }
-      ]
+      ],
+      
+      recentActivities: JSON.parse(localStorage.getItem('vd_recent_acts') || '[]'),
+      MAX_RECENT: 12, // remember the last ~12 picks
+
+      // --- Pexels cache ---
+      pexelsImages: {}
     }
   },
 
@@ -596,22 +698,71 @@ export default {
       return 0
     },
 
-    todayUVMinTime() {
-      if (!this.uvSeries.length) return ''
-      const minUV = this.todayUVMin
-      const point = this.uvSeries.find(p => Math.round(p.uv * 10) / 10 === minUV)
-      return point ? this.formatTime(point.t) : ''
+    // Check if activities need rotation
+    needsActivityRotation() {
+      const today = new Date().toISOString().slice(0, 10)
+      return !this.lastRotationDate || this.lastRotationDate !== today
     },
 
-    todayUVMaxTime() {
-      if (!this.uvSeries.length) return ''
-      const maxUV = this.todayUVMax
-      const point = this.uvSeries.find(p => Math.round(p.uv * 10) / 10 === maxUV)
-      return point ? this.formatTime(point.t) : ''
+    // Enhanced activity suggestions with tips
+    todayActivitiesWithTips() {
+      const activities = []
+      
+      if (this.todaySlots.morning) {
+        activities.push({
+          ...this.todaySlots.morning,
+          tip: this.getActivityTip(this.todaySlots.morning.activity)
+        })
+      }
+      
+      if (this.todaySlots.afternoon) {
+        activities.push({
+          ...this.todaySlots.afternoon,
+          tip: this.getActivityTip(this.todaySlots.afternoon.activity)
+        })
+      }
+      
+      return activities
     }
   },
 
   methods: {
+    // --- Deterministic shuffle (same order for same city+date) ---
+    seededShuffle(arr, seedStr) {
+      const out = [...arr]
+      let seed = 0
+      for (let i = 0; i < seedStr.length; i++) seed = (seed * 31 + seedStr.charCodeAt(i)) >>> 0
+      const rand = () => {
+        seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5
+        return ((seed >>> 0) / 0xFFFFFFFF)
+      }
+      for (let i = out.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1))
+        ;[out[i], out[j]] = [out[j], out[i]]
+      }
+      return out
+    },
+
+    // --- Pexels tiny fetcher ---
+    async fetchPexels(activityName) {
+      if (!activityName) return
+      if (this.pexelsImages[activityName]) return
+      if (!PEXELS_KEY) return
+      const clean = activityName.replace(/\s*\([^)]*\)\s*/g, '').trim()
+      const q = encodeURIComponent(`${clean} outdoor`)
+      try {
+        const res = await fetch(`https://api.pexels.com/v1/search?query=${q}&per_page=1&orientation=landscape`, {
+          headers: { Authorization: PEXELS_KEY }
+        })
+        if (!res.ok) return
+        const data = await res.json()
+        const url = data?.photos?.[0]?.src?.large || data?.photos?.[0]?.src?.medium
+        if (url) this.pexelsImages[activityName] = url
+      } catch (_) {
+        // silent fail
+      }
+    },
+
     // Chart coordinate calculations
     getX(index) {
       const plotWidth = this.chartWidth - this.padding.left - this.padding.right
@@ -661,6 +812,142 @@ export default {
       if (uvIndex <= 7) return 'uv-high'
       if (uvIndex <= 10) return 'uv-very-high'
       return 'uv-extreme'
+    },
+
+    // NEW: Rotate activities daily
+    rotateWeekActivities() {
+      const today = new Date().toISOString().slice(0, 10)
+      
+      // Only rotate once per day
+      if (this.lastRotationDate === today) return
+      
+      console.log('Rotating weekly activities for', today)
+      
+      // Shuffle activity pool (Fisher-Yates shuffle)
+      const shuffled = [...this.activityPool]
+        .sort(() => Math.random() - 0.5)
+      
+      // Assign to week days
+      this.weekDays.forEach((day, index) => {
+        if (shuffled[index]) {
+          day.activity = shuffled[index].name
+          day.tip = shuffled[index].tip
+          try {
+            day.image = new URL(`@/assets/images/activities/${shuffled[index].image}`, import.meta.url).href
+          } catch (e) {
+            console.warn('Failed to load image for', shuffled[index].name)
+            day.image = new URL('@/assets/images/activities/morning-walk.jpg', import.meta.url).href
+          }
+        }
+      })
+      
+      // Save rotation date
+      this.lastRotationDate = today
+      localStorage.setItem('vd_last_activity_rotation', today)
+    },
+
+    // NEW: Load last rotation date from storage
+    loadRotationDate() {
+      this.lastRotationDate = localStorage.getItem('vd_last_activity_rotation')
+    },
+
+    // NEW: Get motivational tip for an activity
+    getActivityTip(activityName) {
+      if (!activityName) return 'Every bit of outdoor time counts toward better health!'
+      
+      const activity = this.activityPool.find(a => 
+        a.name.toLowerCase().includes(activityName.toLowerCase()) ||
+        activityName.toLowerCase().includes(a.name.toLowerCase())
+      )
+      
+      return activity?.tip || 'Stay active and enjoy the fresh air for better health!'
+    },
+
+    // NEW: Get icon for an activity
+    getActivityIcon(activityName) {
+      if (!activityName) return 'mdi:walk'
+      
+      const nameLower = activityName.toLowerCase()
+      
+      const activity = this.activityPool.find(a => {
+        const activityNameLower = a.name.toLowerCase()
+        
+        // Direct match
+        if (activityNameLower.includes(nameLower) || nameLower.includes(activityNameLower)) {
+          return true
+        }
+        
+        // Check aliases
+        if (a.aliases) {
+          return a.aliases.some(alias => 
+            alias.toLowerCase().includes(nameLower) || 
+            nameLower.includes(alias.toLowerCase())
+          )
+        }
+        
+        return false
+      })
+      
+      return activity?.icon || 'mdi:walk'
+    },
+
+    // NEW: Get image for an activity (now prefers Pexels)
+    getActivityImage(activityName) {
+      if (!activityName) {
+        console.warn('No activity name provided, using fallback image')
+        return new URL('@/assets/images/activities/morning-walk.jpg', import.meta.url).href
+      }
+
+      // If a Pexels image has been fetched for this activity, use it
+      if (this.pexelsImages[activityName]) {
+        return this.pexelsImages[activityName]
+      }
+      
+      // Remove weather context like (sunny), (cloudy), (sheltered area)
+      const cleanName = activityName.replace(/\s*\([^)]*\)\s*/g, '').trim()
+      const nameLower = cleanName.toLowerCase()
+      
+      console.log(`Looking for activity: "${activityName}" → cleaned: "${cleanName}"`)
+      
+      const activity = this.activityPool.find(a => {
+        const activityNameLower = a.name.toLowerCase()
+        
+        // Direct match
+        if (activityNameLower === nameLower || activityNameLower.includes(nameLower) || nameLower.includes(activityNameLower)) {
+          console.log(`✅ Matched: "${a.name}" → image: ${a.image}`)
+          return true
+        }
+        
+        // Check aliases
+        if (a.aliases) {
+          const aliasMatch = a.aliases.some(alias => {
+            const aliasLower = alias.toLowerCase()
+            return aliasLower === nameLower || aliasLower.includes(nameLower) || nameLower.includes(aliasLower)
+          })
+          if (aliasMatch) {
+            console.log(`✅ Matched via alias: "${a.name}" → image: ${a.image}`)
+            return true
+          }
+        }
+        
+        return false
+      })
+      
+      if (activity?.image) {
+        try {
+          const imagePath = new URL(`@/assets/images/activities/${activity.image}`, import.meta.url).href
+          console.log(`📷 Loading image: ${activity.image}`)
+          return imagePath
+        } catch (e) {
+          console.error(`❌ Failed to load image for "${activityName}":`, e)
+          console.error(`Attempted path: @/assets/images/activities/${activity.image}`)
+        }
+      } else {
+        console.warn(`⚠️ No activity found for "${activityName}" (cleaned: "${cleanName}"), using fallback`)
+      }
+      
+      // Fallback image
+      return new URL('@/assets/images/activities/morning-walk.jpg', import.meta.url).href
     },
 
     // Weather: current
@@ -751,6 +1038,8 @@ export default {
         // Get TODAY's date in the user's local timezone
         const now = new Date()
         const todayISO = now.toISOString().slice(0, 10)
+        // --- seed string for deterministic picks (city + date)
+        const seedStr = `${this.locationData.city || 'NA'}|${todayISO}`
         
         console.log('Current date:', todayISO, 'Current time:', now.toLocaleTimeString())
 
@@ -758,12 +1047,76 @@ export default {
         const today = this.planWeek.find(d => (d.dateISO || '').slice(0, 10) === todayISO) || this.planWeek[0]
         this.todaySlots = { morning: today?.morning || null, afternoon: today?.afternoon || null }
         this.suggestionsCount = [this.todaySlots.morning, this.todaySlots.afternoon].filter(Boolean).length
+        
+        const poolForUv = (uv) => {
+          // If UV is >3, avoid uvSafe === false (e.g., "Outdoor Fitness")
+          return this.activityPool.filter(a => (uv > 3 ? a.uvSafe !== false : true))
+        }
 
-        // Fill Week cards
+        const ensureUnique = (slotKey) => {
+          const slot = this.todaySlots[slotKey]
+          if (!slot) return
+
+          const other = slotKey === 'morning' ? this.todaySlots.afternoon : this.todaySlots.morning
+          const used = new Set([
+            ...(other?.activity ? [other.activity] : []),
+            ...this.recentActivities
+          ])
+
+          // If current pick is already used/recent, replace with a unique, UV-safe option
+          if (!used.has(slot.activity)) return
+
+          // exclude anything already used in the other slot (and honor recents inside pickUniqueActivity)
+          let pool = this.seededShuffle(poolForUv(slot.uv), seedStr).filter(a => !used.has(a.name))
+
+          // try to pick from the filtered, seeded pool
+          let alt = this.pickUniqueActivity(slot.activity, pool, seedStr)
+
+          // hard fallback in case pool was empty or helper still gave back a used one
+          if (!alt || used.has(alt)) {
+            alt = (pool[0]?.name) || this.activityPool.find(a => a.name !== (other?.activity || '')).name
+          }
+
+          slot.activity = alt
+          slot.tip = this.getActivityTip(alt)
+        }
+
+        // Make both slots unique (and UV-appropriate if UV is high)
+        ensureUnique('morning')
+        ensureUnique('afternoon')
+
+        // If still equal (edge case), change afternoon again (use seeded pool)
+        if (
+          this.todaySlots.morning &&
+          this.todaySlots.afternoon &&
+          this.todaySlots.morning.activity === this.todaySlots.afternoon.activity
+        ) {
+          const pool = this.seededShuffle(poolForUv(this.todaySlots.afternoon.uv), seedStr)
+          const alt = this.pickUniqueActivity(this.todaySlots.afternoon.activity, pool, seedStr)
+          this.todaySlots.afternoon.activity = alt
+          this.todaySlots.afternoon.tip = this.getActivityTip(alt)
+        }
+
+        // Persist the final choices to avoid repeats tomorrow
+        ;['morning', 'afternoon'].forEach(k => {
+          const slot = this.todaySlots[k]
+          if (slot?.activity) this.saveRecent(slot.activity)
+        })
+
+        // --- Fetch Pexels images for today's activities ---
+        this.fetchPexels(this.todaySlots.morning?.activity)
+        this.fetchPexels(this.todaySlots.afternoon?.activity)
+
+        // Fill Week cards with plan data
         const order = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         this.planWeek.forEach((d, i) => {
           const card = this.weekDays.find(x => x.name === order[i % 7])
-          if (card) card.activity = (d.morning?.activity || d.afternoon?.activity || card.activity)
+          if (card && (d.morning?.activity || d.afternoon?.activity)) {
+            const pickedActivity = d.morning?.activity || d.afternoon?.activity
+            card.activity = pickedActivity
+            // Get tip for this activity
+            card.tip = this.getActivityTip(pickedActivity)
+          }
         })
 
         // UV series for TODAY only
@@ -868,6 +1221,10 @@ export default {
         const [city, state = ''] = (resNow.weather.location || cityQuery).split(', ')
         this.locationData = { city, state, lat: null, lon: null }
 
+        // --- clear recents when city changes so new city gets a fresh mix ---
+        this.recentActivities = []
+        localStorage.setItem('vd_recent_acts', '[]')
+
         // Fetch forecast
         this.updateStatus = 'Loading UV forecast...'
         await this.fetchForecast()
@@ -928,7 +1285,24 @@ export default {
       if (diff === 2) return 'back-2'
       if (diff === 3) return 'back-3'
       return 'back-4'
+    },
+    saveRecent(name) {
+      if (!name) return
+      const set = new Set(this.recentActivities)
+      set.add(name)
+      this.recentActivities = Array.from(set).slice(-this.MAX_RECENT)
+      localStorage.setItem('vd_recent_acts', JSON.stringify(this.recentActivities))
+    },
+
+    // --- use seeded shuffle to avoid same-first picks ---
+    pickUniqueActivity(desiredName, fallbackPool = this.activityPool, seedStr = '') {
+      const shuffled = seedStr ? this.seededShuffle(fallbackPool, seedStr) : [...fallbackPool]
+      const desired = shuffled.find(a => a.name === desiredName)
+      if (desired && !this.recentActivities.includes(desired.name)) return desired.name
+      const pick = shuffled.find(a => !this.recentActivities.includes(a.name))
+      return (pick ? pick.name : (desired ? desired.name : shuffled[0]?.name))
     }
+
   },
 
   async mounted() {
@@ -945,6 +1319,12 @@ export default {
     // Visuals
     this.setTodayInWeekDays()
 
+    // NEW: Load and check activity rotation
+    this.loadRotationDate()
+    if (this.needsActivityRotation) {
+      this.rotateWeekActivities()
+    }
+
     // Data → plan
     await this.fetchWeatherData()
     await this.fetchForecast()
@@ -952,6 +1332,12 @@ export default {
     // Auto-refresh every 30 minutes to ensure we have current data
     this.refreshInterval = setInterval(() => {
       console.log('Auto-refreshing weather data...')
+      
+      // Check if activities need rotation
+      if (this.needsActivityRotation) {
+        this.rotateWeekActivities()
+      }
+      
       this.fetchWeatherData()
       this.fetchForecast()
     }, 30 * 60 * 1000) // 30 minutes
@@ -1235,6 +1621,36 @@ export default {
   color: #374151;
 }
 
+/* NEW: HIGH UV DANGER WARNING */
+.uv-danger-warning {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #ef4444;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  color: #991b1b;
+  animation: warningPulse 2s ease-in-out infinite;
+}
+
+@keyframes warningPulse {
+  0%, 100% { border-color: #ef4444; }
+  50% { border-color: #dc2626; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2); }
+}
+
+.uv-danger-warning strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.uv-danger-warning p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
 /* Outside Content Grid */
 .outside-content {
   display: grid;
@@ -1388,21 +1804,6 @@ export default {
   font-size: 0.875rem;
   font-weight: 600;
   color: #6b7280;
-}
-
-.uv-number {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #f59e0b;
-  line-height: 1;
-}
-
-.uv-level-text {
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 /* UV Curve Chart - IMPROVED */
@@ -1725,101 +2126,184 @@ export default {
 .activities-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
+}
+
+.header-left {
+  display: flex
+;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .activities-header h3 {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-  flex: 1;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .person-icon {
   color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 10px;
 }
 
 .suggestions-count {
-  background: #dbeafe;
-  color: #1d4ed8;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.813rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
 .weather-summary {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8fafc;
-  border-radius: 12px;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-radius: 16px;
   margin-bottom: 1.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .weather-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #f59e0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .weather-info .temperature {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
   color: #1f2937;
+  line-height: 1;
+  margin-bottom: 0.25rem;
 }
 
 .weather-desc {
   font-size: 0.875rem;
   color: #6b7280;
   text-transform: capitalize;
+  font-weight: 500;
 }
 
 .activity-suggestions {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
-.activity-item {
+/* NEW: Enhanced Activity Card with Images */
+.activity-card {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0;
+  border-radius: 16px;
+  background: white;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.activity-image {
+  width: 140px;
+  min-width: 140px;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  border-radius: 14px 0 0 14px;
+}
+
+.activity-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border-radius: 14px 0 0 14px;
+}
+
+.activity-content {
+  flex: 1;
+  padding: 1.25rem 1.25rem 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activity-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.6) 100%);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.activity-item:hover {
-  transform: translateX(4px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.8) 100%);
-}
-
-.activity-icon {
-  font-size: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-  border-radius: 12px;
-  color: #6b7280;
 }
 
 .activity-name {
-  font-weight: 600;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
   color: #1f2937;
-  margin-bottom: 0.25rem;
+}
+
+.uv-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .activity-meta {
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
   color: #6b7280;
+  font-weight: 500;
+}
+
+/* NEW: Updated Activity Tip Styling */
+.activity-tip {
+  font-size: 0.813rem;
+  color: #3b82f6;
+  font-style: italic;
+  padding: 0.75rem;
+  background: rgba(59, 130, 246, 0.06);
+  border-radius: 10px;
+  border-left: 3px solid #3b82f6;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.activity-card.empty-state {
+  border-color: rgba(239, 68, 68, 0.2);
 }
 
 /* Week at a Glance */
@@ -1920,6 +2404,19 @@ export default {
   font-size: 0.75rem;
   font-weight: 500;
   color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+/* NEW: Day Tip Styling */
+.day-tip {
+  font-size: 0.65rem;
+  color: #3b82f6;
+  font-style: italic;
+  line-height: 1.3;
+  padding: 0.25rem 0.5rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 4px;
+  margin-top: 0.5rem;
 }
 
 /* Activity Gallery */
@@ -2221,6 +2718,27 @@ export default {
 
   .uv-current-indicator {
     flex-wrap: wrap;
+  }
+
+  /* Activity Card Mobile */
+  .activity-card {
+    flex-direction: column;
+  }
+
+  .activity-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .activity-content {
+    padding: 1.25rem;
+  }
+
+  .activity-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
   
   .week-days {
