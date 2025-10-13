@@ -1,6 +1,5 @@
 // src/services/api.js
 import axios from "axios";
-import { apiRequest } from "./apiCore";
 
 // Normalize base: add scheme if missing, strip trailing slashes
 const raw = import.meta.env.VITE_API_BASE || "";
