@@ -18,6 +18,7 @@ const API_ENDPOINTS = {
   timer: "/timer/api/timer/",
   news: "/brain-health-news/",
   insights: "/insights/",
+  forecast: "/vitamin-d-helper/api/weather/forecast/",
   nutrition: "/nutrition/",
 };
 
@@ -32,9 +33,39 @@ function joinUrl(endpoint) {
 async function apiRequest(endpoint, options = {}) {
   const url = joinUrl(endpoint);
   const merged = { ...DEFAULT_FETCH_OPTIONS, ...options };
+
   const res = await fetch(url, merged);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const contentType = res.headers.get("content-type") || "";
+
+  // Try to read body safely (JSON if possible, otherwise text)
+  let body;
+  try {
+    if (contentType.includes("application/json")) {
+      body = await res.json();
+    } else {
+      body = await res.text();
+    }
+  } catch (e) {
+    // Parsing failed (e.g., empty body or invalid JSON)
+    body = null;
+  }
+
+  if (!res.ok) {
+    const msg =
+      (body && typeof body === "object" && (body.detail || body.error)) ||
+      (typeof body === "string" && body.slice(0, 300)) ||
+      `HTTP ${res.status}`;
+    throw new Error(msg);
+  }
+
+  // If server sent text masquerading as 200, bubble up something useful
+  if (!contentType.includes("application/json")) {
+    throw new Error(
+      typeof body === "string" && body ? body.slice(0, 300) : "Unexpected non-JSON response"
+    );
+  }
+
+  return body;
 }
 
 
