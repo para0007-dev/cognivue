@@ -17,7 +17,8 @@ export default defineConfig({
       '^/insights/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
       '^/timer/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
       '^/brain-health-news/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
-      '^/simpleauth/': { target: 'http://127.0.0.1:8000', changeOrigin: true }, // 👈 add this
+      '^/simpleauth/': { target: 'http://127.0.0.1:8000', changeOrigin: true },
+      '^/mealplanner/': { target: 'https://127.0.0.1:8000', changeOrigin: true },
     },
   },
 })

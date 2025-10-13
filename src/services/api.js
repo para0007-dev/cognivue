@@ -19,15 +19,21 @@ const API_ENDPOINTS = {
 // Safe join
 function joinUrl(endpoint) {
   const p = `${endpoint}`.startsWith("/") ? endpoint : `/${endpoint}`;
-  return `${BASE}${p}`;
+  return `${API_BASE_URL}${p}`;
 }
 
-// Generic fetch wrapper that returns {ok,status,json,text}
+function getCookie(name) {
+  return document.cookie.split("; ").find(r => r.startsWith(name + "="))?.split("=")[1] || "";
+}
+
+// Generic fetch wrapper with strong error surfacing
 async function apiRequest(endpoint, options = {}) {
   const url = joinUrl(endpoint);
-  const defaultOptions = {
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+  const hasBody = !!options.body;
+  const headers = {
+    ...(hasBody ? { "Content-Type": "application/json" } : {}),
+    "X-CSRFToken": getCookie("csrftoken"),
+    ...(options.headers || {}),
   };
   
   try {
@@ -325,8 +331,26 @@ export const insightsAPI = {
 export const API_BASE_URL = BASE;
 
 // Axios instance for components that use axios (if you still need it)
+export const mealAI = {
+  generate: (payload) =>
+    apiRequest("/mealplanner/api/meal-plan/ai-generate/", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+};
+
+export const mealImages = {
+  get: async (q, dietArr = []) =>
+    apiRequest(
+      `/mealplanner/api/photo/?q=${encodeURIComponent(q)}&diet=${encodeURIComponent(
+        (dietArr || []).join(",")
+      )}`
+    ),
+};
+
+// Axios instance for optional axios users
 const api = axios.create({
-  baseURL: BASE,
+  baseURL: API_BASE_URL,
   timeout: 10000,
   withCredentials: true,
 });
