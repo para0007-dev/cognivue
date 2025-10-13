@@ -18,357 +18,202 @@
     </div>
 
     <!-- Main Content Container -->
-    <div class="main-content" :class="{ 'has-meal-plan': mealPlan }">
-      <!-- Left Configuration Panel -->
+    <div class="main-content">
+      <!-- Configuration Panel -->
       <div class="config-panel">
-      <!-- Preferences Section -->
-      <div class="preferences-section">
-        <h2 class="section-title">Tell us about your preferences</h2>
+        <!-- Preferences Section -->
+        <div class="preferences-section">
+          <h2 class="section-title">Tell us about your preferences</h2>
 
-        <div class="preferences-grid">
-          <!-- Dietary Requirements -->
-          <div class="preference-group">
-            <div class="group-header">
-              <span class="icon-text">Diet</span>
-              <h3 class="group-title">Dietary Requirements</h3>
-            </div>
-            <div class="dietary-options">
-              <button 
-                v-for="diet in dietaryOptions" 
-                :key="diet.id"
-                :class="['diet-btn', { active: selectedDiets.includes(diet.id) }]"
-                @click="toggleDiet(diet.id)"
-              >
-                {{ diet.label }}
-              </button>
-              <button class="diet-btn restrictions">No Restrictions</button>
-            </div>
-          </div>
-
-          <!-- Weekly Budget -->
-          <div class="preference-group">
-            <div class="group-header">
-              <span class="icon-text">Budget</span>
-              <h3 class="group-title">Weekly Budget</h3>
-            </div>
-            <div class="budget-section">
-              <div class="budget-display">
-                <span class="budget-amount">${{ weeklyBudget }} AUD/week</span>
-                <span class="daily-budget">Daily budget: ${{ (weeklyBudget / 7).toFixed(2) }}</span>
+          <div class="preferences-grid">
+            <!-- Dietary Requirements -->
+            <div class="preference-group">
+              <div class="group-header">
+                <span class="icon-text">Diet</span>
+                <h3 class="group-title">Dietary Requirements</h3>
               </div>
-              <div class="budget-range">
-                <span class="range-label">$50</span>
-                <input 
-                  type="range" 
-                  v-model="weeklyBudget" 
-                  min="50" 
-                  max="500" 
-                  step="10"
-                  class="budget-slider"
-                />
-                <span class="range-label">$500</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Meal Types Needed -->
-          <div class="preference-group">
-            <div class="group-header">
-              <span class="icon-text">Meals</span>
-              <h3 class="group-title">Meal Types Needed</h3>
-            </div>
-            <div class="meal-types-container">
-              <div class="meal-types">
+              <div class="dietary-options">
                 <button 
-                  v-for="meal in mealTypes" 
-                  :key="meal.id"
-                  :class="['meal-btn', { active: selectedMeals.includes(meal.id) }]"
-                  @click="toggleMeal(meal.id)"
+                  v-for="diet in dietaryOptions" 
+                  :key="diet.id"
+                  :class="['diet-btn', { active: selectedDiets.includes(diet.id) }]"
+                  @click="toggleDiet(diet.id)"
                 >
-                  <span class="meal-icon">{{ meal.icon }}</span>
-                  <span class="meal-label">{{ meal.label }}</span>
+                  {{ diet.label }}
                 </button>
-              </div>
-              <div class="selected-info">
-                <span class="selected-text">Selected: {{ getSelectedMealsText() }}</span>
+                <button class="diet-btn restrictions">No Restrictions</button>
               </div>
             </div>
+
+            <!-- Weekly Budget -->
+            <div class="preference-group">
+              <div class="group-header">
+                <span class="icon-text">Budget</span>
+                <h3 class="group-title">Weekly Budget</h3>
+              </div>
+              <div class="budget-section">
+                <div class="budget-display">
+                  <span class="budget-amount">${{ weeklyBudget }} AUD/week</span>
+                  <span class="daily-budget">Daily budget: ${{ (weeklyBudget / 7).toFixed(2) }}</span>
+                </div>
+                <div class="budget-range">
+                  <span class="range-label">$50</span>
+                  <input 
+                    type="range" 
+                    v-model="weeklyBudget" 
+                    min="50" 
+                    max="500" 
+                    step="10"
+                    class="budget-slider"
+                  />
+                  <span class="range-label">$500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Generate Button -->
+          <div class="generate-section">
+            <button 
+              class="generate-btn" 
+              @click="generateMealPlan"
+              :disabled="loading"
+            >
+              {{ loading ? 'Generating...' : 'Generate My AI Meal Plan' }}
+            </button>
           </div>
         </div>
 
-        <!-- Personalized Meal Plan Preview -->
-        <div v-if="showMealPlanPreview" class="meal-plan-preview">
-          <div class="preview-header">
-            <h3 class="preview-title">Your Personalized Meal Plan</h3>
-            <div class="preview-stats">
-              <span class="stat-badge vitamin">970 IU Vitamin D</span>
-              <span class="stat-badge cost">$195 Weekly Cost</span>
-              <span class="stat-badge days">7 Days Covered</span>
-            </div>
-          </div>
-
-          <div class="meal-cards">
-            <!-- Breakfast Card -->
-            <div class="meal-card">
-              <div class="meal-card-header">
-                <div class="meal-icon-wrapper">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18 3H6C4.9 3 4 3.9 4 5v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM6 19V5h12v14H6z"/>
-                  </svg>
-                </div>
-                <div class="meal-info">
-                  <h4 class="meal-title">Vitamin D Fortified Cereal Bowl</h4>
-                  <span class="meal-type-label">Breakfast</span>
-                </div>
-                <span class="vitamin-badge">400 IU Vitamin D</span>
-              </div>
-
-              <div class="meal-details">
-                <div class="ingredients-section">
-                  <h5>Ingredients</h5>
-                  <ul class="ingredients-list">
-                    <li>Fortified cereal (1 cup)</li>
-                    <li>Fortified milk (200ml)</li>
-                    <li>Banana slices</li>
-                    <li>Almonds (handful)</li>
-                  </ul>
-                </div>
-
-                <div class="nutrition-section">
-                  <h5>Nutrition Facts</h5>
-                  <div class="nutrition-grid">
-                    <div class="nutrition-item">
-                      <span class="label">Calories:</span>
-                      <span class="value">350</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Protein:</span>
-                      <span class="value">12g</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Carbs:</span>
-                      <span class="value">58g</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Fat:</span>
-                      <span class="value">9g</span>
-                    </div>
+        <!-- Meal Plan Display (only when generated) -->
+        <div v-if="mealPlan" class="meal-plan-display">
+          <div class="meal-plan-content">
+            <div class="plan-header">
+              <div class="plan-header-content">
+                <div class="plan-title-section">
+                  <div class="plan-icon">
+                    <Icon icon="material-symbols:restaurant-menu-rounded" :width="32" :height="32" color="#16a34a" />
+                  </div>
+                  <div class="plan-title-text">
+                    <h2 class="plan-title">Here's your personalised meal plan:</h2>
+                    <p class="plan-subtitle">Carefully crafted to meet your vitamin D goals and dietary preferences</p>
                   </div>
                 </div>
-
-                <div class="meal-footer">
-                  <div class="cost-time">
-                    <span class="cost">$4.50 AUD per serving</span>
-                    <span class="time">5 mins</span>
-                  </div>
-                  <div class="health-tip">
-                    <div class="tip-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
-                      </svg>
+                <div class="plan-summary">
+                  <div class="summary-card total-card">
+                    <div class="summary-icon">
+                      <Icon icon="material-symbols:payments-rounded" :width="20" :height="20" color="#059669" />
                     </div>
-                    <span class="tip-text">Choose cereals fortified with at least 100 IU vitamin D per serving for maximum benefit.</span>
+                    <div class="summary-content">
+                      <span class="summary-label">Total Cost</span>
+                      <span class="summary-value">${{ totalCost.toFixed(2) }}</span>
+                    </div>
+                  </div>
+                  <div class="summary-card budget-card">
+                    <div class="summary-icon">
+                      <Icon icon="material-symbols:account-balance-wallet-rounded" :width="20" :height="20" color="#0369a1" />
+                    </div>
+                    <div class="summary-content">
+                      <span class="summary-label">Weekly Budget</span>
+                      <span class="summary-value">${{ weeklyBudget.toFixed(2) }}</span>
+                    </div>
+                  </div>
+                  <div class="summary-card status-card" :class="budgetStatusClass">
+                    <div class="summary-icon">
+                      <Icon v-if="budgetStatusClass === 'within-budget'" icon="material-symbols:check-circle-rounded" :width="20" :height="20" color="#059669" />
+                      <Icon v-else icon="material-symbols:warning-rounded" :width="20" :height="20" color="#dc2626" />
+                    </div>
+                    <div class="summary-content">
+                      <span class="summary-label">Budget Status</span>
+                      <span class="summary-value">{{ budgetStatus }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Lunch Card -->
-            <div class="meal-card">
-              <div class="meal-card-header">
-                <div class="meal-icon-wrapper">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                </div>
-                <div class="meal-info">
-                  <h4 class="meal-title">Tuna & Egg Power Salad</h4>
-                  <span class="meal-type-label">Lunch</span>
-                </div>
-                <span class="vitamin-badge">480 IU Vitamin D</span>
-              </div>
-
-              <div class="meal-details">
-                <div class="ingredients-section">
-                  <h5>Ingredients</h5>
-                  <ul class="ingredients-list">
-                    <li>Canned tuna (1 can)</li>
-                    <li>Hard-boiled eggs (2)</li>
-                    <li>Mixed greens</li>
-                    <li>Cherry tomatoes</li>
-                    <li>Olive oil dressing</li>
-                  </ul>
-                </div>
-
-                <div class="nutrition-section">
-                  <h5>Nutrition Facts</h5>
-                  <div class="nutrition-grid">
-                    <div class="nutrition-item">
-                      <span class="label">Calories:</span>
-                      <span class="value">380</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Protein:</span>
-                      <span class="value">35g</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Carbs:</span>
-                      <span class="value">8g</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Fat:</span>
-                      <span class="value">22g</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="meal-footer">
-                  <div class="cost-time">
-                    <span class="cost">$6.80 AUD per serving</span>
-                    <span class="time">15 mins</span>
-                  </div>
-                  <div class="health-tip">
-                    <div class="tip-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
-                      </svg>
-                    </div>
-                    <span class="tip-text">Egg yolks are rich in vitamin D. Free-range eggs from pasture-raised hens have higher levels.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Dinner Card -->
-            <div class="meal-card">
-              <div class="meal-card-header">
-                <div class="meal-icon-wrapper">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
-                </div>
-                <div class="meal-info">
-                  <h4 class="meal-title">Grilled Barramundi with Herbs</h4>
-                  <span class="meal-type-label">Dinner</span>
-                </div>
-                <span class="vitamin-badge">500 IU Vitamin D</span>
-              </div>
-
-              <div class="meal-details">
-                <div class="ingredients-section">
-                  <h5>Ingredients</h5>
-                  <ul class="ingredients-list">
-                    <li>Barramundi fillet (200g)</li>
-                    <li>Lemon herbs</li>
-                    <li>Roasted vegetables</li>
-                    <li>Sweet potato</li>
-                    <li>Olive oil</li>
-                  </ul>
-                </div>
-
-                <div class="nutrition-section">
-                  <h5>Nutrition Facts</h5>
-                  <div class="nutrition-grid">
-                    <div class="nutrition-item">
-                      <span class="label">Calories:</span>
-                      <span class="value">480</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Protein:</span>
-                      <span class="value">42g</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Carbs:</span>
-                      <span class="value">35g</span>
-                    </div>
-                    <div class="nutrition-item">
-                      <span class="label">Fat:</span>
-                      <span class="value">18g</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="meal-footer">
-                  <div class="cost-time">
-                    <span class="cost">$12.50 AUD per serving</span>
-                    <span class="time">25 mins</span>
-                  </div>
-                  <div class="health-tip">
-                    <div class="tip-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
-                      </svg>
-                    </div>
-                    <span class="tip-text">Fatty fish like barramundi are excellent sources of vitamin D and omega-3 fatty acids.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Generate Button -->
-      <button 
-        class="generate-btn" 
-        @click="generateMealPlan"
-        :disabled="loading || selectedMeals.length === 0"
-      >
-        {{ loading ? 'Generating...' : 'Generate My AI Meal Plan' }}
-      </button>
-    </div>
-
-    <!-- Meal Plan Display (only when generated) -->
-    <div v-if="mealPlan" class="meal-plan-display">
-      <div class="meal-plan-content">
-        <div class="plan-header">
-          <h2>Your Personalised Meal Plan</h2>
-          <div class="plan-actions">
-            <button class="action-btn save">Save</button>
-            <button class="action-btn share">Share</button>
-            <button class="action-btn print">Print</button>
-          </div>
-        </div>
-
-        <!-- Daily Meal Cards -->
-        <div class="daily-meals">
-          <div 
-            v-for="day in mealPlan" 
-            :key="day.day"
-            class="day-card"
-          >
-            <div class="day-header">
-              <h3 class="day-name">{{ day.day }}</h3>
-              <div class="day-total">{{ day.totalVitaminD }} IU total per serving</div>
-            </div>
-
-            <div class="meals-list">
+            <!-- Meal Cards -->
+            <div class="meal-cards-container">
               <div 
-                v-for="meal in day.meals" 
+                v-for="meal in mealPlan" 
                 :key="meal.type"
-                class="meal-item"
+                class="meal-card"
               >
-                <div class="meal-header">
-                  <span class="meal-type">{{ meal.type }}</span>
-                  <button class="swap-btn" @click="openSwapDialog(day.day, meal.type)">
-                    Swap
-                  </button>
-                </div>
-                <div class="meal-details">
-                  <h4 class="meal-name">{{ meal.name }}</h4>
-                  <div class="meal-info">
-                    <span class="vitamin-d">{{ meal.vitaminD }} IU</span>
-                    <span class="calories">{{ meal.calories }} cal</span>
-                    <span class="prep-time">{{ meal.prepTime }} min</span>
+                <div class="meal-card-header">
+                  <div class="meal-image-container">
+                    <div class="meal-image-placeholder">
+                      <!-- Image interface reserved for backend integration -->
+                      <div class="image-placeholder">
+                        <Icon icon="material-symbols:restaurant" :width="32" :height="32" color="#9CA3AF" />
+                        <span class="placeholder-text">{{ meal.type }} Image</span>
+                      </div>
+                    </div>
+                    <div class="meal-type-badge">{{ meal.type }}</div>
                   </div>
-                  <div class="meal-tags">
-                    <span 
-                      v-for="tag in meal.tags" 
-                      :key="tag"
-                      class="tag"
-                    >
-                      {{ tag }}
-                    </span>
+                  
+                  <div class="meal-header-info">
+                    <h3 class="meal-title">{{ meal.name }}</h3>
+                    <div class="meal-stats-grid">
+                      <div class="stat-item vitamin-stat">
+                        <Icon icon="material-symbols:vitamins" :width="16" :height="16" color="#f59e0b" />
+                        <span class="stat-label">Vitamin D</span>
+                        <span class="stat-value">{{ meal.vitaminDUnit }}</span>
+                      </div>
+                      <div class="stat-item time-stat">
+                        <Icon icon="material-symbols:schedule" :width="16" :height="16" color="#3b82f6" />
+                        <span class="stat-label">Prep Time</span>
+                        <span class="stat-value">{{ meal.prepTime }} min</span>
+                      </div>
+                      <div class="stat-item cost-stat">
+                        <Icon icon="material-symbols:attach-money" :width="16" :height="16" color="#059669" />
+                        <span class="stat-label">Cost</span>
+                        <span class="stat-value">${{ meal.cost.toFixed(2) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="meal-card-body">
+                  <div class="meal-details-grid">
+                    <div class="ingredients-section">
+                      <div class="section-header">
+                        <Icon icon="material-symbols:grocery" :width="20" :height="20" color="#059669" />
+                        <h4 class="section-title">Ingredients</h4>
+                      </div>
+                      <ul class="ingredients-list">
+                        <li v-for="ingredient in meal.ingredients" :key="ingredient" class="ingredient-item">
+                          <Icon icon="material-symbols:check-circle" :width="14" :height="14" color="#059669" />
+                          <span>{{ ingredient }}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="recipe-section">
+                      <div class="section-header">
+                        <Icon icon="material-symbols:menu-book" :width="20" :height="20" color="#3b82f6" />
+                        <h4 class="section-title">Recipe Steps</h4>
+                      </div>
+                      <ol class="recipe-steps">
+                        <li v-for="(step, index) in meal.recipe" :key="index" class="recipe-step">
+                          {{ step }}
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+
+                  <div class="meal-footer">
+                    <div class="meal-tags">
+                      <span 
+                        v-for="tag in meal.tags" 
+                        :key="tag"
+                        class="tag"
+                      >
+                        {{ tag }}
+                      </span>
+                    </div>
+                    <button class="action-button">
+                      <Icon icon="material-symbols:favorite-border" :width="16" :height="16" />
+                      Save Recipe
+                    </button>
                   </div>
                 </div>
               </div>
@@ -406,7 +251,6 @@
         </div>
       </div>
     </dialog>
-    </div>
   </div>
 </template>
 
@@ -420,13 +264,12 @@ import { Icon } from '@iconify/vue'
 const loading = ref(false)
 const weeklyBudget = ref(150)
 const selectedDiets = ref([])
-const selectedMeals = ref(['breakfast', 'snacks'])
+
 const mealPlan = ref(null)
 const searchQuery = ref('')
 const alternatives = ref([])
 const currentSwap = ref({ day: '', mealType: '' })
 const swapDialog = ref(null)
-const showMealPlanPreview = ref(true)
 
 // Options data
 const dietaryOptions = ref([
@@ -438,12 +281,24 @@ const dietaryOptions = ref([
   { id: 'low-sodium', label: 'Low-Sodium' }
 ])
 
-const mealTypes = ref([
-  { id: 'breakfast', label: 'Breakfast', icon: 'B' },
-  { id: 'lunch', label: 'Lunch', icon: 'L' },
-  { id: 'dinner', label: 'Dinner', icon: 'D' },
-  { id: 'snacks', label: 'Snacks', icon: 'S' }
-])
+// Computed properties
+const totalCost = computed(() => {
+  if (!mealPlan.value) return 0
+  return mealPlan.value.reduce((total, meal) => total + meal.cost, 0)
+})
+
+const budgetStatus = computed(() => {
+  const total = totalCost.value
+  const budget = weeklyBudget.value
+  if (total <= budget) return 'Within budget'
+  return 'Over budget'
+})
+
+const budgetStatusClass = computed(() => {
+  const total = totalCost.value
+  const budget = weeklyBudget.value
+  return total <= budget ? 'within-budget' : 'over-budget'
+})
 
 // Methods
 const toggleDiet = (dietId) => {
@@ -453,22 +308,6 @@ const toggleDiet = (dietId) => {
   } else {
     selectedDiets.value.push(dietId)
   }
-}
-
-const toggleMeal = (mealId) => {
-  const index = selectedMeals.value.indexOf(mealId)
-  if (index > -1) {
-    selectedMeals.value.splice(index, 1)
-  } else {
-    selectedMeals.value.push(mealId)
-  }
-}
-
-const getSelectedMealsText = () => {
-  if (selectedMeals.value.length === 0) return 'None selected'
-  return selectedMeals.value.map(id => 
-    mealTypes.value.find(m => m.id === id)?.label
-  ).join(', ')
 }
 
 const transformMealPlanData = (backendData) => {
@@ -506,44 +345,90 @@ const transformMealPlanData = (backendData) => {
 
 const generateMealPlan = async () => {
   loading.value = true
-  try {
-    // Call the real backend API
-    const response = await nutritionAPI.getMealPlan()
-    
-    // Transform the backend data to match the frontend format
-    const transformedData = transformMealPlanData(response)
-    mealPlan.value = transformedData
-    
-  } catch (error) {
-    console.error('Error generating meal plan:', error)
-    // Fallback to mock data if API fails
-    mealPlan.value = [
+  
+  // Simulate short loading time to show loading state
+  await new Promise(resolve => setTimeout(resolve, 800))
+  
+  // Using mock data for frontend template - your teammate can replace with real API call later
+  // const response = await nutritionAPI.getMealPlan()
+  // const transformedData = transformMealPlanData(response)
+  // mealPlan.value = transformedData
+  
+  // Current mock data for style template
+  mealPlan.value = [
       {
-        day: 'Day 1: Egg Protein Cereal Bowl',
-        totalVitaminD: 245,
-        meals: [
-          {
-            type: 'Breakfast',
-            name: 'Vitamin D Fortified Cereal Bowl',
-            vitaminD: 120,
-            calories: 350,
-            prepTime: 5,
-            tags: ['Quick', 'High Protein']
-          },
-          {
-            type: 'Snacks',
-            name: 'Mixed Nuts & Seeds',
-            vitaminD: 125,
-            calories: 180,
-            prepTime: 0,
-            tags: ['Portable', 'Healthy Fats']
-          }
-        ]
+        type: 'Breakfast',
+        name: 'Smoked Salmon & Avocado Toast',
+        vitaminD: 10.5,
+        vitaminDUnit: '420 IU',
+        prepTime: 10,
+        cost: 6.00,
+        ingredients: [
+          '80 g Smoked salmon',
+          '2 slice Wholegrain bread',
+          '0.5 Avocado',
+          '1 tbsp Cream cheese'
+        ],
+        recipe: [
+          'Toast the bread slices.',
+          'Spread cream cheese on each slice.',
+          'Top with sliced avocado.',
+          'Arrange smoked salmon on top.',
+          'Serve immediately.'
+        ],
+        tags: ['budget-friendly', 'meal', 'mid-age', 'vitamin d', 'au'],
+        image: '/api/placeholder/300/200'
+      },
+      {
+        type: 'Lunch',
+        name: 'Spinach & Feta Egg Bake',
+        vitaminD: 3.2,
+        vitaminDUnit: '128 IU',
+        prepTime: 25,
+        cost: 4.00,
+        ingredients: [
+          '3 Eggs',
+          '100 g Fresh spinach',
+          '30 g Feta cheese',
+          '50 ml Milk'
+        ],
+        recipe: [
+          'Preheat oven to 180°C.',
+          'Whisk eggs with milk, salt, and pepper.',
+          'Stir in chopped spinach and crumbled feta.',
+          'Pour mixture into a greased baking dish.',
+          'Bake for 20-25 minutes until set.'
+        ],
+        tags: ['vegetarian', 'protein', 'vitamin d', 'healthy'],
+        image: '/api/placeholder/300/200'
+      },
+      {
+        type: 'Dinner',
+        name: 'Grilled Barramundi with Herbs',
+        vitaminD: 8.7,
+        vitaminDUnit: '348 IU',
+        prepTime: 30,
+        cost: 12.50,
+        ingredients: [
+          '200 g Barramundi fillet',
+          '1 tbsp Olive oil',
+          '1 Lemon (juiced)',
+          'Fresh herbs (parsley, dill)',
+          '150 g Sweet potato'
+        ],
+        recipe: [
+          'Preheat grill to medium-high heat.',
+          'Season fish with salt, pepper, and herbs.',
+          'Brush with olive oil and lemon juice.',
+          'Grill for 4-5 minutes each side.',
+          'Serve with roasted sweet potato.'
+        ],
+        tags: ['seafood', 'omega-3', 'vitamin d', 'healthy'],
+        image: '/api/placeholder/300/200'
       }
     ]
-  } finally {
-    loading.value = false
-  }
+  
+  loading.value = false
 }
 
 const openSwapDialog = (day, mealType) => {
@@ -581,37 +466,150 @@ onMounted(() => {
 <style scoped>
 .meal-planner {
   min-height: 100vh;
-  background: #ffffff;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 30%, #f1f5f9 70%, #e2e8f0 100%);
+  position: relative;
+}
+
+.meal-planner::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(34, 197, 94, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Jumbotron Styles */
 .jumbotron {
-  background: #ffffff;
-  padding: 60px 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+  padding: 80px 24px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  margin-bottom: 32px;
-  border-radius: 24px;
+  margin-bottom: 40px;
+  border-radius: 32px;
   margin: 24px;
-  margin-bottom: 32px;
-  border: 1px solid #e2e8f0;
+  margin-bottom: 40px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
 }
 
 .jumbotron::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: #16a34a;
-  border-radius: 2px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #ff8c00 0%, #ffa500 50%, #ff8c00 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.jumbotron::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.03) 0%, transparent 70%);
+  animation: float 6s ease-in-out infinite;
 }
 
 .jumbotron:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.12),
+    0 16px 32px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+}
+
+/* Page Load Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply animations to elements */
+.jumbotron {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.config-panel {
+  animation: fadeInLeft 0.8s ease-out 0.2s both;
+}
+
+.meal-plan-display {
+  animation: fadeInRight 0.8s ease-out 0.4s both;
+}
+
+.preference-group {
+  animation: fadeInUp 0.6s ease-out calc(0.1s * var(--animation-order, 0)) both;
+}
+
+.meal-card {
+  animation: scaleIn 0.6s ease-out calc(0.1s * var(--animation-order, 0)) both;
 }
 
 .jumbotron-content {
@@ -629,24 +627,45 @@ onMounted(() => {
 .title-icon {
   width: 60px;
   height: 60px;
-  background: rgba(255, 255, 255, 0.2);
+  background: #ff8c00;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: pulse 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.title-icon:hover {
+  transform: scale(1.1) rotate(10deg);
+  animation-play-state: paused;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 140, 0, 0);
+  }
 }
 
 .jumbotron-title {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #16a34a;
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
   line-height: 1.2;
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  text-shadow: 0 4px 8px rgba(22, 163, 74, 0.2);
+  letter-spacing: -0.02em;
 }
 
 .jumbotron-title:hover::before {
@@ -709,7 +728,7 @@ onMounted(() => {
 }
 
 .daily-goal-jumbotron {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: #ff8c00;
   color: white;
   padding: 12px 24px;
   border-radius: 12px;
@@ -717,20 +736,20 @@ onMounted(() => {
   font-weight: 600;
   margin-top: 20px;
   max-width: 400px;
-  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
 }
 
 /* Main Content Container */
 .main-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 24px;
   padding: 0 24px 24px;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Left Configuration Panel */
+/* Configuration Panel */
 .config-panel {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 20px;
@@ -739,11 +758,8 @@ onMounted(() => {
     0 20px 40px rgba(16, 185, 129, 0.15),
     0 8px 16px rgba(16, 185, 129, 0.08),
     0 0 0 1px rgba(16, 185, 129, 0.05);
-  height: fit-content;
   border: 1px solid rgba(34, 197, 94, 0.1);
   transition: all 0.3s ease;
-  position: sticky;
-  top: 24px;
   width: 100%;
 }
 
@@ -758,7 +774,7 @@ onMounted(() => {
 
 
 .daily-goal {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: #ff8c00;
   color: white;
   padding: 12px 16px;
   border-radius: 12px;
@@ -771,18 +787,65 @@ onMounted(() => {
   margin-bottom: 24px;
 }
 
+.generate-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
 .preferences-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
   align-items: stretch;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* Responsive design */
 @media (max-width: 1024px) {
   .preferences-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 600px;
+  }
+  
+  .preference-group {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .preferences-grid {
     gap: 16px;
+  }
+  
+  .preference-group {
+    padding: 20px;
+  }
+  
+  .dietary-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .group-title {
+    font-size: 15px;
+  }
+  
+  .budget-amount {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dietary-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .diet-btn {
+    padding: 14px 16px;
   }
 }
 
@@ -807,59 +870,100 @@ onMounted(() => {
 
 .preference-group {
   margin-bottom: 24px;
-  padding: 20px;
+  padding: 28px;
   background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #bbf7d0;
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.1);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.08), 0 2px 4px rgba(34, 197, 94, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.preference-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  opacity: 0.8;
+}
+
+.preference-group:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.12), 0 4px 8px rgba(34, 197, 94, 0.08);
 }
 
 .group-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(34, 197, 94, 0.1);
 }
 
 .icon-text {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   color: #16a34a;
-  background: #dcfce7;
-  padding: 4px 8px;
-  border-radius: 6px;
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.1);
 }
 
 .group-title {
   font-size: 16px;
-  font-weight: 600;
-  color: #374151;
+  font-weight: 700;
+  color: #1f2937;
+  flex: 1;
   margin: 0;
 }
 
 .dietary-options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 12px;
   flex-grow: 1;
+  margin-top: 8px;
 }
 
 .diet-btn {
-  padding: 8px 16px;
+  padding: 12px 16px;
   border: 2px solid #e2e8f0;
   background: white;
-  border-radius: 20px;
+  border-radius: 12px;
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
 .diet-btn:hover {
   border-color: #16a34a;
   background: rgba(22, 163, 74, 0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diet-btn.active {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  border-color: #16a34a;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
 }
 
 .diet-btn.active {
@@ -877,25 +981,32 @@ onMounted(() => {
 .budget-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   flex-grow: 1;
+  margin-top: 8px;
 }
 
 .budget-display {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.1);
 }
 
 .budget-amount {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1e293b;
+  font-size: 20px;
+  font-weight: 800;
+  color: #16a34a;
+  letter-spacing: -0.5px;
 }
 
 .daily-budget {
-  font-size: 14px;
-  color: #64748b;
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
 }
 
 .budget-range {
@@ -912,94 +1023,51 @@ onMounted(() => {
 
 .budget-slider {
   flex: 1;
-  height: 6px;
-  border-radius: 3px;
-  background: #e2e8f0;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #e2e8f0 0%, #e2e8f0 100%);
   outline: none;
   cursor: pointer;
+  appearance: none;
+  transition: all 0.3s ease;
 }
 
-.meal-types-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.meal-types {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-  flex-grow: 1;
-}
-
-.meal-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  border: 2px solid #e2e8f0;
-  background: white;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.meal-btn:hover {
-  border-color: #16a34a;
-  background: rgba(22, 163, 74, 0.05);
-}
-
-.meal-btn.active {
-  background: #16a34a;
-  color: white;
-  border-color: #16a34a;
-}
-
-.meal-icon {
-  font-size: 24px;
-  font-weight: bold;
-  width: 32px;
-  height: 32px;
+.budget-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
+  transition: all 0.3s ease;
 }
 
-.meal-btn.active .meal-icon {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+.budget-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
 }
 
-.meal-label {
-  font-size: 14px;
-  font-weight: 500;
+.budget-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
 }
 
-.selected-info {
-  padding: 12px;
-  background: #dbeafe;
-  border-radius: 8px;
-  border: 1px solid #93c5fd;
-}
 
-.selected-text {
-  font-size: 14px;
-  color: #1e40af;
-  font-weight: 500;
-}
 
 .generate-btn {
   width: 100%;
-  background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #34d399 100%);
+  background: #16a34a;
   color: white;
   border: none;
-  padding: 18px 28px;
-  border-radius: 16px;
-  font-size: 16px;
+  padding: 20px 32px;
+  border-radius: 20px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1007,49 +1075,29 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 
-    0 8px 20px rgba(16, 185, 129, 0.25),
-    0 4px 8px rgba(16, 185, 129, 0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.generate-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.generate-btn:hover::before {
-  left: 100%;
+  gap: 12px;
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
 }
 
 .generate-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%);
-  transform: translateY(-3px);
-  box-shadow: 
-    0 16px 32px rgba(16, 185, 129, 0.35),
-    0 8px 16px rgba(16, 185, 129, 0.25);
+  background: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
 }
 
 .generate-btn:active {
-  transform: translateY(-1px);
+  transform: translateY(0);
+  transition: all 0.1s ease;
 }
 
 .generate-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
   box-shadow: 
-    0 4px 8px rgba(16, 185, 129, 0.15),
-    0 2px 4px rgba(16, 185, 129, 0.1);
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .btn-icon {
@@ -1057,7 +1105,7 @@ onMounted(() => {
   font-weight: 600;
 }
 
-/* Right Meal Plan Display */
+/* Meal Plan Display */
 .meal-plan-display {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 20px;
@@ -1068,9 +1116,441 @@ onMounted(() => {
     0 0 0 1px rgba(16, 185, 129, 0.04);
   border: 1px solid rgba(34, 197, 94, 0.08);
   transition: all 0.3s ease;
-  min-height: 600px;
+  margin-top: 24px;
   width: 100%;
   overflow-x: auto;
+}
+
+/* Plan Summary Styles */
+.plan-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.summary-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.total-card .summary-icon {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+}
+
+.budget-card .summary-icon {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.status-card .summary-icon {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+}
+
+.status-card.over-budget .summary-icon {
+  background: linear-gradient(135deg, #fef2f2, #fecaca);
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.status-card.within-budget .summary-value {
+  color: #059669;
+}
+
+.status-card.over-budget .summary-value {
+  color: #dc2626;
+}
+
+/* Meal Cards Container */
+.meal-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual Meal Card */
+.meal-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.meal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: #3b82f6;
+}
+
+.meal-card-header {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #fafbfc 0%, #f8fafc 100%);
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.meal-image-container {
+  position: relative;
+}
+
+.meal-image-placeholder {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px dashed #cbd5e1;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.meal-card:hover .meal-image-placeholder {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  transition: color 0.3s ease;
+}
+
+.meal-card:hover .image-placeholder {
+  color: #3b82f6;
+}
+
+.placeholder-text {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.meal-header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.meal-type-badge {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  flex-shrink: 0;
+}
+
+.meal-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+
+.meal-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.stat-item-enhanced {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.stat-item-enhanced:hover {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.stat-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.stat-icon.vitamin-d {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+}
+
+.stat-icon.prep-time {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.stat-icon.cost {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.meal-card-body {
+  padding: 24px;
+  background: white;
+}
+
+.meal-section {
+  margin-bottom: 24px;
+}
+
+.meal-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+}
+
+.meal-footer {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: center;
+}
+
+.save-recipe-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.save-recipe-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.ingredients-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredient-item {
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 10px;
+  font-size: 14px;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ingredient-item:hover {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.ingredient-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.recipe-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step-counter;
+}
+
+.recipe-step {
+  counter-increment: step-counter;
+  padding: 16px 0;
+  border-bottom: 1px solid #f1f5f9;
+  position: relative;
+  padding-left: 50px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  transition: all 0.3s ease;
+}
+
+.recipe-step:hover {
+  color: #1e293b;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  margin: 0 -16px;
+  padding-left: 66px;
+  padding-right: 16px;
+  border-radius: 8px;
+}
+
+.recipe-step:last-child {
+  border-bottom: none;
+}
+
+.recipe-step::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
 .meal-plan-display:hover {
@@ -1079,6 +1559,76 @@ onMounted(() => {
     0 24px 48px rgba(16, 185, 129, 0.15),
     0 12px 20px rgba(16, 185, 129, 0.08),
     0 0 0 1px rgba(16, 185, 129, 0.06);
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Meal card entrance animations */
+.meal-card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.meal-card:nth-child(1) { animation-delay: 0.1s; }
+.meal-card:nth-child(2) { animation-delay: 0.2s; }
+.meal-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Summary card animations */
+.summary-card {
+  animation: fadeInScale 0.5s ease-out;
+}
+
+.summary-card:nth-child(1) { animation-delay: 0.1s; }
+.summary-card:nth-child(2) { animation-delay: 0.2s; }
+.summary-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Icon hover effects */
+.stat-icon:hover {
+  animation: pulse 1.5s infinite;
+}
+
+.section-icon:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Button click effects */
+.save-recipe-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Meal type badge hover effects */
+.meal-type-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
 .placeholder {
@@ -1111,19 +1661,55 @@ onMounted(() => {
 }
 
 .plan-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #bbf7d0;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
 }
 
-.plan-header h2 {
-  font-size: 24px;
+.plan-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.plan-title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.plan-icon {
+  width: 56px;
+  height: 56px;
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+  border: 2px solid #bbf7d0;
+}
+
+.plan-title-text {
+  flex: 1;
+}
+
+.plan-title {
+  font-size: 28px;
   font-weight: 700;
-  color: #1e293b;
+  color: #064e3b;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.plan-subtitle {
+  font-size: 16px;
+  color: #059669;
   margin: 0;
+  font-weight: 500;
 }
 
 .plan-actions {
@@ -1213,13 +1799,27 @@ onMounted(() => {
 }
 
 .swap-btn {
-  padding: 6px 12px;
-  background: #f59e0b;
+  padding: 8px 16px;
+  background: #ff8c00;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 140, 0, 0.2);
+}
+
+.swap-btn:hover {
+  background: #ff7f00;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 140, 0, 0.3);
+}
+
+.swap-btn:active {
+  transform: translateY(0);
+  transition: all 0.1s ease;
 }
 
 .meal-name {
@@ -1296,7 +1896,7 @@ onMounted(() => {
 .close-btn {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 14px;
   cursor: pointer;
   color: #64748b;
 }
@@ -1500,45 +2100,95 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .meal-types {
-    grid-template-columns: 1fr;
+  /* Plan header responsive */
+  .plan-header-content {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
   }
   
-  .plan-header {
+  .plan-summary {
     flex-direction: column;
     gap: 16px;
-    align-items: flex-start;
   }
   
-  .day-header {
+  .summary-card {
+    padding: 16px;
+  }
+  
+  .summary-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  
+  /* Meal card responsive */
+  .meal-card-header {
     flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    text-align: center;
   }
   
-  .meal-header {
+  .meal-image-placeholder {
+    width: 120px;
+    height: 120px;
+    align-self: center;
+  }
+  
+  .meal-header-info {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .meal-title {
     flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
+    gap: 12px;
+    align-items: center;
   }
   
-  .meal-info {
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .checkbox-group {
+  .meal-stats-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
   
-  .meal-plan-preview {
+  .stat-item-enhanced {
+    justify-content: center;
+    padding: 12px 16px;
+  }
+  
+  .ingredients-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .ingredient-item {
+    padding: 10px 14px;
+    justify-content: center;
+  }
+  
+  .recipe-step {
+    padding-left: 40px;
+    font-size: 13px;
+  }
+  
+  .recipe-step::before {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+  
+  .meal-card-body {
     padding: 20px;
   }
   
-  .meal-cards {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .meal-footer {
+    padding: 16px 20px;
+  }
+  
+  .save-recipe-btn {
+    padding: 10px 20px;
+    font-size: 13px;
   }
   
   .config-panel,
@@ -1562,7 +2212,7 @@ onMounted(() => {
   
   .generate-btn {
     padding: 16px 24px;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -1589,15 +2239,134 @@ onMounted(() => {
   
   .config-panel,
   .meal-plan-display {
-    padding: 20px;
+    padding: 16px;
+  }
+  
+  /* Plan header mobile */
+  .plan-header {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .plan-title {
+    font-size: 20px;
+  }
+  
+  .plan-subtitle {
+    font-size: 12px;
+  }
+  
+  .plan-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  
+  .summary-card {
+    padding: 12px;
+  }
+  
+  .summary-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .summary-label {
+    font-size: 9px;
+  }
+  
+  .summary-value {
+    font-size: 12px;
+  }
+  
+  /* Meal card mobile */
+  .meal-card-header {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .meal-image-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .meal-name {
+    font-size: 18px;
+  }
+  
+  .meal-type-badge {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+  
+  .stat-item-enhanced {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+  
+  .stat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+  }
+  
+  .stat-label {
+    font-size: 9px;
+  }
+  
+  .stat-value {
+    font-size: 11px;
+  }
+  
+  .meal-card-body {
+    padding: 16px;
+  }
+  
+  .section-title {
+    font-size: 14px;
+    gap: 8px;
+  }
+  
+  .section-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+  }
+  
+  .ingredient-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .ingredient-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 7px;
+  }
+  
+  .recipe-step {
+    padding-left: 35px;
+    font-size: 12px;
+  }
+  
+  .recipe-step::before {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .meal-footer {
+    padding: 12px 16px;
+  }
+  
+  .save-recipe-btn {
+    padding: 8px 16px;
+    font-size: 12px;
   }
   
   .checkbox-item {
     padding: 12px;
-  }
-  
-  .meal-card {
-    padding: 16px;
   }
   
   .nutrition-grid {
@@ -1605,258 +2374,5 @@ onMounted(() => {
   }
 }
 
-/* Meal Plan Preview Styles */
-.meal-plan-preview {
-  margin-top: 24px;
-  padding: 20px;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-}
 
-.preview-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.preview-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 0;
-}
-
-.preview-stats {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.stat-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: white;
-}
-
-.stat-badge.vitamin {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-}
-
-.stat-badge.cost {
-  background: linear-gradient(135deg, #10b981, #059669);
-}
-
-.stat-badge.days {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-}
-
-.meal-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.meal-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s;
-}
-
-.meal-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-.meal-card-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.meal-icon-wrapper {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.meal-info {
-  flex: 1;
-}
-
-.meal-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 0 0 4px 0;
-}
-
-.meal-type-label {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.vitamin-badge {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.meal-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 16px;
-}
-
-.ingredients-section h5,
-.nutrition-section h5 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
-  margin: 0 0 8px 0;
-}
-
-.ingredients-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.ingredients-list li {
-  padding: 4px 0;
-  font-size: 14px;
-  color: #64748b;
-  position: relative;
-  padding-left: 16px;
-}
-
-.ingredients-list li::before {
-  content: '-';
-  color: #3b82f6;
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-
-.nutrition-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.nutrition-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 8px;
-  background: #f8fafc;
-  border-radius: 6px;
-  font-size: 13px;
-}
-
-.nutrition-item .label {
-  color: #64748b;
-  font-weight: 500;
-}
-
-.nutrition-item .value {
-  color: #1e293b;
-  font-weight: 600;
-}
-
-.meal-footer {
-  border-top: 1px solid #f1f5f9;
-  padding-top: 16px;
-}
-
-.cost-time {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.cost {
-  font-size: 14px;
-  font-weight: 600;
-  color: #059669;
-}
-
-.time {
-  font-size: 14px;
-  color: #64748b;
-  background: #f1f5f9;
-  padding: 4px 8px;
-  border-radius: 12px;
-}
-
-.health-tip {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 12px;
-  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
-  border-radius: 8px;
-  border-left: 4px solid #8b5cf6;
-}
-
-.tip-icon {
-  color: #8b5cf6;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.tip-text {
-  font-size: 13px;
-  color: #5b21b6;
-  line-height: 1.4;
-}
-
-/* Responsive adjustments for meal plan preview */
-@media (max-width: 768px) {
-  .meal-plan-preview {
-    padding: 16px;
-  }
-  
-  .preview-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .meal-details {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .nutrition-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .cost-time {
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
-  }
-}
 </style>

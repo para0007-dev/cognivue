@@ -1,5 +1,5 @@
 <template>
-  <div class="timer-test">
+  <div class="timer-test page-content">
     <h1>Timer Test Page</h1>
     <div class="timer-info">
       <p>Current Status: {{ timerState.isRunning ? 'Running' : 'Paused' }}</p>

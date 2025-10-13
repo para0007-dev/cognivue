@@ -5,7 +5,7 @@
       <nav class="desktop-nav">
         <router-link to="/" class="logo">
           <img src="@/assets/images/Cognivue (2).png" alt="VitaminD Brain Logo" class="logo-icon">
-          <span class="logo-text">BrainVD</span>
+          <span class="logo-text">BrainVID</span>
         </router-link>
         <ul class="nav-menu">
           <li><router-link to="/" class="nav-link" :class="{ active: $route.path === '/' }"><Icon icon="material-symbols:home" :width="16" :height="16" /><span>Home</span></router-link></li>
@@ -20,7 +20,7 @@
       <nav class="mobile-nav">
         <router-link to="/" class="logo">
           <img src="@/assets/images/Cognivue (2).png" alt="VitaminD Brain Logo" class="logo-icon">
-          <span class="logo-text">BrainVD</span>
+          <span class="logo-text">BrainVID</span>
         </router-link>
         <button class="hamburger" @click="toggleMobileMenu" :class="{ active: isMobileMenuOpen }">
           <span></span>

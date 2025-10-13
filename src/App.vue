@@ -1,6 +1,14 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view v-slot="{ Component, route }">
+      <transition 
+        name="page-transition" 
+        mode="out-in"
+        appear
+      >
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -66,4 +74,64 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* Page Transition Animations - Simplified */
+.page-transition-enter-active,
+.page-transition-leave-active {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.page-transition-enter-from,
+.page-transition-leave-to {
+  opacity: 0;
+}
+
+.page-transition-enter-to,
+.page-transition-leave-from {
+  opacity: 1;
+}
+
+/* Smooth page container */
+#app {
+  overflow-x: hidden;
+}
+
+/* Ensure smooth transitions for all page content */
+.page-transition-enter-active *,
+.page-transition-leave-active * {
+  transition-delay: inherit;
+}
+
+/* Page content styling for better animations */
+.page-content {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Gentle content animation */
+.page-transition-enter-active .page-content > * {
+  animation: gentleSlideIn 0.4s ease-out forwards;
+}
+
+.page-transition-enter-from .page-content > * {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes gentleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle staggered delay for first few elements */
+.page-content > *:nth-child(1) { animation-delay: 0s; }
+.page-content > *:nth-child(2) { animation-delay: 0.05s; }
+.page-content > *:nth-child(3) { animation-delay: 0.1s; }
 </style>

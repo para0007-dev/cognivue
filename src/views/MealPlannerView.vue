@@ -1,5 +1,5 @@
 <template>
-  <section class="nutrition">
+  <div class="meal-planner-page page-content">
     <Header />
     <!-- Dynamic Tab Content -->
     <div class="content">
@@ -7,7 +7,7 @@
       <FoodSearch v-if="currentTab === 'Food Search'" />
       <NutritionTips v-if="currentTab === 'Nutrition Tips'" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>
@@ -28,7 +28,12 @@ export default {
 </script>
 
 <style scoped>
-.nutrition { padding: 16px; }
+.meal-planner-page {
+  /* Keep consistent with other pages - no padding on main container */
+}
 
-.content { margin-top: 20px; }
+.content { 
+  margin-top: 20px; 
+  padding: 16px; /* Add padding only to content area */
+}
 </style>

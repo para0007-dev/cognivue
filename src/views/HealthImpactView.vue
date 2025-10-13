@@ -1,5 +1,5 @@
 <template>
-  <div class="health-impact-page">
+  <div class="health-impact-page page-content">
     <Header />
     <main class="main-content">
       <div class="container">

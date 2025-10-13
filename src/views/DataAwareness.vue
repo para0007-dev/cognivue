@@ -93,7 +93,7 @@ onBeforeUnmount(stopAuto)
 
 
 <template>
-  <div>
+  <div class="page-content">
     <Header />
     <div class="awa-page">
       <!-- Jumbotron -->
@@ -152,8 +152,8 @@ onBeforeUnmount(stopAuto)
         </div>
         <div class="grid">
           <div
-            v-for="t in tips" :key="t.id"
-            class="card3d" :class="{flipped: t._flipped}" @click="toggleFlip(t)"
+            v-for="(t, index) in tips" :key="t.id"
+            class="card3d" :class="{flipped: t._flipped}" @click="toggleFlip(t)" :style="{ '--animation-order': index }"
           >
             <div class="inner">
               <!-- front -->
@@ -860,5 +860,72 @@ onBeforeUnmount(stopAuto)
     padding: 8px 16px;
     font-size: 0.85rem;
   }
+}
+
+/* Component Entrance Animations - MealPlanner Style */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply animations to main components */
+.jumbotron {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.cta {
+  animation: fadeInLeft 0.8s ease-out 0.4s both;
+}
+
+.cards {
+  animation: fadeInRight 0.8s ease-out 0.6s both;
+}
+
+.impact {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+/* Staggered animations for cards */
+.card3d {
+  animation: scaleIn 0.6s ease-out calc(0.1s * var(--animation-order, 0) + 1.0s) both;
 }
 </style>

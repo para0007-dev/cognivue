@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrap">
+  <div class="login-wrap page-content">
     <div class="card">
       <h1 class="title">BrainViD</h1>
       <p class="subtitle">Please enter password to access the system</p>

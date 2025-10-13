@@ -1,5 +1,5 @@
 <template>
-  <div class="sun-exposure-page">
+  <div class="sun-exposure-page page-content">
     <Header />
     <main class="main-content">
       <div class="container">
@@ -55,7 +55,7 @@
               </div>
               
               <div class="time-recommendations">
-                <div class="time-slot optimal">
+                <div class="time-slot optimal" style="--animation-order: 0">
                   <div class="time-icon">
                     <Icon icon="wi:sunrise" :width="24" :height="24" />
                   </div>
@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 
-                <div class="time-slot moderate">
+                <div class="time-slot moderate" style="--animation-order: 1">
                   <div class="time-icon">
                     <Icon icon="material-symbols:warning" :width="24" :height="24" />
                   </div>
@@ -77,7 +77,7 @@
                   </div>
                 </div>
                 
-                <div class="time-slot safe">
+                <div class="time-slot safe" style="--animation-order: 2">
                   <div class="time-icon">
                     <Icon icon="wi:cloudy" :width="24" :height="24" />
                   </div>
@@ -111,7 +111,7 @@
               </div>
               
               <div class="activity-suggestions">
-                <div class="activity-item">
+                <div class="activity-item" style="--animation-order: 0">
                   <div class="activity-icon">
                     <Icon icon="mdi:walk" :width="24" :height="24" />
                   </div>
@@ -121,7 +121,7 @@
                   </div>
                 </div>
                 
-                <div class="activity-item">
+                <div class="activity-item" style="--animation-order: 1">
                   <div class="activity-icon">
                     <Icon icon="mdi:tree" :width="24" :height="24" />
                   </div>
@@ -131,7 +131,7 @@
                   </div>
                 </div>
                 
-                <div class="activity-item">
+                <div class="activity-item" style="--animation-order: 2">
                   <div class="activity-icon">
                     <Icon icon="mdi:bike" :width="24" :height="24" />
                   </div>
@@ -157,7 +157,7 @@
             </div>
             
             <div class="week-days">
-              <div class="day-card" v-for="day in weekDays" :key="day.name" :class="{ active: day.isToday }">
+              <div class="day-card" v-for="(day, index) in weekDays" :key="day.name" :class="{ active: day.isToday }" :style="{ '--animation-order': index }">
                 <div class="day-name">{{ day.name }}</div>
                 <div class="day-image" :style="{ backgroundImage: `url(${day.image})` }"></div>
                 <div class="day-activity">{{ day.activity }}</div>
@@ -628,16 +628,18 @@ export default {
 
 .sun-exposure-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  background: #f0f9ff;
+  position: relative;
 }
+
+
 
 .main-content {
   padding: 2rem 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
   position: relative;
   overflow-x: hidden;
-
+  z-index: 1;
 }
 
 .main-content::before {
@@ -679,10 +681,12 @@ export default {
   }
 }
 
+
+
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 24px;
   position: relative;
   z-index: 1;
 }
@@ -716,7 +720,7 @@ export default {
   }
   
   .container {
-    padding: 0 1rem;
+    padding: 0 20px;
   }
   
   .page-title {
@@ -775,36 +779,42 @@ export default {
 
 .stat-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #e2e8f0;
 }
 
 .stat-card.green {
   border-left: 4px solid #22c55e;
-  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  background: #f0fdf4;
+  border-color: #bbf7d0;
 }
 
 .stat-card.blue {
   border-left: 4px solid #3b82f6;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  background: #eff6ff;
+  border-color: #bfdbfe;
 }
 
 .stat-card.purple {
   border-left: 4px solid #8b5cf6;
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+  background: #faf5ff;
+  border-color: #e9d5ff;
 }
 
 .stat-card.orange {
   border-left: 4px solid #f59e0b;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: #fffbeb;
+  border-color: #fed7aa;
 }
 
 .stat-label {
@@ -983,18 +993,13 @@ export default {
 
 /* Let's Get Outside Section */
 .lets-get-outside {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fed7aa 100%);
-  border-radius: 24px;
-  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
   margin-bottom: 2rem;
-  border: 2px solid #f59e0b;
-  box-shadow: 
-    0 12px 40px rgba(245, 158, 11, 0.2),
-    0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: hidden;
-
-  transition: all 0.3s ease;
 }
 
 .lets-get-outside::before {
@@ -1096,24 +1101,35 @@ export default {
 }
 
 .outside-title {
-  font-size: 2.25rem;
-  font-weight: 800;
+  font-size: 2.5rem;
+  font-weight: 900;
   margin: 0;
-  background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%);
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 25%, #b45309 50%, #92400e 75%, #f59e0b 100%);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 2px 4px rgba(146, 64, 14, 0.1);
-  animation: titleGlow 2s ease-in-out infinite alternate;
+  text-shadow: 0 4px 8px rgba(146, 64, 14, 0.2);
+  animation: titleGlow 3s ease-in-out infinite alternate, gradientShift 4s ease-in-out infinite;
   position: relative;
+  letter-spacing: 0.5px;
 }
 
 @keyframes titleGlow {
   from {
-    filter: drop-shadow(0 0 5px rgba(146, 64, 14, 0.3));
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
   }
   to {
-    filter: drop-shadow(0 0 15px rgba(146, 64, 14, 0.5));
+    filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.6));
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
 
@@ -1257,45 +1273,26 @@ export default {
   align-items: center;
   gap: 0.5rem;
   padding: 0.875rem 1.5rem;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: #f59e0b;
   color: white;
   border: none;
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   font-size: 0.9rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-}
-
-.update-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transition: all 0.4s ease;
-  transform: translate(-50%, -50%);
-}
-
-.update-btn:hover::before {
-  width: 300px;
-  height: 300px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 .update-btn:hover {
-  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+  background: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
 .update-btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0);
+  transition: all 0.1s ease;
 }
 
 .current-location {
@@ -1335,13 +1332,10 @@ export default {
   gap: 1.5rem;
   font-size: 0.9rem;
   padding: 1rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(254, 243, 199, 0.6) 100%);
-  border-radius: 12px;
-  border: 1px solid rgba(245, 158, 11, 0.15);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
-
-  transition: all 0.3s ease;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes weatherFadeIn {
@@ -1408,19 +1402,14 @@ export default {
 
 /* Safe Sun Exposure Card */
 .safe-sun-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.9) 100%);
-  border-radius: 20px;
+  background: #ffffff;
+  border-radius: 16px;
   padding: 2rem;
   color: #1f2937;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.08),
-    0 4px 16px rgba(0, 0, 0, 0.04);
-  border: 2px solid rgba(245, 158, 11, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
   position: relative;
-  overflow: hidden;
-
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .safe-sun-card::before {
@@ -1429,10 +1418,9 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #f59e0b, #d97706, #b45309, #f59e0b);
-  background-size: 200% 100%;
-  animation: cardGradient 3s ease-in-out infinite;
+  height: 4px;
+  background: #f59e0b;
+  border-radius: 16px 16px 0 0;
 }
 
 @keyframes cardSlideIn {
@@ -1446,40 +1434,49 @@ export default {
   }
 }
 
-@keyframes cardGradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
 .safe-sun-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.12),
-    0 8px 20px rgba(0, 0, 0, 0.08);
-  border-color: rgba(245, 158, 11, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #e2e8f0;
 }
 
 .safe-sun-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+}
+
+.warning-icon {
+  width: 28px;
+  height: 28px;
+  background: #f59e0b;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
 .safe-sun-header h3 {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   flex: 1;
+  color: #1f2937;
 }
 
 .today-label {
-  background: #fef3c7;
-  color: #92400e;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 600;
+  border: 1px solid #e2e8f0;
 }
 
 .uv-index-display {
@@ -1512,24 +1509,35 @@ export default {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  padding: 1rem;
+  padding: 1.25rem;
   border-radius: 12px;
   border-left: 4px solid;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid;
 }
 
 .time-slot.optimal {
   background: #f0fdf4;
   border-left-color: #22c55e;
+  border-color: #bbf7d0;
 }
 
 .time-slot.moderate {
-  background: #fef3c7;
+  background: #fffbeb;
   border-left-color: #f59e0b;
+  border-color: #fed7aa;
 }
 
 .time-slot.safe {
   background: #eff6ff;
   border-left-color: #3b82f6;
+  border-color: #bfdbfe;
+}
+
+.time-slot:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .time-icon {
@@ -1560,35 +1568,68 @@ export default {
 
 /* Today's Activities Card */
 .todays-activities-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 2rem;
   color: #1f2937;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.todays-activities-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #3b82f6;
+  border-radius: 16px 16px 0 0;
+}
+
+.todays-activities-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #e2e8f0;
 }
 
 .activities-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+}
+
+.person-icon {
+  width: 28px;
+  height: 28px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .activities-header h3 {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   flex: 1;
+  color: #1f2937;
 }
 
 .suggestions-count {
-  background: #dbeafe;
-  color: #1d4ed8;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 600;
+  border: 1px solid #e2e8f0;
 }
 
 .weather-summary {
@@ -1628,14 +1669,10 @@ export default {
   align-items: center;
   gap: 1.25rem;
   padding: 1rem 1.25rem;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.6) 100%);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-
 }
 
 
@@ -1658,7 +1695,7 @@ export default {
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   transform: scaleY(0);
   transition: transform 0.3s ease;
   transform-origin: bottom;
@@ -1699,7 +1736,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 12px;
@@ -1733,7 +1770,7 @@ export default {
 .view-more-btn {
   width: 100%;
   padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   color: white;
   border: none;
   border-radius: 16px;
@@ -1776,7 +1813,7 @@ export default {
 }
 
 .view-more-btn:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1e40af 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   transform: translateY(-2px);
   box-shadow: 
     0 8px 25px rgba(59, 130, 246, 0.4),
@@ -1904,17 +1941,13 @@ export default {
   text-align: center;
   padding: 1.25rem 0.75rem;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.8) 100%);
-  border: 2px solid rgba(226, 232, 240, 0.5);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(5px);
-
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-
-
 
 @keyframes dayCardFadeIn {
   from {
@@ -1927,44 +1960,24 @@ export default {
   }
 }
 
-.day-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.day-card:hover::before {
-  opacity: 1;
-}
-
 .day-card:hover {
-  background: linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 0.9) 100%);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.12),
-    0 4px 15px rgba(0, 0, 0, 0.08);
-  border-color: rgba(59, 130, 246, 0.3);
+  background: #f8fafc;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #cbd5e1;
 }
 
 .day-card.active {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  background: #eff6ff;
   border-color: #3b82f6;
   color: #1f2937;
-  box-shadow: 
-    0 8px 25px rgba(59, 130, 246, 0.3),
-    0 4px 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
 }
 
-.day-card.active::before {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
-  opacity: 1;
+.day-card.active:hover {
+  background: #dbeafe;
+  border-color: #2563eb;
 }
 
 .day-name {
@@ -1990,21 +2003,15 @@ export default {
 
 /* Did You Know */
 .did-you-know {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.9) 100%);
-  border-radius: 20px;
+  background: #ffffff;
+  border-radius: 12px;
   padding: 2rem;
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.08),
-    0 4px 16px rgba(0, 0, 0, 0.04);
-  border: 2px solid rgba(59, 130, 246, 0.1);
-  position: relative;
-  overflow: hidden;
-
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .did-you-know::before {
@@ -2235,7 +2242,18 @@ export default {
 /* Activity Gallery Styles */
 .activity-gallery {
   margin-top: 1.5rem;
+  animation: galleryFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
 
+@keyframes galleryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes gallerySlideIn {
@@ -2250,16 +2268,36 @@ export default {
 }
 
 .gallery-container {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
-  border-radius: 20px;
-  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 24px;
+  padding: 2rem;
   box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 8px 25px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
+  animation: containerSlideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes containerSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.02);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.08),
+      0 8px 25px rgba(0, 0, 0, 0.04),
+      0 0 0 1px rgba(255, 255, 255, 0.5);
+  }
 }
 
 
@@ -2290,13 +2328,32 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: #ef4444;
+  opacity: 0;
+  animation: buttonFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+}
+
+@keyframes buttonFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 .close-gallery-btn:hover {
   background: rgba(239, 68, 68, 0.2);
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.close-gallery-btn:active {
+  transform: scale(0.95) rotate(90deg);
+  transition: all 0.1s ease;
 }
 
 .gallery-slider {
@@ -2454,7 +2511,19 @@ export default {
 /* Stacked Images Gallery Styles */
 .stacked-gallery {
   margin-top: 1.5rem;
+  animation: stackedGalleryFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  opacity: 0;
+}
 
+@keyframes stackedGalleryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .stacked-container {
@@ -2479,84 +2548,88 @@ export default {
   position: absolute;
   background-size: cover;
   background-position: center;
-  border-radius: 15px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  will-change: transform, opacity, box-shadow;
 }
 
 /* Front image - largest and most prominent */
 .stacked-image.front {
-  width: 500px;
-  height: 350px;
+  width: 480px;
+  height: 340px;
   z-index: 5;
   transform: translateX(0) scale(1);
   opacity: 1;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* Back images with decreasing sizes and positions */
 .stacked-image.back-1 {
-  width: 420px;
-  height: 300px;
+  width: 400px;
+  height: 290px;
   z-index: 4;
-  transform: translateX(180px) scale(0.9);
-  opacity: 0.8;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateX(160px) scale(0.92);
+  opacity: 0.85;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
 .stacked-image.back-2 {
-  width: 360px;
-  height: 260px;
+  width: 340px;
+  height: 250px;
   z-index: 3;
-  transform: translateX(320px) scale(0.8);
-  opacity: 0.6;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateX(280px) scale(0.84);
+  opacity: 0.7;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
 .stacked-image.back-3 {
-  width: 320px;
-  height: 230px;
+  width: 300px;
+  height: 220px;
   z-index: 2;
-  transform: translateX(-180px) scale(0.7);
-  opacity: 0.5;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateX(-160px) scale(0.76);
+  opacity: 0.6;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
 }
 
 .stacked-image.back-4 {
-  width: 280px;
-  height: 200px;
+  width: 260px;
+  height: 190px;
   z-index: 1;
-  transform: translateX(-320px) scale(0.6);
-  opacity: 0.4;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(-280px) scale(0.68);
+  opacity: 0.5;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Hover effects */
+/* Enhanced hover effects */
 .stacked-image:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 1);
 }
 
 .stacked-image.front:hover {
-  transform: translateX(0) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  transform: translateX(0) scale(1.02) translateY(-5px);
 }
 
 .stacked-image.back-1:hover {
-  transform: translateX(180px) scale(0.92);
+  transform: translateX(160px) scale(0.94) translateY(-3px);
 }
 
 .stacked-image.back-2:hover {
-  transform: translateX(320px) scale(0.82);
+  transform: translateX(280px) scale(0.86) translateY(-3px);
 }
 
 .stacked-image.back-3:hover {
-  transform: translateX(-180px) scale(0.72);
+  transform: translateX(-160px) scale(0.78) translateY(-3px);
 }
 
 .stacked-image.back-4:hover {
-  transform: translateX(-320px) scale(0.62);
+  transform: translateX(-280px) scale(0.70) translateY(-3px);
 }
 
 
@@ -2567,24 +2640,56 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
   color: white;
-  padding: 2rem 1.5rem 1.5rem;
+  padding: 1.75rem 1.5rem 1.25rem;
   z-index: 2;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: overlayFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .stacked-image .image-overlay h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+  margin: 0 0 0.4rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: white;
+  line-height: 1.3;
+  transform: translateY(10px);
+  animation: textSlideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
 }
 
 .stacked-image .image-overlay p {
   margin: 0;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
-  opacity: 0.9;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  transform: translateY(10px);
+  animation: textSlideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.1s forwards;
+}
+
+@keyframes textSlideUp {
+  from {
+    opacity: 0.7;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Navigation arrows */
@@ -2592,34 +2697,43 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: #374151;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: #4b5563;
   z-index: 10;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  opacity: 0.8;
 }
 
 .stacked-container .nav-arrow:hover {
   background: rgba(255, 255, 255, 1);
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: #1f2937;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-50%) translateY(-2px);
+  opacity: 1;
+}
+
+.stacked-container .nav-arrow:active {
+  transform: translateY(-50%) translateY(0px) scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.1s ease;
 }
 
 .stacked-container .nav-left {
-  left: 20px;
+  left: 24px;
 }
 
 .stacked-container .nav-right {
-  right: 20px;
+  right: 24px;
 }
 
 /* Responsive Design for Stacked Gallery */
@@ -2772,5 +2886,92 @@ export default {
     height: 90px;
     transform: translateX(-140px) scale(0.6);
   }
+}
+
+/* Component Entrance Animations - MealPlanner Style */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply animations to main components */
+.outside-header {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.location-search-container {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.safe-sun-card {
+  animation: fadeInLeft 0.8s ease-out 0.4s both;
+}
+
+.todays-activities-card {
+  animation: fadeInRight 0.8s ease-out 0.6s both;
+}
+
+.week-forecast-card {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.knowledge-hub-card {
+  animation: scaleIn 0.8s ease-out 1.0s both;
+}
+
+.gallery-section {
+  animation: fadeInUp 0.8s ease-out 1.2s both;
+}
+
+/* Staggered animations for time slots and activity items */
+.time-slot {
+  animation: fadeInUp 0.6s ease-out calc(0.1s * var(--animation-order, 0) + 0.6s) both;
+}
+
+.activity-item {
+  animation: scaleIn 0.6s ease-out calc(0.1s * var(--animation-order, 0) + 0.8s) both;
+}
+
+.day-card {
+  animation: fadeInUp 0.6s ease-out calc(0.1s * var(--animation-order, 0) + 1.0s) both;
 }
 </style>

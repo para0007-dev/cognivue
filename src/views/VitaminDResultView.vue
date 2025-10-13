@@ -1,5 +1,5 @@
 <template>
-  <div class="vitamin-d-result">
+  <div class="vitamin-d-result page-content">
     <Header />
     <!-- Background -->
     <div class="background"></div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="questionnaire-page">
+  <div class="questionnaire-page page-content">
     <Header />
     <main class="main-content">
       <div class="container">
