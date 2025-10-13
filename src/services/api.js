@@ -1,9 +1,16 @@
-// src/services/api.js
 import axios from "axios";
 
-// Normalize base: add scheme if missing, strip trailing slashes
 const raw = import.meta.env.VITE_API_BASE || "";
 const BASE = (raw.startsWith("http") ? raw : `http://${raw || "localhost:8000"}`).replace(/\/+$/, "");
+// Export base if needed elsewhere
+const API_BASE_URL = BASE;
+// --- Default fetch options
+const defaultOptions = {
+  method: "GET",
+  credentials: "include",
+  mode: "cors",
+  cache: "no-store",
+};
 
 // Central endpoints (leading slash only)
 const API_ENDPOINTS = {
@@ -16,10 +23,12 @@ const API_ENDPOINTS = {
   forecast: "/vitamin-d-helper/api/weather/forecast/",
 };
 
-// Safe join
+// --- Join base + endpoint
 function joinUrl(endpoint) {
-  const p = `${endpoint}`.startsWith("/") ? endpoint : `/${endpoint}`;
-  return `${API_BASE_URL}${p}`;
+  if (!endpoint) return API_BASE_URL;
+  if (endpoint.startsWith("http")) return endpoint;
+  const path = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  return `${API_BASE_URL}${path}`;
 }
 
 function getCookie(name) {
@@ -35,11 +44,11 @@ async function apiRequest(endpoint, options = {}) {
     "X-CSRFToken": getCookie("csrftoken"),
     ...(options.headers || {}),
   };
-  
+
   try {
-    const res = await fetch(url, { ...defaultOptions, ...options });
+    const res = await fetch(url, { ...defaultOptions, ...options, headers });
     const ct = res.headers.get("content-type") || "";
-    
+
     // Try to parse JSON response
     let payload = null;
     try {
@@ -52,12 +61,12 @@ async function apiRequest(endpoint, options = {}) {
       console.warn("Failed to parse response:", parseError);
       payload = null;
     }
-    
-    return { 
-      ok: res.ok, 
-      status: res.status, 
-      json: ct.includes("json") ? payload : null, 
-      text: ct.includes("json") ? null : payload 
+
+    return {
+      ok: res.ok,
+      status: res.status,
+      json: ct.includes("json") ? payload : null,
+      text: ct.includes("json") ? null : payload
     };
   } catch (error) {
     console.error("API Request failed:", error);
@@ -175,7 +184,7 @@ export const weatherAPI = {
     try {
       const params = new URLSearchParams({ city: city.trim() });
       const { ok, json, status } = await apiRequest(`${API_ENDPOINTS.forecast}?${params}`);
-      
+
       if (!ok) {
         const errorMsg = json?.error || json?.suggestion || `City not found (HTTP ${status})`;
         const err = new Error(errorMsg);
@@ -183,19 +192,19 @@ export const weatherAPI = {
         err.suggestion = json?.suggestion;
         throw err;
       }
-      
+
       // Validate that we got forecast data
       const normalized = normalizeForecast(json);
       if (!normalized.days || normalized.days.length === 0) {
         throw new Error(`No forecast data available for ${city}. Try a larger nearby city.`);
       }
-      
+
       // Check if we have hourly data
       const hasHourlyData = normalized.days.some(day => day.hours && day.hours.length > 0);
       if (!hasHourlyData) {
         throw new Error(`Limited forecast data for ${city}. Try a major city for detailed UV forecasts.`);
       }
-      
+
       return normalized;
     } catch (error) {
       console.error("getForecastByCity error:", error);
@@ -207,11 +216,11 @@ export const weatherAPI = {
 // Normalizer so the view can rely on a stable shape
 function normalizeForecast(json) {
   // Handle different response formats
-  const days = Array.isArray(json?.days) 
-    ? json.days 
-    : Array.isArray(json) 
-    ? json 
-    : [];
+  const days = Array.isArray(json?.days)
+    ? json.days
+    : Array.isArray(json)
+      ? json
+      : [];
 
   if (!days || days.length === 0) {
     console.warn("No days data in forecast response:", json);
@@ -223,18 +232,18 @@ function normalizeForecast(json) {
     days: days.map(d => {
       const dateISO = d.dateISO ?? d.date ?? d.day ?? null;
       const hoursRaw = d.hours ?? d.hourly ?? [];
-      
+
       return {
         dateISO: dateISO,
         hours: hoursRaw.map(h => {
           // Handle time parsing
           let timeISO = h.timeISO ?? h.time ?? h.datetime ?? null;
-          
+
           // Ensure proper ISO format for Date parsing
           if (timeISO && !timeISO.includes('T')) {
             timeISO = `${timeISO}T00:00:00`;
           }
-          
+
           // Parse UV value safely
           let uvValue = 0;
           const uvRaw = h.uv ?? h.uvi ?? 0;
@@ -245,7 +254,7 @@ function normalizeForecast(json) {
           } catch (e) {
             console.warn("Failed to parse UV value:", uvRaw);
           }
-          
+
           // Parse temperature safely
           let tempValue = null;
           const tempRaw = h.tempC ?? h.temp_c ?? h.temp ?? h.temperature;
@@ -257,7 +266,7 @@ function normalizeForecast(json) {
               console.warn("Failed to parse temperature:", tempRaw);
             }
           }
-          
+
           return {
             timeISO: timeISO,
             uv: uvValue,
@@ -270,7 +279,7 @@ function normalizeForecast(json) {
   };
 
   console.log(`Normalized forecast: ${normalized.days.length} days with data`);
-  
+
   return normalized;
 }
 
@@ -327,9 +336,6 @@ export const insightsAPI = {
   },
 };
 
-// Export base if needed elsewhere
-export const API_BASE_URL = BASE;
-
 // Axios instance for components that use axios (if you still need it)
 export const mealAI = {
   generate: (payload) =>
@@ -353,6 +359,8 @@ const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
   withCredentials: true,
+  xsrfCookieName: "csrftoken",
+  xsrfHeaderName: "X-CSRFToken"
 });
 
 export default api;
