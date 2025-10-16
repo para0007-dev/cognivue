@@ -4,7 +4,7 @@
       <!-- Desktop Navigation -->
       <nav class="desktop-nav">
         <div class="logo">
-          <img src="@/assets/images/logo-icon.svg" alt="VitaminD Brain Logo" class="logo-icon">
+          <img src="@/assets/images/Cognivue (2).png" alt="VitaminD Brain Logo" class="logo-icon">
           <span class="logo-text">BrainViD</span>
         </div>
         <ul class="nav-menu">
@@ -19,7 +19,7 @@
       <!-- Mobile Navigation -->
       <nav class="mobile-nav">
         <div class="logo">
-          <img src="@/assets/images/logo-icon.svg" alt="VitaminD Brain Logo" class="logo-icon">
+          <img src="@/assets/images/Cognivue (2).png" alt="VitaminD Brain Logo" class="logo-icon">
           <span class="logo-text">BrainViD</span>
         </div>
         <button class="hamburger" @click="toggleMobileMenu" :class="{ active: isMobileMenuOpen }">
