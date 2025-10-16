@@ -1,4 +1,3 @@
-// src/services/api.js
 import axios from "axios";
 
 // Normalize base: add scheme if missing, strip trailing slashes
@@ -22,30 +21,10 @@ function joinUrl(endpoint) {
     return `${BASE}${p}`;
 }
 function withCountryBias(city) {
-  // if user didn’t add a country/state, bias to AU/VIC
-  if (/,/g.test(city)) return city.trim();
-  return `${city.trim()}, Victoria, AU`;
+    // if user didn’t add a country/state, bias to AU/VIC
+    if (/,/g.test(city)) return city.trim();
+    return `${city.trim()}, Victoria, AU`;
 }
-
-export const weatherAPI = {
-  // ...
-  getForecastByCity: async (city) => {
-    try {
-      // 1st attempt as typed
-      return await apiRequest(`/vitamin-d-helper/api/uv-forecast/?city=${encodeURIComponent(city.trim())}`);
-    } catch (e) {
-      const msg = String(e.message || e);
-      // Retry ONCE if backend says geocoding timed out or couldn’t resolve
-      if (/geocoding/i.test(msg) || /timed out/i.test(msg) || /not found/i.test(msg)) {
-        const biased = withCountryBias(city);
-        if (biased !== city.trim()) {
-          return await apiRequest(`/vitamin-d-helper/api/uv-forecast/?city=${encodeURIComponent(biased)}`);
-        }
-      }
-      throw e;
-    }
-  },
-};
 
 // Generic fetch wrapper that returns {ok,status,json,text}
 async function apiRequest(endpoint, options = {}) {
